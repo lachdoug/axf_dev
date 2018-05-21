@@ -1,0 +1,15 @@
+form(name, opts={})
+opts
+  action - URL fopr submit
+  method - HTTP method for submit
+
+field
+required: name;
+optional: field_type, label, comment, hint, placeholder, pattern, pattern_invalid_message,
+
+group
+optional: depends_on, legend, border
+
+nest
+required: name;
+optional: collection
