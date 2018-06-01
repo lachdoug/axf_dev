@@ -54,7 +54,9 @@ class V0 < Sinatra::Base
     erb :'ax.js'
   end
 
-  get '*' do
+  get '*path' do
+    # byebug
+    pass if params[:path].split("/")[1] = "power"
     pass unless request.accept? "text/html"
     content_type :html
     erb :'index.html'

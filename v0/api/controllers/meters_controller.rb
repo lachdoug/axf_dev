@@ -7,11 +7,11 @@ class V0
         { id: 2, name: "Oven" },
       ]
 
-      get '/meters' do
+      get '/power/meters' do
         test_meters
       end
 
-      get '/meters/:id' do
+      get '/power/meters/:id' do
         id = params[:id].to_i
         return 404 if id < 1 || id > test_meters.length
         test_meters[ id - 1 ]
