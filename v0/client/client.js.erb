@@ -1,12 +1,5 @@
 var inDevelopment = <%= Sinatra::Base.development? %>;
 
-<% Dir.glob( [ './v0/client/lib/**/*.js' ] ).each do |file| %>
- 	<%= File.read file %>
-<% end %>
-
-// var x = new XCell();
-
-
-<% Dir.glob( [ './v0/client/application/**/*.js' ] ).each do |file| %>
+<% Dir.glob( [ './v0/client/app/**/*.js' ] ).each do |file| %>
  	<%= File.read file %>
 <% end %>

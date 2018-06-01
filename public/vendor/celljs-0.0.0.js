@@ -101,6 +101,7 @@
       if (['$init'].indexOf(key) === -1) {
         $node.Genotype[key] = Nucleus.bind($node, val);
       } else {
+        val.snapshot = val; // snapshot of $init
         $node.Genotype[key] = val;
       }
     },
@@ -114,6 +115,20 @@
       for (var key in gene) {
         Genotype.set($node, key, gene[key]);
       }
+    },
+    infect: function(gene) {
+      var virus = gene.$virus;
+      if (!virus) return gene;
+      var mutations = Array.isArray(virus) ? virus : [virus];
+      delete gene.$virus;
+      return mutations.reduce(function(g, mutate) {
+        var mutated = mutate(g);
+        if (mutated === null || typeof mutated !== 'object') {
+          throw new Error('$virus mutations must return an object');
+        }
+        mutated.$type = mutated.$type || 'div';
+        return mutated;
+      }, gene);
     },
   };
   var Gene = {
@@ -190,14 +205,17 @@
      *   - $update(): executes the "$update" callback function when needed (called by Nucleus on every tick)
      */
     build: function($node, genotype) {
+      Phenotype.$init($node);
       for (var key in genotype) {
         if (genotype[key] !== null && genotype[key] !== undefined) {
           Phenotype.set($node, key, genotype[key]);
         }
       }
-      Phenotype.$init($node);
     },
     multiline: function(fn) { return /\/\*!?(?:@preserve)?[ \t]*(?:\r\n|\n)([\s\S]*?)(?:\r\n|\n)[ \t]*\*\//.exec(fn.toString())[1]; },
+    get: function(key) {
+      return Object.getOwnPropertyDescriptor($root.HTMLElement.prototype, key) || Object.getOwnPropertyDescriptor($root.Element.prototype, key);
+    },
     set: function($node, key, val) {
       if (key[0] === '$') {
         if (key === '$type') {
@@ -223,21 +241,20 @@
       } else if (key === 'value') {
         $node[key] = val;
       } else if (key === 'style' && typeof val === 'object') {
-        var CSSStyleDeclaration = Object.getOwnPropertyDescriptor($root.HTMLElement.prototype, key).get.call($node);
+        var CSSStyleDeclaration = Phenotype.get(key).get.call($node);
         for (var attr in val) { CSSStyleDeclaration[attr] = val[attr]; }
       } else if (typeof val === 'number' || typeof val === 'string' || typeof val === 'boolean') {
         if ($node.setAttribute) $node.setAttribute(key, val);
       } else if (typeof val === 'function') {
-        $node[key] = val;
+        // For natively supported HTMLElement.prototype methods such as onclick()
+        var prop = Phenotype.get(key);
+        if (prop) prop.set.call($node, val);
       }
     },
     $type: function(model, namespace) {
       var meta = {};
       var $node;
-      if (model.$type === 'text') {
-        if (model.$text && typeof model.$text === 'function') model.$text = Phenotype.multiline(model.$text);
-        $node = $root.document.createTextNode(model.$text);
-      } else if (model.$type === 'svg') {
+      if (model.$type === 'svg') {
         $node = $root.document.createElementNS('http://www.w3.org/2000/svg', model.$type);
         meta.namespace = $node.namespaceURI;
       } else if (namespace) {
@@ -245,6 +262,9 @@
         meta.namespace = $node.namespaceURI;
       } else if (model.$type === 'fragment') {
         $node = $root.document.createDocumentFragment();
+      } else if (model.$type === 'text') {
+        if (model.$text && typeof model.$text === 'function') model.$text = Phenotype.multiline(model.$text);
+        $node = $root.document.createTextNode(model.$text);
       } else {
         $node = $root.document.createElement(model.$type || 'div');
       }
@@ -322,75 +342,77 @@
     tick: $root.requestAnimationFrame || $root.webkitRequestAnimationFrame || $root.mozRequestAnimationFrame || $root.msRequestAnimationFrame || function(cb) { return $root.setTimeout(cb, 1000/60); },
     set: function($node, key) {
       // Object.defineProperty is used for overriding the default getter and setter behaviors.
-      Object.defineProperty($node, key, {
-        configurable: true,
-        get: function() {
-          // 1. get() overrides the node's getter to create an illusion that users are directly accessing the attribute on the node (In reality they are accessing the genotype via nucleus)
-          // 2. get() also queues up the accessed variable so it can potentially trigger a phenotype update in case there's been a mutation
-          if (key[0] === '$' || key[0] === '_') {
-            if (key in $node.Genotype) {
-              Nucleus.queue($node, key, 'r');
-              return $node.Genotype[key];
-            } else if (key[0] === '_') {
-              // Context Inheritance: If a _variable cannot be found on the current node, propagate upwards until we find a node with the attribute.
-              var $current = $node;
+      try {
+        Object.defineProperty($node, key, {
+          configurable: true,
+          get: function() {
+            // 1. get() overrides the node's getter to create an illusion that users are directly accessing the attribute on the node (In reality they are accessing the genotype via nucleus)
+            // 2. get() also queues up the accessed variable so it can potentially trigger a phenotype update in case there's been a mutation
+            if (key[0] === '$' || key[0] === '_') {
+              if (key in $node.Genotype) {
+                Nucleus.queue($node, key, 'r');
+                return $node.Genotype[key];
+              } else if (key[0] === '_') {
+                // Context Inheritance: If a _variable cannot be found on the current node, propagate upwards until we find a node with the attribute.
+                var $current = $node;
+                while ($current = $current.parentNode) { // eslint-disable-line no-cond-assign
+                  if ($current && $current.Genotype && (key in $current.Genotype)) {
+                    Nucleus.queue($current, key, 'r');
+                    return $current.Genotype[key];
+                  }
+                }
+              } else {
+                return null;
+              }
+            } else {
+              // DOM Attributes.
+              if (key === 'value') {
+                // The "value" attribute needs a special treatment.
+                return Object.getOwnPropertyDescriptor(Object.getPrototypeOf($node), key).get.call($node);
+              } else if (key === 'style') {
+                return Phenotype.get(key).get.call($node);
+              } else if (key in $node.Genotype) {
+                // Otherwise utilize Genotype
+                return $node.Genotype[key];
+              } else {
+                // If the key doesn't exist on the Genotype, it means we're dealing with native DOM attributes we didn't explicitly define on the gene.
+                // For example, there are many DOM attributes such as "tagName" that come with the node by default.
+                // These are not something we directly define on a gene object, but we still need to be able to access them..
+                // In this case we just use the native HTMLElement.prototype accessor
+                return Phenotype.get(key).get.call($node);
+              }
+            }
+          },
+          set: function(val) {
+            // set() overrides the node's setter to create an illusion that users are directly setting an attribute on the node (In reality it's proxied to set the genotype value instead)
+            // set() also queues up the mutated variable so it can trigger a phenotype update once the current call stack becomes empty
+
+            // 0. Context Inheritance: If a _variable cannot be found on the current node, cell propagates upwards until it finds a node with the attribute.
+            var $current = $node;
+            if (!(key in $node.Genotype) && key[0] === '_') {
               while ($current = $current.parentNode) { // eslint-disable-line no-cond-assign
                 if ($current && $current.Genotype && (key in $current.Genotype)) {
-                  Nucleus.queue($current, key, 'r');
-                  return $current.Genotype[key];
+                  break;
                 }
               }
-            } else {
-              return null;
             }
-          } else {
-            // DOM Attributes.
-            if (key === 'value') {
-              // The "value" attribute needs a special treatment.
-              return Object.getOwnPropertyDescriptor(Object.getPrototypeOf($node), key).get.call($node);
-            } else if (key === 'style') {
-              return Object.getOwnPropertyDescriptor($root.HTMLElement.prototype, key).get.call($node);
-            } else if (key in $node.Genotype) {
-              // Otherwise utilize Genotype
-              return $node.Genotype[key];
-            } else {
-              // If the key doesn't exist on the Genotype, it means we're dealing with native DOM attributes we didn't explicitly define on the gene.
-              // For example, there are many DOM attributes such as "tagName" that come with the node by default.
-              // These are not something we directly define on a gene object, but we still need to be able to access them..
-              // In this case we just use the native HTMLElement.prototype accessor
-              return Object.getOwnPropertyDescriptor($root.HTMLElement.prototype, key).get.call($node);
-            }
-          }
-        },
-        set: function(val) {
-          // set() overrides the node's setter to create an illusion that users are directly setting an attribute on the node (In reality it's proxied to set the genotype value instead)
-          // set() also queues up the mutated variable so it can trigger a phenotype update once the current call stack becomes empty
-
-          // 0. Context Inheritance: If a _variable cannot be found on the current node, cell propagates upwards until it finds a node with the attribute.
-          var $current = $node;
-          if (!(key in $node.Genotype) && key[0] === '_') {
-            while ($current = $current.parentNode) { // eslint-disable-line no-cond-assign
-              if ($current && $current.Genotype && (key in $current.Genotype)) {
-                break;
+            // 1. Set genotype by default
+            Genotype.update($current, key, val);
+            // 2. DOM attribute handling (anything that doesn't start with $ or _)
+            if (key[0] !== '$' && key[0] !== '_') {
+              if (key === 'value') {
+                return Object.getOwnPropertyDescriptor(Object.getPrototypeOf($node), key).set.call($node, val);
+              } else if (key === 'style' && typeof val === 'object') {
+                Phenotype.get(key).set.call($node, val);
+              } else if (typeof val === 'number' || typeof val === 'string' || typeof val === 'boolean') {
+                $node.setAttribute(key, val);
+              } else if (typeof val === 'function') {
+                Phenotype.get(key).set.call($node, val);
               }
             }
-          }
-          // 1. Set genotype by default
-          Genotype.update($current, key, val);
-          // 2. DOM attribute handling (anything that doesn't start with $ or _)
-          if (key[0] !== '$' && key[0] !== '_') {
-            if (key === 'value') {
-              return Object.getOwnPropertyDescriptor(Object.getPrototypeOf($node), key).set.call($node, val);
-            } else if (key === 'style' && typeof val === 'object') {
-              Object.getOwnPropertyDescriptor($root.HTMLElement.prototype, key).set.call($node, val);
-            } else if (typeof val === 'number' || typeof val === 'string' || typeof val === 'boolean') {
-              $node.setAttribute(key, val);
-            } else if (typeof val === 'function') {
-              Object.getOwnPropertyDescriptor($root.HTMLElement.prototype, key).set.call($node, val);
-            }
-          }
-        },
-      });
+          },
+        });
+      } catch (e) { /** native element edge case handling for electron **/ }
     },
     build: function($node) {
       // 1. The special attributes "$type", "$text", "$html", "$components" are tracked by default even if not manually defined
@@ -414,7 +436,7 @@
       // 1. No difference if the attribute is just a regular variable
       // 2. If the attribute is a function, we create a wrapper function that first executes the original function, and then triggers a phenotype update depending on the queue condition
       if (typeof v === 'function') {
-        return function() {
+        var fun = function() {
           // In the following code, everything inside Nucleus.tick.call is executed AFTER the last line--v.apply($node, arguments)--because it gets added to the event loop and waits until the next render cycle.
 
           // 1. Schedule phenotype update by wrapping them in a single tick (requestAnimationFrame)
@@ -452,6 +474,8 @@
           // 2. Run the actual function, which will modify the queue
           return v.apply($node, arguments);
         };
+        fun.snapshot = v;
+        return fun;
       } else {
         return v;
       }
@@ -512,7 +536,8 @@
       // As a result, all HTML elements become autonomous.
       if ($context === undefined) $context = $root;
       else $root = $context;
-      $context.DocumentFragment.prototype.$build = $context.Element.prototype.$build = function(gene, inheritance, index, namespace, replace) {
+      $context.DocumentFragment.prototype.$build = $context.Element.prototype.$build = function(healthy_gene, inheritance, index, namespace, replace) {
+        var gene = Genotype.infect(healthy_gene);
         var $node = Membrane.build(this, gene, index, namespace, replace);
         Genotype.build($node, gene, inheritance || [], index);
         Nucleus.build($node);
@@ -521,6 +546,16 @@
       };
       $context.DocumentFragment.prototype.$cell = $context.Element.prototype.$cell = function(gene, options) {
         return this.$build(gene, [], null, (options && options.namespace) || null, true);
+      };
+      $context.DocumentFragment.prototype.$snapshot = $context.Element.prototype.$snapshot = function() {
+        var json = JSON.stringify(this.Genotype, function(k, v) {
+          if (typeof v === 'function' && v.snapshot) { return '(' + v.snapshot.toString() + ')'; }
+          return v;
+        });
+        return JSON.parse(json, function(k, v) {
+          if (typeof v === 'string' && v.indexOf('function') >= 0) { return eval(v); }
+          return v;
+        });
       };
       if ($root.NodeList && !$root.NodeList.prototype.forEach) $root.NodeList.prototype.forEach = Array.prototype.forEach; // NodeList.forEach override polyfill
     },

@@ -44,15 +44,22 @@ class V0 < Sinatra::Base
   # Here are the erb files
   set :views, Proc.new { File.join(root, "client") }
 
-  get '/' do
+  get '/client.js' do
+    content_type :'application/javascript'
+    erb :'client.js'
+  end
+
+  get '/ax.js' do
+    content_type :'application/javascript'
+    erb :'ax.js'
+  end
+
+  get '*' do
+    pass unless request.accept? "text/html"
     content_type :html
     erb :'index.html'
   end
 
-  get '/client' do
-    content_type :'application/javascript'
-    erb :'client.js'
-  end
 
 
   ##############################################################################
@@ -97,7 +104,7 @@ class V0 < Sinatra::Base
 
   error do |error|
     if error.is_a?(NonFatalError)
-      [ error.status_code, { error: { message: error.message } }.to_json ]
+      [ error.status_code, { error: { message: error.message } } ]
     else
       error_text = error.class.to_s + " (" + error.message + ")"
       [ 500, { error: { message: "Server error.",
@@ -108,7 +115,7 @@ class V0 < Sinatra::Base
           method: request.request_method,
           path: request.fullpath,
           backtrace: error.backtrace,
-      } } }.to_json ]
+      } } } ]
     end
   end
 
@@ -119,7 +126,7 @@ class V0 < Sinatra::Base
       text: "#{request.fullpath} not found",
       method: request.request_method,
       path: request.fullpath,
-      } } }.to_json
+      } } }
   end
 
   ## Default content type to JSON

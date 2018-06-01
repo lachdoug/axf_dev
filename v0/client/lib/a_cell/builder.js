@@ -1,30 +1,40 @@
-function ACellBuilder() {
+var AcellBuilder = function () {
 
-	// Create a proxy of this builder, which catches calls to get to missing
-	// properties and returns a gene with $type being the name of the
-	// missing property.
-	// A call to this builder of missing method .h1( ... ) will return
-	// a gene of { $type: "h3", ... }
-  var htmlTagsShim = {
-    get: function( target, property ) {
-			if (target[property] !== undefined) {
-				return target[property];
-			} else {
-				return function() {
-					return geneForTag(property, ...arguments)
-				}
-			};
-    },
+	// // Create a proxy of this builder, which catches gets to missing
+	// // properties, then returns a gene with $type being the name of the
+	// // missing property.
+	// // A call to this builder of missing method .h1( ... ) will return
+	// // a gene of { $type: "h3", ... }
+  // var htmlTagsShim = {
+  //   get: function( target, property ) {
+	// 		if (target[property] !== undefined) {
+	// 			return target[property];
+	// 		} else {
+	// 			return function() {
+	// 				return geneForTag(property, ...arguments)
+	// 			}
+	// 		};
+  //   },
+  // };
+  //
+
+	this.tagBuilder = new AcellBuilderTags( this );
+  this.extensionsBuilder = AcellBuilderExtensions && new AcellBuilderExtensions( this );
+
+  this.randomId = function( prefix = "ax" ) {
+    var random;
+  	do {
+  		random = prefix + "_" + Math.random().toString(36).substr(2);
+  	} while (
+  		document.querySelector( "#" + random ) != undefined
+  	);
+  	return random;
   };
 
-	var cellBuilderProxy = new Proxy( this, htmlTagsShim );
-
-  this.dsl = new ACellDsl( cellBuilderProxy );
-
-  this.cellFor = function( geneContent, geneOptions ) {
+  this.cell = function( geneContent, geneOptions ) {
     return Object.assign(
       { $cell: true },
-      geneFor( geneContent, geneOptions )
+      geneForTag( "cell", geneContent, geneOptions )
     );
   };
 
@@ -41,15 +51,16 @@ function ACellBuilder() {
 
   var geneFor = function( geneContent, geneOptions ) {
 		if ( typeof geneContent === "string" || typeof geneContent === "number" ) {
-			return geneForString( 'div', geneContent, geneOptions );
+			return geneForString( 'span', geneContent, geneOptions );
 		} else if ( geneContent instanceof Array ) {
 			return geneForArray( 'div', geneContent, geneOptions );
 		} else if ( typeof geneContent === "function" ) {
-			return geneFor( geneContent( cellBuilderProxy ), geneOptions );
+			return geneFor( geneContent( this.tagBuilder, this.extensionsBuilder ), geneOptions );
 		} else if ( typeof geneContent === "object" ) {
+      // debugger;
 			return mergeGene( geneContent, geneOptions )
 		};
-	};
+	}.bind(this);
 
 
 	var geneForTag = function( geneType, geneContent, geneOptions ) {
@@ -58,13 +69,13 @@ function ACellBuilder() {
 		} else if ( geneContent instanceof Array ) {
 			return geneForArray( geneType, geneContent, geneOptions );
 		} else if ( typeof geneContent === "function" ) {
-			return geneForTag( geneType, geneContent( cellBuilderProxy ), geneOptions );
-		} else if ( typeof geneContent === "object" ) {
-			return geneForObject( geneType, geneContent, geneOptions );
-		} else {
-			return { $type: geneType };
+			return geneForTag( geneType, geneContent( this.tagBuilder, this.extensionsBuilder ), geneOptions );
+    } else {
+		// } else if ( typeof geneContent === "object" ) {
+			return geneForArray( geneType, [ geneContent ], geneOptions );
+      // return { $type: geneType };
     };
-	};
+	}.bind(this);
 
 	var geneForString = function( geneType, text, geneOptions ) {
 		return mergeGene(
@@ -77,6 +88,8 @@ function ACellBuilder() {
 	};
 
 	var geneForArray = function( geneType, components, geneOptions ) {
+    // Compact the array
+    components = components.filter(function(n){ return n != undefined })
 		return mergeGene(
 			{
 				$type: geneType,
@@ -88,14 +101,14 @@ function ACellBuilder() {
 		);
 	};
 
-	var geneForObject = function( geneType, genePartial, geneOptions ) {
-		return mergeGene(
-			Object.assign(
-				{ $type: geneType },
-				genePartial
-			),
-			geneOptions
-		);
-	};
+	// var geneForObject = function( geneType, genePartial, geneOptions ) {
+	// 	return mergeGene(
+	// 		Object.assign(
+	// 			{ $type: geneType },
+	// 			genePartial
+	// 		),
+	// 		geneOptions
+	// 	);
+	// };
 
 };

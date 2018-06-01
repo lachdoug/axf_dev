@@ -3,7 +3,7 @@ class V0
     module Controllers
 
       test_people = [
-        { first_name: "Bre", last_name: "Lander", age: 39, pets: [ "Dog", "Cat" ], sports: ["Golf", "Football"], golf: [ "Clubs", "Buggy" ], pet: "Cat" },
+        { first_name: "Bre", last_name: "Lander", age: 39, registered: true, pets: [ "Dog", "Cat" ], sports: ["Golf", "Football"], golf: [ 0, 1 ] },
         { first_name: "Jihun", last_name: "Son", age: 26, pets: [ "Cat" ] },
         { first_name: "Jack", last_name: "Anderson", age: 45, pets: [ "Fish" ] },
         { first_name: "Sally", last_name: "Jones", age: 31, pets: [ "Cat" ] },
@@ -20,11 +20,11 @@ class V0
         test_people[ id - 1 ]
       end
 
-      post '/test/people' do
-        params.map { |k,v|
-          k == "captures" ? nil : { k => v }
-        }.compact.inject(:merge)
+      post '*' do
+        test_params
       end
+
+
 
     end
   end

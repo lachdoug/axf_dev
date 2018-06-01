@@ -1,4 +1,4 @@
-// function ACellDslFormBuilder(cellBuilder) {
+// function AcellDslFormBuilder(cellBuilder) {
 //
 //   this.form = function(componentsOrFunctionOrFormArgs, formOptions) {
 //     if ( typeof componentsOrFunctionOrFormArgs === 'object' ) {
@@ -11,8 +11,8 @@
 //     };
 //
 //     if ( typeof formArgs.components === "function" ) {
-//       var aCellDslFormField = new ACellDslFormFieldBuilder( cellBuilder, formArgs )
-//       formArgs.components = formArgs.components( aCellDslFormField );
+//       var acellDslFormField = new AcellDslFormFieldBuilder( cellBuilder, formArgs )
+//       formArgs.components = formArgs.components( acellDslFormField );
 //     };
 //
 //     return cellBuilder.form({
