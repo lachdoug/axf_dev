@@ -7,8 +7,6 @@ class V0
         { id: 2, name: "Oven" },
       ]
 
-
-
       get '/power/meters' do
         test_meters
       end
@@ -18,6 +16,7 @@ class V0
         return 404 if id < 1 || id > test_meters.length
         result = test_meters[ id - 1 ]
         result[:consumption] = random_meter_data
+        result
       end
 
     end

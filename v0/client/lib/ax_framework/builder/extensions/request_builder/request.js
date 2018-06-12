@@ -1,4 +1,4 @@
-AxBuilderExtensionsRequestBuilder.prototype.request = function( action, options ) {
+AxBuilderExtensionsRequestBuilder.prototype.request = function( action, options={} ) {
 
   var a = this.cellBuilder.tagBuilder;
 
