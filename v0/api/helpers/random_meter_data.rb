@@ -10,12 +10,10 @@ class V0
       end
 
       def random_meter_data
-        [
-          {
-            history: random_months,
-            monthToDate: random_month(0)
-          }
-        ]
+        {
+          history: random_months,
+          monthToDate: random_month(0)
+        }
       end
 
       def random_months
