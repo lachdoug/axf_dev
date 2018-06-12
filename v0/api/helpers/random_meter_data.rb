@@ -2,6 +2,13 @@ class V0
   module Api
     module Helpers
 
+      def test_meters
+        [
+          { id: 1, name: "TV" },
+          { id: 2, name: "Oven" },
+        ]
+      end
+
       def random_meter_data
         [
           {

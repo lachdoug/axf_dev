@@ -2,11 +2,7 @@ class V0
   module Api
     module Controllers
 
-      test_meters = [
-        { id: 1, name: "TV" },
-        { id: 2, name: "Oven" },
-      ]
-
+      
       get '/power/meters' do
         test_meters
       end
