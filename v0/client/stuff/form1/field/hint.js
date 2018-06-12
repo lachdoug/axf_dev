@@ -1,4 +1,4 @@
-AcellDslFormBuilder.prototype.hint = function( geneContent ) {
+AxDslFormBuilder.prototype.hint = function( geneContent ) {
 
     var a = this.cellBuilder;
 

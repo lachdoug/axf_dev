@@ -1,4 +1,4 @@
-AcellDslFormBuilder.prototype.help = function( content, helpBuilderOptions ) {
+AxDslFormBuilder.prototype.help = function( content, helpBuilderOptions ) {
 
   var a = this.cellBuilder;
   var f = this;

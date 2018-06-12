@@ -1,4 +1,4 @@
-AcellDslFormBuilder.prototype.submit = function( geneContentOrGeneOptions, geneOptions ) {
+AxDslFormBuilder.prototype.submit = function( geneContentOrGeneOptions, geneOptions ) {
 
   if ( typeof geneContentOrGeneOptions === "undefined" ) {
     geneContentOrGeneOptions = "OK";

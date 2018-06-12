@@ -1,4 +1,4 @@
-AcellDslFormBuilder.prototype.labeler = function( field, fieldName, labelerBuilderOptions ) {
+AxDslFormBuilder.prototype.labeler = function( field, fieldName, labelerBuilderOptions ) {
 
   var labelOptions = labelerBuilderOptions["label"] === undefined ? true : labelerBuilderOptions["label"];
   var a = this.cellBuilder;

@@ -1,4 +1,4 @@
-AcellDslFormBuilder.prototype.input = function(
+AxDslFormBuilder.prototype.input = function(
 	name,
 	inputType,
 	fieldValue,

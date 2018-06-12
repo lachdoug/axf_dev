@@ -1,10 +1,10 @@
-AcellDslFormBuilder.prototype.customFieldBuilder = function() {
+AxDslFormBuilder.prototype.customFieldBuilder = function() {
 
-  return new AcellDslFormCustomFieldBuilder( this );
+  return new AxDslFormCustomFieldBuilder( this );
 
 };
 
-function AcellDslFormCustomFieldBuilder( formBuilder ) {
+function AxDslFormCustomFieldBuilder( formBuilder ) {
 
   this.formBuilder = formBuilder;
   this.cellBuilder = formBuilder.cellBuilder;

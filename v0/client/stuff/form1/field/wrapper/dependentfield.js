@@ -1,4 +1,4 @@
-AcellDslFormBuilder.prototype.dependentfield = function(
+AxDslFormBuilder.prototype.dependentfield = function(
   wrappedField,
   dependentFieldBuilderOptions
 ) {

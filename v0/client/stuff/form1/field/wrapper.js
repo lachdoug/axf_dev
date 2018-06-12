@@ -1,4 +1,4 @@
-AcellDslFormBuilder.prototype.wrapper = function(
+AxDslFormBuilder.prototype.wrapper = function(
   field,
   fieldName,
   wrapperGeneOptions,

@@ -1,4 +1,4 @@
-AcellDslFormBuilder.prototype.field = function(
+AxDslFormBuilder.prototype.field = function(
   fieldName,
   fieldTypeOrBuilderOptions,
   fieldValueOrBuilderOptions,

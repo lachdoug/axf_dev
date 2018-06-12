@@ -6,4 +6,4 @@ gem 'thin'
 gem 'rest-client'
 # gem 'byebug'
 
-# gem 'sprockets-helpers'
+gem 'sprockets'

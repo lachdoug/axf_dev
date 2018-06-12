@@ -1,4 +1,4 @@
-AcellDslFormBuilder.prototype.textarea = function( nameOrGeneOptions, geneOptionsOrBuilderOptions, builderOptions ) {
+AxDslFormBuilder.prototype.textarea = function( nameOrGeneOptions, geneOptionsOrBuilderOptions, builderOptions ) {
 
 	var geneOptions;
 

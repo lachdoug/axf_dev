@@ -1,4 +1,4 @@
-AcellDslFormBuilder.prototype.cancel = function( geneContentOrGeneOptions, geneOptions ) {
+AxDslFormBuilder.prototype.cancel = function( geneContentOrGeneOptions, geneOptions ) {
 
   var a = this.cellBuilder;
 

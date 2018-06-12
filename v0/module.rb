@@ -1,12 +1,3 @@
-require 'sinatra/base'
-require 'sinatra/extension'
-require 'sinatra/json'
-# require "sinatra/streaming"
-
-# require 'tempfile'
-# require 'rest-client'
-require 'byebug' if Sinatra::Base.development?
-# require 'yaml'
 
 
 class V0 < Sinatra::Base
@@ -35,6 +26,13 @@ class V0 < Sinatra::Base
   set data_directory_path: 'data/v0'
   set session_secret: ENV['ENGINES_ADMIN_GUI_SESSION_SECRET'] || '0'
   set user_inactivity_timeout: ( ENV['ENGINES_ADMIN_GUI_USER_INACTIVITY_TIMEOUT'] || 30 ).to_i * 60
+  # set environment: Sprockets::Environment.new
+
+  ##############################################################################
+  ## Assets
+  ##############################################################################
+
+  # environment.append_path "client/lib"
 
 
   ##############################################################################
@@ -49,14 +47,13 @@ class V0 < Sinatra::Base
     erb :'client.js'
   end
 
-  get '/ax.js' do
+  get '/lib.js' do
     content_type :'application/javascript'
-    erb :'ax.js'
+    erb :'lib.js'
   end
 
   get '*path' do
-    # byebug
-    pass if params[:path].split("/")[1] = "power"
+    pass if params[:path].split("/")[1] == "power"
     pass unless request.accept? "text/html"
     content_type :html
     erb :'index.html'
