@@ -6,9 +6,9 @@ App.prototype.body = function() {
   return x.controller( {
     "/": this.bodyRoot(a,x),
     "/get_ax": this.getAx(a,x),
-    "/tutorials/:id": this.tutorialsShow(a,x),
-    "/tutorials/": this.tutorialsShow(a,x),
-    "/tutorials": this.tutorialsIndex(a,x),
+    "/guides/:id": this.guidesShow(a,x),
+    "/guides/": this.guidesShow(a,x),
+    "/guides": this.guidesIndex(a,x),
     "/*lost": function( params, controller ) { return a.p( "No view at /" + params.lost ); },
   }, { bind: "router" } );
 

@@ -435,7 +435,7 @@ class App {
 // // acell( (a) => [
 // // 	a.dsl.form( {
 // // 		action: "/testform",
-// // 		data: { email: "myemail@tutorial.com" },
+// // 		data: { email: "myemail@guide.com" },
 // // 		$components: (f) => [
 // // 			// f.field("email"),
 // // 			a.button("Save - use dsl submit"),
@@ -748,225 +748,225 @@ class App {
 // 	// a.dsl.request("/test/people"),
 // ]);
 
-ax( (a,x) => x.css(`
-cell {
-	font-family: sans-serif;
-}
-
-cell button {
-	cursor: pointer;
-}
-
-cell form {
-	// font-size: 24px;
-	margin: 10px;
-	max-width: 600px;
-}
-
-cell form field wrapper {
-	display: block;
-	margin-bottom: 20px;
-}
-
-cell form label {
-	font-weight: 600;
-}
-
-cell form help helpbutton {
-	float: right;
-	padding: 0px 10px;
-	cursor: pointer;
-}
-
-cell form help helptext {
-	font-size: 0.8em;
-	color: #666;
-	padding: 0px 10px 10px; 10px;
-	display: block;
-	clear: both;
-}
-
-cell form input, cell form select, cell form textarea {
-	box-sizing: border-box;
-	padding: 5px;
-	// font-size: 24px;
-	width: 100%;
-	margin: 0px;
-}
-
-
-
-cell form radiobuttons radiobutton, cell form checkboxes checkbox {
-	display: block;
-	margin-top: 5px;
-}
-
-cell form radiobuttons radiobutton label, cell form checkboxes checkbox label {
-	font-weight: normal;
-	vertical-align: top;
-}
-
-cell form input[type="color"] {
-	height: 49px;
-	width: 49px;
-}
-
-cell form input[type="checkbox"], cell form input[type="radio"] {
-	width: inherit;
-	margin-right: 5px;
-}
-
-cell form hint {
-	color: #333;
-	font-size: 0.8em;
-	font-style: italic;
-}
-
-cell form textarea {
-	resize: vertical;
-}
-
-cell form multiselect selecteditems {
-	display: block;
-	margin-top: -1px;
-	border: 1px solid #999;
-	border-top: none;
-	border-bottom-left-radius: 4px;
-	border-bottom-right-radius: 4px;
-	overflow: hidden;
-	background-color: white;
-}
-
-cell form multiselect selecteditems selecteditem {
-	padding: 5px;
-	display: block;
-}
-
-cell form multiselect selecteditems selecteditem noneselectedmessage {
-	font-style: italic;
-	color: #666;
-}
-
-
-
-cell form multiselect selecteditems selecteditem:hover {
-	background-color: #eee;
-}
-
-cell form multiselect selecteditems selecteditem itemremovebutton {
-	float: right;
-}
-
-cell form multiselect selecteditems selecteditem itemremovebutton button {
-	color: #999;
-	padding: 0px 5px;
-	border: none;
-	background: transparent;
-}
-
-cell form multiselect selecteditems selecteditem itemremovebutton button:hover {
-	color: #666;
-}
-
-cell form codemirror {
-	border-radius: 4px;
-	overflow: hidden;
-	display: block;
-	border: 1px solid #bbb;
-}
-
-cell form codemirror editor {
-	height: 200px;
-	display: block;
-	font-size: 16px;
-}
-
-cell form codemirror toolbar {
-	background-color: #f6f6f6;
-	border-bottom: 1px solid #ddd;
-	display: block;
-	overflow: hidden;
-	cursor: pointer;
-}
-
-cell form codemirror toolbar button {
-	float: right;
-	border: none;
-	margin: 2px;
-	background: none;
-	padding: 5px 10px;
-	color: #999;
-}
-
-cell form codemirror toolbar:hover button {
-	color: #666;
-}
-
-cell form codemirror toolbar mode {
-	display: inline-block;
-	margin: 2px;
-	padding: 5px 10px;
-	color: #999;
-	font-size: 0.8em;
-}
-
-/* This fixed conflicts when SimpleMDE and CodeMirror css
-	 files are loaded on the same page. (SimpleMDE uses CodeMirror.) */
-cell form codemirror editor .CodeMirror {
-	min-height: 0px;
-	border: none;
-	border-radius: 0px;
-	padding: 0px;
-	font-family: monospace;
-}
-
-cell form simplemde {
-	border: 1px solid #bbb;
-}
-
-cell form simplemde .CodeMirror {
-	border: 1px solid #bbb;
-	border-top: 1px solid #ddd;
-	border-bottom: 1px solid #ddd;
-
-	border-bottom-left-radius: 0px;
-	border-bottom-right-radius: 0px;
-	min-height: 0px;
-	height: 200px;
-}
-
-cell form simplemde .editor-toolbar {
-	background-color: #f6f6f6;
-	opacity: 1;
-	border-top: 1px solid #bbb;
-	border-left: 1px solid #bbb;
-	border-right: 1px solid #bbb;
-}
-
-cell form simplemde .editor-toolbar a {
-	color: #999 !important;
-	border: none;
-	margin-right: 1px;
-}
-
-cell form simplemde .editor-toolbar:hover {
-	opacity: 1;
-}
-
-cell form simplemde .editor-toolbar a:hover {
-	background: inherit;
-	color: #666 !important;
-}
-
-cell form simplemde .editor-statusbar {
-	background-color: #f6f6f6;
-	color: #999;
-	border: 1px solid #bbb;
-	border-bottom-left-radius: 4px;
-	border-bottom-right-radius: 4px;
-	border-top: none;
-	padding: 3px 6px;
-}
-` ),
-  { style: "display: none;" }
-);
+// ax( (a,x) => x.css(`
+// cell {
+// 	font-family: sans-serif;
+// }
+//
+// cell button {
+// 	cursor: pointer;
+// }
+//
+// cell form {
+// 	// font-size: 24px;
+// 	margin: 10px;
+// 	max-width: 600px;
+// }
+//
+// cell form field wrapper {
+// 	display: block;
+// 	margin-bottom: 20px;
+// }
+//
+// cell form label {
+// 	font-weight: 600;
+// }
+//
+// cell form help helpbutton {
+// 	float: right;
+// 	padding: 0px 10px;
+// 	cursor: pointer;
+// }
+//
+// cell form help helptext {
+// 	font-size: 0.8em;
+// 	color: #666;
+// 	padding: 0px 10px 10px; 10px;
+// 	display: block;
+// 	clear: both;
+// }
+//
+// cell form input, cell form select, cell form textarea {
+// 	box-sizing: border-box;
+// 	padding: 5px;
+// 	// font-size: 24px;
+// 	width: 100%;
+// 	margin: 0px;
+// }
+//
+//
+//
+// cell form radiobuttons radiobutton, cell form checkboxes checkbox {
+// 	display: block;
+// 	margin-top: 5px;
+// }
+//
+// cell form radiobuttons radiobutton label, cell form checkboxes checkbox label {
+// 	font-weight: normal;
+// 	vertical-align: top;
+// }
+//
+// cell form input[type="color"] {
+// 	height: 49px;
+// 	width: 49px;
+// }
+//
+// cell form input[type="checkbox"], cell form input[type="radio"] {
+// 	width: inherit;
+// 	margin-right: 5px;
+// }
+//
+// cell form hint {
+// 	color: #333;
+// 	font-size: 0.8em;
+// 	font-style: italic;
+// }
+//
+// cell form textarea {
+// 	resize: vertical;
+// }
+//
+// cell form multiselect selecteditems {
+// 	display: block;
+// 	margin-top: -1px;
+// 	border: 1px solid #999;
+// 	border-top: none;
+// 	border-bottom-left-radius: 4px;
+// 	border-bottom-right-radius: 4px;
+// 	overflow: hidden;
+// 	background-color: white;
+// }
+//
+// cell form multiselect selecteditems selecteditem {
+// 	padding: 5px;
+// 	display: block;
+// }
+//
+// cell form multiselect selecteditems selecteditem noneselectedmessage {
+// 	font-style: italic;
+// 	color: #666;
+// }
+//
+//
+//
+// cell form multiselect selecteditems selecteditem:hover {
+// 	background-color: #eee;
+// }
+//
+// cell form multiselect selecteditems selecteditem itemremovebutton {
+// 	float: right;
+// }
+//
+// cell form multiselect selecteditems selecteditem itemremovebutton button {
+// 	color: #999;
+// 	padding: 0px 5px;
+// 	border: none;
+// 	background: transparent;
+// }
+//
+// cell form multiselect selecteditems selecteditem itemremovebutton button:hover {
+// 	color: #666;
+// }
+//
+// cell form codemirror {
+// 	border-radius: 4px;
+// 	overflow: hidden;
+// 	display: block;
+// 	border: 1px solid #bbb;
+// }
+//
+// cell form codemirror editor {
+// 	height: 200px;
+// 	display: block;
+// 	font-size: 16px;
+// }
+//
+// cell form codemirror toolbar {
+// 	background-color: #f6f6f6;
+// 	border-bottom: 1px solid #ddd;
+// 	display: block;
+// 	overflow: hidden;
+// 	cursor: pointer;
+// }
+//
+// cell form codemirror toolbar button {
+// 	float: right;
+// 	border: none;
+// 	margin: 2px;
+// 	background: none;
+// 	padding: 5px 10px;
+// 	color: #999;
+// }
+//
+// cell form codemirror toolbar:hover button {
+// 	color: #666;
+// }
+//
+// cell form codemirror toolbar mode {
+// 	display: inline-block;
+// 	margin: 2px;
+// 	padding: 5px 10px;
+// 	color: #999;
+// 	font-size: 0.8em;
+// }
+//
+// /* This fixed conflicts when SimpleMDE and CodeMirror css
+// 	 files are loaded on the same page. (SimpleMDE uses CodeMirror.) */
+// cell form codemirror editor .CodeMirror {
+// 	min-height: 0px;
+// 	border: none;
+// 	border-radius: 0px;
+// 	padding: 0px;
+// 	font-family: monospace;
+// }
+//
+// cell form simplemde {
+// 	border: 1px solid #bbb;
+// }
+//
+// cell form simplemde .CodeMirror {
+// 	border: 1px solid #bbb;
+// 	border-top: 1px solid #ddd;
+// 	border-bottom: 1px solid #ddd;
+//
+// 	border-bottom-left-radius: 0px;
+// 	border-bottom-right-radius: 0px;
+// 	min-height: 0px;
+// 	height: 200px;
+// }
+//
+// cell form simplemde .editor-toolbar {
+// 	background-color: #f6f6f6;
+// 	opacity: 1;
+// 	border-top: 1px solid #bbb;
+// 	border-left: 1px solid #bbb;
+// 	border-right: 1px solid #bbb;
+// }
+//
+// cell form simplemde .editor-toolbar a {
+// 	color: #999 !important;
+// 	border: none;
+// 	margin-right: 1px;
+// }
+//
+// cell form simplemde .editor-toolbar:hover {
+// 	opacity: 1;
+// }
+//
+// cell form simplemde .editor-toolbar a:hover {
+// 	background: inherit;
+// 	color: #666 !important;
+// }
+//
+// cell form simplemde .editor-statusbar {
+// 	background-color: #f6f6f6;
+// 	color: #999;
+// 	border: 1px solid #bbb;
+// 	border-bottom-left-radius: 4px;
+// 	border-bottom-right-radius: 4px;
+// 	border-top: none;
+// 	padding: 3px 6px;
+// }
+// ` ),
+//   { style: "display: none;" }
+// );

@@ -3,12 +3,13 @@ App.prototype.coderunnerRunCompleteOutputHtmlCode = function () {
 //   var a = this.a;
 //   var x = this.x;
 //
-// function appHelperCodeTutorialRunCompleteOutputHtmlCode( this ) {
+// function appHelperCodeGuideRunCompleteOutputHtmlCode( this ) {
 
   var htmlcodeTarget = this.querySelector("output htmlcode textarea");
   var iframe = this.querySelector("output rendered iframe");
   var iframeWindow = iframe.contentWindow;
   var sourceCells = iframe.contentDocument.body.children;
+  var styleCell = iframe.contentDocument.body.firstChild;
   var callbackCell = iframe.contentDocument.body.lastChild;
   var htmlcodeSnips = [];
 
@@ -16,7 +17,7 @@ App.prototype.coderunnerRunCompleteOutputHtmlCode = function () {
   // Test is > 2 because callback cell also present.
   if ( sourceCells.length > 2 ) {
     for ( var sourceCell of sourceCells ) {
-      if ( sourceCell === callbackCell ) { break; }
+      if ( sourceCell.id === "axCoderunnerComplete" ) { break; };
       htmlcodeSnips.push( sourceCell.outerHTML );
     };
   } else {

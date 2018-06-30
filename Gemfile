@@ -7,3 +7,6 @@ gem 'rest-client'
 # gem 'byebug'
 
 gem 'sprockets'
+
+gem 'selenium-webdriver'
+gem 'geckodriver-helper'

@@ -17,7 +17,7 @@ App.prototype.bodyRoot = function( params, controller ) {
   a.hr(),
   x.css( { field: { label: { marginRight: "5px" } } } ),
   x.form( (f) => [ f.field( "detail" ), f.field( "locked", "checkbox" ) ] ),
-  x.markdown( "Check out the **tutorials**." )
+  x.md( "Check out the **guides**." )
 ] );` ),
   ]
 };

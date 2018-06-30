@@ -1,9 +1,430 @@
-// var inDevelopment = <%= Sinatra::Base.development? %>;
-//
-// <% Dir.glob( [ './v0/client/src/**/*.js' ] ).each do |file| %>
-//  	<%= File.read file %>
-// <% end %>
-//
-// ax( App );
+var inDevelopment = <%= Sinatra::Base.development? %>;
 
-ax("hi");
+<% Dir.glob( [ './v0/client/src/**/*.js' ] ).each do |file| %>
+ 	<%= File.read file %>
+<% end %>
+
+ax( App );
+
+
+
+ax( (a,x) => [
+  // x.script( "/axf/themes/standard/form.js" ),
+  x.css(
+    { maxWidth: "600px", marginLeft: "auto", marginRight: "auto", marginTop: "20px" },
+    { scope: "#myform" }
+  ),
+  x.form( (f) => [
+    // a.div( f.fields([
+    //   [ "story", "textarea", {
+    //     required: true,
+    //     input: { attributes: { class: "form-control" } },
+    //     label: { inline: { attributes: { class: "col-sm-4" } }, attributes: { class: "col-sm-1 col-form-label" } },
+    //     outerwrapper: { attributes: { class: "form-group" } } } ],
+    //   [ "story", "textarea", {
+    //     required: true,
+    //     input: { attributes: { class: "form-control" } },
+    //     label: { inline: { attributes: { class: "col-sm-4" } }, attributes: { class: "col-sm-2 col-form-label" } },
+    //     outerwrapper: { attributes: { class: "form-group" } } } ],
+    //
+    // ]), { class: "row" } ),
+
+    f.fields(
+      [
+        // [ "color", "color", { help: "Hi", hint: "Foo", rightwrapper: { class: "col-sm-9 col-form-label" }, } ],
+        // [ "accept", "checkbox", {
+        //   // input: { attributes: { class: "form-check-input" } },
+        //   // outerwrapper: { class: "form-check form-group" },
+        //   leftwrapper: { class: "col-sm-3 col-form-label" },
+        //   rightwrapper: { class: "col-sm-9 col-form-label" },
+        //   // rightwrapper: { class: "col-sm-2 col-form-label" },
+        //   label: { layout: "normal" },
+        //   help: "Cool\n\nStuff",
+        //   hint: "Bar",
+        // } ],
+        // [ "accepted", "checkbox", {
+        //   // input: { attributes: { class: "form-check-input" } },
+        //   leftwrapper: { class: "col-sm-3 col-form-label" },
+        //   rightwrapper: { class: "col-sm-9 col-form-label" },
+        //   // outerwrapper: { class: "form-group row" },
+        //   // leftwrapper: { class: "col-sm-10" },
+        //   // rightwrapper: { class: "col-sm-2" },
+        //   // rightwrapper: { class: "col-sm-2 col-form-label" },
+        //   // label: { layout: "normal" },
+        //   help: "Cool\n\nStuff",
+        //   // hint: "Bar",
+        // } ],
+        // [ "accepters", "multiselect", { value: [1,2], collection: { 1: "Red", 2: "Blue", 3: "Green" } } ],
+        // [ "sports", "custom/selectinput", { placeholder: "", collection: { glf: "Golf", ftb: "Football" } } ],
+        // [ "story", "textarea", {
+        //   required: true,
+        //   // input: { attributes: { class: "form-control" } },
+        //   label: { layout: "check" },
+        //   // leftwrapper: { class: "col-sm-9" },
+        //   // rightwrapper: { class: "col-sm-3" },
+        //   // outerwrapper: { class: "form-group row" },
+        //   hint: "Cool",
+        //   help: "Enter some text.\n\nMake it **readable**.\n===",
+        //   }
+        // ],
+        // [ "pet", "radios", {
+        //   collection: [ "dog", "cat", "fish", "bird" ],
+        //   // value: "cat",
+        //   hint: "Click on an option to select it.",
+        //   rightwrapper: { class: "col-sm-9 col-form-label" },
+        //   required: true,
+        //   check: ( item ) => {
+        //     var help = {
+        //       fish: "Sorry, you can't select fish at the moment.",
+        //       bird: "The bird option\n\n is currently blue."
+        //     };
+        //     var isFish = item[0] === "fish";
+        //     return {
+        //       input: { attributes: {
+        //         // class: "form-check-input",
+        //         disabled: isFish ? "disabled" : null
+        //       } },
+        //
+        //       // outerwrapper: { class: "form-check" },
+        //       // outerwrapper: { attributes: { class: "form-group row" } } } ],
+        //       help: help[ item[0] ],
+        //       hint: {
+        //         text: "Same same",
+        //         attributes: {
+        //           // style: "font-style: italic; " + ( item[0] === "bird" ? "color: inherit;" : "" )
+        //         }
+        //       },
+        //       label: {
+        //         // layout: "normal",
+        //         // attributes: { class: "form-check-label" },
+        //         leftwrapper: {
+        //           // class: "form-check-label",
+        //           style: item[0] === "bird" ? "color: blue" : ""
+        //         },
+        //         // leftwrapper: { class: "" },
+        //
+        //         // label: { inline: { attributes: { class: "col-sm-10" } }, attributes: { class: "col-sm-2 col-form-label" } },
+        //         //
+        //       }
+        //     };
+        //   },
+        // } ],
+        // a.hr(),
+        // [ "chess", "checkboxes", {
+        //   collection: [ "pawn", "knight", "bishop", "rook", "queen", "king" ],
+        //   value: [ "bishop", "queen" ],
+        //   check: ( item ) => ( {
+        //     // input: { attributes: { class: "form-check-input" } },
+        //     // outerwrapper: { class: "form-check" },
+        //     // leftwrapper: { class: "form-check-label" },
+        //     label: {
+        //       // layout: "normal",
+        //       // attributes: { class: "form-check-label" }
+        //     },
+        //     hint: "This is the " + item[1],
+        //     help: "Help for " + item[1],
+        //   } ),
+        //   help: "Main help"
+        // } ],
+        // [ "domicile", "custom/country", { placeholder: "Where do they live?", required: true, dependent: { selector: "[name='chess[]']", pattern: "pawn" } } ],
+        // [ "speaks", "custom/timezone", { placeholder: "What is their preferred language?" } ],
+        // [ "script_mode", "codemode", { value: "javascript" } ],
+        // [ "script", "code" ],
+        // [ "avatar", "file", {
+        //   // leftwrapper: { class: "col-sm-2" },
+        //   // rightwrapper: { class: "col-sm-10" },
+        //   // outerwrapper: { class: "form-group row" },
+        // } ],
+        //
+        // // dependent: { selector: "[name='age']", pattern: /^18|19|[2-9]\d+|\d{3,}$/ } }
+        //
+        //
+        // [ "favcolor", "custom/inputoutput", "#00FF00", { type: "color" } ],
+        // [ "scale", "custom/inputoutput", 10, { type: "range", input: { attributes: { min: 1, class: "form-control-range" } } } ],
+        // [ "email", "email", { input: { attributes: { placeholder: "name@example.com" } } } ],
+        [ "birthday", "date", { help: "Ask your mother. She'll remember." } ],
+        // "first_name",
+        "last_name",
+        // [ "name", { pattern: "x", required: true, input: { oninvalid: function() { debugger; return true; } } } ],
+        [ "description", "markdown", {
+          required: true,
+
+          label: false,
+        } ],
+        a.button( "A", { name: "answer", value: "0", class: "btn btn-primary" } ),
+        f.submit( "OK", { attributes: { class: "btn btn-primary" } } ),
+      ],
+      {
+        attributes: { $type: "fieldset", class: "form-control" },
+        field: ( field ) => ( {
+          input: { class: "form-control" },
+          leftwrapper: { class: "col-sm-4 col-form-label" },
+          rightwrapper: { class: "col-sm-8" },
+          layout: "check",
+          outerwrapper: { class: "form-group row" },
+          help: "Help!!!",
+          // label: { attributes: { class: "form-label" } },
+          // outerwrapper: { class: "form-group" }
+        } )
+        //   input: { attributes: { class: "form-control" } },
+        //   label: { inline: { attributes: { class: "col-sm-10" } }, attributes: { class: "col-sm-2 col-form-label" } },
+        //   outerwrapper: { attributes: { class: "form-group row" } } } ],
+        // label: false,
+      }
+    ),
+
+  ],
+  { attributes: {
+    id: "myform",
+    // novalidate: true,
+    // class: "needs-validation",
+    // onsubmit: function(event) {
+    //   if (this.checkValidity() == false) {
+    //     this.querySelectorAll("input textarea select").forEach(
+    //       function(input) {
+    //         debugger
+    //       };
+    //     )
+    //     return false;
+    //   }
+    //   return true;
+    // },
+
+  }
+}
+)
+] );
+
+
+
+// ax("hi");
+
+// ax( (a,x) =>
+//   x.form( (f) => [
+//   ], { attributes: {  } } )
+// );
+//
+//
+// ax( (a,x) => [
+//   x.css(
+//     {
+//       fontFamily: "'Helvetica Neue',Helvetica,Arial,sans-serif",
+//       color: "#333",
+//       button: {
+//         cursor: "pointer"
+//       }
+//     },
+//     { scope: "body" }
+//   ),
+//   x.css(
+//     {
+//       outerwrapper: {
+//       	display: "block",
+//       	marginBottom: "20px"
+//       },
+//       label: {
+//       	fontWeight: "600"
+//       },
+//       help: {
+//         helpbutton: {
+//           float: "right",
+//         	padding: "0px 10px",
+//         	cursor: "pointer",
+//         },
+//         helptext: {
+//           color: "#666",
+//         	padding: "0px 10px 10px 10px",
+//         	display: "block",
+//         	clear: "both",
+//         }
+//       },
+//       "input,select,textarea": {
+//         boxSizing: "border-box",
+//       	padding: "5px",
+//       	width: "100%",
+//       	margin: "0px",
+//       },
+//       "radiobuttons radiobutton, checkboxes checkbox": {
+//         display: "block",
+//       	marginTop: "5px"
+//       }
+//
+//     },
+//     { scope: "form field" }
+//   )
+// ] );
+//
+//
+// ax( (a,x) => x.css(`
+//
+// field radiobuttons radiobutton label, field checkboxes checkbox label {
+// 	font-weight: normal;
+// 	vertical-align: top;
+// }
+//
+// field input[type="color"] {
+// 	height: 49px;
+// 	width: 49px;
+// }
+//
+// field input[type="checkbox"], field input[type="radio"] {
+// 	width: inherit;
+// 	// margin-right: 5px;
+// }
+//
+// field hint {
+// 	color: #333;
+// 	font-size: 0.8em;
+// 	font-style: italic;
+// }
+//
+// field textarea {
+// 	resize: vertical;
+// }
+//
+// field multiselect selecteditems {
+// 	display: block;
+// 	margin-top: -1px;
+// 	border: 1px solid #999;
+// 	border-top: none;
+// 	border-bottom-left-radius: 4px;
+// 	border-bottom-right-radius: 4px;
+// 	overflow: hidden;
+// 	background-color: white;
+//   font-weight: normal;
+// }
+//
+// field multiselect selecteditems selecteditem {
+// 	padding: 5px;
+// 	display: block;
+// }
+//
+// field multiselect selecteditems selecteditem noneselectedmessage {
+// 	font-style: italic;
+// 	color: #666;
+// }
+//
+//
+//
+// field multiselect selecteditems selecteditem:hover {
+// 	background-color: #eee;
+// }
+//
+// field multiselect selecteditems selecteditem itemremovebutton {
+// 	float: right;
+// }
+//
+// field multiselect selecteditems selecteditem itemremovebutton button {
+// 	color: #999;
+// 	padding: 0px 5px;
+// 	border: none;
+// 	background: transparent;
+// }
+//
+// field multiselect selecteditems selecteditem itemremovebutton button:hover {
+// 	color: #666;
+// }
+//
+// field codemirror {
+// 	border-radius: 4px;
+// 	overflow: hidden;
+// 	display: block;
+// 	border: 1px solid #bbb;
+// }
+//
+// field codemirror editor {
+// 	height: 200px;
+// 	display: block;
+// 	font-size: 16px;
+// }
+//
+// field codemirror toolbar {
+// 	background-color: #f6f6f6;
+// 	border-bottom: 1px solid #ddd;
+// 	display: block;
+// 	overflow: hidden;
+// 	cursor: pointer;
+// }
+//
+// field codemirror toolbar button {
+// 	float: right;
+// 	border: none;
+// 	margin: 2px;
+// 	background: none;
+// 	padding: 5px 10px;
+// 	color: #999;
+// }
+//
+// field codemirror toolbar:hover button {
+// 	color: #666;
+// }
+//
+// field codemirror toolbar mode {
+// 	display: inline-block;
+// 	margin: 2px;
+// 	padding: 5px 10px;
+// 	color: #999;
+// 	font-size: 0.8em;
+// }
+//
+// /* This fixed conflicts when SimpleMDE and CodeMirror css
+// 	 files are loaded on the same page. (SimpleMDE uses CodeMirror.) */
+// field codemirror editor .CodeMirror {
+// 	min-height: 0px;
+// 	border: none;
+// 	border-radius: 0px;
+// 	padding: 0px;
+// 	font-family: monospace;
+// }
+//
+// field simplemde {
+//   font-weight: normal;
+// 	border: 1px solid #bbb;
+// }
+//
+// field simplemde .CodeMirror {
+// 	border: 1px solid #bbb;
+// 	border-top: 1px solid #ddd;
+// 	border-bottom: 1px solid #ddd;
+//
+// 	border-bottom-left-radius: 0px;
+// 	border-bottom-right-radius: 0px;
+// 	min-height: 0px;
+// 	height: 200px;
+// }
+//
+// field simplemde .editor-toolbar {
+// 	background-color: #f6f6f6;
+// 	opacity: 1;
+// 	border-top: 1px solid #bbb;
+// 	border-left: 1px solid #bbb;
+// 	border-right: 1px solid #bbb;
+// }
+//
+// field simplemde .editor-toolbar a {
+// 	color: #999 !important;
+// 	border: none;
+// 	margin-right: 1px;
+// }
+//
+// field simplemde .editor-toolbar:hover {
+// 	opacity: 1;
+// }
+//
+// field simplemde .editor-toolbar a:hover {
+// 	background: inherit;
+// 	color: #666 !important;
+// }
+//
+// field simplemde .editor-statusbar {
+// 	background-color: #f6f6f6;
+// 	color: #999;
+// 	border: 1px solid #bbb;
+// 	border-bottom-left-radius: 4px;
+// 	border-bottom-right-radius: 4px;
+// 	border-top: none;
+// 	padding: 3px 6px;
+// }
+// ` ),
+//   // { style: "display: none;" }
+// );

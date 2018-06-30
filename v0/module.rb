@@ -42,21 +42,57 @@ class V0 < Sinatra::Base
   # Here are the erb files
   set :views, Proc.new { File.join(root, "client") }
 
+
+
+  get '/go' do
+
+        require "selenium-webdriver"
+
+        driver = Selenium::WebDriver.for :firefox
+        driver.navigate.to "http://google.com"
+
+        element = driver.find_element(name: 'q')
+        element.send_keys "Hello WebDriver!"
+        element.submit
+
+        puts driver.title
+
+        driver.quit
+
+  end
+
   get '/client.js' do
     content_type :'application/javascript'
     erb :'client.js'
   end
 
-  get '/lib.js' do
+  get '/axf.js' do
     content_type :'application/javascript'
-    erb :'lib.js'
+    # byebug
+    erb :'/ax_framework/axf.js'
+  end
+
+  get '/axf/themes/:theme' do
+    content_type :'application/javascript'
+    # byebug
+    erb "/ax_framework/themes/#{params[:theme]}".to_sym
+  end
+
+  get '/axf/themes/*path' do
+    content_type :'application/javascript'
+    # byebug
+    File.read( "#{settings.views}/ax_framework/themes/#{params[:path]}" )
   end
 
   get '*path' do
     pass if params[:path].split("/")[1] == "power"
     pass unless request.accept? "text/html"
     content_type :html
-    erb :'index.html'
+    if params[:path] === "/i"
+      erb :'index_bootstrap.html'
+    else
+      erb :'index.html'
+    end
   end
 
 
@@ -136,11 +172,9 @@ class V0 < Sinatra::Base
   end
 
   after do
-    response.body = response.body.to_json if
+    response.body = JSON.pretty_generate( response.body ) if
       ( content_type == "application/json" ) &&
       not( response.body.is_a? String )
-    puts "Response"
-    puts response.body
   end
 
   ## Authenticate

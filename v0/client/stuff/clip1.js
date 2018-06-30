@@ -1,3 +1,80 @@
+
+
+
+
+
+x.table(
+	[
+		[ "First", "Second" ],
+		[ "Fizz", "Buzz" ],
+		[ "Foo", "Bar" ]
+	],
+	{
+		tableAttributes: {},
+		trAttributes: function(i) {
+			return {
+				onclick: function(e) {
+					alert(i);
+				}
+			}
+		},
+		thAttributes: function(j) {
+			return {
+				onclick: function(e) {
+					alert(j);
+				}
+			}
+		},
+		tdAttributes: function(j) {
+			return {
+				onclick: function(e) {
+					alert(j);
+				}
+			}
+		},
+	}
+),
+
+x.tabulate(
+	(r) => [
+		r.property( "first", "boolean", { } ),
+		r.text( "first" ),
+	],
+	[
+		{ first: "fizz", second: "buzz" },
+		{ first: "foo", second: "bar" },
+	],
+	{
+		properties: [ "first", "second" ],
+		labels: { first: "First 1st" },
+		types: { first: "image" }
+		// tableAttributes:
+		// trAttributes: {},
+		tableOptions: {
+			trAttributes: function(i) {},
+		}
+	}
+);
+
+x.index(
+	"/test/people",
+	{
+		fetchOptions: {},
+		// formOptions: {},
+		tabulateOptions: {
+			tableOptions: {
+				trAttributes: function(i) { return { onclick: function(e) { open record } } },
+			}
+		}
+	}
+);
+
+
+
+
+
+
+
 AxDslFormBuilder.prototype.input = function(
 	name,
 	inputType,

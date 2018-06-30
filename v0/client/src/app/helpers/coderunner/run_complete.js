@@ -16,7 +16,14 @@ App.prototype.coderunnerRunComplete = function( iframeWindow ) {
   coderunner.querySelector("outputbuttons")._show();
 
   // Set the height of the HTML output iframe.
-  iframe.style.height = iframe.contentDocument.body.scrollHeight + 100 + 'px';
+  // debugger;
+
+  var setIframeHeight = function() {
+    iframe.style.height = iframe.contentDocument.body.scrollHeight + 500 + 'px';
+    console.log("do height")
+    // setTimeout( setIframeHeight, 1000 );
+  };
+  setIframeHeight();
 
   // Note that iframes in some browser (e.g. Chrome) will re-render old cell
   // objects from previous runs, but other browsers (e.g. Firefox) will not.

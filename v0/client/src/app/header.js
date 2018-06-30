@@ -5,6 +5,6 @@ App.prototype.header = function() {
 
   return x.controller( {
     "*path": this.headerNav(a,x),
-  }, { bind: "router", id: "navController" } );
+  }, { bind: "router" } );
 
 };

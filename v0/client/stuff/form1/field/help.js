@@ -21,7 +21,7 @@ AxDslFormBuilder.prototype.help = function( content, helpBuilderOptions ) {
             },
           }
         ),
-        a.helptext(
+        a.helpbody(
           content,
           {
             style: "display: none;",

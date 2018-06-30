@@ -19,13 +19,13 @@ App.prototype.coderunner = function( code ) {
   }
 
   return a.coderunner( [
-    x.formBuilder.field("code", "code", { label: false, mode: "javascript", value: code } ),
+    x.form( (f) => f.field("code", "code", { label: false, mode: "javascript", value: code } ), { formAttributes: { onsubmit: ()=>false } } ),
     a.p( [
       a.runbutton(
-        x.btn( "Run", function () { app.coderunnerRun( this ); }, { fa: "play"} )
+        app.appbtn( "Run", function () { app.coderunnerRun( this ); }, { fa: "play", attributes: { title: "Run code and show output" } } )
       ),
       a.outputbuttons( [
-        x.btn( null, function(e) {
+        app.appbtn( null, function(e) {
           this.closest("outputbuttons").querySelectorAll("button").forEach( function( button ) {
             button.classList.remove( "active" );
           } );
@@ -34,8 +34,8 @@ App.prototype.coderunner = function( code ) {
           coderunner.querySelector("output rendered")._show();
           coderunner.querySelector("output htmlcode")._hide();
           coderunner.querySelector("output cellobject")._hide();
-        }, { fa: "tv", buttonAttributes: { class: "active" } } ),
-        x.btn( null, function(e) {
+        }, { fa: "tv", attributes: { class: "active", title: "Rendered output" } } ),
+        app.appbtn( null, function(e) {
           this.closest("outputbuttons").querySelectorAll("button").forEach( function( button ) {
             button.classList.remove( "active" );
           } );
@@ -45,8 +45,8 @@ App.prototype.coderunner = function( code ) {
           this._outputHtmlCode( coderunner );
           coderunner.querySelector("output rendered")._hide();
           coderunner.querySelector("output cellobject")._hide();
-        }, { fa: "code" } ),
-        x.btn( "ᴥ", function(e) {
+        }, { fa: "code", attributes: { title: "Output HTML" } } ),
+        app.appbtn( "ᴥ", function(e) {
           this.closest("outputbuttons").querySelectorAll("button").forEach( function( button ) {
             button.classList.remove( "active" );
           } );
@@ -55,12 +55,25 @@ App.prototype.coderunner = function( code ) {
           coderunner.querySelector("output cellobject")._show();
           coderunner.querySelector("output rendered")._hide();
           coderunner.querySelector("output htmlcode")._hide();
-        }, { buttonAttributes: { style: "line-height: 25px;" } } ),
-        x.btn( null, function() {
+        }, { attributes: { title: "Cell object", style: "line-height: 25px;" } } ),
+        app.appbtn( null, function() {
+          var coderunner = this.closest("coderunner");
+          var headHtml = coderunner.querySelector("output iframe").contentDocument.head.innerHTML;
+          var html =
+`<!DOCTYPE html>
+<html lang="en">
+<head>
+${headHtml}
+</head>
+<body></body>
+</html>`;
+          x.lib.open( { html: html } );
+        }, { fa: "external-link", attributes: { title: "Run in window" } } ),
+        app.appbtn( null, function() {
           var coderunner = this.closest("coderunner");
           coderunner.querySelector("output")._hide();
           coderunner.querySelector("outputbuttons")._hide();
-        }, { fa: "times" } ),
+        }, { fa: "times", attributes: { title: "Close" } } ),
       ],
       Object.assign( { style: "float: right;" }, hideAndShow )
     ),
