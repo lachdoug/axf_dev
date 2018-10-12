@@ -3,70 +3,70 @@
 // }
 
 // return Object.assign(
-// 	{
-// 		$type: "input",
-// 		class: args.class || null,
-// 		id: args.id || null,
-// 		style: args.style || null,
-// 		placeholder: args.placeholder || null,
-// 		type: args.type || "text",
-// 		name: args.name || null,
-// 		value: args.value || null,
-// 		pattern: args.pattern || null,
-// 		min: args.min || null,
-// 		max: args.max || null,
-// 		autocomplete: args.autocomplete || null,
+//   {
+//     $type: "input",
+//     class: args.class || null,
+//     id: args.id || null,
+//     style: args.style || null,
+//     placeholder: args.placeholder || null,
+//     type: args.type || "text",
+//     name: args.name || null,
+//     value: args.value || null,
+//     pattern: args.pattern || null,
+//     min: args.min || null,
+//     max: args.max || null,
+//     autocomplete: args.autocomplete || null,
 //
-// 		onchange: function(e) {
+//     onchange: function(e) {
 //       args.onchange && args.onchange(e)
-// 		},
+//     },
 //
-// 		oninput: function(e) {
+//     oninput: function(e) {
 //
-// 			// var defaultFn = function() {
-// 				if(e.target.validity.patternMismatch) {
-// 					e.target.setCustomValidity(
-// 						args.patternMessage ||
-// 						( 'Must match pattern ' + args.pattern )
-// 					);
-// 					// return false;
-// 				} else {
+//       // var defaultFn = function() {
+//         if(e.target.validity.patternMismatch) {
+//           e.target.setCustomValidity(
+//             args.patternMessage ||
+//             ( 'Must match pattern ' + args.pattern )
+//           );
+//           // return false;
+//         } else {
 //           e.target.setCustomValidity('')
-// 					// return true;
-// 			  };
-// 			// };
+//           // return true;
+//         };
+//       // };
 //       args.oninput && args.oninput(e);
-// 			// if ( args.oninput ) {
-// 			// 	args.oninput(e) && defaultFn();
-// 			// } else {
-// 			// 	defaultFn();
-// 			// };
-// 		},
+//       // if ( args.oninput ) {
+//       //   args.oninput(e) && defaultFn();
+//       // } else {
+//       //   defaultFn();
+//       // };
+//     },
 //
-// 		$init: function () {
+//     $init: function () {
 //
-// 			if (args.onkeyup) {
-// 				$(this).bind( "keyup paste cut", function (e) {
-// 					args.onkeyup(e);
-// 				} );
-// 			};
+//       if (args.onkeyup) {
+//         $(this).bind( "keyup paste cut", function (e) {
+//           args.onkeyup(e);
+//         } );
+//       };
 //
-// 			if (args.onkeydown) {
-// 				$(this).bind( "keydown", function () {
-// 					args.onkeydown(this);
-// 				} );
-// 			};
+//       if (args.onkeydown) {
+//         $(this).bind( "keydown", function () {
+//           args.onkeydown(this);
+//         } );
+//       };
 //
-// 			args.init && init(this);
+//       args.init && init(this);
 //
-// 		},
+//     },
 //
 //     _value: function() {
 //       return this.value;
 //     },
-// 	},
-// 	args.required ? { required: 'required' } : {},
-// 	args.disabled ? { disabled: 'disabled' } : {},
+//   },
+//   args.required ? { required: 'required' } : {},
+//   args.disabled ? { disabled: 'disabled' } : {},
 // );
 
 
@@ -105,7 +105,7 @@
 //   // }.bind(this);
 //   //
 //   // var fieldFor = function( fieldArgs ) {
-//   //   switch( fieldArgs.type )	{
+//   //   switch( fieldArgs.type )  {
 //   //     case "string":
 //   //       return wrapField( Object.assign( fieldArgs, { type: "text" } ), this.input( fieldArgs ) );
 //   //     // case "file":

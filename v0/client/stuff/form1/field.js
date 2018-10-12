@@ -14,7 +14,7 @@ AxDslFormBuilder.prototype.field = function(
   // Assign arguments depending on the data types
   // of the second and third arguments.
   // First argument is always name.
-	if ( typeof fieldTypeOrBuilderOptions === "string" ) {
+  if ( typeof fieldTypeOrBuilderOptions === "string" ) {
     fieldType = fieldTypeOrBuilderOptions;
     if (
       typeof valueOrBuilderOptions === "string" ||
@@ -28,10 +28,10 @@ AxDslFormBuilder.prototype.field = function(
     } else {
       builderOptions = valueOrBuilderOptions || {};
     };
-	} else {
+  } else {
     builderOptions = fieldTypeOrBuilderOptions || {};
     fieldType = builderOptions.type || "input";
-	};
+  };
 
   // Get the field value from form data, or use default value from builder options
   fieldValue = this.formDataValueFor( fieldName ) || builderOptions.value;
@@ -212,110 +212,110 @@ AxDslFormBuilder.prototype.field = function(
 
 
 
-	// var geneOptions;
+  // var geneOptions;
   //
-	// if ( typeof nameOrGeneOptions === "string" ) {
-	// 	geneOptions = Object.assign( { name: nameOrGeneOptions }, ( geneOptionsOrBuilderOptions || {} ) );
-	// 	builderOptions = builderOptions || {};
-	// } else {
-	// 	geneOptions = nameOrGeneOptions;
-	// 	builderOptions = geneOptionsOrBuilderOptions || {};
-	// };
+  // if ( typeof nameOrGeneOptions === "string" ) {
+  //   geneOptions = Object.assign( { name: nameOrGeneOptions }, ( geneOptionsOrBuilderOptions || {} ) );
+  //   builderOptions = builderOptions || {};
+  // } else {
+  //   geneOptions = nameOrGeneOptions;
+  //   builderOptions = geneOptionsOrBuilderOptions || {};
+  // };
   //
-	// var oninputFunction = geneOptions.oninput;
-	// var invalidPatternMessage = builderOptions.invalidPatternMessage || ( 'Must match pattern ' + geneOptions.pattern )
+  // var oninputFunction = geneOptions.oninput;
+  // var invalidPatternMessage = builderOptions.invalidPatternMessage || ( 'Must match pattern ' + geneOptions.pattern )
   //
-	// geneOptions = Object.assign(
-	// 	{
-	//     value: function() {
-	//       return this.value;
-	// 		},
-	// 		oninput: function(e) {
-	// 			oninputFunction ?
-	// 			oninputFunction(e) && this._checkPatternValidity() :
-	// 			this._checkPatternValidity();
-	// 		},
-	// 		_checkPatternValidity: function() {
-	// 			if(this.validity.patternMismatch) {
-	// 				this.setCustomValidity(
-	// 					invalidPatternMessage
-	// 				);
-	// 			} else {
+  // geneOptions = Object.assign(
+  //   {
+  //     value: function() {
+  //       return this.value;
+  //     },
+  //     oninput: function(e) {
+  //       oninputFunction ?
+  //       oninputFunction(e) && this._checkPatternValidity() :
+  //       this._checkPatternValidity();
+  //     },
+  //     _checkPatternValidity: function() {
+  //       if(this.validity.patternMismatch) {
+  //         this.setCustomValidity(
+  //           invalidPatternMessage
+  //         );
+  //       } else {
   //         this.setCustomValidity('')
-	// 		  };
-	// 		},
-	//   },
-	// 	geneOptions
-	// );
+  //       };
+  //     },
+  //   },
+  //   geneOptions
+  // );
   //
-	// return this.cellBuilder.input( geneOptions )
-	// // ,
+  // return this.cellBuilder.input( geneOptions )
+  // // ,
   //
-	// // }
+  // // }
   //
-	// // return Object.assign(
-	// // 	{
-	// // 		$type: "input",
-	// // 		class: args.class || null,
-	// // 		id: args.id || null,
-	// // 		style: args.style || null,
-	// // 		placeholder: args.placeholder || null,
-	// // 		type: args.type || "text",
-	// // 		name: args.name || null,
-	// // 		value: args.value || null,
-	// // 		pattern: args.pattern || null,
-	// // 		min: args.min || null,
-	// // 		max: args.max || null,
-	// // 		autocomplete: args.autocomplete || null,
-	// //
-	// // 		onchange: function(e) {
+  // // return Object.assign(
+  // //   {
+  // //     $type: "input",
+  // //     class: args.class || null,
+  // //     id: args.id || null,
+  // //     style: args.style || null,
+  // //     placeholder: args.placeholder || null,
+  // //     type: args.type || "text",
+  // //     name: args.name || null,
+  // //     value: args.value || null,
+  // //     pattern: args.pattern || null,
+  // //     min: args.min || null,
+  // //     max: args.max || null,
+  // //     autocomplete: args.autocomplete || null,
+  // //
+  // //     onchange: function(e) {
   // //       args.onchange && args.onchange(e)
-	// // 		},
-	// //
-	// // 		oninput: function(e) {
-	// //
-	// // 			// var defaultFn = function() {
-	// // 				if(e.target.validity.patternMismatch) {
-	// // 					e.target.setCustomValidity(
-	// // 						args.patternMessage ||
-	// // 						( 'Must match pattern ' + args.pattern )
-	// // 					);
-	// // 					// return false;
-	// // 				} else {
+  // //     },
+  // //
+  // //     oninput: function(e) {
+  // //
+  // //       // var defaultFn = function() {
+  // //         if(e.target.validity.patternMismatch) {
+  // //           e.target.setCustomValidity(
+  // //             args.patternMessage ||
+  // //             ( 'Must match pattern ' + args.pattern )
+  // //           );
+  // //           // return false;
+  // //         } else {
   // //           e.target.setCustomValidity('')
-	// // 					// return true;
-	// // 			  };
-	// // 			// };
+  // //           // return true;
+  // //         };
+  // //       // };
   // //       args.oninput && args.oninput(e);
-	// // 			// if ( args.oninput ) {
-	// // 			// 	args.oninput(e) && defaultFn();
-	// // 			// } else {
-	// // 			// 	defaultFn();
-	// // 			// };
-	// // 		},
-	// //
-	// // 		$init: function () {
-	// //
-	// // 			if (args.onkeyup) {
-	// // 				$(this).bind( "keyup paste cut", function (e) {
-	// // 					args.onkeyup(e);
-	// // 				} );
-	// // 			};
-	// //
-	// // 			if (args.onkeydown) {
-	// // 				$(this).bind( "keydown", function () {
-	// // 					args.onkeydown(this);
-	// // 				} );
-	// // 			};
-	// //
-	// // 			args.init && init(this);
-	// //
-	// // 		},
-	// //
+  // //       // if ( args.oninput ) {
+  // //       //   args.oninput(e) && defaultFn();
+  // //       // } else {
+  // //       //   defaultFn();
+  // //       // };
+  // //     },
+  // //
+  // //     $init: function () {
+  // //
+  // //       if (args.onkeyup) {
+  // //         $(this).bind( "keyup paste cut", function (e) {
+  // //           args.onkeyup(e);
+  // //         } );
+  // //       };
+  // //
+  // //       if (args.onkeydown) {
+  // //         $(this).bind( "keydown", function () {
+  // //           args.onkeydown(this);
+  // //         } );
+  // //       };
+  // //
+  // //       args.init && init(this);
+  // //
+  // //     },
+  // //
   // //     value: function() {
   // //       return this.value;
   // //     },
-	// // 	},
-	// // 	args.required ? { required: 'required' } : {},
-	// // 	args.disabled ? { disabled: 'disabled' } : {},
-	// // );
+  // //   },
+  // //   args.required ? { required: 'required' } : {},
+  // //   args.disabled ? { disabled: 'disabled' } : {},
+  // // );

@@ -44,21 +44,21 @@ AxDslFormBuilder.prototype.dependentfield = function(
 
         // Field is shown when there is a match,
         // and hidden if there is not a match.
-      	_checkDependentField: function () {
-  				if ( this._dependentMatch() ) {
+        _checkDependentField: function () {
+          if ( this._dependentMatch() ) {
             if ( this.style.display === "" ) {
               this.style.display = "block";
             } else if ( this.style.display === "none" ) {
               f.fadeIn(this);
             };
-  				} else {
+          } else {
             if ( this.style.display === "" ) {
               this.style.display = "none";
             } else if ( this.style.display === "block" ) {
               f.fadeOut(this);
             };
-  				};
-    		},
+          };
+        },
       }
     );
   } else {

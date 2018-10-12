@@ -1,0 +1,14 @@
+ax(
+  (a,x) => [
+    <% Dir.glob( [ './v0/axFunction/themes/common/**/*.js' ] ).select { |file| File.file?(file) }.each do |file| %>
+       x.css( <%= File.read file %>, { head: true } ),
+    <% end %>
+    <% Dir.glob( [ './v0/axFunction/themes/basic/**/*.js' ] ).select { |file| File.file?(file) }.each do |file| %>
+      x.css( <%= File.read file %>, { head: true } ),
+    <% end %>
+    <% Dir.glob( [ './v0/axFunction/themes/round/**/*.js' ] ).select { |file| File.file?(file) }.each do |file| %>
+      x.css( <%= File.read file %>, { head: true } ),
+    <% end %>
+  ],
+  { cell: false }
+);

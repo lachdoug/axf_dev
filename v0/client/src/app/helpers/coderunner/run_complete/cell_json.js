@@ -25,7 +25,7 @@ function appHelperCodeGuideRunCompleteCellJsonDoValue( value ) {
   } else if ( typeof value === "object" ) {
     return appHelperCodeGuideRunCompleteCellJsonDummySerializeFunctions( value );
   } else if ( typeof value === "function" ) {
-    return 'ƒ ' + value;
+    return ( 'ƒ ' + value ).replace(/\s+/g, ' ');
   } else {
     return value;
   };
@@ -33,6 +33,7 @@ function appHelperCodeGuideRunCompleteCellJsonDoValue( value ) {
 
 function appHelperCodeGuideRunCompleteCellJsonDummySerializeFunctions( object ) {
   var result = {};
+  // delete object.$;  // Don't show the $ helper
   for ( key in object ) {
     var value = object[key]
     result[key] = appHelperCodeGuideRunCompleteCellJsonDoValue( value );

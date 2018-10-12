@@ -1,12 +1,13 @@
-App.prototype.coderunnerRunCompleteOutputHtmlCode = function () {
+App.prototype.coderunnerRunCompleteOutputHtmlCode = function ( coderunner, target ) {
 
-//   var a = this.a;
-//   var x = this.x;
+//   var a = coderunner.a;
+//   var x = coderunner.x;
 //
-// function appHelperCodeGuideRunCompleteOutputHtmlCode( this ) {
-
-  var htmlcodeTarget = this.querySelector("output htmlcode textarea");
-  var iframe = this.querySelector("output rendered iframe");
+// function appHelperCodeGuideRunCompleteOutputHtmlCode( coderunner ) {
+// debugger;
+  var codemirror = coderunner.querySelector("output " + target + "htmlcode codemirror").$codemirror;
+  // var htmlcodeTarget = coderunner.querySelector("output " + target + "htmlcode textarea");
+  var iframe = coderunner.querySelector("output rendered iframe");
   var iframeWindow = iframe.contentWindow;
   var sourceCells = iframe.contentDocument.body.children;
   var styleCell = iframe.contentDocument.body.firstChild;
@@ -27,8 +28,8 @@ App.prototype.coderunnerRunCompleteOutputHtmlCode = function () {
 
   var htmlcode = html_beautify( htmlcodeSnips.join("\n"), { unformatted: [] } );
 
-  htmlcodeTarget._codemirror.getDoc().setValue( htmlcode );
-  htmlcodeTarget._codemirror.setSize( "100%", "100%" );
-  htmlcodeTarget._codemirror.refresh();
+  codemirror.getDoc().setValue( htmlcode );
+  codemirror.setSize( "100%", "100%" );
+  codemirror.refresh();
 
 };

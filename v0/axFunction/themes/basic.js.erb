@@ -1,0 +1,6 @@
+<% Dir.glob( [ './v0/axFunction/themes/common/**/*.js' ] ).select { |file| File.file?(file) }.each do |file| %>
+   ax.document.css( <%= File.read file %> )
+<% end %>
+<% Dir.glob( [ './v0/axFunction/themes/basic/**/*.js' ] ).select { |file| File.file?(file) }.each do |file| %>
+  ax.document.css( <%= File.read file %> )
+<% end %>

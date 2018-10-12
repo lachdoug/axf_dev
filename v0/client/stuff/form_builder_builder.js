@@ -3,7 +3,7 @@
 //   this.form = function(componentsOrFunctionOrFormArgs, formOptions) {
 //     if ( typeof componentsOrFunctionOrFormArgs === 'object' ) {
 //       formArgs = componentsOrFunctionOrFormArgs;
-//   	} else {
+//     } else {
 //       formArgs = Object.assign(
 //         { components: componentsOrFunctionOrFormArgs },
 //         ( formOptions || {} )

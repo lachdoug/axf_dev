@@ -1,0 +1,3 @@
+<% Dir.glob( [ './v0/client/lib/*.js' ] ).each do |file| %>
+   <%= erb( File.read file ) %>
+<% end %>

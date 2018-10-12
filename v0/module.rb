@@ -69,19 +69,26 @@ class V0 < Sinatra::Base
   get '/axf.js' do
     content_type :'application/javascript'
     # byebug
-    erb :'/ax_framework/axf.js'
+    V0::Api::Models::Distribution::Axf.distribution
+    # erb :'/../axFunction/axf.js'
+  end
+
+  get '/plugins.js' do
+    content_type :'application/javascript'
+    V0::Api::Models::Distribution::Plugins.distribution
+    # erb :'/axFunction/plugins.js'
   end
 
   get '/axf/themes/:theme' do
     content_type :'application/javascript'
     # byebug
-    erb "/ax_framework/themes/#{params[:theme]}".to_sym
+    erb "/../axFunction/themes/#{params[:theme]}".to_sym
   end
 
   get '/axf/themes/*path' do
     content_type :'application/javascript'
     # byebug
-    File.read( "#{settings.views}/ax_framework/themes/#{params[:path]}" )
+    File.read( "#{settings.views}/axFunction/themes/#{params[:path]}" )
   end
 
   get '*path' do
@@ -94,7 +101,6 @@ class V0 < Sinatra::Base
       erb :'index.html'
     end
   end
-
 
 
   ##############################################################################

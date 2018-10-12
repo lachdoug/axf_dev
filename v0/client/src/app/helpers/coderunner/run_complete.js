@@ -8,22 +8,22 @@ App.prototype.coderunnerRunComplete = function( iframeWindow ) {
 
   // CodeMirror textarea needs to be visible to update content.
   coderunner.querySelector("output cellobject")._show();
-  // debugger;
   this._outputCellObject();
   coderunner.querySelector("output cellobject")._hide();
+  coderunner.querySelector("output initialhtmlcode")._show();
+  this._outputHtmlCode( "initial" );
+  coderunner.querySelector("output initialhtmlcode")._hide();
 
   // Show the output buttons
   coderunner.querySelector("outputbuttons")._show();
+  coderunner.querySelector("resizeButton")._show();
 
-  // Set the height of the HTML output iframe.
-  // debugger;
-
-  var setIframeHeight = function() {
-    iframe.style.height = iframe.contentDocument.body.scrollHeight + 500 + 'px';
-    console.log("do height")
-    // setTimeout( setIframeHeight, 1000 );
-  };
-  setIframeHeight();
+  // Set the height of the iframe.
+  this._resizeIframe( coderunner );
+  // var setIframeHeight = function() {
+  //   iframe.style.height = iframe.contentDocument.body.scrollHeight + 100 + 'px';
+  // };
+  // setIframeHeight();
 
   // Note that iframes in some browser (e.g. Chrome) will re-render old cell
   // objects from previous runs, but other browsers (e.g. Firefox) will not.
@@ -37,3 +37,9 @@ App.prototype.coderunnerRunComplete = function( iframeWindow ) {
   };
 
 };
+
+// App.prototype.coderunnerResizeIframe = function( coderunner ) {
+//   var iframe = coderunner.querySelector("output iframe");
+//   iframe.style.height = "";
+//   iframe.style.height = iframe.contentDocument.body.scrollHeight + 100 + 'px';
+// };

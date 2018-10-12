@@ -5,8 +5,8 @@ App.prototype.footer = function() {
 
   return a.footer(
     [
-  		a.a( "Github", { href: "https://github.com/engines/Ax", target: "https://github.com/engines/Ax" } ),
-  	],
+      a.a( "Github", { href: "https://github.com/engines/Ax", target: "https://github.com/engines/Ax" } ),
+    ],
     { style: "text-align: center;"}
   );
 

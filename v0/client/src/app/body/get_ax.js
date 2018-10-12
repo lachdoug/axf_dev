@@ -13,7 +13,7 @@ App.prototype.getAx = function( params, controller ) {
     a.p( [
       "2. Use the CDN:",
       x.code(
-        `<script src="http://somecdn.com/axframework-0.0.0/axf.min.js"></script>`
+        `<script src="http://somecdn.com/axfunction-0.0.0/axf.min.js"></script>`
       ),
     ] ),
     a.p( [

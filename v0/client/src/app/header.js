@@ -4,7 +4,11 @@ App.prototype.header = function() {
   var x = this.x;
 
   return x.controller( {
-    "*path": this.headerNav(a,x),
-  }, { bind: "router" } );
+    "*path": this.header.nav( this ),
+  }, {
+    bind: "router",
+    // transition: x.appkit.transitions.fade,
+    // in: x.appkit.lib.fadeIn,
+  } );
 
 };

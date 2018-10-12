@@ -6,10 +6,11 @@ App.prototype.body = function() {
   return x.controller( {
     "/": this.bodyRoot(a,x),
     "/get_ax": this.getAx(a,x),
-    "/guides/:id": this.guidesShow(a,x),
-    "/guides/": this.guidesShow(a,x),
-    "/guides": this.guidesIndex(a,x),
+    "/guide/:id": this.guideShow(a,x),
+    "/guide/": this.guideShow(a,x),
+    "/guide": this.guideIndex(a,x),
+    "/dev": this.dev(a,x),
     "/*lost": function( params, controller ) { return a.p( "No view at /" + params.lost ); },
-  }, { bind: "router" } );
+  }, { bind: "router", transition: x.appkit.transitions.fade } );
 
 };

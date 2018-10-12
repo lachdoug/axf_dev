@@ -4,20 +4,49 @@ App.prototype.bodyRoot = function( params, controller ) {
   var x = this.x;
 
   return ( params, controller ) => [
-    a.p( "Ax is a client-side javascript web application framework for building dynamic content and user interfaces." ),
-    a.p( [
-      "Ax uses ",
-      a.a( "Cell", { href: "https://github.com/intercellular/cell", target: "https://github.com/intercellular/cell"} ),
-      " and its ingenious approach to creating active document components. ",
-      "Ax is essentially a set of helper functions that output objects to Cell."
-    ] ),
+    x.md ( "`ax()` is a tool for developing client-side web applications, user interfaces and dynamic content." ),
     this.coderunner(
 `ax( (a,x) => [
-  a.h3( "Welcome to Ax" ),
+  a( "<h1>I <blink>&hearts;</blink> HTML 1.0</h1>" ),
+  a.strong( "Here's a tag!" ),
+  a.p( [
+    a.em( "“class free object-oriented programming is JavaScript's gift to humanity”" ),
+    a("&mdash;"),
+    a.a( "Douglas Crockford", {
+      href: "https://frontendmasters.com/courses/good-parts-javascript-web/evolution-of-inheritance/",
+      target: "frontendmasters"
+    } )
+  ] ),
   a.hr(),
-  x.css( { field: { label: { marginRight: "5px" } } } ),
-  x.form( (f) => [ f.field( "detail" ), f.field( "locked", "checkbox" ) ] ),
-  x.md( "Check out the **guides**." )
+  x.time( { local: true } ),
+  x.md( [
+    "Extensions add functionality to \`ax()\`.",
+    "This is **markdown**. Other extensions support libraries for " +
+      "css, forms, icons, charts and more."
+  ] ),
+  x.css( { body: { padding: "10px" }, field: { input: { margin: "5px" } } } ),
+  x.css( \`
+    blink { animation: blink-animation 1s steps(5, start) infinite;
+          -webkit-animation: blink-animation 1s steps(5, start) infinite; }
+    @keyframes blink-animation { to { visibility: hidden; } }
+    @-webkit-keyframes blink-animation { to { visibility: hidden; } }
+  \` ),
+  a.div( [
+    a.a( "Cell", { href: "https://www.celljs.org", target: "cell" } ),
+    " looks after the DOM."
+  ] ),
+  { _num: 0,
+     _up: function() { this._num++ },
+     $init: function() { this._up() },
+     $update: function() {
+      this.$text = this._num;
+      setTimeout( () => { this._up() }, 1000 );
+     }
+  },
+  x.form( (f) => [ f.field( { name: 'name', label: x.icon( "fa fa-pencil" ) } ), f.submit( "OK" ) ] ),
+  x.chart( { type: 'line', data: {
+    datasets: [ { data: [ 0, 1 ], label: "Chart.js rocks!" } ]
+  } } )
 ] );` ),
   ]
 };
