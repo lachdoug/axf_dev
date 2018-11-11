@@ -1,0 +1,16 @@
+ax.extension.appkit.document.css["appkit-form-textsecurity-password"](
+  {
+    display: 'inline-block',
+    verticalAlign: "top",
+    '>*': {
+      display: "block",
+    },
+    input: {
+      fontSize: "1.1em",
+      lineHeight: "1em",
+      padding: "0.5px",
+      verticalAlign: "top",
+      // autocomplete: "off",
+    }
+  }
+)
