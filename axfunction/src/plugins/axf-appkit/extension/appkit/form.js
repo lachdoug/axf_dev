@@ -1,19 +1,16 @@
 ax.extension.appkit.form = function( component, options={} ) {
 
   if ( typeof component === "function" ) {
+
+    let nest = options.nest || []
+    if ( typeof nest === "string" ) { nest = [ nest ] }
+
     component = component(
       ax.extension.appkit.form.factory( {
-        object: options.object,
+        nest: nest,
+        data: options.data,
         layout: options.layout
       } )
-
-
-      // new this.formFactory(
-      //   {
-      //     object: options.object,
-      //     layout: options.layout
-      //   }
-      // )
     )
   }
 

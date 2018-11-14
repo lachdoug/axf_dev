@@ -4,7 +4,7 @@ ax.extension.appkit.form.factory.country = (f) => function(
 
   let a = ax.a
   let x = ax.x
-  let form = x.appkit.form
+  let country = x.appkit.form.factory.country
 
   var selectOptions = Object.assign(
     {
@@ -21,7 +21,7 @@ ax.extension.appkit.form.factory.country = (f) => function(
       style: options.style,
       title: options.title,
 
-      collection: form.factory.country.collection,
+      collection: country.collection,
     },
     options.select
   )

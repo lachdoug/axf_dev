@@ -26,7 +26,7 @@ ax.extension.appkit.document.css["appkit-form-codemirror-code"](
     'appkit-form-codemirror-code-toolbar-right': {
       float: "right",
     },
-    '< .fullscreen': {
+    '&.fullscreen': {
       position: "fixed",
       top: "0",
       left: "0",

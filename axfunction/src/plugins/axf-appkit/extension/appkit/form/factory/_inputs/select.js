@@ -34,13 +34,18 @@
  */
 ax.extension.appkit.form.factory.
 select = (f) => function( options = {} ) {
-  let lib = ax.x.appkit.lib
-  let selectOptions = ax.extension.appkit.form.factory.select.options( options )
+
+  let a = ax.a
+  let x = ax.x
+  let lib = x.appkit.lib.form
+
+  // let lib = x.appkit.lib
+  let selectOptions = x.appkit.form.factory.select.options( options )
 // debugger
   let name = options.name
   // Ensure name ends in '[]' when multiple
   if ( options.multiple ) {
-    let name = lib.form.collection.name( name )
+    let name = lib.collection.name( name )
   }
 
   // Insert hidden field when readonly (and therefore disabled )

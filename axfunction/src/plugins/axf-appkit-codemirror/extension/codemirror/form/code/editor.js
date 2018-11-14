@@ -21,7 +21,7 @@ ax.extension.codemirror.form.code.editor = function(
               codemirror.getTextArea().$setRequired()
             })
 // debugger
-            this.closest( "appkit-form-codemirror-code" ).$setMode()
+            this.$( "^appkit-form-codemirror-code" ).$setMode()
 
             this.$codemirror.setSize("100%", "100%")
             this.$codemirror.refresh()
@@ -51,17 +51,17 @@ ax.extension.codemirror.form.code.editor = function(
       $on: {
         'keyup: ESC to exit': function(e) {
 
-          let container = this.closest( "appkit-form-codemirror-code" )
+          let container = this.$( "^appkit-form-codemirror-code" )
 
           if ( container.classList.contains( "fullscreen" ) ) {
             // Close fullscreen if ESC pressed
             if (e.keyCode == 27) {
-              container.querySelector('appkit-form-codemirror-code-fullscreen button').click()
+              container.$('appkit-form-codemirror-code-fullscreen button').click()
             }
           } else {
             // Remove focus if ESC pressed
             if (e.keyCode == 27) {
-              container.querySelector("appkit-form-codemirror-code-editor textarea").$codemirror.getInputField().blur()
+              container.$("appkit-form-codemirror-code-editor textarea").$codemirror.getInputField().blur()
             }
           }
 

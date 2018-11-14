@@ -5,7 +5,7 @@ checkboxes = (f) => function(
 
   let a = ax.a
   let x = ax.x
-  let f = this
+
   let lib = ax.x.appkit.lib.form
 
   let name = lib.collection.name( options.name )
@@ -37,23 +37,17 @@ checkboxes = (f) => function(
       type: "hidden",
       disabled: true,
       inputTag: { $value: function () {
-        return this.closest('appkit-form-checkboxes').$value()
+        return this.$('^appkit-form-checkboxes').$value()
       } },
     } )
   )
 
   let checkboxesTag = {
     $value: function() {
-      let checked = Array.from( this.querySelectorAll('input:checked') )
-      // debugger
-      return checked.map(
-        function( option ) {
-          return option.value
-        }
-      )
+      return this.$$('input:checked').value()
     },
     $focus: function () {
-      this.$('input')[0].focus()
+      this.$('input').focus()
     },
     $disable: function() {
       this.querySelectorAll('input').

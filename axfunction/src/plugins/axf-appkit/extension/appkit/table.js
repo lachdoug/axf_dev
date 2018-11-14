@@ -5,7 +5,7 @@ ax.extension.appkit.table = function ( contents, options={} ) {
 
   // let table = this
 
-  let components = []
+  let component = []
 
   let trTag = function( i, row ) {
     if ( typeof options.trTag === "function" ) {
@@ -62,7 +62,7 @@ ax.extension.appkit.table = function ( contents, options={} ) {
   }
 
   contents.map( function( row, i ) {
-    components.push(
+    component.push(
       ax.a.tr(
         row.map( function( content, j) {
           return tableCellFor( i, j, content )
@@ -73,5 +73,5 @@ ax.extension.appkit.table = function ( contents, options={} ) {
 
   // let tableTag = options.tableTag
 
-  return ax.a.table( components, options.tableTag )
+  return ax.a.table( component, options.tableTag )
 }

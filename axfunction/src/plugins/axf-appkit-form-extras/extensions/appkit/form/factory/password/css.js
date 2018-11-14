@@ -10,7 +10,6 @@ ax.extension.appkit.document.css["appkit-form-textsecurity-password"](
       lineHeight: "1em",
       padding: "0.5px",
       verticalAlign: "top",
-      // autocomplete: "off",
     }
   }
 )

@@ -1,6 +1,7 @@
 ax.extension.appkit.button = function( content, onclickFunction, options = {} ) {
 
   var buttonTag = {
+    type: "button",
     $on: { click: onclickFunction },
     ...options.buttonTag
    }

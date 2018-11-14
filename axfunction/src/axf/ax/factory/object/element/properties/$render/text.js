@@ -17,7 +17,7 @@ ax.factory.object.element.properties.$render.text = function ( element ) {
   if ( typeof text === "function" ) {
     let args = [ element ]
     if ( element.$state ) { args.push( element.$state ) }
-    text = text.call( element, element.$state )
+    text = text.call( element, element.$state, element )
   }
 
   // Clear exisitng content

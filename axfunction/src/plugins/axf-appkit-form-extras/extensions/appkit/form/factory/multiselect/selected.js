@@ -18,21 +18,13 @@ multiselect.selected = function(
 
     $add: function ( item, index ) {
       this.$state = [ item ].concat( this.$state )
-      // this._checkDependent && this._checkDependent()
     },
-
-    // $nodes: [
-    //   f.input( {
-    //     name: options.name,
-    //     inputTag: { type: "hidden" },
-    //   } )
-    // ],
 
     $update: function() {
 
       if ( this.$state.length === 0 ) {
         this.style.display = "none"
-        this.closest("appkit-form-multiselect-selected").previousSibling.required = options.required
+        this.$( "^appkit-form-multiselect-selected" ).previousSibling.required = options.required
         this.$nodes = [
           f.input( {
             name: options.name,
@@ -42,8 +34,8 @@ multiselect.selected = function(
         ]
       } else {
         this.style.display = ""
-        this.closest("appkit-form-multiselect-selected").
-          previousSibling.removeAttribute("required")
+        this.$( "^appkit-form-multiselect-selected" ).
+          previousSibling.removeAttribute( "required" )
         this.$nodes = this.$state.map( function( item ) {
           return a['appkit-form-multiselect-selected-item']( [
             a['appkit-form-multiselect-selected-item-label']( item.label ),
@@ -51,9 +43,9 @@ multiselect.selected = function(
               "🗙",
               {
                 $on: { 'click: remove item from selection': function(e) {
-                  this.closest("appkit-form-multiselect").
-                    $("select")[0].$enableDeselected( item.index )
-                  this.closest("appkit-form-multiselect-selected").$remove( item )
+                  this.$( "^appkit-form-multiselect" ).
+                    $("select").$enableDeselected( item.index )
+                  this.$( "^appkit-form-multiselect-selected" ).$remove( item )
                 }
               } }
             ),

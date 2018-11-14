@@ -5,7 +5,6 @@ radios = (f) => function(
 
   let a = ax.a
   let x = ax.x
-  let f = this
   let lib = ax.x.appkit.lib.form
 
   let collection = lib.collection.from( options.collection )
@@ -25,7 +24,7 @@ radios = (f) => function(
       label: radio.label,
       inputTag: {
         $value: function () {
-          return this.closest('appkit-form-radios').$value()
+          return this.$('^appkit-form-radios').$value()
         }
       },
       ...checkOptions
@@ -35,11 +34,11 @@ radios = (f) => function(
 
   let radiosTag = {
     $value: function() {
-      let checked = this.$('input:checked')[0]
+      let checked = this.$('input:checked')
       return checked ? checked.value : ''
     },
     $focus: function () {
-      this.$('input')[0].focus()
+      this.$('input').focus()
     },
     $disable: function() {
       this.querySelectorAll('input').

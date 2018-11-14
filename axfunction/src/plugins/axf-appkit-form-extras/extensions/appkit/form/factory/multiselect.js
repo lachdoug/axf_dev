@@ -19,29 +19,27 @@ multiselect = (f) => function( options={} ) {
       $init: function() { this.$preselect(); },
 
       $value: function() {
-        return this.$('appkit-form-multiselect-selected')[0].$state.
+        return this.$('appkit-form-multiselect-selected').$state.
           map( function(item) { return item.value } )
       },
 
       $focus: function () {
-        this.$('select')[0].focus()
+        this.$('select').focus()
       },
 
       $disable: function() {
-        this.querySelectorAll('input').
-          forEach( function( input ) { input.$disable() } )
+        this.$$('input').$disable()
       },
 
       $enable: function() {
-        if ( !options.disabled ) this.querySelectorAll('input').
-          forEach( function( input ) { input.$enable() } )
+        if ( !options.disabled ) this.$$('input').$enable()
       },
 
       $preselect: function () {
         var items = []
         options.value.map( (itemValue) => {
 
-          var select = this.$("select")[0]
+          var select = this.$("select")
           var selections = select.options
 
           for (var i=0, n=selections.length; i<n ; i++) {

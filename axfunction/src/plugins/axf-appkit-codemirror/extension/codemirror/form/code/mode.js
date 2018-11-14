@@ -27,14 +27,14 @@ ax.extension.codemirror.form.code.mode = function(
       collection: collection,
       selectTag: {
         $on: { 'change: set CodeMirror mode': function () {
-          this.closest("appkit-form-codemirror-code").$setMode()
+          this.$("^appkit-form-codemirror-code").$setMode()
         } },
       },
       ...options
     } )
 
     value = function() {
-      return this.querySelector('select').$value()
+      return this.$('select').$value()
     }
 
   } else {

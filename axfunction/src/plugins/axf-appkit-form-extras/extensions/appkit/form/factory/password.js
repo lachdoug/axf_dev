@@ -50,7 +50,7 @@ password = (f) => function( options={} ) {
   return a["appkit-form-textsecurity-password"](
     component, {
       $value: function() {
-        this.querySelector('input').$value()
+        this.$('input').$value()
       },
       $on: {
         'input: check validity': function () {

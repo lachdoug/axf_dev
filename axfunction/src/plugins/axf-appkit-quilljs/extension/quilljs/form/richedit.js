@@ -18,7 +18,7 @@ ax.extension.quilljs.form.richedit = function(
       return this.$quill ? this.$quill.value() : options.value;
     },
     $init: function() {
-      let container = this.querySelector('appkit-form-quilljs-markdown-container')
+      let container = this.$('appkit-form-quilljs-markdown-container')
       this.$quill = new Quill( container, {
         modules: {
           toolbar: [
@@ -40,7 +40,7 @@ ax.extension.quilljs.form.richedit = function(
     },
     $update: function () {
       let value = JSON.stringify( this.$quill.getContents() )
-      this.querySelector( "appkit-form-quilljs-markdown-textarea textarea" ).value = value
+      this.$( "appkit-form-quilljs-markdown-textarea textarea" ).value = value
     },
     ...options.quilljsTag
   } )

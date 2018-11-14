@@ -32,22 +32,22 @@ ax.extension.codemirror.form.code = function(
     ],
     {
       $setMode: function() {
-        this.$('textarea')[0].$codemirror.setOption(
+        this.$('textarea').$codemirror.setOption(
           "mode",
-          this.querySelector( "appkit-form-codemirror-code-mode" ).$value()
+          this.$( "appkit-form-codemirror-code-mode" ).$value()
         )
       },
       $value: function() {
-        return this.$('textarea')[0].$codemirror.getValue()
+        return this.$('textarea').$codemirror.getValue()
       },
       $focus: function () {
-        this.$('textarea')[0].$codemirror.focus()
+        this.$('textarea').$codemirror.focus()
       },
       $disable: function() {
-        this.$('textarea')[0].$disable()
+        this.$('textarea').$disable()
       },
       $enable: function() {
-        if ( !options.disabled ) this.$('textarea')[0].$disable()
+        if ( !options.disabled ) this.$('textarea').$disable()
       },
     }
   )

@@ -1,11 +1,11 @@
-ax.extension.appkit.transition.popfade = function( components, options={} ) {
+ax.extension.appkit.transition.popfade = function( component, options={} ) {
 
   let a = ax.a
   let x = ax.x
 
-  let time = ( options.time || 500 )
+  let time = options.time || 500
 
-  return a['appkit-transition']( components, {
+  return a['appkit-transition']( component, {
     $complete: function () {
       // debugger
       this.$nodes = this.$nodes.slice(1)

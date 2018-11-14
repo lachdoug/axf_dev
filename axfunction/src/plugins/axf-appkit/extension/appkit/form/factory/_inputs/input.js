@@ -36,7 +36,7 @@ input = (f) => function( options={} ) {
   if ( options.multiple ) {
     name = lib.form.collection.name( name )
   }
-// debugger
+
   return ax.a.input( {
 
     name: name,
@@ -55,20 +55,20 @@ input = (f) => function( options={} ) {
     title: options.title,
     type: options.type,
 
-
     $init: function () { this.$validity() },
 
     $on: {
 
-      'keypress: check for dependents': function(e) {
+      'keypress: do not submit if form has dependent fields': function(e) {
         // Default behavior for a form with a single input
         // is to submit when enter is pressed.
         // If there are dependent fields on the form,
         // do not submit on enter, in case dependent fields
         // are not yet showing.
+
         if (
           ( e.charCode || e.keyCode ) == 13 &&
-          this.closest('form').$('field dependent').length
+          this.$('^form').$$('appkit-form-field-dependent')().length
         ) {
           // If field is valid, just blur and stop.
           // Otherwise continue as normal, which will
@@ -93,6 +93,7 @@ input = (f) => function( options={} ) {
     },
 
     $focus: function () {
+      debugger
       this.focus()
     },
 

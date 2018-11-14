@@ -12,9 +12,9 @@ ax.extension.codemirror.form.code.toolbar = function(
             type: "button",
             $on: {
               'click: toggle full screen': function() {
-                let container = this.closest( "appkit-form-codemirror-code" )
-                let editor = container.querySelector("appkit-form-codemirror-code-editor")
-                let codemirror = editor.querySelector("textarea").$codemirror
+                let container = this.$( "^appkit-form-codemirror-code" )
+                let editor = container.$("appkit-form-codemirror-code-editor")
+                let codemirror = editor.$("textarea").$codemirror
                 if ( container.classList.contains( "fullscreen" ) ) {
                   this.$text = "🗖"
                   container.classList.remove("fullscreen")

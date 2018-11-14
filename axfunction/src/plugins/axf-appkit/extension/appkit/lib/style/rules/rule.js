@@ -13,7 +13,7 @@ ax.extension.appkit.lib.style.rules.rule = function( object, selectors ) {
   if ( result === "" ) {
     return result
   } else {
-    return selectors.join(" ").replace(/\s*<\s*/g, '') +
+    return selectors.join(" ").replace(/\s*&\s*/g, '') +
       " {\n" + result + "\n}\n"
   }
 

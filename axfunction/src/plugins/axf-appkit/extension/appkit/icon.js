@@ -7,19 +7,19 @@ ax.extension.appkit.icon = function( klass, text, options = {} ) {
 // reverse: true to put icon after text.
 // compact: true to have no space between icon and text.
 
-  var components = [
+  var component = [
     ax.a.span( { class: klass } )
-  ];
+  ]
 
   if ( text ) {
-    if ( !options.compact ) components.push( " " );
-    components.push( ax.a.span( text ) );
-  };
+    if ( !options.compact ) component.push( " " )
+    component.push( ax.a.span( text ) )
+  }
 
   if ( options.reverse ) {
-    components.reverse();
-  };
+    component.reverse()
+  }
 
-  return ax.a['appkit-icon']( components, options.tag );
+  return ax.a['appkit-icon']( component, options.tag )
 
-};
+}

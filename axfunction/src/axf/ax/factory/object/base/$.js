@@ -1,7 +1,16 @@
-ax.factory.object.base.$ = function( selector ) {
-
-    return ax.factory.object.query(
-      Array.from( this.querySelectorAll( selector ) )
-    )
-
+ax.factory.object.base.$ = function( ...selectors ) {
+  let result = this
+  selectors.forEach( function( selector ) {
+    if ( selector instanceof Array ) {
+      result = result.$( ...selector )
+    } else if ( /^\^\S*$/.test( selector ) ) {
+      result = ax.factory.object.traverse( result, selector )
+    } else if ( /\^/.test( selector ) ) {
+      selector = selector.split(/(\^\S*)/g)
+      result = result.$( ...selector )
+    } else {
+      result = ax.factory.object.traverse( result, selector )
+    }
+  } )
+  return result
 }

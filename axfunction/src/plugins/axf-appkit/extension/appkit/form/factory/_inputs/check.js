@@ -54,11 +54,7 @@ check = (f) => function( options={} ) {
     },
 
     $focus: function () {
-      if ( this.type === 'checkbox' ) {
-        this.click()
-      } else {
-        this.focus()
-      }
+      this.focus()
     },
 
     $disable: function() {
@@ -74,9 +70,25 @@ check = (f) => function( options={} ) {
   } )
 
   if ( options.label ) {
+    let labelTag = {
+      $disable: function() {
+        this.$('input').$disable()
+      },
+      $enable: function() {
+        this.$('input').$enable()
+      },
+      $value: function() {
+        return this.$('input').$value()
+      },
+      $focus: function () {
+        this.$('input').$focus()
+      },
+
+      ...options.labelTag
+    }
     let nodes = [ input, options.label ]
     if ( options.reverse ) nodes.reverse()
-    return ax.a.label( nodes, options.labelTag )
+    return ax.a.label( nodes, labelTag )
   } else {
     return input
   }

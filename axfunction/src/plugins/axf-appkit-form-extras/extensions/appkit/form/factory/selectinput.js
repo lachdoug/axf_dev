@@ -24,30 +24,30 @@ ax.extension.appkit.form.factory.selectinput = (f) => function(
 
   let selectinputTag = {
     $value: function() {
-      return this.querySelector('appkit-form-selectinput-hiddeninput input').value
+      return this.$('appkit-form-selectinput-hiddeninput input').value
     },
     $focus: function () {
-      let select = this.querySelector('select')
+      let select = this.$('select')
       if ( select.value === "__USE_INPUT__" ) {
-        this.querySelector('appkit-form-selectinput-input input').focus()
+        this.$('appkit-form-selectinput-input input').focus()
       } else {
         select.focus()
       }
     },
     $disable: function() {
-      let hiddeninput = this.querySelector('appkit-form-selectinput-hiddeninput input')
+      let hiddeninput = this.$('appkit-form-selectinput-hiddeninput input')
       hiddeninput.$disable()
     },
     $enable: function() {
       if ( !options.disabled ) {
-        let hiddeninput = this.querySelector('appkit-form-selectinput-hiddeninput input')
+        let hiddeninput = this.$('appkit-form-selectinput-hiddeninput input')
         hiddeninput.$enable()
       }
     },
     $on: { change: function () {
-      let select = this.querySelector('select')
-      let input = this.querySelector('appkit-form-selectinput-input input')
-      let hiddeninput = this.querySelector('appkit-form-selectinput-hiddeninput input')
+      let select = this.$('select')
+      let input = this.$('appkit-form-selectinput-input input')
+      let hiddeninput = this.$('appkit-form-selectinput-hiddeninput input')
       if ( select.value === "__USE_INPUT__" ) {
         input.style.display = ""
         hiddeninput.value = input.value
