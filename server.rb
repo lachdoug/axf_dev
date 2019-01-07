@@ -15,6 +15,13 @@ class Server < Sinatra::Base
     content_type :json
   end
 
+  not_found do
+    pass unless request.accept? "text/html"
+    pass if request.path_info.match /^\/assets|test/
+    content_type :html
+    erb :'index.html'
+  end
+
   after do
     response.body = JSON.pretty_generate( response.body ) if
       ( content_type == "application/json" ) &&

@@ -1,56 +1,77 @@
 class Server
   module App
     module Models
-      module Distribution
+      class Distribution
 
         require 'uglifier'
 
-        module Axf
-
-          def self.distribution
-            Distribution.concatenate( [ './axfunction/src/axf/**/*.js' ] )
-          end
-
-          def self.minified
-            Distribution.minify distribution
-          end
-
+        def initialize( version=nil )
+          @version = version
         end
 
-        module Plugins
-
-          def self.distribution
-            Distribution.concatenate( [
-              './axfunction/src/plugins/axf-appkit/**/*.js',
-              './axfunction/src/plugins/axf-appkit-form-extras/**/*.js',
-              './axfunction/src/plugins/axf-appkit-theme-base/**/*.js',
-              './axfunction/src/plugins/axf-appkit-codemirror/**/*.js',
-              './axfunction/src/plugins/axf-appkit-markedjs/**/*.js',
-              './axfunction/src/plugins/axf-appkit-simplemde/**/*.js',
-              './axfunction/src/plugins/axf-appkit-quilljs/**/*.js',
-            ] )
-          end
-
-          def self.minified
-            Distribution.minify distribution
-          end
-
+        def path
+          @path ||= "axf/release/#{@version}"
         end
 
-        module Client
-
-          def self.distribution
-            Distribution.concatenate( [ './client/**/*.js' ] )
+        def process
+          if Dir.exist? path
+            raise "Release #{@version} already exists!"
+          else
+            process!
           end
-
-          def self.minified
-            Distribution.minify distribution
-          end
-
         end
 
-        def self.concatenate( sources )
-          [].tap do |result|
+        def process!
+          if Dir.exist? path
+            FileUtils.rm_r path
+          end
+          puts "Building release #{@version}"
+          Dir.mkdir path
+          Dir.mkdir "#{path}/axf"
+          Dir.mkdir "#{path}/plugins"
+          File.write( "#{path}/axf/axf.js", axf )
+          File.write( "#{path}/axf/axf.min.js", axf_min )
+          File.write( "#{path}/plugins/plugins.js", plugins )
+          File.write( "#{path}/plugins/plugins.min.js", plugins_min )
+          `jsdoc --readme axf/src/axf/README.md #{path}/axf/axf.js -d #{path}/docs/axf`
+          `jsdoc #{path}/plugins/plugins.js -d #{path}/docs/plugins`
+        end
+
+        def axf
+          @axf ||= concatenate( [ './axf/src/axf/**/*.js' ] )
+        end
+
+        def axf_min
+          @axf_min ||= minify axf
+        end
+
+        def plugins
+          concatenate( [
+            './axf/src/plugins/axf-appkit/**/*.js',
+            './axf/src/plugins/axf-appkit-form-extras/**/*.js',
+            './axf/src/plugins/axf-appkit-theme-base/**/*.js',
+            './axf/src/plugins/axf-appkit-codemirror/**/*.js',
+            './axf/src/plugins/axf-appkit-markedjs/**/*.js',
+            './axf/src/plugins/axf-appkit-chartjs/**/*.js',
+            './axf/src/plugins/axf-appkit-simplemde/**/*.js',
+            './axf/src/plugins/axf-appkit-quilljs/**/*.js',
+          ] )
+        end
+
+        def plugins_min
+          minify plugins
+        end
+
+        def client
+          concatenate( [ './client/**/*.js' ] )
+        end
+
+        def client_min
+          minify client
+        end
+
+        def concatenate( sources )
+          ["'use strict'"].tap do |result|
             sources.each do |source|
               files_from( source ).each do |file|
                 result << File.read( file )
@@ -59,12 +80,11 @@ class Server
           end.join("\n")
         end
 
-        def self.minify( javascript )
+        def minify( javascript )
           Uglifier.compile javascript, harmony: true
         end
 
-        def self.files_from( source )
-          # debugger
+        def files_from( source )
           Dir.glob( [ source ] ).select { |file| puts file; File.file?(file) }.sort{ |a, b| a.count('/') <=> b.count('/') }
         end
 

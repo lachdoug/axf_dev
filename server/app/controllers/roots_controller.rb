@@ -2,7 +2,7 @@ class Server
   module App
     module Controllers
 
-      get '/' do redirect '/axfunction/' end
+      # get '/' do redirect '/axf' end
 
     end
   end
