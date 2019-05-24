@@ -29,19 +29,21 @@ textarea = (f) => function( options = {} ) {
 
     name: options.name,
 
-    // class: options.class,
-    // data: options.data,
+    class: options.class,
+    data: options.data,
     disabled: options.disabled,
-    // id: options.id,
+    id: options.id,
     placeholder: options.placeholder,
     readonly: options.readonly,
     required: options.required,
-    // style: options.style,
-    // title: options.title,
+    style: options.style,
+    title: options.title,
 
     $value: function() {
       return this.value
     },
+
+    $data: function() { return this.$value() },
 
     $focus: function () {
       this.focus()

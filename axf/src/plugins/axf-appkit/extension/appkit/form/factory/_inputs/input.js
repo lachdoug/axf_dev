@@ -37,11 +37,14 @@ input = (f) => function( options={} ) {
     name = lib.field.collection.name( name )
   }
 
+  let value = ax.x.appkit.lib.coerce.string( options.value )
+
   return ax.a.input( {
 
     name: name,
-    value: options.value,
+    value: value,
 
+    type: options.type,
     autocomplete: options.autocomplete,
     class: options.class,
     data: options.data,
@@ -53,7 +56,8 @@ input = (f) => function( options={} ) {
     required: options.required,
     style: options.style,
     title: options.title,
-    type: options.type,
+
+    maxlength: options.maxlength,
 
     $init: function () { this.$valid() },
 
@@ -130,6 +134,20 @@ input = (f) => function( options={} ) {
 
     $value: function() {
       return this.value
+    },
+
+    $data: function() {
+      if ( this.value === "" ) {
+        return null
+      } else if ( options.datatype ) {
+        return ax.x.appkit.lib.coerce[ options.datatype ]( this.value )
+      } else {
+        if ( options.type === "number" ) {
+          return ax.x.appkit.lib.coerce.number( this.value )
+        } else {
+          return this.value
+        }
+      }
     },
 
     $focus: function () {

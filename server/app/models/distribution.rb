@@ -5,11 +5,12 @@ class Server
 
         require 'uglifier'
 
-        def initialize( version=nil )
+        def initialize( version )
           @version = version
         end
 
         def path
+          raise "Version can't be blank" if @version === nil
           @path ||= "axf/release/#{@version}"
         end
 
@@ -55,6 +56,8 @@ class Server
             './axf/src/plugins/axf-appkit-chartjs/**/*.js',
             './axf/src/plugins/axf-appkit-simplemde/**/*.js',
             './axf/src/plugins/axf-appkit-quilljs/**/*.js',
+            './axf/src/plugins/axf-html5-sortable/**/*.js',
+            './axf/src/plugins/axf-timeago/**/*.js',
           ] )
         end
 

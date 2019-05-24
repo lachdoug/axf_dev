@@ -11,9 +11,9 @@ dependent.match = function( options ) {
 
       let dependencyValue = dependency.$value()
 
-      if ( ax.type.is.array( dependencyValue ) ) {
-        dependencyValue = dependencyValue.join(' ')
-      }
+      // if ( ax.type.is.array( dependencyValue ) ) {
+      //   dependencyValue = dependencyValue.join(' ')
+      // }
 
       if ( options.value ) {
         return dependencyValue == options.value

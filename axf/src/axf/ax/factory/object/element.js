@@ -7,8 +7,8 @@ ax.factory.object.element = function ( object ) {
   ax.factory.pipeline.forEach( function( pipelineFunction ) {
     element.$object = pipelineFunction( element.$object )
   } )
-// debugger
-  return this.element.properties.$init(
+
+  return this.element.properties.init(
     this.element.properties( element ).$render()
   )
 

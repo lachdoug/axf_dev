@@ -11,13 +11,24 @@ password = (f) => function( options={} ) {
     }
   }
 
+  let placeholder_primary
+  let placeholder_secondary
+
+  if ( ax.type.is.array( options.placeholder ) ) {
+    placeholder_primary = options.placeholder[0]
+    placeholder_secondary = options.placeholder[1]
+  } else {
+    placeholder_primary = options.placeholder
+    placeholder_secondary = "Confirm password"
+  }
+
   let component = [
     a["appkit-form-textsecurity-password-input"](
       f.input( {
         name: options.name,
         value: options.value,
         autocomplete: "off",
-        // placeholder: options.placeholder,
+        placeholder: placeholder_primary,
         readonly: options.readonly,
         required: options.required,
         inputTag: {
@@ -33,7 +44,7 @@ password = (f) => function( options={} ) {
       f.input( {
         value: options.value,
         autocomplete: "off",
-        // placeholder: "Confirm password",
+        placeholder: placeholder_secondary,
         readonly: options.readonly,
         required: options.required,
         inputTag: {

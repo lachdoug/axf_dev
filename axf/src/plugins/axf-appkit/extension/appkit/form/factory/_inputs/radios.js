@@ -19,13 +19,19 @@ radios = (f) => function(
     return f.check( {
       name: options.name,
       type: 'radio',
-      value: options.value === radio.value ? radio.value : "",
+      value: options.value === radio.value ? radio.value : null,
+      disabled: options.disabled || radio.disabled,
+      readonly: options.readonly || radio.readonly,
+      datatype: options.datatype,
       checked: radio.value,
       label: radio.label,
       inputTag: {
         $value: function () {
           return this.$('^appkit-form-radios').$value()
-        }
+        },
+        $data: function () {
+          return this.$('^appkit-form-radios').$data()
+        },
       },
       ...checkOptions
     } )
@@ -35,7 +41,18 @@ radios = (f) => function(
   let radiosTag = {
     $value: function() {
       let checked = this.$('input:checked')
-      return checked ? checked.value : ''
+      let value = checked ? checked.value : null
+      return value
+    },
+    $data: function() {
+      let data = this.$value()
+      if ( data === null ) {
+        return null
+      } else if ( options.datatype ) {
+        data = ax.x.appkit.lib.data.
+          coerce[ options.datatype ]( data )
+      }
+      return data
     },
     $focus: function () {
       this.$('input').focus()

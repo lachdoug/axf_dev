@@ -7,9 +7,9 @@ one = (f) => function( key, component, options={} ) {
 
     component = component(
       ax.extension.appkit.form.factory( {
-        data: options.data || f.$data[ key ],
-        scope: options.scope || f.$scope.concat( [ key ] ),
-        layout: options.layout || f.$layout
+        data: options.data || f.data[ key ] || {},
+        scope: options.scope || f.scope.concat( [ key ] ),
+        layout: options.layout || f.layout
       } )
     )
 

@@ -5,9 +5,12 @@ many = (f) => function( key, component, options={} ) {
 
   if ( ax.type.is.function( component ) ) {
 
-    let data = options.data || f.$data[ options.key || key ] || []
-    let scope = options.scope || f.$scope.concat( [ key, '' ] )
-    let layout = options.layout || f.$layout
+    let data =
+      options.data ||
+      ( f.data && f.data[ options.key || key ] ) ||
+      []
+    let scope = options.scope || f.scope.concat( [ key, '' ] )
+    let layout = options.layout || f.layout
 
     let factory = ax.extension.appkit.form.factory( {
       data: data,

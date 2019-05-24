@@ -3,7 +3,7 @@
  *
  * @example
  * f.codemirror( {
- *   name: "script",
+ *   key: "myscript",
  *   mode: "ruby",
  *   value: "[1,2,3].map &:to_s"
  * } ),
@@ -44,27 +44,18 @@ ax.extension.codemirror.form.code = function(
         this.$('textarea').$codemirror.focus()
       },
       $disable: function() {
-        // debugger
         this.$$('textarea').setAttribute('disabled', 'disabled')
-        // this.$('textarea').$codemirror.setOption("readonly", true)
       },
       $enable: function() {
         this.$('appkit-form-codemirror-code-editor textarea').$refresh()
         if ( !options.disabled ) {
           this.$$('textarea').removeAttribute('disabled')
-          // this.$('textarea').$codemirror.setOption("readonly", false)
         }
       },
+
+      ...options.codeTag
+
     }
   )
 
 }
-
-//
-// $disable: function() {
-//   this.disabled = 'disabled'
-// },
-//
-// $enable: function() {
-//   if ( !options.disabled ) this.removeAttribute('disabled')
-// },

@@ -19,7 +19,7 @@ multiselect = (f) => function( options={} ) {
       $init: function() { this.$preselect(); },
 
       $value: function() {
-        return this.$('appkit-form-multiselect-selected').$state.
+        return this.$('appkit-form-multiselect-selected').$state().
           map( function(item) { return item.value } )
       },
 

@@ -10,19 +10,19 @@ multiselect.selected = function(
     $state: [],
 
     $remove: function ( item ) {
-      let state = this.$state
+      let state = this.$state()
       let index = state.indexOf( item )
       state.splice(index, 1)
       if (index !== -1) this.$state = state
     },
 
     $add: function ( item, index ) {
-      this.$state = [ item ].concat( this.$state )
+      this.$state = [ item ].concat( this.$state() )
     },
 
     $update: function() {
 
-      if ( this.$state.length === 0 ) {
+      if ( this.$state().length === 0 ) {
         this.style.display = "none"
         this.$( "^appkit-form-multiselect-selected" ).previousSibling.required = options.required
         this.$nodes = [
@@ -36,7 +36,7 @@ multiselect.selected = function(
         this.style.display = ""
         this.$( "^appkit-form-multiselect-selected" ).
           previousSibling.removeAttribute( "required" )
-        this.$nodes = this.$state.map( function( item ) {
+        this.$nodes = this.$state().map( function( item ) {
           return a['appkit-form-multiselect-selected-item']( [
             a['appkit-form-multiselect-selected-item-label']( item.label ),
             a['appkit-form-multiselect-selected-item-remove'](

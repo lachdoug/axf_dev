@@ -18,7 +18,7 @@ dependent.dependency = (f) => function( options ) {
     } else {
       let name
       if ( options.key ) {
-        name = lib.name.assemble( ...f.$scope, options.key )
+        name = lib.name.assemble( ...f.scope, options.key )
       } else if ( options.name ) {
         name = options.name
       } else {

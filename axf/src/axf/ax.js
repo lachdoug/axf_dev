@@ -16,8 +16,6 @@
  */
 let ax = function ( component, attributes ) {
 
-// debugger
-
   let target
 
   if ( attributes ) {
@@ -25,16 +23,21 @@ let ax = function ( component, attributes ) {
     component = { $nodes: component, ...attributes }
   }
 
-  let element = ax.factory( component )
+  document.addEventListener("DOMContentLoaded", function(e) {
 
-  if ( component.id ) {
-    document.querySelector( '#' + component.id ).
-      replaceWith( element )
-  } else {
-    document.body.appendChild( element )
-  }
+    let element = ax.factory( component )
 
-  return element
+    if ( component.id ) {
+      document.querySelector( '#' + component.id ).
+        replaceWith( element )
+    } else {
+      document.body.appendChild( element )
+    }
+
+  });
+
+
+  // return element
 
 }
 

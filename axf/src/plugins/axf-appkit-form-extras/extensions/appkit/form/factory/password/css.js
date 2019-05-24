@@ -1,6 +1,7 @@
 ax.extension.appkit.document.css["appkit-form-textsecurity-password"](
   {
     display: 'inline-block',
+    width: "100%",
     verticalAlign: "top",
     '>*': {
       display: "block",

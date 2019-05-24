@@ -49,8 +49,22 @@ check = (f) => function( options={} ) {
     title: options.title,
     type: options.type || "checkbox",
 
+    // Prevent user from changing a readonly check
+    onclick: options.readonly ? "return false;" : null,
+
     $value: function() {
-      return this.checked ? this.value : ''
+      return this.checked ? checkedValue : ( !ax.type.is.undefined( options.unchecked ) ? options.unchecked : null )
+    },
+
+    $data: function() {
+      let value = this.$value()
+      if ( value === null ) {
+        return null
+      } else if ( options.datatype ) {
+        return ax.x.appkit.lib.coerce[ options.datatype ]( value )
+      } else {
+        return value
+      }
     },
 
     $focus: function () {
@@ -59,15 +73,53 @@ check = (f) => function( options={} ) {
 
     $disable: function() {
       this.disabled = 'disabled'
+      if ( !ax.type.is.undefined( options.unchecked ) ) {
+        this.previousSibling.disabled = 'disabled'
+      }
     },
 
     $enable: function() {
-      if ( !options.disabled ) this.removeAttribute('disabled')
+      if ( !options.disabled ) {
+        this.removeAttribute('disabled')
+        if ( !ax.type.is.undefined( options.unchecked ) ) {
+          this.previousSibling.removeAttribute('disabled')
+        }
+      }
     },
 
     ...options.inputTag
 
   } )
+
+  let inputs;
+  if ( !ax.type.is.undefined( options.unchecked ) ) {
+    inputs = [
+      ax.a.input( {
+        name: options.name,
+        value: options.unchecked.toString(),
+        type: "hidden",
+        $value: function() {
+          return this.nextSibling.$value()
+        },
+        $focus: function() {
+          return this.nextSibling.$focus()
+        },
+        $disable: function() {
+          this.disabled = 'disabled'
+          this.nextSibling.disabled = 'disabled'
+        },
+        $enable: function() {
+          if ( !options.disabled ) {
+            this.removeAttribute('disabled')
+            this.nextSibling.removeAttribute('disabled')
+          }
+        },
+      } ),
+      input
+    ]
+  } else {
+    inputs = input
+  }
 
   if ( options.label ) {
     let labelTag = {
@@ -86,11 +138,11 @@ check = (f) => function( options={} ) {
 
       ...options.labelTag
     }
-    let nodes = [ input, options.label ]
+    let nodes = [ inputs, options.label ]
     if ( options.reverse ) nodes.reverse()
     return ax.a.label( nodes, labelTag )
   } else {
-    return input
+    return inputs
   }
 
 }

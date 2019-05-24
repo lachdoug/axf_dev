@@ -79,7 +79,7 @@ this.$text = "New text"
 and the element will render the new content.
 
 Elements also have custom accessors for `$on`, which allows
-you to write `this.$on( { "click": alert("foo") } )` to set an
+you to write `this.$on( { click: alert("foo") } )` to set an
 event listener.
 
 

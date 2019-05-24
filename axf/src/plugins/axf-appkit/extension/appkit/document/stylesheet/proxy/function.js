@@ -1,4 +1,5 @@
-ax.extension.appkit.document.stylesheet.proxy.function = function( styles, options={} ) {
+ax.extension.appkit.document.stylesheet.proxy.
+function = function( styles, options={} ) {
 
   let a = ax.a
   let x = ax.x
@@ -7,7 +8,9 @@ ax.extension.appkit.document.stylesheet.proxy.function = function( styles, optio
     'head',
     'style',
     x.appkit.lib.style( styles, options.scope ),
-    { styleTag: options.styleTag }
+    { tag: options.styleTag }
   )
+
+  return null
 
 }

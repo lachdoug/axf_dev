@@ -1,7 +1,10 @@
 require 'sinatra/base'
 require 'sinatra/extension'
 require 'sinatra/json'
-require 'byebug'
+# require "sinatra/activerecord/rake"
+require 'byebug' if Sinatra::Base.development?
+
+require 'yaml'
 
 require "./server"
 
@@ -14,3 +17,7 @@ Dir.glob( './tasks/**/*.rake' ).each { |file| load file }
 # load "./tasks/release.rake"
 
 task default: [:release]
+
+# task :build do
+#   puts "Rake OK"
+# end

@@ -12,7 +12,7 @@ field = (f) => function( keyOrOptions={}, options={} ) {
   let field = x.appkit.form.factory.field
   let lib = x.appkit.lib.field
 
-  options.name = options.name || lib.name.assemble( ...f.$scope, options.key )
+  options.name = options.name || lib.name.assemble( ...f.scope, options.key )
 
   let component = a["appkit-form-field-body"]( [
     field.caption( options ),

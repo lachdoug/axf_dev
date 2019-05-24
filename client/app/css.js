@@ -1,57 +1,63 @@
-ax.extension.appkit.document.css(
+app.css = (a,x) => x.appkit.document.css( [
+
   {
-    body: {
-      margin: "5px",
-      fontFamily: "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen,Ubuntu,Cantarell,Fira Sans,Droid Sans,Helvetica Neue,sans-serif;",
-    },
-    'app-coderunner': {
-      iframe: {
-        width: "100%",
-        height: "1000px",
-        border: "1px solid #ccc",
+    ".pills": {
+      padding: "0 .375rem",
+      ".btn": {
+        padding: "0 .375rem"
+      },
+      ".pill-selected": {
+        border: "1px solid transparent",
+        verticalAlign: "middle",
+        padding: ".375rem",
+        color: "grey",
       }
     },
-    'app-navbar': {
-      display: "block",
-      marginBottom: "5px",
-      // backgroundColor: "#eee",
-      ".btn": {
-        borderRadius: "0px",
+    ".order-dir": {
+      ul: {
+        listStyleType: "none",
+        padding: 0,
+      },
+      ".order-dir-item": {
+        padding: ".375rem 0",
         border: "1px solid transparent",
-        "&.active": {
-          borderBottom: "1px solid #48D",
+        cursor: "grab",
+        "appkit-icon" : {
+          padding: "0 0.75rem",
         }
-      },
-      // '.label': { verticalAlign: "middle" }
+      }
     },
-    ".navigator": {
-      select: {
-        textAlign: "center",
-        borderRadius: "0px",
-        border: "1px solid #007bff",
-        borderLeft: "none",
-        borderRight: "none",
-        backgroundColor: "transparent",
+    "appkit-list": {
+      fontFamily: "monospace",
+      whiteSpace: "pre",
+      color: "lightgrey",
+      "appkit-list-type-null": {
+        color: "red"
       },
-    }
-  }
-  // {
-  //   ".CodeMirror": {
-  //     borderColor: "#b3b3b3",
-  //     borderTop: "1px solid #ccc",
-  //     borderBottomLeftRadius: 0,
-  //     borderBottomRightRadius: 0,
-  //     minHeight: "unset",
-  //   },
-  //   ".CodeMirror-scroll": {
-  //     minHeight: "unset",
-  //   },
-  //   ".editor-toolbar": {
-  //     border: "1px solid #b3b3b3",
-  //     borderBottom: "none",
-  //     borderTopLeftRadius: 0,
-  //     borderTopRightRadius: 0,
-  //     opacity: 1,
-  //   },
-  // }
-)
+      "appkit-list-type-number": {
+        color: "green"
+      },
+      "appkit-list-type-text": {
+        color: "blue",
+        maxHeight: "300px",
+        display: "inline-block",
+      },
+      "ul, ol": {
+        padding: "0 0 0 20px",
+      },
+      label: {
+        fontWeight: "bold",
+        color: "grey",
+        margin: "0px",
+        verticalAlign: "top",
+      }
+    },
+    ".CodeMirror-scroll": {
+      maxHeight: "80vh",
+    },
+    ".fullscreen .CodeMirror-scroll": {
+      maxHeight: "unset",
+    },
+  },
+  config.css
+] )

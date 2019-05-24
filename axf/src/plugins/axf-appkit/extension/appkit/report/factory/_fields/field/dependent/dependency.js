@@ -19,7 +19,7 @@ dependent.dependency = (r) => function( options ) {
     } else {
       let name
       if ( options.key ) {
-        name = lib.name.assemble( ...r.$scope, options.key )
+        name = lib.name.assemble( ...r.scope, options.key )
       } else if ( options.name ) {
         name = options.name
       } else {

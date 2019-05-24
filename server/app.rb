@@ -1,24 +1,9 @@
 class Server
   module App
-
-    module Models
-      Dir.glob( [ "./server/app/models/**/*.rb" ] ).each { |file| require file }
-    end
-
-    module Services
-      Dir.glob( [ "./server/app/services/**/*.rb" ] ).each { |file| require file }
-    end
-
-    module Helpers
-      Dir.glob( [ "./server/app/helpers/**/*.rb" ] ).each { |file| require file }
-    end
-
-    module Controllers
-      include Models
-      include Services
-      extend Sinatra::Extension
-      Dir.glob( [ "./server/app/controllers/**/*.rb" ] ).each { |file| require file }
-    end
-
+    require './server/app/helpers'
+    require './server/app/configuration'
+    require './server/app/services'
+    require './server/app/models'
+    require './server/app/controllers'
   end
 end

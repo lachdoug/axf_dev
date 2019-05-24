@@ -41,6 +41,12 @@ text = (r) => function( options={} ) {
     }
   }
 
+  if ( ax.type.is.object( value ) ) {
+    value = JSON.stringify( value )
+  } else {
+    value = value.toString()
+  }
+
   return a['appkit-report-text']( {
 
     name: options.name,
@@ -48,7 +54,7 @@ text = (r) => function( options={} ) {
     class: options.class,
     data: options.data,
     id: options.id,
-    placeholder: options.placeholder,
+    // placeholder: options.placeholder,
     style: options.style,
     title: options.title,
 

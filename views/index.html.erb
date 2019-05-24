@@ -22,7 +22,9 @@
   <script src="/vendor/codemirror-5.28.0/mode/shell/shell.js"></script>
   <script src="/vendor/codemirror-5.28.0/mode/javascript/javascript.js"></script>
   <script src="/vendor/codemirror-5.28.0/mode/ruby/ruby.js"></script>
+  <script src="/vendor/codemirror-5.28.0/mode/python/python.js"></script>
   <script src="/vendor/codemirror-5.28.0/mode/xml/xml.js"></script>
+  <script src="/vendor/codemirror-5.28.0/mode/yaml/yaml.js"></script>
   <script src="/vendor/simplemde-1.11.2/simplemde.min.js"></script>
   <script src="/vendor/quilljs-1.3.6/quill.js"></script>
   <!-- <script src="/vendor/js-beautify-1.7.5/beautify.js"></script> -->
@@ -38,7 +40,8 @@
   <script src="/vendor/jquery-3.3.1.slim.min.js"></script>
   <script src="/vendor/popperjs-1.14.0/popper.min.js"></script>
   <script src="/vendor/bootstrap-4.1.0-dist/js/bootstrap.min.js"></script>
-
+  <script src="/vendor/html5-sortable-0.9.11.js"></script>
+  <script src="/vendor/timeago-3.0.0/timeago.min.js"></script>
 
   <!-- <script src="https://component.kitchen/polyfill/webcomponents-bundle.js"></script> -->
   <!-- <script type="module" src="https://component.kitchen/modules/AutosizeTextarea.js"></script> -->
@@ -48,141 +51,18 @@
   <!-- <script type="application/javascript" src="/assets/axf/themes/basic.js" ></script> -->
   <script type="application/javascript" src="/assets/client.js" ></script>
 
-  <style>
-  /*body { font-size: 2em; background-color: teal; color: white; font-family: arial; text-align: center; }*/
-  </style>
 </head>
 <body>
 
-<script>
-// debugger
-ax( app )
-
-// let app = (a,x) => x.appkit.router(
-//   {
-//     '/': app.root,
-//     // '/people/:id': app.people,
-//     // [ '/people/:id', "person" ]: app.people,
-//     '/people**': app.people
-//   },
-//   { mount: "/axf", root: '/', lost: 'warn' }
-// )
-//
-//
-// // app.open = function( path ) {
-// //   document.querySelector('appkit-router').$to( location )
-// // }
-//
-// app.btn = function( component, onclick, klass='primary', options={} ) {
-//   return ax.x.appkit.button( component, onclick, {
-//     buttonTag: {
-//       disabled: options.disabled,
-//       class: `btn btn-${ klass }`,
-//     }
-//   } )
-// }
-//
-//
-// app.root = ( c ) => [
-//   "Home",
-//   app.btn( "People", () => c.open( 'people' ) )
-// ]
-//
-// app.people = (c) => (a,x) => [
-//   a.h1( "People" ),
-//   a.p( `locator: ${ JSON.stringify( c.locator ) }` ),
-//   a.p( `params: ${ JSON.stringify( c.params ) }` ),
-//   app.btn( "#1", () => c.open( '%/people/1' ) ),
-//   app.btn( "#2", () => c.open( '%/people/2' ) ),
-//   app.btn( "Home", () => c.open( '%' ) ),
-//
-//   x.appkit.router(
-//     {
-//       '/': app.people.index,
-//       '/:id**': app.person,
-//     },
-//     { scope: "/people", root: '/', lost: 'show' }
-//   ),
-//   a.hr
-//
-// ]
-//
-// app.people.index = [
-//   "Index people"
-// ]
-//
-// app.person = (c) => (a,x) => [
-//   a.p( `locator: ${ JSON.stringify( c.locator ) }` ),
-//   a.p( `params: ${ JSON.stringify( c.params ) }` ),
-//   app.btn( "#1", () => c.open( '%/../1' ) ),
-//   x.appkit.router(
-//     {
-//       '/': app.person.show,
-//       '/edit': app.person.edit,
-//       // [ '/people/:id', "person" ]: app.people,
-//       // '/people*': app.people
-//     },
-//     { scope: `/${c.params.id}`, root: '/', lost: 'show' }
-//   ),
-//   a.hr
-// ]
-//
-// app.person.show = ( c ) => (a,x) => [
-//   a.h1( `Person ${ c.params.id }`),
-//   a.p( `locator: ${ JSON.stringify( c.locator ) }` ),
-//   a.p( `params: ${ JSON.stringify( c.params ) }` ),
-// ]
-
-
-// () => x.appkit.controller( {
-//     '': index people
-//     '/#id': show person
-//     '/#id/edit': edit person
-//   },
-//   { scope: '/people' }
-// )
-
-
-// ax( {
-//   // $tag: "input",
-//   $nodes: [
-//     { $tag: "input", $init: function() { this.focus() } }
-//   ],
-//   $init: function() {
-//     // this.addEventListener(
-//     //   "blur",
-//     //   function() { alert('blur') }
-//     // );
-//     // this.focus()
-//     // ax.throw()
-//   },
-//   // $on: { "blur": function() { debugger } }
-// } )
-
-// ax( { $nodes: function() { return "wooo" } } )
-
-// ax( app )
-// ax( App2 )
-// ax( [ "hi", "ho", ax.a.hr ] )
-// ax( [
-//   "hi",
-//   ax.a(`
-//   <div class="btn-group" role="group">
-//     <button id="btnGroupDrop1" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-//     Dropdown
-//     </button>
-//     <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-//       <a class="dropdown-item" href="#">Dropdown link</a>
-//       <a class="dropdown-item" href="#">Dropdown link</a>
-//     </div>
-//   </div>
-//   `)
-//
-// ] )
-
-// ax( (a,x) => [ "Hello", "world", a.hr, a['ax-appkit-component'], a.div("fdgfdgfd"), a.button("OK") ], { id: "here", $tag: "div" } )
-
-</script>
+<script>let config = JSON.parse(`<%=
+  {
+    icon: config[:icon],
+    title: config[:title],
+    css: config[:css]
+  }.to_json
+%>`)</script>
+<script>ax( app )</script>
+<!-- <script>ax( (a,x) => a.pre( x.appkit.put( config ) ) )</script> -->
 
 </body>
 </html>

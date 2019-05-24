@@ -1,5 +1,5 @@
 ax.extension.appkit.form.factory.many.
-remove = ( f ) => function( component, options={} ) {
+remove = ( fi ) => function( component, options={} ) {
 
   let a = ax.a
   let x = ax.x

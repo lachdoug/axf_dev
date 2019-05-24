@@ -3,7 +3,7 @@ ax.extension.appkit.kontroller.$content = function ( routes, options ) {
   var views = ax.x.appkit.kontroller.$content.views( routes, options )
 
   return function() {
-    let path = this.$state.path
+    let path = this.$state().path
     let params = this.$state.params || {}
     let content
     for ( let i in views ) {

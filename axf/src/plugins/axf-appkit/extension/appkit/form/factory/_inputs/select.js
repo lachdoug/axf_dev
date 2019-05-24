@@ -72,12 +72,25 @@ select = (f) => function( options = {} ) {
 
     $value: function() {
       if ( this.multiple ) {
-        let result = []
+        return this.$data().join(' ')
+      } else {
+        return this.value
+      }
+    },
+
+    $data: function() {
+      if ( this.multiple ) {
+        let values = []
         let selected = this.querySelectorAll('option:checked')
         selected.forEach( function( option ) {
-          result.push( option.value )
+          let value = option.value
+          let datatype = options.datatype
+          if ( datatype ) {
+            value = ax.x.appkit.lib.coerce[ datatype ]( value )
+          }
+          values.push( value )
         } )
-        return result
+        return values
       } else {
         return this.value
       }

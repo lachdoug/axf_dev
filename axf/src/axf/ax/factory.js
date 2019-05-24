@@ -13,12 +13,14 @@ ax.factory = function( component ) {
 
   let is = ax.type.is
 // debugger
-  // if ( is.null( component ) ) return undefined
+  if ( is.null( component ) ) return null
   if ( is.node( component ) ) return component
   if ( is.nodelist( component ) ) return ax.factory.nodelist( component )
   if ( is.array( component ) ) return ax.factory.array( component )
+  if ( is.promise( component ) ) return ax.factory.promise( component )
   if ( is.object( component ) ) return ax.factory.object( component )
   if ( is.function( component ) ) return ax.factory.function( component )
+  if ( is.undefined( component ) ) ax.factory.undefined()
   return ax.factory.text( component )
 
 }

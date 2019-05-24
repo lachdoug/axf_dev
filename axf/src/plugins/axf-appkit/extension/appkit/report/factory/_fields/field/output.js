@@ -5,7 +5,13 @@ output = (r) => function( options ) {
   let x = ax.x
 
   let as = options.as || 'text'
-  let value = ( r.$data && r.$data[ options.key ] ) || options.value
+  let value = (
+    r.data &&
+    (
+      r.data[ options.key ] ||
+      ( r.data[ options.key ] === 0 ? "0" : null )
+    )
+   ) || options.value
 
   return a['appkit-report-field-output']( r[ as ]( {
     name: options.name,

@@ -1,5 +1,5 @@
 ax.extension.appkit.report.factory.many.
-add = ( f ) => function( component, options={} ) {
+add = ( r ) => function( component, options={} ) {
 
   let a = ax.a
   let x = ax.x

@@ -7,12 +7,15 @@ ax.extension.appkit.icon = function( klass, text, options = {} ) {
 // reverse: true to put icon after text.
 // compact: true to have no space between icon and text.
 
+  let a = ax.a
+  let x = ax.x
+
   var component = [
     ax.a.span( { class: klass } )
   ]
-
+// debugger
   if ( text ) {
-    if ( !options.compact ) component.push( " " )
+    if ( !options.compact ) component.push( '' )
     component.push( ax.a.span( text ) )
   }
 
@@ -20,6 +23,11 @@ ax.extension.appkit.icon = function( klass, text, options = {} ) {
     component.reverse()
   }
 
-  return ax.a['appkit-icon']( component, options.tag )
+  let iconTag = {
+    style: { whiteSpace: 'nowrap' },
+    ...options.iconTag
+  }
+
+  return ax.a['appkit-icon']( component, iconTag )
 
 }

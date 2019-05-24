@@ -39,14 +39,14 @@ checkboxes = (r) => function(
     } )
   )
 
-  let tag = {
+  let checkboxesTag = {
     $value: function() {
       return options.value
     },
 
-    ...options.tag
+    ...options.checkboxesTag
   }
 
-  return a['appkit-report-checkboxes']( checkboxes, tag )
+  return a['appkit-report-checkboxes']( checkboxes, checkboxesTag )
 
 }

@@ -12,7 +12,7 @@ field = (r) => function( keyOrOptions={}, options={} ) {
   let field = x.appkit.report.factory.field
   let lib = x.appkit.lib.field
 
-  let name = lib.name.assemble( ...r.$scope, options.key )
+  let name = lib.name.assemble( ...r.scope, options.key )
 
   let component = a["appkit-report-field-body"]( [
     field.caption( options ),

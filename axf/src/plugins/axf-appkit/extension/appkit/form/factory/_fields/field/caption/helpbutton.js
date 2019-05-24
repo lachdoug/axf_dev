@@ -8,11 +8,11 @@ helpbutton = function( options ) {
     $state: false,
     $nodes: function() {
       return a["appkit-form-field-arrow"](
-        { $text: this.$state ? " ? ▴ " : " ? ▾ " }
+        { $text: this.$state() ? " ? ▴ " : " ? ▾ " }
       )
     },
     $on: { 'click: toggle help': function() {
-      this.$state = !this.$state
+      this.$state = !this.$state()
       this.$('^appkit-form-field', 'appkit-form-field-help').$toggle()
     } },
     ...options.helpbuttonTag

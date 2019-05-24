@@ -7,11 +7,10 @@ ax.extension.appkit.transition.fade = function( content, options={} ) {
 
   return a['appkit-transition']( content, {
     $init: function () {
-      if( !content ) {
-        this.style.display = 'none'
-      } else{
-        // debugger
-        this.$view = this.children[0]
+      this.style.display = 'none'
+      if( content ) {
+        this.$view = content
+        this.$in()
       }
     },
     $in: function () {
@@ -25,8 +24,7 @@ ax.extension.appkit.transition.fade = function( content, options={} ) {
       // debugger
       view = ax.factory( view )
 
-      // debugger
-      ax.log( view.isEqualNode( this.$view ) )
+      // ax.log( view.isEqualNode( this.$view ) )
       if ( options.regulate && view.isEqualNode( this.$view ) ) {
         // Do nothing. Keep existing content.
       } else {

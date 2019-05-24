@@ -22,9 +22,19 @@ checkboxes = (f) => function(
     return f.check( {
       name: name,
       value: lib.collection.includes( value, checkbox.value ) ? checkbox.value : "",
-      disabled: checkbox.disabled,
+      disabled: options.disabled || checkbox.disabled,
+      readonly: options.readonly || checkbox.readonly,
+      datatype: options.datatype,
       checked: checkbox.value,
       label: checkbox.label,
+      // inputTag: {
+      //   $value: function () {
+      //     return this.$('^appkit-form-checkboxes').$value()
+      //   },
+      //   $data: function () {
+      //     return this.$('^appkit-form-checkboxes').$data()
+      //   },
+      // },
       ...checkOptions
     } )
 
@@ -36,15 +46,33 @@ checkboxes = (f) => function(
       name: name,
       type: "hidden",
       disabled: true,
-      inputTag: { $value: function () {
-        return this.$('^appkit-form-checkboxes').$value()
-      } },
+      inputTag: {
+        $value: function () {
+          return this.$('^appkit-form-checkboxes').$value()
+        },
+        $data: function () {
+          debugger
+          return this.$('^appkit-form-checkboxes').$data()
+        },
+      },
     } )
   )
 
   let checkboxesTag = {
+    $data: function() {
+      debugger
+      return this.$$('input:checked').$data()
+      // let values =
+      // debugger
+      // if ( options.datatype ) {
+      //   values = values.map( function( value ) {
+      //     return ax.x.appkit.lib.coerce[ options.datatype ]( value )
+      //   } )
+      // }
+      // return values
+    },
     $value: function() {
-      return this.$$('input:checked').value()
+      return this.$data.join(' ')
     },
     $focus: function () {
       this.$('input').focus()

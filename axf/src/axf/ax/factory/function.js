@@ -5,11 +5,12 @@ ax.factory.function = function ( component ) {
 
   // The factory checks functions for an $object property.
   // If it finds one, the factory will use its value
-  // as the component. This is so that the tag builder
+  // as the component.
+  // For example, the component a['div'] will render an empty <div>.
+  // This is so that the tag builder
   // can return uncalled functions and the factory can
   // do something sensible with them. Otherwise such components
   // would be called with (a,x) arguments, which would be wrong.
-  // For example, the component a['div'] will render an empty <div>.
 
   if ( ax.type.is.class( component ) ) {
     component = new component( a,x )
