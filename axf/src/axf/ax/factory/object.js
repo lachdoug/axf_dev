@@ -1,5 +1,8 @@
-ax.factory.object = function ( component ) {
+ax.factory.object = function ( object ) {
 
-  return this.object.element( component )
+  return this.element( {
+    $tag: 'pre',
+    $text: JSON.stringify( object, null, 2  )
+  } )
 
 }

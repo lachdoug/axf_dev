@@ -1,24 +1,18 @@
-let app = function(a,x) { return [
-  app.css,
-  x.appkit.router( (r) => [
-    app.navbar(r),
-    a["div.container"](
-      r.routes( {
-        '%%': app.view
-      }, {
-        transition: x.appkit.transition.fade(
-          x.appkit.loading, { time: 200 } ),
-      } )
-    )
+let $preferences = {
+  // codeEditorKeymap: 'vim',
+}
 
-  ], {
-    default: (r) => (a,x) => [
-      a.p( `Not found ${ r.path }` ),
-    ],
-  } ),
-] }
+// let $stashedHREF
+
+let app = (a,x) => a['app']( [
+  app.nav,
+  app.view,
+] )
 
 
-
-
-// app.view.dir = ( r, dir ) => { debugger }
+app.nav = (a,x) => a['app-nav']( [
+  app.logo( 20 ),
+  'Engines',
+], {
+  // style: "display: block;",
+} )

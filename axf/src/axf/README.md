@@ -74,18 +74,18 @@ that do the job of triggering the element $render method.
 This is so that you can write statements like either:
 ~~~javascript
 this.$state = { name: 'Fred', age: 30 }
-this.$text = "New text"
+this.$text = New text
 ~~~
 and the element will render the new content.
 
 Elements also have custom accessors for `$on`, which allows
-you to write `this.$on( { click: alert("foo") } )` to set an
+you to write `this.$on( { click: alert(foo) } )` to set an
 event listener.
 
 
 ax() is global and has properties:
  * 'factory' - makes HTML elements
- * 'tags' - interprets ax() tags like a.h1("Hi")
+ * 'tags' - interprets ax() tags like a.h1(Hi)
  * 'extension' - for adding features to ax()
  * 'a' - exposes `tags`
  * 'x' - exposes `extension`

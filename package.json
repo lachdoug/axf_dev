@@ -1,0 +1,33 @@
+{
+  "name": "axf",
+  "version": "0.0.2",
+  "description": "Ax Function",
+  "main": "_with_quotes.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "browserify client/app.js -o server/public/bundle.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lachdoug/a_cell.git"
+  },
+  "author": "Lachlan Douglas",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/lachdoug/a_cell/issues"
+  },
+  "homepage": "https://github.com/lachdoug/a_cell#readme",
+  "devDependencies": {
+    "@fortawesome/fontawesome-free": "^5.10.2"
+  },
+  "dependencies": {
+    "bootstrap-css-only": "^4.3.1",
+    "codemirror": "^5.49.0",
+    "html5sortable": "^0.9.16",
+    "jsoneditor": "^7.0.5",
+    "marked": "^0.7.0",
+    "mustache": "^3.1.0",
+    "simplemde": "^1.11.2",
+    "xterm": "^3.14.5"
+  }
+}

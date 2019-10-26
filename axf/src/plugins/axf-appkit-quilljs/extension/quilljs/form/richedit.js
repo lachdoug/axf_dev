@@ -5,56 +5,54 @@ ax.extension.quilljs.form.richedit = function(
   let a = ax.a
   let x = ax.x
 
-  return a['appkit-form-quilljs-richedit']( [
-    a['appkit-form-quilljs-richedit-container']( a( options.value || '' ), {
+  return a['|appkit-form-quilljs-richedit']( [
+    a['|appkit-form-quilljs-richedit-container']( a( options.value || '' ), {
 
       $on: {
-        'keyup: check field depenencies': function(e) {
-          let form = this.$('^form')
-          if ( form ) { form.$dependencies() }
-          this.$('^').$focus()
-        },
+        'keyup: send control change event': (e,el) =>
+          el.$send( 'axf.appkit.form.control.change' ),
         'keydown: check for editor exit': function(e) {
 
-          if ( e.keyCode == 9 && e.altKey && e.shiftKey ) {
-            // alt+shift+TAB pressed - move focus to last button on toolbar
-            this.$('^appkit-form-quilljs-richedit').$$('appkit-form-quilljs div.ql-toolbar button')().slice(-1)[0].focus()
-          }
-
-          if ( e.keyCode == 27 ) {
+          if ( e.keyCode == 27 && e.shiftKey ) {
+            // shift+ESC pressed - move focus backward
+            ax.x.lib.tabable.previous( e.target ).focus()
+          } else if ( e.keyCode == 27 ) {
             // ESC pressed - move focus forward
-            ax.x.appkit.lib.tabable.next( this ).focus()
+            ax.x.lib.tabable.next( e.target ).focus()
           }
 
         },
       },
 
     } ),
-    a['appkit-form-quilljs-richedit-textarea']( a.textarea( {
+    a['|appkit-form-quilljs-richedit-textarea']( a.textarea( {
       name: options.name,
       // value: options.value,
       disabled: options.disabled,
       required: options.required,
       tabIndex: -1,
     } ) ),
-    // a['appkit-form-quilljs-richedit-textarea']
+    // a['|appkit-form-quilljs-richedit-textarea']
   ], {
     $value: function() {
       let value
       if ( this.$quill ) {
         value = this.$quill.getContents()
       } else {
-        ax.throw("Quill not initialized.")
+        ax.log.error(Quill not initialized.)
         options.value
       }
-      if ( JSON.stringify( value ) === "{\"ops\":[{\"insert\":\"\\n\"}]}" ) {
-        value = ""
+      if ( JSON.stringify( value ) === {\ops\:[{\insert\:\\\n\}]} ) {
+        value = ''
       }
       console.log( value )
       return value
     },
+    $data: function() {
+      return this.$value()
+    },
     $init: function() {
-      let container = this.$('appkit-form-quilljs-richedit-container')
+      let container = this.$('|appkit-form-quilljs-richedit-container')
       this.$quill = new Quill( container, {
         modules: {
           toolbar: [
@@ -63,7 +61,7 @@ ax.extension.quilljs.form.richedit = function(
             [{ list: 'ordered' }, { list: 'bullet' }]
           ]
         },
-        theme: options.theme || "snow",
+        theme: options.theme || snow,
         placeholder: options.placeholder,
         readOnly: options.readonly,
         ...options.quill
@@ -96,7 +94,7 @@ ax.extension.quilljs.form.richedit = function(
 
     $update: function () {
       let value = this.$value()
-      let textarea = this.$( "appkit-form-quilljs-richedit-textarea textarea" )
+      let textarea = this.$( '|appkit-form-quilljs-richedit-textarea textarea' )
       if ( value ) {
         textarea.value = JSON.stringify( { text: this.$quill.getText(), ...value } )
       } else {

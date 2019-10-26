@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+
+  <link rel="stylesheet" href="/node_modules/@fortawesome/fontawesome-free/css/all.min.css">
+
+  <link rel="stylesheet" href="/vendor/bootstrap-4.1.0-dist/css/bootstrap.min.css">
+
+  <script src="/vendor/marked-0.3.6.min.js"></script>
+
+  <link rel="stylesheet" href="/node_modules/codemirror/lib/codemirror.css">
+  <link rel="stylesheet" href="/node_modules/codemirror/theme/neo.css">
+
+  <link rel="stylesheet" href="/node_modules/@mdi/font/css/materialdesignicons.min.css">
+
+  <script src="/node_modules/codemirror/lib/codemirror.js"></script>
+  <script src="/node_modules/codemirror/addon/display/placeholder.js"></script>
+  <script src="/node_modules/codemirror/mode/shell/shell.js"></script>
+  <script src="/node_modules/codemirror/mode/javascript/javascript.js"></script>
+  <script src="/node_modules/codemirror/mode/ruby/ruby.js"></script>
+  <script src="/node_modules/codemirror/mode/python/python.js"></script>
+  <script src="/node_modules/codemirror/mode/xml/xml.js"></script>
+  <script src="/node_modules/codemirror/mode/yaml/yaml.js"></script>
+  <script src="/node_modules/codemirror/keymap/vim.js"></script>
+  <script src="/node_modules/codemirror/keymap/emacs.js"></script>
+  <script src="/node_modules/codemirror/keymap/sublime.js"></script>
+
+  <script src="/node_modules/html5sortable/dist/html5sortable.js"></script>
+
+
+  <script type="application/javascript" src="/axfunction/axf.js" ></script>
+  <script type="application/javascript" src="/axfunction/axf-plugins.js" ></script>
+  <script type="application/javascript" src="/dev/dev.js" ></script>
+  <!-- <script type="application/javascript" src="/axf/themes/basic.js" ></script> -->
+
+</head>
+<body>
+
+<script>
+
+// form = function( options={} ) {
+//
+//   let a = ax.a
+//   let x = ax.x
+//
+//   let formFn = options.form || ( () => null )
+//
+//   let formTagOptions = {
+//     method: 'POST',
+//     action: options.url,
+//     ...options.formTag
+//   }
+//
+//   if ( options.async ) {
+//
+//     let proxy = x.appkit.form.async.proxy( options.proxy )
+//
+//     let factory = form.factory( {
+//       scope: options.scope,
+//       object: options.object,
+//       params: options.params,
+//       proxy: proxy,
+//     } )
+//
+//     return a.form( a['appkit-asyncform']( [
+//       a['appkit-asyncform-result'],
+//       a['appkit-asyncform-form']( formFn( factory ) ),
+//     ] ), formTagOptions )
+//
+//   } else {
+//
+//     let factory = form.factory( {
+//       scope: options.scope,
+//       object: options.object,
+//       params: options.params,
+//       proxy: options.proxy,
+//     } )
+//
+//     return a.form( formFn( factory ), formTagOptions )
+//
+//   }
+//
+// }
+//
+// form.factory = function( options ) {
+//
+//   let shim = options.proxy
+//   let target = form.factory.object(  )
+//
+//   target.scope = options.scope || ''
+//   target.object = options.object || {}
+//   target.params = options.params || {}
+//
+//   let factoryProxy = function( object={}, shim={} ) {
+//
+//     return new Proxy( object, {
+//       get: ( target, property ) => {
+//         let object = target[property]
+//         if ( ax.is.function( shim[property] ) ) {
+//           return shim[property]( factory, object )
+//         } else if ( ax.is.object( shim[property] ) ) {
+//           return factoryProxy( object, shim[property] )
+//         } else {
+//           return object
+//         }
+//       },
+//     } )
+//
+//   }
+//
+//   let factory = factoryProxy( target, shim )
+//
+//   return factory
+//
+// }
+//
+//
+// form.factory.object = function(  ) {
+//
+//   let factory = ax.x.appkit.form.factory
+//
+//   return {
+//
+//     submit: ( options ) => factory.submit( factory )( options ),
+//
+//     element: {
+//       input: ( options ) => factory.element.input( options ),
+//       button: ( options ) => factory.element.button( options ),
+//       check: ( options ) => factory.element.check( options ),
+//     },
+//
+//   }
+//
+// }
+
+
+
+
+app1 = (a,x) => x.panes(
+  x.appkit.form( {
+    async: true,
+    url: '/dev/some/api/endpoint',
+    // factory: app.factory,
+    // proxy: app1.proxy( app2.form.shim, bootstrap.form ),
+    proxy: bootstrap.form,
+    form: (f) => [
+      // x.appkit.context(
+      //   a.h1( 'Right click', { } ),
+      //   {
+      //     contextTag: {
+      //       $on: {
+      //         'appkitContextPopupClose': (e,el) => el.$$('appkit-menu-submenu').style.display = 'none',
+      //       }
+      //     },
+      //     popup: x.menu( { menu: [
+      //       {
+      //         label: 'Open',
+      //         onclick: () => alert( 'Open' ),
+      //       },
+      //       {
+      //         label: 'Pets',
+      //         menu: [
+      //           {
+      //             label: 'Cats',
+      //             onclick: () => alert( 'Cats' ),
+      //           },
+      //           {
+      //             label: 'Dogs',
+      //             onclick: () => alert( 'Dogs' ),
+      //           },
+      //           a.hr,
+      //           {
+      //             label: 'Fish',
+      //             menu: [
+      //               {
+      //                 label: 'Goldfish',
+      //                 onclick: () => alert( 'Goldfish' ),
+      //               },
+      //               {
+      //                 label: 'Guppies',
+      //                 onclick: () => alert( 'Guppies' ),
+      //               },
+      //             ],
+      //           },
+      //         ]
+      //       },
+      //     ] } ),
+      //   }
+      // ),
+      f.element.check( { name: 'element_affirmation', label: 'Click me' } ),
+      f.element.input( { name: 'element_string' } ),
+      f.element.select( { name: 'element_selection', collection: [ "Cats", "Dogs" ] } ),
+      f.element.textarea( { name: 'element_words' } ),
+      f.element.button( { label: '★ My button', onclick: () => alert('Button clicked.') } ),
+      f.control.input( { name: 'control_string' } ),
+      f.control.select( { name: 'control_selection', collection: [ "Cats", "Dogs" ] } ),
+      f.control.textarea( { name: 'control_few_words' } ),
+      // f.buttons(),
+      // f.special.fast.thing(),
+      f.submit()
+    ]
+  } ),
+)
+
+app1.btn = ( options={} ) => (a,x) => x.appkit.button( {
+  class: 'btn btn-outline-primary border-0',
+  ...options
+} )
+
+
+// app1.proxy = function( object, shim ) {
+//
+//   return function( factory ) {
+//
+//     let proxy = function( object={}, shim={} ) {
+//
+//       return new Proxy( object, {
+//         get: ( target, property ) => {
+//           let object = target[property]
+//           if ( ax.is.function( shim[property] ) ) {
+//             return shim[property]( factory, object )
+//           } else if ( ax.is.object( shim[property] ) ) {
+//             return proxy( object, shim[property] )
+//           } else {
+//             return object
+//           }
+//         },
+//       } )
+//
+//     }
+//
+//     return proxy( object, shim )
+//
+//   }
+//
+// }
+
+
+// Bootstrap = {}
+// Bootstrap.form = {
+//   element: {
+//     input: ( f, target ) => ( options={} ) => target(
+//       { ...options, style: { width: '50px', ...options.style } } ),
+//   },
+// }
+
+Nestify = {}
+Nestify.form = {
+  element: {
+    input: ( f, target ) => ( options={} ) => target(
+      { ...options, style: { border: '2px solid red', ...options.style } } ),
+  },
+}
+
+
+// Factory = function( base, shim )
+//
+// shim1 = shimmer( {}, Shim1 )
+// shim2 = shimmer( shim1, Bootstrap.form )
+// shim3 = shimmer( shim2, Nestify.form )
+// shim4 = shimmer( shim3, app2.form.shim )
+//
+// f = new Factory( Base0, shim4 )
+
+app2 = (a,x) => app2.form( {
+  form: (f) => [
+    f.control.input( { value: '$', style: { color: 'white' } } ),
+    // f.buttons(),
+    f.submit()
+  ]
+} )
+
+app2.form = ( options={} ) => (a,x) => x.appkit.form( {
+  async: true,
+  shims:  [ bootstrap.form, Nestify.form, app2.form.shimx ],
+  ...options
+} )
+
+app2.form.shim = {
+  element: {
+    input: ( f, target ) => ( options={} ) => target(
+    { ...options, style: { backgroundColor: 'blue', ...options.style } } ),
+  },
+}
+
+app2.form.shimx = {
+  element: {
+    input: ( f, target ) => ( options={} ) => target( {
+      ...options,
+      // inputTag: {
+      //   class: 'form-control',
+      //   ...options.inputTag,
+      // },
+    } ),
+    // check: ( f, target ) => ( options={} ) => target( {
+    //   ...options,
+    //   checkTag: {
+    //     class: 'custom-control custom-checkbox',
+    //     ...options.buttonTag,
+    //   },
+    //   inputTag: {
+    //     class: 'custom-control-input',
+    //     ...options.inputTag,
+    //   },
+    //   labelTag: {
+    //     class: 'custom-control-label',
+    //     ...options.labelTag,
+    //   },
+    // } ),
+  },
+  // special: {
+  //   fast: {
+  //     thing: (f) => ( options={} ) => (a,x) => a['app-form-buttons']( [
+  //       f.element.button( {
+  //         label: 'Cats',
+  //         buttonTag: {
+  //           class: 'btn btn-secondary',
+  //           ...options.buttonTag,
+  //         },
+  //         ...options.cancel
+  //       } ),
+  //       ' ',
+  //       f.submit( { label: 'Dogs', ...options.submit } ),
+  //     ] ),
+  //   },
+  //   slow: {
+  //
+  //   },
+  // },
+  buttons: (f) => ( options={} ) => (a,x) => a['app-form-buttons']( [
+    f.element.button( {
+      label: '✖ Cancel',
+      buttonTag: {
+        class: 'btn btn-secondary',
+        ...options.buttonTag,
+      },
+      ...options.cancel
+    } ),
+    ' ',
+    f.submit( options.submit ),
+  ] ),
+}
+
+
+// ax.x.appkit.form = function( options={} ) {
+//
+//   let form = options.form || ( () => {} )
+//   let shims = [ this.form.shim ]
+//   if ( options.async ) shims.push( this.form.asyncShim )
+//   shims.push( ...( options.shims || [] ) )
+//
+//   let factoryOptions = {
+//     scope: options.scope,
+//     params: options.params,
+//     object: options.object,
+//   }
+//   let f = new this.form.factory( this.form.base, shims, factoryOptions )
+//
+//   return (a,x) => a.form( form(f) )
+//
+//
+// }
+//
+// ax.x.appkit.form.factory = function( base, shims, options={} ) {
+//
+//   let proxy = function( factory, base, shim ) {
+//
+//     return new Proxy( base, {
+//       get: ( target, property ) => {
+//         let object = target[property]
+//         if ( ax.is.function( shim[property] ) ) {
+//           return shim[property]( factory.target, object )
+//         } else if ( ax.is.object( shim[property] ) ) {
+//           return proxy( factory, object, shim[property] )
+//         } else {
+//           return object
+//         }
+//       },
+//     } )
+//
+//   }
+//
+//   this.target = base
+//   for ( let i in shims ) {
+//     this.target = proxy( this, this.target, shims[i] )
+//   }
+//   this.target.scope = options.scope || ''
+//   this.target.params = options.params || {}
+//   this.target.object = options.object || {}
+//
+//   return this.target
+//
+// }
+//
+// ax.x.appkit.form.base = {
+//   element: {
+//     input: (f) => ( options ) => (a,x) => a.input( options.inputTag ),
+//   },
+//   control: {
+//     input: (f) => ( options ) => f.element.input( options ),
+//   },
+// }
+//
+// ax.x.appkit.form.shim = {
+//   element: {
+//     input: ( f, target ) => ( options={} ) => target(f)( options ),
+//   },
+//   control: {
+//     input: ( f, target ) => ( options ) => target(f)( options ),
+//   },
+// }
+//
+// ax.x.appkit.form.asyncShim = {
+//   element: {
+//     input: ( f, target ) => ( options={} ) => target(
+//       { ...options, style: { height: '50px', ...options.style } } ),
+//   },
+// }
+
+
+
+
+
+ax( app2 )
+
+
+
+
+// let shim1 = {
+//   which: 'shim1',
+//   element: {
+//     input: (f) => ( options={} ) => (a,x) => a.input( options ),
+//   },
+//   control: {
+//     input: (f) => ( options={} ) => { debugger; return f.element.input( options ) },
+//   },
+// }
+//
+// let shim2 = {
+//   which: 'shim2',
+//   element: {
+//     input: ( f, target ) => ( options={} ) => target(
+//       { ...options, style: { height: '50px', ...options.style } } ),
+//   },
+// }
+//
+// let shim3 = {
+//   which: 'shim3',
+//   element: {
+//     input: ( f, target ) => ( options={} ) => target(
+//       { ...options, style: { width: '50px', ...options.style } } ),
+//   },
+// }
+//
+// let shim4 = {
+//   which: 'shim4',
+//   element: {
+//     input: ( f, target ) => ( options={} ) => target(
+//       { ...options, style: { border: '2px solid red', ...options.style } } ),
+//   },
+// }
+//
+// let shim5 = {
+//   which: 'shim5',
+//   element: {
+//     input: ( f, target ) => ( options={} ) => target(
+//       { ...options, style: { backgroundColor: 'blue', ...options.style } } ),
+//   },
+// }
+//
+// let proxy = function( base={}, shim={} ) {
+// // debugger
+//   let Factory = new Proxy( base, {
+//     get: ( target, property ) => {
+//       let object = target[property]
+//       if ( ax.is.function( shim[property] ) ) {
+//         // debugger
+//         return shim[property]( factory, object )
+//       } else if ( ax.is.object( shim[property] ) ) {
+//         return proxy( object, shim[property] )
+//       } else if ( ax.is.string( shim[property] ) ) {
+//         return shim[property]
+//       } else {
+//         // debugger
+//         return object
+//       }
+//     },
+//   } )
+//
+//   let factory = new Factory
+//
+//   return factory
+//
+// }
+//
+// let form = function( options ) {
+//   let f = factory( { proxy: options.proxy } )
+//   return options.form(f)
+// }
+//
+//
+// app2 = (a,x) => form( {
+//   proxy: p5,
+//   form: (f) => [
+//     f.control.input( { value: '$', style: { color: 'white' } } )
+//   ]
+// } )
+//
+// let f0 = new Proxy( {}, {
+//   get: ( target, property ) => { debugger }
+// } )
+// let f1 = new proxy( f0, shim1 )
+// let f2 = new proxy( f1, shim2 )
+// let f3 = new proxy( f2, shim3 )
+// let f4 = new proxy( f3, shim4 )
+// let f5 = new proxy( f4, shim5 )
+//
+// let P5 = function( base ) {
+//   return {
+//
+//   }
+// }
+//
+// let factory = function( options ) {
+//
+//
+//
+//
+//
+//   return new Proxy( {}, {
+//
+//   } )
+//
+// }
+//
+//
+// let form = function( options ) {
+//   let f = factory( { proxy: options.proxy } )
+//   return options.form(f)
+// }
+//
+//
+// app2 = (a,x) => form( {
+//   proxy: p5,
+//   form: (f) => [
+//     f.control.input( { value: '$', style: { color: 'white' } } )
+//   ]
+// } )
+//
+
+
+</script>
+
+
+</body>
+</html>

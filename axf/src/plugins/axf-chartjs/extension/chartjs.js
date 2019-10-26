@@ -3,12 +3,12 @@ ax.extension.chartjs = function( chartjsOptions, options={} ) {
   var a = ax.a;
 
   var chartTag = Object.assign(
-    { style: "display: block;" },
+    { style: 'display: block;' },
     options.chartTag || {}
   );
 
   var canvasTag = Object.assign(
-    { style: "display: block;" },
+    { style: 'display: block;' },
     options.canvasTag || {}
   );
 

@@ -6,10 +6,16 @@
  * @namespace ax.tag.proxy
  *
  */
-ax.tag.proxy.function = function( html ) {
+ax.tag.proxy.function = function( component ) {
 
+  if ( ax.is.string( component) ) {
     let jig = document.createElement('div')
-    jig.innerHTML = html
+    jig.innerHTML = component
     return jig.childNodes
+  } if ( ax.is.object( component) ) {
+    return ax.factory.element( component )
+  } else {
+    ax.log.error( 'Component must be String or Object.' )
+  }
 
 }

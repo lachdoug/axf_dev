@@ -2,11 +2,11 @@
  * Throw an error.
  *
  * @since 0.0.0
- * @namespace ax.throw
+ * @namespace ax.log.error
  *
  * @param {string} message
  *
  */
-ax.throw = function( message ) {
-  throw new Error( message )
+ax.throw = function( ...args ) {
+  throw new Error( args )
 }

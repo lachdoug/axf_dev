@@ -7,9 +7,7 @@
  * @param {string} message
  *
  */
-ax.log = console.log.bind( console )
-
-// function( message ) {
-//   // console.log.bind(window.console)( message )
-//   console.log.bind( console )
-// }
+ax.log = ( ...args ) => {
+  console.log.bind( console )( ...args )
+  return null
+}

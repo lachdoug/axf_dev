@@ -11,16 +11,20 @@
  */
 ax.factory = function( component ) {
 
-  let is = ax.type.is
-// debugger
+  let is = ax.is
+  let factory = ax.factory
+
   if ( is.null( component ) ) return null
+  // if ( is.string( component ) ) return factory.text( component )
   if ( is.node( component ) ) return component
-  if ( is.nodelist( component ) ) return ax.factory.nodelist( component )
-  if ( is.array( component ) ) return ax.factory.array( component )
-  if ( is.promise( component ) ) return ax.factory.promise( component )
-  if ( is.object( component ) ) return ax.factory.object( component )
-  if ( is.function( component ) ) return ax.factory.function( component )
-  if ( is.undefined( component ) ) ax.factory.undefined()
-  return ax.factory.text( component )
+  if ( is.nodelist( component ) ) return factory.nodelist( component )
+  if ( is.array( component ) ) return factory.array( component )
+  if ( is.promise( component ) ) return factory.promise( component )
+  if ( is.object( component ) ) return factory.object( component )
+  if ( is.class( component ) ) return factory.class( component )
+  if ( is.tag( component ) ) return factory.tag( component )
+  if ( is.function( component ) ) return factory.function( component )
+  if ( is.undefined( component ) ) factory.undefined()
+  return factory.text( component )
 
 }

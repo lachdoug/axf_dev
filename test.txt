@@ -1,0 +1,52 @@
+Engines System
+
+An Engines System is a computer running the Engines System Software.
+
+The Engines System Software comes in two versions:
+1. Engines System Community Edition ( AGPL ).
+2. Engines System Commercial Edition ( proprietary licence ).
+
+The Community Edition can run free software, but not commercial/paid software.
+
+The Commercial Edition can run free software as well as commercial software.
+
+Ecosystem
+
+An Engines Ecosystem is a platform for handling the registrations of subsidiary Engines Systems and Ecosystems. Ecosystems can be tiered/nested.
+
+There are two top-level instances of the Ecosystem, operated by Engines Corp. These are called the Community Mothership and the Commercial Mothership.
+
+Other instances of the Ecosystem can be operated by clients. These are called Client Ecosystems.
+
+The Community Mothership accepts registrations from Engines System Community Editions.
+The Commercial Mothership accepts registrations from Engines System Commercial Editions and Client Ecosystems.
+Client Ecosystems accept registrations from Engines System Commercial Editions and Client Ecosystems.
+
+An Ecosystem has a Tenant Mode, which can be either:
+Mothership - One system or ecosystem per user account.
+Single-organisation - Users are members of groups.  multiple systems,
+Multi-organisation -
+
+The two motherships run in multi-tenant mode.
+
+The
+
+No Organisation - one user account has one registration.
+Single Organisation -
+
+Motherships operate in No Organisation Tenant Mode. That is, a mothership user account can have one registration, be it an Engines System or a Client Ecosystem.
+
+
+Features
+
+
+Users can create an account. Accounts provided by Keycloak.
+
+One Engines system can be registered under a user account.
+
+When a
+
+=========
+
+
+Hoster - a user

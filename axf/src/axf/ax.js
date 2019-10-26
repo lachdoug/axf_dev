@@ -1,75 +1,30 @@
 /**
- * Creates an HTML element and inserts it in the DOM.
- * The element is described by a component and any accompanying attributes.
- * If the element has an `id`, it will replace an existing
- * DOM element that has the same `id`.
- * If the element does not have a matching `id`,
- * the element will be appended to the &lt;body&gt;.
+ * Creates an HTML element.
+ * If options.target is supplied, the element will replace the target in the DOM,
+ * or append or prepend to target if options.insert is 'append' or 'prepend'.
  *
  * @since 0.0.0
  * @namespace
  *
- * @param {component} component any Component
- * @param {object} attributes to be applied to the component
+ * @param {component} component an ax component
+ * @param {object} options
  *
  * @return {htmlElement} The new element
  */
-let ax = function ( component, attributes ) {
+let ax = function ( component=null, options={} ) {
 
-  let target
+  let element = ax.factory( component )
+  let target = options.target
 
-  if ( attributes ) {
-    if ( ! ( component instanceof Array ) ) { component = [ component ] }
-    component = { $nodes: component, ...attributes }
+  if ( target ) {
+    if ( ax.is.string( target ) ) target = document.querySelector( target )
+    if ( options.insert ) {
+      document.body[`${ options.insert }Child`]( element )
+    } else {
+      target.replaceWith( element )
+    }
   }
 
-  document.addEventListener("DOMContentLoaded", function(e) {
-
-    let element = ax.factory( component )
-
-    if ( component.id ) {
-      document.querySelector( '#' + component.id ).
-        replaceWith( element )
-    } else {
-      document.body.appendChild( element )
-    }
-
-  });
-
-
-  // return element
+  return element
 
 }
-
-
-// let ax = function ( component, attributes ) {
-//
-//   let target
-//
-//
-//
-//   if ( attributes ) {
-//     if ( !ax.type.is.array( component ) ) { component = [ component ] }
-//     component = { $nodes: component, ...attributes }
-//   }
-// debugger
-//   let element = ax.factory( component )
-//
-//   if ( ax.type.is.nodelist( element ) ) {
-//     for ( let i of element ) {
-//       // debugger
-//       document.body.appendChild( element[0] )
-//     }
-//   } else {
-//     // debugger
-//     if ( component.id ) {
-//       document.querySelector( '#' + component.id ).
-//       replaceWith( element )
-//     } else {
-//       document.body.appendChild( element )
-//     }
-//   }
-//
-//   return element
-//
-// }

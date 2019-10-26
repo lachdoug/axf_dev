@@ -1,3 +1,5 @@
 ax.factory.nodelist = function ( component ) {
-  return this( { $nodes: Array.from( component ) } )
+
+  return this.element( { $nodes: Array.from( component ) } )
+
 }

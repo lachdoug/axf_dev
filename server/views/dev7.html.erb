@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+
+  <link rel="stylesheet" href="/node_modules/@fortawesome/fontawesome-free/css/all.min.css">
+
+  <link rel="stylesheet" href="/vendor/bootstrap-4.3.1-dist/css/bootstrap.min.css">
+
+  <script src="/vendor/marked-0.3.6.min.js"></script>
+
+  <link rel="stylesheet" href="/node_modules/codemirror/lib/codemirror.css">
+  <link rel="stylesheet" href="/node_modules/codemirror/theme/neo.css">
+
+  <!-- <link rel="stylesheet" href="/node_modules/@mdi/font/css/materialdesignicons.min.css"> -->
+
+  <script src="/node_modules/codemirror/lib/codemirror.js"></script>
+  <script src="/node_modules/codemirror/addon/display/placeholder.js"></script>
+  <script src="/node_modules/codemirror/mode/shell/shell.js"></script>
+  <script src="/node_modules/codemirror/mode/javascript/javascript.js"></script>
+  <script src="/node_modules/codemirror/mode/ruby/ruby.js"></script>
+  <script src="/node_modules/codemirror/mode/python/python.js"></script>
+  <script src="/node_modules/codemirror/mode/xml/xml.js"></script>
+  <script src="/node_modules/codemirror/mode/yaml/yaml.js"></script>
+  <script src="/node_modules/codemirror/keymap/vim.js"></script>
+  <script src="/node_modules/codemirror/keymap/emacs.js"></script>
+  <script src="/node_modules/codemirror/keymap/sublime.js"></script>
+
+  <script src="/node_modules/html5sortable/dist/html5sortable.js"></script>
+
+
+  <script type="application/javascript" src="/axfunction/axf.js" ></script>
+  <script type="application/javascript" src="/axfunction/axf-plugins.js" ></script>
+  <script type="application/javascript" src="/dev/dev.js" ></script>
+  <!-- <script type="application/javascript" src="/axf/themes/basic.js" ></script> -->
+
+</head>
+<body>
+
+<script>
+
+
+
+
+
+
+
+app2 = (a,x) => [
+
+  x.form( {
+    form: (f) => [
+
+      f.field( {
+        key: 'view',
+        as: 'one',
+        form: (ff) => [
+          ff.field( {
+            key: 'tests',
+            as: 'many',
+            form: (fff) => [
+              fff.field( {
+                key: 'params',
+                as: 'textarea',
+              } )
+            ]
+          } ),
+          ff.object,
+          ff.field( {
+            key: 'components',
+            as: 'many',
+            form: (fff) => [
+              fff.field( { key: 'type' } ),
+              fff.field( { key: 'markdown', as: 'textarea', dependent: { key: 'type', value: 'markdown' } } ),
+              // fff.field( { key: 'key' } ),
+              // fff.field( { key: 'type', as: 'select', collection: [ 'input', 'select' ] } ),
+            ]
+          } ),
+        ],
+      } ),
+
+      f.buttons( { submit: { name: 'sub', value: 'main' } } ),
+    ],
+    object: {
+      view: {
+        components: [
+          {
+            type: 'markdown',
+            markdown: `Form\n-----`
+          },
+          {
+            type: 'form',
+            form: {
+              scope: {
+                get: 'person[pet]',
+                set: 'person[pet]',
+              },
+              components: [
+                { key: 'name' },
+                { key: 'type', control: 'select', collection_param: 'pet_types' },
+              ]
+            },
+          }
+        ],
+        tests: [
+          {
+            params: `{
+              pet_types: [
+              [ 'dog', 'Dog' ],
+              [ 'fish', 'Fish' ],
+              [ 'cat', 'Cat']
+              ],
+              person: {
+                pet: {
+                  name: 'Puss',
+                  type: 'cat',
+                }
+              },
+            }`,
+          }
+        ],
+      },
+
+    },
+    shims: [
+      x.form.field.shim(),
+      x.form.field.dependent.shim(),
+      x.form.field.nest.shim(),
+      x.bootstrap.form.shim(),
+      x.form.async.shim(),
+      myShim,
+    ],
+  } ),
+
+]
+
+let myShim = {
+  form: ( f, target ) => ( options={} ) => target( {
+    ...options,
+    asyncformTag: {
+      ...options.asyncformTag,
+      $on: {
+        'axf.appkit.http.complete': (e,el) => {
+          el.$$('button[type="submit"]').$revert()
+        },
+        ...( options.asyncformTag || {} ).$on
+      },
+    },
+  } ),
+  field: ( f, target ) => ( options={} ) => target( {
+    ...options,
+    help: options.help ? (a,x) => x.md( options.help ) : null,
+  } ),
+  buttons: (f) => ( options={} ) => (a,x) => a['app-form-buttons']( [
+    f.button( {
+      label: '✖ Cancel',
+      to: app2.hourglass( 'Cancelling…' ),
+      buttonTag: {
+        class: 'btn btn-secondary',
+        ...options.buttonTag,
+      },
+      ...options.cancel
+    } ),
+    ' ',
+    f.submit( options.submit ),
+  ], {
+    ...options.buttonsTag,
+    style: {
+      display: 'block',
+      ...( options.buttonsTag || {} ).style,
+    },
+  } ),
+
+  button: ( f, target ) => ( options={} ) => target( {
+    ...options,
+    buttonTag: {
+      ...options.buttonTag,
+      $on: {
+        'click: change button label': (e,el) => {
+          let to = options.to
+          el.$from = el.innerHTML
+          if ( to ) el.$nodes = to
+        },
+        ...( options.buttonTag || {} ).$on
+      },
+      $revert: function() {
+        this.$html = this.$from
+      },
+    }
+  } ),
+
+  control: {
+    table: ( f, target ) => ( options={} ) => target( {
+      ...options,
+      tableTag: {
+        class: 'table table-sm table-borderless mb-0',
+        ...options.tableTag,
+      },
+      itemButtonsTag: {
+        class: 'btn-group',
+      },
+      sortOffButton: {
+        ...options.sortOffButton,
+        buttonTag: {
+          class: 'btn btn-warning',
+          ...( options.sortOffButton || {} ).buttonTag,
+        },
+      },
+      sortOnButton: {
+        ...options.sortOnButton,
+        buttonTag: {
+          class: 'btn btn-outline-primary border-white',
+          ...( options.sortOnButton || {} ).buttonTag,
+        },
+      },
+      addButton: {
+        ...options.addButton,
+        buttonTag: {
+          class: 'btn btn-outline-primary border-white',
+          ...( options.addButton || {} ).buttonTag,
+        },
+      },
+      upButton: {
+        ...options.upButton,
+        buttonTag: {
+          class: 'btn btn-outline-primary border-white',
+          ...( options.upButton || {} ).buttonTag,
+        },
+      },
+      downButton: {
+        ...options.downButton,
+        buttonTag: {
+          class: 'btn btn-outline-primary border-white',
+          ...( options.downButton || {} ).buttonTag,
+        },
+      },
+      removeButton: {
+        ...options.removeButton,
+        buttonTag: {
+          class: 'btn btn-outline-primary border-white',
+          ...( options.removeButton || {} ).buttonTag,
+        },
+      },
+
+    } ),
+    many: ( f, target ) => ( options={} ) => target( {
+      ...options,
+      itemButtonsTag: {
+        class: 'btn-group',
+      },
+      sortOffButton: {
+        ...options.sortOffButton,
+        buttonTag: {
+          class: 'btn btn-warning',
+          ...( options.sortOffButton || {} ).buttonTag,
+        },
+      },
+      sortOnButton: {
+        ...options.sortOnButton,
+        buttonTag: {
+          class: 'btn btn-outline-primary border-white',
+          ...( options.sortOnButton || {} ).buttonTag,
+        },
+      },
+      addButton: {
+        ...options.addButton,
+        buttonTag: {
+          class: 'btn btn-outline-primary border-white',
+          ...( options.addButton || {} ).buttonTag,
+        },
+      },
+      upButton: {
+        ...options.upButton,
+        buttonTag: {
+          class: 'btn btn-outline-primary border-white',
+          ...( options.upButton || {} ).buttonTag,
+        },
+      },
+      downButton: {
+        ...options.downButton,
+        buttonTag: {
+          class: 'btn btn-outline-primary border-white',
+          ...( options.downButton || {} ).buttonTag,
+        },
+      },
+      removeButton: {
+        ...options.removeButton,
+        buttonTag: {
+          class: 'btn btn-outline-primary border-white',
+          ...( options.removeButton || {} ).buttonTag,
+        },
+      },
+
+    } )
+  },
+  submit: ( f, target ) => ( options={} ) => target( {
+    ...options,
+    // buttonTag: {
+    //   ...options.buttonTag,
+    //   $revert: function() {
+    //     this.$html = this.$from
+    //   },
+    // },
+    button: {
+      to: app2.hourglass( 'Submitting…' ),
+      ...options.button,
+    }
+  } ),
+
+
+
+
+
+
+}
+
+
+app2.btn = ( options={} ) => (a,x) => x.appkit.button( {
+  class: 'btn btn-outline-primary border-white',
+  ...options
+} )
+
+app2.form = ( options={} ) => (a,x) => x.form( {
+  // async: true,
+  shims: [
+  x.bootstrap.formShim(),
+  x.field.formShim(),
+  x.field.dependent.formShim(),
+  x.field.nest.formShim(),
+  myShim ],
+  ...options
+} )
+
+app2.hourglass = ( text ) => (a,x) => x.appkit.cycle( {
+  // period: 250,
+  collection: [
+    x.appkit.icon('far fa-hourglass', text ),
+    x.appkit.icon('fas fa-hourglass-start', text ),
+    x.appkit.icon('fas fa-hourglass-half', text ),
+    x.appkit.icon('fas fa-hourglass-end', text ),
+    x.appkit.icon('far fa-hourglass', text ),
+  ]
+} )
+
+app2.form.shim = {
+  form: ( f, target ) => ( options={} ) => target( {
+    ...options,
+    formTag: {
+      ...options.formTag,
+      $on: {
+        'axf.appkit.http.complete': (e,el) => {
+          el.$$('appkit-form-submit button').$revert()
+        },
+        ...( options.formTag || {} ).$on
+      },
+    },
+  } ),
+  buttons: (f) => ( options={} ) => (a,x) => a['app-form-buttons']( [
+    f.button( {
+      label: '✖ Cancel',
+      to: app2.hourglass( 'Cancelling…' ),
+      buttonTag: {
+        class: 'btn btn-secondary',
+        ...options.buttonTag,
+      },
+      ...options.cancel
+    } ),
+    ' ',
+    f.submit( options.submit ),
+  ], {
+    ...options.buttonsTag,
+    style: {
+      display: 'block',
+      ...( options.buttonsTag || {} ).style,
+    },
+  } ),
+  element: {
+    button: ( f, target ) => ( options={} ) => target( {
+      ...options,
+      buttonTag: {
+        ...options.buttonTag,
+        $on: {
+          'click: change button label': (e,el) => {
+            let to = options.to
+            el.$from = el.innerHTML
+            if ( to ) el.$nodes = to
+          },
+          ...( options.buttonTag || {} ).$on
+        },
+      }
+    } ),
+  },
+  control: {
+    table: ( f, target ) => ( options={} ) => target( {
+      ...options,
+      tableTag: {
+        class: 'table table-sm table-hover table-borderless mb-0',
+        ...options.tableTag,
+      },
+      sortOffButton: {
+        ...options.sortOffButton,
+        buttonTag: {
+          class: 'btn btn-warning',
+          ...( options.sortOffButton || {} ).buttonTag,
+        },
+      },
+      sortOnButton: {
+        ...options.sortOnButton,
+        buttonTag: {
+          class: 'btn btn-outline-primary border-white',
+          ...( options.sortOnButton || {} ).buttonTag,
+        },
+      },
+      addButton: {
+        ...options.addButton,
+        buttonTag: {
+          class: 'btn btn-outline-primary border-white',
+          ...( options.addButton || {} ).buttonTag,
+        },
+      },
+
+    } ),
+    many: ( f, target ) => ( options={} ) => target( {
+      ...options,
+      sortOffButton: {
+        ...options.sortOffButton,
+        buttonTag: {
+          class: 'btn btn-warning',
+          ...( options.sortOffButton || {} ).buttonTag,
+        },
+      },
+      sortOnButton: {
+        ...options.sortOnButton,
+        buttonTag: {
+          class: 'btn btn-outline-dark border-white',
+          ...( options.sortOnButton || {} ).buttonTag,
+        },
+      }
+    } )
+  },
+  submit: ( f, target ) => ( options={} ) => target( {
+    ...options,
+    buttonTag: {
+      ...options.buttonTag,
+      $revert: function() {
+        this.$html = this.$from
+      },
+    },
+    button: {
+      to: app2.hourglass( 'Submitting…' ),
+      ...options.button,
+    }
+  } ),
+
+
+
+
+
+
+}
+
+
+
+ax( app2 )
+
+
+
+</script>
+
+
+</body>
+</html>
