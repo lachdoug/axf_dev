@@ -1,6 +1,6 @@
 ax.factory.element.properties.traverse = function( element, selector ) {
 
-  selector = selector.replace( /\|([\w\-]+)/g, '[data-axf="$1"]' )
+  selector = selector.replace( /\|([\w\-]+)/g, '[data-axf-component="$1"]' )
 
   if ( !element ) {
     return null

@@ -1,0 +1,1 @@
+app.button = cc.button

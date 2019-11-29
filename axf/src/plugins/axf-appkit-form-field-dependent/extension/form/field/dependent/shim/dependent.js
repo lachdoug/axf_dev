@@ -3,8 +3,7 @@ dependent = function( options ) {
 
   let a = ax.a
   let x = ax.x
-// debugger
-// if ( options.scope == 'view[0][form][components][2][field][selections][static][1][fieldset]' ) debugger
+
   if ( options.target ) {
     let parts = options.target.split( '[..]' )
     let keys = parts.pop()
@@ -18,21 +17,12 @@ dependent = function( options ) {
     options.name = scope ? `${ scope }[${ key }]` : key
   }
 
-  // if ( options.pattern == '^template$' ) ax.log( this, dependency, options.name )
-  // if ( options.pattern == '^template$' ) debugger
-
   let dependentTag = {
     $init: function () {
       if( this.$dependable() ) {
         let dependency = this.$dependency()
         dependency.$registerDependent( this )
-
-        // let opts = options
-        // options.scope
-
-
       }
-      // this.$check()
     },
     $registerDependent: function( dependent ) {
       this.$dependents.push( dependent )
@@ -44,10 +34,8 @@ dependent = function( options ) {
       for ( let i in dependents ) {
         dependents[i].$hide()
       }
-      // console.log( [ 'hide', options.name, this ] )
     },
     $show: function() {
-      // if ( !this.$('|appkit-form-control') ) debugger
       this.$('|appkit-form-control').$enable()
       if ( !options.animate ) {
         this.style.display = 'block'
@@ -58,11 +46,6 @@ dependent = function( options ) {
       for ( let i in dependents ) {
         dependents[i].$check()
       }
-      // this.$$( '|appkit-form-field-dependent' ).$check()
-      //
-      //
-      //
-      // ax.log( [ 'show', options.name, this ] )
     },
     $dependents: [],
     $dependable: function() {

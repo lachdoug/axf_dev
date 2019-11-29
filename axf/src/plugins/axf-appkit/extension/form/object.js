@@ -8,9 +8,7 @@ ax.extension.form.object = function( data ) {
     let name = entry[0]
     let value = entry[1]
     let keys = x.lib.name.dismantle( name )
-    // debugger
     x.lib.object.assign( result, keys, value )
-    // console.log( name, value, keys, result )
   }
 
  return result

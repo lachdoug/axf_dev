@@ -12,6 +12,7 @@ submit = ( f, options={} ) => {
     value: options.value,
     onclick: options.onclick,
     to: options.to,
+    title: options.title,
     buttonTag: options.buttonTag,
     ...options.button
   }

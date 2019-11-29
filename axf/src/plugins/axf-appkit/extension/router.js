@@ -22,10 +22,7 @@ ax.extension.router =
 
       const pop = function() {
 
-        let location = this.$location()
-        this.$load(
-          location.path, location.query, location.anchor
-        )
+        this.$go()
 
       }.bind( el )
 
@@ -54,6 +51,15 @@ ax.extension.router =
 
     $config: config,
 
+    $go: function() {
+
+      let location = this.$location()
+      this.$load(
+        location.path, location.query, location.anchor
+      )
+
+    },
+
     $open: function( path, query, anchor ) {
 
       if ( path[0] === '/' ) {
@@ -63,21 +69,29 @@ ax.extension.router =
         this.$locate( path, query, anchor )
       }
 
+      this.$send( 'appkit.router.open', { detail: {
+        path: path,
+        query: query,
+        anchor: anchor
+      } } )
+
     },
 
     $locate: function( path, query, anchor ) {
       query = x.lib.query.from.object( query )
+      path = ( path || '/' ).replace( /(\/\w+\/\.\.)/g, '' )
       path = ( path || '/' ) + ( query ? '?' + query : '' ) + ( anchor ? '#' + anchor : '' )
       history.pushState( { urlPath: path },'', path )
       let event = new PopStateEvent( 'popstate', { urlPath: path } )
       dispatchEvent( event )
+      // debugger
     },
 
     $location: function() {
       let location = window.location
 
       return {
-        href: `${ location.pathname }${ location.search }${ location.hash }`,
+        // href: `${ location.pathname }${ location.search }${ location.hash }`,
         path: location.pathname,
         query: x.lib.query.to.object(
           location.search.slice(1)
@@ -95,6 +109,14 @@ ax.extension.router =
           r.$load( path, query, anchor )
         }
       } )
+
+      this.$send( 'appkit.router.load', { detail: {
+        path: path,
+        query: query,
+        anchor: anchor,
+        // location: this.$location
+      } } )
+
     },
 
     ...options.routerTag

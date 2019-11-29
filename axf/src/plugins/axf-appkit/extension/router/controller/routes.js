@@ -10,12 +10,14 @@ routes = ( config, startLocation ) => function( routes, options={} ) {
 
   let init
   let component
+  let matched
   let transition = ax.x.router.controller.routes.transition( options.transition )
   let view = ax.x.router.controller.routes.view( config )
 
   if ( transition ) {
     init = function() {
       let locatedView = view( this, startLocation )
+      this.$matched = locatedView.matched
       this.$scope = locatedView.scope
       this.$('|appkit-transition').$to( locatedView.component )
     }
@@ -23,6 +25,7 @@ routes = ( config, startLocation ) => function( routes, options={} ) {
   } else {
     component = function() {
       let locatedView = view( this, startLocation )
+      this.$matched = locatedView.matched
       this.$scope = locatedView.scope
       return locatedView.component
     }
@@ -35,17 +38,16 @@ routes = ( config, startLocation ) => function( routes, options={} ) {
     $init: init,
     $nodes: component,
 
-    $open: function( path, query, anchor ) {
-      ax.log( toLocation )
-
-      if ( path[0] === '/' ) {
-        config.router[0].$open( path, query, anchor )
-      } else {
-        path = this.$scope + ( path ? `/${ path }` : '' )
-        config.router[0].$open( path, query, anchor )
-      }
-
-    },
+    // $open: function( path, query, anchor ) {
+    //
+    //   if ( path[0] === '/' ) {
+    //     config.router[0].$open( path, query, anchor )
+    //   } else {
+    //     path = this.$scope + ( path ? `/${ path }` : '' )
+    //     config.router[0].$open( path, query, anchor )
+    //   }
+    //
+    // },
 
     $load: function( path, query, anchor ) {
 
@@ -57,7 +59,12 @@ routes = ( config, startLocation ) => function( routes, options={} ) {
 
       let locatedView = view( this, toLocation )
 
-      if ( options.lazy && this.$scope === locatedView.scope ) {
+      if (
+        options.lazy &&
+        this.$scope == locatedView.scope &&
+        locatedView.matched &&
+        this.$matched
+      ) {
 
         let location = toLocation
         let routes = this.$$('|appkit-router-routes').$$
@@ -83,6 +90,8 @@ routes = ( config, startLocation ) => function( routes, options={} ) {
         }
 
       }
+
+      this.$matched = locatedView.matched
 
     },
 

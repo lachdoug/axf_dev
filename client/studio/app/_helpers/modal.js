@@ -1,0 +1,1 @@
+app.modal = cc.modal

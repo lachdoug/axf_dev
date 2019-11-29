@@ -6,6 +6,7 @@ textarea = function( options={} ) {
   let textareaTagOptions = {
     name: options.name,
     required: options.required,
+    readonly: options.readonly,
     placeholder: options.placeholder,
     ...options.textareaTag
   }

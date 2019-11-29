@@ -1,14 +1,12 @@
 ax.factory.element.properties.define.data.
 attribute = function ( element, keys, value ) {
 
-  let context = ax.factory.element.properties.define
-
   if ( ax.is.string( value ) ) {
     let kebab = keys.join('-')
-    context.attribute( element, kebab, value )
+    ax.factory.element.properties.define.attribute( element, kebab, value )
   } else {
     Object.keys( value ).forEach( function( key ) {
-      let kebab = context.kebab( key )
+      let kebab = ax.kebab( key )
       this.attribute( element, keys.concat( key ), value[ key ] )
     }.bind( this ) )
   }

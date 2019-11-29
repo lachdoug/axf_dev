@@ -1,7 +1,8 @@
-ax.extension.markedjs.markdown = function ( content, options={} ) {
+ax.extension.markedjs.markdown = function ( options={} ) {
 
   let a = ax.a
 
+  let content = options.markdown || ''
   let html
 
   let processMarkdown = function( string ) {
@@ -23,6 +24,6 @@ ax.extension.markedjs.markdown = function ( content, options={} ) {
     html = processMarkdown( content )
   }
 
-  return a['axf-markedjs-markdown']( { '$html': html }, options.markdownTag )
+  return a['div|axf-markedjs-markdown']( { '$html': html }, options.markdownTag )
 
 }

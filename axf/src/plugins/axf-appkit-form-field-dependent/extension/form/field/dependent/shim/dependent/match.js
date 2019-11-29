@@ -5,8 +5,6 @@ dependent.match = function( el, options ) {
 
     let dependency = el.$dependency()
 
-    // if ( ax.is.not.function( dependency.$match ) ) debugger
-
     if ( dependency.$match() ) {
 
       let dependencyValue = dependency.$value()

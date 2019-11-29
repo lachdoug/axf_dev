@@ -1,27 +1,22 @@
-ax.extension.chartjs = function( chartjsOptions, options={} ) {
+ax.extension.chartjs = function( options={} ) {
 
-  var a = ax.a;
+  var a = ax.a
 
-  var chartTag = Object.assign(
-    { style: 'display: block;' },
-    options.chartTag || {}
-  );
+  var wrapperTag = {
+    $init: function() {
+      this.$chart = new Chart(
+        this.$('canvas').getContext('2d'), options.chartjs || {}
+      )
+    },
+    $tag: 'div',
+    ...options.wrapperTag,
+  }
 
-  var canvasTag = Object.assign(
-    { style: 'display: block;' },
-    options.canvasTag || {}
-  );
+  return a['axf-chartjs-chart-wrapper']( [
+    a.canvas( null, options.canvasTag ),
+  ], wrapperTag )
 
-  return a.chart( [
-    a.div( null, {
-      $init: function() {
-        this.parentElement.$chart = new Chart( this.nextSibling.getContext('2d'), chartjsOptions );
-      }
-    } ),
-    a.canvas( null, canvasTag ),
-  ], chartTag );
-
-};
+}
 
 // .chart alias
-ax.extension.chart = ax.extension.chartjs;
+ax.extension.chart = ax.extension.chartjs

@@ -54,9 +54,20 @@ ax.extension.form.async.shim = function() {
                 when: options.when,
                 success: options.success,
                 error: options.error,
+                catch: options.catch,
                 complete: () => {
+
                   el.$enable && el.$enable()
-                  resultDisplay.scrollIntoView()
+
+                  var windowTop = $(window).scrollTop();
+                  var windowBottom = windowTop + $(window).height();
+                  var resultDisplayTop = $(resultDisplay).offset().top;
+                  var resultDisplayBottom = resultDisplayTop + $(resultDisplay).height();
+
+                  if ( ( resultDisplayBottom > windowBottom ) || ( resultDisplayTop < windowTop ) ) {
+                    resultDisplay.scrollIntoView()
+                  }
+
                 },
               } )
 

@@ -24,7 +24,7 @@ textarea = ( f, options={} ) => {
     },
 
     $enable: function() {
-      if ( !options.disabled ) {
+      if ( !textareaOptions.disabled ) {
         this.$('textarea').removeAttribute('disabled')
       }
     },

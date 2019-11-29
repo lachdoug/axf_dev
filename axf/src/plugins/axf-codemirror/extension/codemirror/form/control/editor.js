@@ -5,7 +5,7 @@ ax.extension.codemirror.form.control.editor = function(
   let a = ax.a
 
   return a['|appkit-form-codemirror-editor'](
-    f.element.textarea(
+    f.textarea(
       {
         name: options.name,
         value: options.value,

@@ -1,13 +1,13 @@
 ax.extension.router.controller.routes.
 view = ( config ) => ( routesElement, location ) => {
-
+// debugger
   let scope = config.scope || ''
   let scopedpath = location.path.slice( scope.length )
-  let component = config.default
   let match = config.match || []
   let splat = config.splat || []
+  let component
   let slash
-  let index
+  let matched
 
   let routesKeys = Object.keys( config.routes )
 
@@ -15,7 +15,7 @@ view = ( config ) => ( routesElement, location ) => {
 
     let routesKey = routesKeys[i]
 
-    let matched = ax.x.router.controller.routes.matcher(
+    matched = ax.x.router.controller.routes.matcher(
       routesKey,
       scopedpath,
     )
@@ -32,17 +32,26 @@ view = ( config ) => ( routesElement, location ) => {
         ...matched.params,
       }
       slash = matched.slash
-      scope = scope + matched.scope
-      index = i
+      scope = `${ scope }${ matched.scope }`.replace( /\/$/, '' )
 
       break
+
+    // } else {
+    //
+    //   scope = null
 
     }
 
   }
 
-  scope = scope.replace( /\/$/, '' )
+  if (!matched) {
 
+    component = ax.is.undefined( config.default ) ?
+    `Not found '${ scopedpath }'` :
+    config.default
+
+  }
+// debugger
   if ( ax.is.function( component ) ) {
     let controller = ax.x.router.controller( {
       router: [ ...config.router, routesElement ],
@@ -68,13 +77,10 @@ view = ( config ) => ( routesElement, location ) => {
 
   }
 
-  if ( ax.is.undefined(  component ) ) {
-    ax.log.warn( 'Not found:', location )
-  }
-
   return {
+    matched: !!matched,
     component: component,
-    scope: scope
+    scope: scope,
   }
 
 }

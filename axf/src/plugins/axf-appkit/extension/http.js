@@ -1,11 +1,10 @@
-ax.extension.
-http = function( options={} ) {
+ax.extension.http = function( options={} ) {
 
   let a = ax.a
   let x = ax.x
 
   let componentFor = function( content, contentType ) {
-    // debugger
+
     if ( contentType == 'application/json' ) {
       return { $nodes: content }
     } else if ( contentType == 'text/html' ) {
@@ -18,7 +17,7 @@ http = function( options={} ) {
   let resultFor = function( content, response, contentType ) {
     return {
       content: content,
-      response: response,
+      http: response,
       contentType: contentType
     }
   }
@@ -37,27 +36,15 @@ http = function( options={} ) {
   let handleResult = function( result, el ) {
 
     let callback
-
-    let status = result.response.status
-
-    // let el = result.source
+    let status = result.http.status
 
     if ( status >= 200 && status < 300 ) {
-      el.$send( 'axf.appkit.http.success' )
       callback = options.success || defaultSuccessCallback
     } else {
-      el.$send( 'axf.appkit.http.error' )
       callback = options.error || defaultErrorCallback
     }
 
-    let parent = el.$('^') // el is removed from DOM by callback, so get parent for sending complete event
-
     callback.bind(el)( result, el )
-
-    parent.$send( 'axf.appkit.http.complete' )
-    if( options.complete ) {
-      options.complete.bind(el)(el)
-    }
 
   }
 
@@ -75,6 +62,12 @@ http = function( options={} ) {
         // }
       } )
       .then( response => {
+// debugger
+        if ( response.status >= 200 && response.status < 300 ) {
+          el.$send( 'axf.appkit.http.success' )
+        } else {
+          el.$send( 'axf.appkit.http.error' )
+        }
 
         let statusCallback = customCallbacks[ response.status ]
 
@@ -118,13 +111,15 @@ http = function( options={} ) {
 
             }
 
-          // } else {
-          //
-          //   handleResult.bind(el)( null, el, response )
-
           }
 
         }
+
+        let parent = el.$('^') // el can be removed from DOM by callback, so get parent for sending complete event
+        if( options.complete ) {
+          options.complete.bind(parent)(parent)
+        }
+        parent.$send( 'axf.appkit.http.complete' )
 
       } ).catch( error => {
 

@@ -93,6 +93,7 @@ ax.extension.simplemde.form.control = function( f, options ) {
         toolbar: toolbarIcons,
         placeholder: options.placeholder,
         autoDownloadFontAwesome: false,
+        spellChecker: false,
         ...options.simplemde
       } )
 

@@ -1,0 +1,1 @@
+app.hourglass = cc.hourglass

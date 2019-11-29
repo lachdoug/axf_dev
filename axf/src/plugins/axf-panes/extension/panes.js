@@ -8,7 +8,7 @@ ax.extension.panes = function ( options={} ) {
 
   function move(e) {
 
-    let el = e.target.$('^axf-panes')
+    let el = e.target.$('^|axf-panes')
 
     let percent,
         vertical = options.vertical
@@ -27,9 +27,9 @@ ax.extension.panes = function ( options={} ) {
 
   function resize( el, percent, vertical ) {
 
-    let proximateEl = el.$('axf-panes-proximate'),
-          adjacentEl = el.$('axf-panes-adjacent'),
-          drag = el.$('axf-panes-drag')
+    let proximateEl = el.$('|axf-panes-proximate'),
+          adjacentEl = el.$('|axf-panes-adjacent'),
+          drag = el.$('|axf-panes-drag')
 
     percent = Number( percent || 50 )
     if ( Number.isNaN( percent ) ) percent = 50
@@ -51,21 +51,21 @@ ax.extension.panes = function ( options={} ) {
   }
 
   function clear(e) {
-    e.target.$('^axf-panes').classList.remove( 'dragable' )
+    e.target.$('^|axf-panes').classList.remove( 'dragable' )
     document.removeEventListener( 'mousemove', move )
     document.removeEventListener( 'mouseup', clear )
   }
 
-  return a['axf-panes']( [
-    a['axf-panes-proximate']( proximate ),
-    a['axf-panes-drag']( { $on: {
+  return a['|axf-panes']( [
+    a['|axf-panes-proximate']( proximate ),
+    a['|axf-panes-drag']( { $on: {
       'mousedown': (e,el) => {
-        el.$('^axf-panes').classList.add( 'dragable' )
+        el.$('^|axf-panes').classList.add( 'dragable' )
         document.addEventListener( 'mousemove', move )
         document.addEventListener( 'mouseup', clear )
       },
     } } ),
-    a['axf-panes-adjacent']( adjacent ),
+    a['|axf-panes-adjacent']( adjacent ),
   ], {
     class: orientation,
     $init: function() {

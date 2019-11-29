@@ -4,6 +4,10 @@ field = function( f, options={} ) {
   let a = ax.a
   let x = ax.x
 
+  if ( options.as == 'input/hidden' || options.type == 'hidden' ) {
+    options.label = options.label || false
+  }
+
   let fieldTagOptions = {
     ...options.fieldTag,
     style: {

@@ -27,6 +27,8 @@ ax.extension.form.field.shim = function() {
       select: ( f, target ) => ( options={} ) => this.shim.controls.select( f, options ),
       textarea: ( f, target ) => ( options={} ) => this.shim.controls.textarea( f, options ),
       check: ( f, target ) => ( options={} ) => this.shim.controls.check( f, options ),
+      checks: ( f, target ) => ( options={} ) => this.shim.controls.checks( f, options ),
+      radios: ( f, target ) => ( options={} ) => this.shim.controls.radios( f, options ),
     }
 
   }

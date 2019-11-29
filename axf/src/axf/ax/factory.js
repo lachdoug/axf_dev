@@ -15,7 +15,6 @@ ax.factory = function( component ) {
   let factory = ax.factory
 
   if ( is.null( component ) ) return null
-  // if ( is.string( component ) ) return factory.text( component )
   if ( is.node( component ) ) return component
   if ( is.nodelist( component ) ) return factory.nodelist( component )
   if ( is.array( component ) ) return factory.array( component )

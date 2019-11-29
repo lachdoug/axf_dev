@@ -10,6 +10,8 @@ check = function( options={} ) {
     type: options.type,
     label: options.label,
     checked: options.checked,
+    required: options.required,
+    readonly: options.readonly,
     inputTag: options.inputTag,
     labelTag: options.labelTag,
     checkTag: options.checkTag,

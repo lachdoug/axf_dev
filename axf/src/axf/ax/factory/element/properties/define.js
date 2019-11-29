@@ -18,9 +18,9 @@ ax.factory.element.properties.define = function ( element ) {
 
         }
 
-      } else if ( property == '$handle' ) {
+      } else if ( property == '$component' ) {
 
-        element.dataset.axf = element.$properties.$handle
+        element.dataset.axfComponent = element.$properties.$component
 
       } else {
 

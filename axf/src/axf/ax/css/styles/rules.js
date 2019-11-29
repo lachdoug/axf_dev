@@ -11,7 +11,11 @@ ax.css.styles.rules = function( styleSpec, selectors=[] ) {
         if ( selectorPart.match( /^[a-zA-Z]+$/ ) ) {
           // If the selector is simple set of characters, then kebab it.
           // Selectors like '.someClass' should stay as they are.
-          selectorPart = ax.kebab( selectorPart.trim() )
+          selectorPart = ax.kebab( selectorPart )
+        }
+        if ( selectorPart[0] == '|' ) {
+          let match = selectorPart.match( /^\|(.*)/ )
+          selectorPart = `[data-axf-component="${ match[1] }"]`
         }
         result += ax.css.styles.rules( selected, selectors.concat( selectorPart ) )
       } )

@@ -6,16 +6,16 @@ many = function ( f, options ) {
   return f.controls.nest( {
     ...options,
     form: (ff) => (a,x) => {
-// debugger
+
       return a['|appkit-form-nest-many-wrapper']( [
       ff.items( {
         ...options,
         form: (fff) => [
           a['|appkit-form-nest-many-item-header']( [
             a['|appkit-form-nest-many-item-buttons']( [
-              fff.up( options.upButton ),
-              fff.down( options.downButton ),
-              fff.remove( options.removeButton ),
+              options.sortable ? fff.up( options.upButton ) : null,
+              options.sortable ? fff.down( options.downButton ) : null,
+              options.removable ? fff.remove( options.removeButton ) : null,
             ], options.itemButtonsTag )
           ], options.itemHeaderTag ),
           a['|appkit-form-nest-many-item-body']( options.form( fff ), options.itemBodyTag ),
@@ -65,12 +65,12 @@ many = function ( f, options ) {
 
       a['|appkit-form-nest-many-footer']( [
 
-        a['|appkit-form-nest-add-button'](
+        options.addable ? a['|appkit-form-nest-add-button'](
           ff.add( options.addButton ),
           options.addButtonWrapperTag
-        ),
+        ) : null,
 
-        a['|appkit-form-nest-sort-buttons']( [
+        options.sortable ? a['|appkit-form-nest-sort-buttons']( [
           a['|appkit-form-nest-sort-on']( ff.button( {
             label: '⬍',
             onclick: (e,el) => {
@@ -99,7 +99,7 @@ many = function ( f, options ) {
             },
 
           } ),
-        ], options.sortButtonsTag ),
+        ], options.sortButtonsTag ) : null,
 
       ], options.footerTag )
 

@@ -14,14 +14,18 @@ ax.extension.bootstrap.form.shim = function() {
           bodyTagClass
 
       if (
-          options.as == 'one' ||
-          options.as == 'many' ||
-          options.as == 'table' ||
-          options.as == 'nest'
+          options.as == 'one' || options.control == 'one' ||
+          options.as == 'many' || options.control == 'many' ||
+          options.as == 'table' || options.control == 'table' ||
+          options.as == 'nest' || options.control == 'nest'
           ) {
         fieldTagClass = 'mb-0'
+      } else if (
+          options.as == 'input/hidden' || options.type == 'hidden'
+          ) {
+        fieldTagClass = 'd-none'
       } else {
-        fieldTagClass = 'mb-1'
+        fieldTagClass = 'mb-2'
       }
 
       if ( layout == 'vertical' ) {
@@ -137,25 +141,45 @@ ax.extension.bootstrap.form.shim = function() {
 
     },
 
-    // checkboxes: ( f, target ) => ( options={} ) => target( {
-    //   ...options,
-    //   checkTag: {
-    //     class: 'custom-control custom-checkbox',
-    //     ...options.buttonTag,
-    //   },
-    //   inputTag: {
-    //     class: 'custom-control-input',
-    //     ...options.buttonTag,
-    //   },
-    //   labelTag: {
-    //     class: 'custom-control-label',
-    //     ...options.buttonTag,
-    //   },
-    //   wrapperTag: {
-    //     class: 'p-1',
-    //     ...options.wrapperTag,
-    //   }
-    // } ),
+    checks: ( f, target ) => ( options={} ) => target( {
+      ...options,
+      checkTag: {
+        class: 'custom-control custom-checkbox',
+        ...options.buttonTag,
+      },
+      inputTag: {
+        class: 'custom-control-input',
+        ...options.buttonTag,
+      },
+      labelTag: {
+        class: 'custom-control-label',
+        ...options.buttonTag,
+      },
+      wrapperTag: {
+        class: 'p-1',
+        ...options.wrapperTag,
+      }
+    } ),
+
+    radios: ( f, target ) => ( options={} ) => target( {
+      ...options,
+      checkTag: {
+        class: 'custom-control custom-radio',
+        ...options.buttonTag,
+      },
+      inputTag: {
+        class: 'custom-control-input',
+        ...options.buttonTag,
+      },
+      labelTag: {
+        class: 'custom-control-label',
+        ...options.buttonTag,
+      },
+      wrapperTag: {
+        class: 'p-1',
+        ...options.wrapperTag,
+      }
+    } ),
 
     input: ( f, target ) => ( options={} ) => target( {
       ...options,
@@ -305,7 +329,18 @@ ax.extension.bootstrap.form.shim = function() {
           },
         },
 
-      } )
+      } ),
+      selectinput: ( f, target ) => ( options={} ) => target( {
+        ...options,
+        input: {
+          ...options.input,
+          inputTag: {
+            class: 'form-control mt-1',
+            ...( options.input || {} ) .inputTag,
+          }
+        }
+
+      } ),
     },
 
 

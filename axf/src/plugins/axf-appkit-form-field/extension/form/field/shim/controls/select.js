@@ -10,14 +10,17 @@ select = function( f, options ) {
 
   let controlTagOptions = {
 
+    $init: function () { this.$valid() },
+
+
     $value: function() {
-      if ( options.multiple ) {
-        let checked = this.$$('option:checked').value.$$
-        checked = checked.filter( (el) => el != '' )
-        return checked
-      } else {
+      // if ( selectOptions.multiple ) {
+      //   let checked = this.$$('option:checked').value.$$
+      //   checked = checked.filter( (el) => el != '' )
+      //   return checked
+      // } else {
         return this.$('select').value
-      }
+      // }
     },
 
     $focus: function () {
@@ -29,16 +32,42 @@ select = function( f, options ) {
     },
 
     $enable: function() {
-      if ( !options.disabled ) {
+      if ( !selectOptions.disabled ) {
         this.$('select').removeAttribute('disabled')
+      }
+    },
+
+    $validity: function() {
+      return this.$('select').validity
+    },
+
+    $valid: function() {
+      this.$('select').setCustomValidity('')
+      if( this.$validity().valid ) {
+        return true
+      } else {
+        if ( selectOptions.invalid ) {
+          if ( ax.is.function( selectOptions.invalid ) ) {
+            let invalidMessage = selectOptions.invalid( this.$value, this.$validity )
+            if ( invalidMessage ) {
+              this.$('select').setCustomValidity( invalidMessage )
+            }
+          } else {
+            this.$('select').setCustomValidity( selectOptions.invalid )
+          }
+        }
+        return false
       }
     },
 
     ...options.controlTag,
 
     $on: {
-      'click: do nothing when readonly': (e) => { if ( options.readonly ) e.preventDefault() },
-      'change:': (e,el) => {
+      'click: do nothing when readonly': (e) => { if ( selectOptions.readonly ) e.preventDefault() },
+      'change: check validity': (e,el) => {
+        el.$valid()
+      },
+      'change: send control change event': (e,el) => {
         el.$send( 'axf.appkit.form.control.change' )
       },
       ...( options.controlTag || {} ).$on

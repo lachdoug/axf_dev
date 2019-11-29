@@ -6,6 +6,8 @@ ax.extension.form.shim = function() {
     select: (f) => ( options ) => this.factory.select( options ),
     textarea: (f) => ( options ) => this.factory.textarea( options ),
     check: (f) => ( options ) => this.factory.check( options ),
+    checks: (f) => ( options ) => this.factory.checks( options ),
+    radios: (f) => ( options ) => this.factory.radios( options ),
     button: (f) => ( options ) => this.factory.button( options ),
 
     form: (f) => ( options ) => this.factory.form( f, options ),

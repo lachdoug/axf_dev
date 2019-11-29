@@ -1,8 +1,8 @@
 ax.css( {
-  '[data-axf="appkit-form-codemirror"]': {
+  '[data-axf-component="appkit-form-codemirror"]': {
     display: 'block',
     border: '1px solid #b3b3b3',
-    '[data-axf="appkit-form-codemirror-toolbar"]': {
+    '[data-axf-component="appkit-form-codemirror-toolbar"]': {
       display: 'block',
       overflow: 'auto',
       backgroundColor: 'white',
@@ -19,7 +19,7 @@ ax.css( {
         backgroundColor: 'transparent',
       }
     },
-    '[data-axf="appkit-form-codemirror-mode"], [data-axf="appkit-form-codemirror-keymap"]': {
+    '[data-axf-component="appkit-form-codemirror-mode"], [data-axf-component="appkit-form-codemirror-keymap"]': {
       // display: 'inline-block',
       // border: '1px solid #e6e6e6',
       'select': {
@@ -29,7 +29,7 @@ ax.css( {
         margin: '2px 10px',
       }
     },
-    '[data-axf="appkit-form-codemirror-toolbar-right"]': {
+    '[data-axf-component="appkit-form-codemirror-toolbar-right"]': {
       float: 'right',
     },
     '&.fullscreen': {
@@ -42,7 +42,7 @@ ax.css( {
       borderRadius: '0px',
       zIndex: 999,
     },
-    '[data-axf="appkit-form-codemirror-editor"]': {
+    '[data-axf-component="appkit-form-codemirror-editor"]': {
       'div.CodeMirror': {
         minHeight: '2em',
         border: 'unset',

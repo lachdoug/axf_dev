@@ -1,9 +1,9 @@
 ax.css( {
-  appkitMenu: {
+  '|appkit-menu': {
     display: 'block',
     width: '150px',
     zIndex: 1,
-    appkitMenuItem: {
+    '|appkit-menu-item': {
       display: 'block',
       width: '100%',
       userSelect: 'none',
@@ -11,7 +11,7 @@ ax.css( {
       // padding: '2px',
       // margin: '',
       position: 'relative',
-      appkitMenuSubmenuOpen: {
+      '|appkitMenuSubmenuOpen': {
         whiteSpace: 'nowrap',
         display: 'block',
         width: '125px',

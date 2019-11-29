@@ -12,10 +12,6 @@ ax.extension.form = function( options={} ) {
     object: options.object,
   } )
 
-  return f.form( {
-    form: options.form,
-    url: options.url,
-    formTag: options.formTag,
-  } )
+  return f.form( options )
 
 }

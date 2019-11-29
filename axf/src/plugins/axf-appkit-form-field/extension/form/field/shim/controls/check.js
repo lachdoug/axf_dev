@@ -16,11 +16,13 @@ check = function( f, options ) {
 
   let controlTagOptions = {
 
+    $init: function () { this.$valid() },
+
     $value: function() {
       if ( this.$('input[type=checkbox]').checked ) {
-        return options.checked || 'on'
+        return checkOptions.checked || 'on'
       } else {
-        return options.unchecked
+        return checkOptions.unchecked
       }
     },
 
@@ -36,7 +38,7 @@ check = function( f, options ) {
     },
 
     $enable: function() {
-      if ( !options.disabled ) {
+      if ( !checkOptions.disabled ) {
         let inputs = this.$$('input').$$
         for ( let input of inputs ) {
           input.removeAttribute('disabled')
@@ -44,9 +46,35 @@ check = function( f, options ) {
       }
     },
 
+    $validity: function() {
+      return this.$('input[type=checkbox]').validity
+    },
+
+    $valid: function() {
+      this.$('input[type=checkbox]').setCustomValidity('')
+      if( this.$validity().valid ) {
+        return true
+      } else {
+        if ( checkOptions.invalid ) {
+          if ( ax.is.function( checkOptions.invalid ) ) {
+            let invalidMessage = checkOptions.invalid( this.$value, this.$validity() )
+            if ( invalidMessage ) {
+              this.$('input[type=checkbox]').setCustomValidity( invalidMessage )
+            }
+          } else {
+            this.$('input[type=checkbox]').setCustomValidity( checkOptions.invalid )
+          }
+        }
+        return false
+      }
+    },
+
     ...options.controlTag,
 
     $on: {
+      'input: check validity': (e,el) => {
+        el.$valid()
+      },
       'input: send control change event': (e,el) => {
         el.$send( 'axf.appkit.form.control.change' )
       },

@@ -4,32 +4,31 @@ remove = function( f, options ) {
   let item = f.item || 'item'
   let confirmation
 
-  if ( ax.is.false( options.confirmation ) ) {
-    confirmation = () => true
-  } else if ( ax.is.string( options.confirmation ) ) {
-    confirmation = ( target ) => confirm( options.confirmation )
-  } else if ( ax.is.function( options.confirmation ) ) {
-    confirmation = ( target ) => confirm( options.confirmation( target ) )
+  if ( ax.is.false( options.confirm ) ) {
+    confirmation = false
+  } else if ( ax.is.string( options.confirm ) || ax.is.function( options.confirm ) ) {
+    confirmation = options.confirm
   } else {
-    confirmation = () => confirm( `Are you sure that you want to remove this ${ item }?` )
+    confirmation = `Are you sure that you want to remove this ${ item }?`
   }
 
   return f.button( {
     label: '✖',
+    confirm: confirmation,
     onclick: function (e,el) {
-      var target = options.itemTarget ? options.itemTarget(el) : el.$('^|appkit-form-nest-item')
-      let confirmed = confirmation( target )
-      if ( confirmed ) {
-        let parent = target.parentElement
-        let index = Array.prototype.indexOf.call( parent.children, target )
-        target.remove()
-        let length = parent.children.length
-        parent.$send( 'axf.appkit.form.nest.item.remove', { detail: {
-          target: el,
-          index: index,
-          length: length,
-        } } )
-      }
+      var target = el.$('^|appkit-form-nest-item')
+      let parent = target.parentElement
+      let index = Array.prototype.indexOf.call( parent.children, target )
+      target.remove()
+      let length = parent.children.length
+      parent.$send( 'axf.appkit.form.nest.item.remove', { detail: {
+        target: el,
+        index: index,
+        length: length,
+      } } )
+      // let confirmed = confirmation( el )
+      // if ( confirmed ) {
+      // }
     },
     ...options
   } )

@@ -19,10 +19,12 @@ let ax = function ( component=null, options={} ) {
   if ( target ) {
     if ( ax.is.string( target ) ) target = document.querySelector( target )
     if ( options.insert ) {
-      document.body[`${ options.insert }Child`]( element )
+      target[`${ options.insert }Child`]( element )
     } else {
       target.replaceWith( element )
     }
+  } else if ( target != false ) {
+    document.body.appendChild( element )
   }
 
   return element

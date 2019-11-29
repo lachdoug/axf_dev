@@ -2,9 +2,9 @@ ax.extension.bootstrap.report.shim = function() {
 
   return {
 
-    field: ( f, target ) => ( options={} ) => {
+    field: ( r, target ) => ( options={} ) => {
 
-      let layout = options.layout || f.params.layout || 'horizontal'
+      let layout = options.layout || r.params.layout || 'horizontal'
 
       let fieldTagClass,
           headerTagClass,
@@ -51,7 +51,7 @@ ax.extension.bootstrap.report.shim = function() {
 
     // controls: {
     //
-    //   table: ( f, target ) => ( options={} ) => target( {
+    //   table: ( r, target ) => ( options={} ) => target( {
     //     ...options,
     //     itemTag: {
     //       class: 'p-n1', // For tables, negate margin on fields' form-group class.
@@ -61,7 +61,7 @@ ax.extension.bootstrap.report.shim = function() {
     //
     // },
 
-    button: ( f, target ) => ( options={} ) => target( {
+    button: ( r, target ) => ( options={} ) => target( {
       ...options,
       buttonTag: {
         class: 'btn btn-secondary',
@@ -69,7 +69,7 @@ ax.extension.bootstrap.report.shim = function() {
       },
     } ),
 
-    check: ( f, target ) => ( options={} ) => {
+    check: ( r, target ) => ( options={} ) => {
 
       let checkTagClass
 
@@ -101,7 +101,7 @@ ax.extension.bootstrap.report.shim = function() {
 
     },
 
-    // checkboxes: ( f, target ) => ( options={} ) => target( {
+    // checkboxes: ( r, target ) => ( options={} ) => target( {
     //   ...options,
     //   checkTag: {
     //     class: 'custom-control custom-checkbox',
@@ -121,32 +121,42 @@ ax.extension.bootstrap.report.shim = function() {
     //   }
     // } ),
 
-    output: ( f, target ) => ( options={} ) => target( {
+    output: ( r, target ) => ( options={} ) => target( {
       ...options,
       outputTag: {
-        class: 'form-control border-top-0 border-right-0 border-left-0',
+        class: 'border border-light p-2 d-block',
         ...options.outputTag,
       },
     } ),
 
-    select: ( f, target ) => ( options={} ) => target( {
+    json: ( r, target ) => ( options={} ) => target( {
       ...options,
-      selectTag: {
-        class: 'custom-select',
-        ...options.selectTag,
+      jsonTag: {
+        class: 'border border-light p-2',
+        ...options.outputTag,
       },
     } ),
 
-    textarea: ( f, target ) => ( options={} ) => target( {
-      ...options,
-      textareaTag: {
-        class: 'form-control',
-        ...options.textareaTag,
-      },
-    } ),
+
+
+    // select: ( r, target ) => ( options={} ) => target( {
+    //   ...options,
+    //   selectTag: {
+    //     class: 'custom-select',
+    //     ...options.selectTag,
+    //   },
+    // } ),
+    //
+    // textarea: ( r, target ) => ( options={} ) => target( {
+    //   ...options,
+    //   textareaTag: {
+    //     class: 'form-control',
+    //     ...options.textareaTag,
+    //   },
+    // } ),
 
     controls: {
-      table: ( f, target ) => ( options={} ) => target( {
+      table: ( r, target ) => ( options={} ) => target( {
         ...options,
         tableTag: {
           class: 'table table-sm table-borderless mb-0',
@@ -204,7 +214,7 @@ ax.extension.bootstrap.report.shim = function() {
         },
 
       } ),
-      many: ( f, target ) => ( options={} ) => target( {
+      many: ( r, target ) => ( options={} ) => target( {
         ...options,
         itemHeaderTag: {
           class: 'clearfix',
@@ -265,7 +275,7 @@ ax.extension.bootstrap.report.shim = function() {
     },
 
 
-    submit: ( f, target ) => ( options={} ) => target( {
+    submit: ( r, target ) => ( options={} ) => target( {
       ...options,
       buttonTag: {
         class: 'btn btn-primary',

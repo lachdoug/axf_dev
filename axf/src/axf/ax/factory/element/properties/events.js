@@ -8,7 +8,7 @@ ax.factory.element.properties.events = function ( element ) {
       function(e) {
         element.$events[ handler ] &&
         element.$events[ handler ].
-        call( this, e, element, element.$state )
+        call(this, e, element, element.$state)
       }
     )
   }

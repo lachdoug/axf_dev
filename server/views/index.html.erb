@@ -1,244 +1,97 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang='en'>
 
 <head>
-  <meta charset="utf-8">
+  <meta charset='utf-8'>
   <title>Ax</title>
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" href="/favicon.png" type="image/png">
 
-</head>
-<body>
-
-  <div id="systemLoadingSpinner" style="
-  text-align: center; line-height: 80vh; position: fixed;
-  left: 0; top: 0; right: 0; bottom: 0; z-index: 1000; pointer-events: none;">
-    <svg width="100" height="100" style="vertical-align: middle;">
-      <g transform="scale(0.33333)">
-        <path d="
-          M 150,300 L 280,225 L 280,75 L 150,0 L 20,75 L 20,225 L 150,300
-          M 40,150 A 110,110 0 1,0 260,150 A 110,110 0 1,0 40,150 Z"
-          style="fill:#48D9;stroke-width:0" fill-rule="evenodd">
-          <animateTransform
-            attributeName="transform"
-            attributeType="XML"
-            type="rotate"
-            from="0 150 150"
-            to="360 150 150"
-            dur="2s"
-            repeatCount="indefinite"/>
-        </path>
-      </g>
-    </svg>
-  </div>
-
-  <!-- <link rel="stylesheet" href="/vendor/font-awesome-4.7.0/css/font-awesome.min.css"> -->
-  <link rel="stylesheet" href="/node_modules/@fortawesome/fontawesome-free/css/all.min.css">
-  <link rel="stylesheet" href="/vendor/codemirror-5.28.0/codemirror.css">
-  <link rel="stylesheet" href="/vendor/codemirror-5.28.0/theme/neo.css">
-  <link rel="stylesheet" href="/vendor/simplemde-1.11.2/simplemde.min.css">
-  <link rel="stylesheet" href="/vendor/jsoneditor-6.1.0/jsoneditor.min.css">
-  <link rel="stylesheet" href="/vendor/quilljs-1.3.6/quill.snow.css">
-  <link rel="stylesheet" href="/vendor/text-security-0.0.0/dist/text-security.css">
-  <link rel="stylesheet" href="/vendor/dropzonejs-5.5.0/dropzone.css">
-  <!-- <link rel="stylesheet" href="/vendor/filepond-4.4.12/filepond.min.css"> -->
+  <link rel='stylesheet' href='/node_modules/bootstrap/dist/css/bootstrap.min.css'>
+  <link rel='stylesheet' href='/node_modules/@fortawesome/fontawesome-free/css/all.min.css'>
+  <link rel='stylesheet' href='/node_modules/codemirror/lib/codemirror.css'>
+  <link rel='stylesheet' href='/node_modules/codemirror/theme/neo.css'>
+  <link rel='stylesheet' href='/node_modules/simplemde/dist/simplemde.min.css'>
+  <link rel='stylesheet' href='/node_modules/jsoneditor/dist/jsoneditor.css'>
+  <link rel="stylesheet" href='/node_modules/text-security/dist/text-security.css'>
   <link rel="stylesheet" href="/node_modules/xterm/dist/xterm.css">
   <link rel="stylesheet" href="/node_modules/xterm/dist/addons/fullscreen/fullscreen.css">
-  <link rel="stylesheet" href="/node_modules/select2/dist/css/select2.css">
+  <link rel="stylesheet" href="/node_modules/chart.js/dist/Chart.css">
+  <link rel="stylesheet" href="/node_modules/filepond/dist/filepond.css">
 
-  <link rel="stylesheet" href="/vendor/bootstrap-4.1.0-dist/css/bootstrap.min.css">
-
-  <script src="/vendor/codemirror-5.28.0/codemirror.min.js"></script>
-  <script src="/vendor/codemirror-5.28.0/addons/display/placeholder.js"></script>
-  <script src="/vendor/codemirror-5.28.0/mode/shell/shell.js"></script>
-  <script src="/vendor/codemirror-5.28.0/mode/javascript/javascript.js"></script>
-  <script src="/vendor/codemirror-5.28.0/mode/ruby/ruby.js"></script>
-  <script src="/vendor/codemirror-5.28.0/mode/python/python.js"></script>
-  <script src="/vendor/codemirror-5.28.0/mode/xml/xml.js"></script>
-  <script src="/vendor/codemirror-5.28.0/mode/yaml/yaml.js"></script>
-  <script src="/vendor/codemirror-5.28.0/keymap/vim.js"></script>
-  <script src="/vendor/codemirror-5.28.0/keymap/emacs.js"></script>
-  <script src="/vendor/codemirror-5.28.0/keymap/sublime.js"></script>
-  <script src="/vendor/simplemde-1.11.2/simplemde.min.js"></script>
-  <script src="/vendor/jsoneditor-6.1.0/jsoneditor.min.js"></script>
-  <script src="/vendor/quilljs-1.3.6/quill.js"></script>
-  <!-- <script src="/vendor/js-beautify-1.7.5/beautify.js"></script> -->
-  <!-- <script src="/vendor/js-beautify-1.7.5/beautify-css.js"></script> -->
-  <!-- <script src="/vendor/js-beautify-1.7.5/beautify-html.js"></script> -->
-  <script src="/vendor/marked-0.3.6.min.js"></script>
-  <!-- <script src="/vendor/sketchjs-0.0.0.js"></script> -->
-  <script src="/vendor/chartjs-2.7.2.bundle.min.js"></script>
-
-  <!-- <script src="/vendor/codemirror-5.28.0/codemirror.min.js"></script> -->
-
-
-
-  <script src="/vendor/jquery-3.3.1.slim.min.js"></script>
-  <script src="/vendor/popperjs-1.14.0/popper.min.js"></script>
-  <script src="/vendor/bootstrap-4.1.0-dist/js/bootstrap.min.js"></script>
-  <script src="/vendor/html5-sortable-0.9.11.js"></script>
-  <script src="/vendor/timeago-3.0.0/timeago.min.js"></script>
-  <script src="/vendor/dropzonejs-5.5.0/dropzone.js"></script>
-  <!-- <script src="/vendor/filepond-4.4.12/filepond.min.js"></script> -->
+  <script src='/node_modules/jquery/dist/jquery.slim.min.js'></script>
+  <script src='/node_modules/popper.js/dist/umd/popper.min.js'></script>
+  <script src='/node_modules/bootstrap/dist/js/bootstrap.min.js'></script>
+  <script src='/node_modules/codemirror/lib/codemirror.js'></script>
+  <script src='/node_modules/codemirror/addon/display/placeholder.js'></script>
+  <script src='/node_modules/codemirror/mode/shell/shell.js'></script>
+  <script src='/node_modules/codemirror/mode/javascript/javascript.js'></script>
+  <script src='/node_modules/codemirror/mode/ruby/ruby.js'></script>
+  <script src='/node_modules/codemirror/mode/python/python.js'></script>
+  <script src='/node_modules/codemirror/mode/xml/xml.js'></script>
+  <script src='/node_modules/codemirror/mode/yaml/yaml.js'></script>
+  <script src='/node_modules/codemirror/keymap/vim.js'></script>
+  <script src='/node_modules/codemirror/keymap/emacs.js'></script>
+  <script src='/node_modules/codemirror/keymap/sublime.js'></script>
+  <script src='/node_modules/html5sortable/dist/html5sortable.js'></script>
+  <script src='/node_modules/simplemde/dist/simplemde.min.js'></script>
+  <script src='/node_modules/jsoneditor/dist/jsoneditor.js'></script>
+  <script src='/node_modules/marked/marked.min.js'></script>
+  <script src='/node_modules/mustache/mustache.min.js'></script>
   <script src="/node_modules/xterm/dist/xterm.js"></script>
   <script src="/node_modules/xterm/dist/addons/fit/fit.js"></script>
   <script src="/node_modules/xterm/dist/addons/fullscreen/fullscreen.js"></script>
-  <script src="/node_modules/select2/dist/js/select2.js"></script>
-
-  <!-- <script src="https://component.kitchen/polyfill/webcomponents-bundle.js"></script> -->
-  <!-- <script type="module" src="https://component.kitchen/modules/AutosizeTextarea.js"></script> -->
-
-  <script type="application/javascript" src="/axfunction/axf.js" ></script>
-  <script type="application/javascript" src="/axfunction/axf-plugins.js" ></script>
-  <!-- <script type="application/javascript" src="/axf/themes/basic.js" ></script> -->
-  <script type="application/javascript" src="/client.js" ></script>
+  <script src="/node_modules/chart.js/dist/Chart.js"></script>
+  <script src="/node_modules/filepond/dist/filepond.js"></script>
 
 
+  <script type='application/javascript' src='/axfunction/axf.js' ></script>
+  <script type='application/javascript' src='/axfunction/axf-plugins.js' ></script>
+  <script type='application/javascript' src='/app.js' ></script>
+  <!-- <script type='application/javascript' src='/axf/themes/basic.js' ></script> -->
 
+</head>
+<body>
 
+<div id="systemLoadingSpinner" style="
+transition: opacity 0.75s ease;
+text-align: center; line-height: 80vh; position: fixed;
+left: 0; top: 0; right: 0; bottom: 0; z-index: 1000; pointer-events: none;">
+  <svg width="100" height="100" style="vertical-align: middle;">
+    <g transform="scale(0.33333)">
+      <path d="
+        M 150,300 L 280,225 L 280,75 L 150,0 L 20,75 L 20,225 L 150,300
+        M 40,150 A 110,110 0 1,0 260,150 A 110,110 0 1,0 40,150 Z"
+        style="fill:#48D9;stroke-width:0" fill-rule="evenodd">
+        <animateTransform
+          attributeName="transform"
+          attributeType="XML"
+          type="rotate"
+          from="0 150 150"
+          to="360 150 150"
+          dur="2s"
+          repeatCount="indefinite"/>
+      </path>
+    </g>
+  </svg>
+</div>
 
-  <!-- <script>
-    // ax( (a,x) => a( "<hr>" ) )
-    // window.onload = () => {
-    //   alert("hi")
-    //   // debugger
-    // }
-  </script> -->
+<script>
 
-  <!-- <script>
-  ax( (a,x) => a.h1( "Hello", { $on: { click: () => alert("Hi") } } ) )
-  </script> -->
+  let $currentUser = '<%= @current_user.class.to_s %>'
 
-  <!-- <script>let config = JSON.parse(\`< %=
-    {
-      icon: config[:icon],
-      title: config[:title],
-      css: config[:css]
-    }.to_json
-  % >\`)</script> -->
+  let $preferences = {
+    codeEditorKeymap: 'vim',
+    enableServiceDesigner: <%= Server::Api.respond_to?( :enable_services_designer ) ? Server::Api.enable_services_designer : false %>,
+  }
 
-  <script>ax( app )</script>
-
-  <!-- <script>ax.x.appkit.lib.animate.fade.out( pageLoading, { complete: (el)=> el.remove() } )</script> -->
-
-
-  <!-- <script>ax( (a,x) => [
-    "hi",
-    x.appkit.form( {
-      action: '/api/system/login',
-      enctype: 'multipart/form-data',
-      form: (f) => [
-        f.input( {
-          name: 'password',
-        } ),
-        // f.one( {
-        //   key: 'person',
-        //   form: (f) => [
-        //     f.input( {
-        //       key: 'name'
-        //     } )
-        //   ]
-        // } ),
-        // f.control( {
-        //   as: 'input:number',
-        //   key: 'myInput',
-        //   // type: 'file',
-        //   // multiple: true,
-        //   // readonly: true,
-        //   // value: "Some string",
-        // } ),
-        // f.input( {
-        //   key: 'myInput',
-        //   confirm: true,
-        //   // type: 'file',
-        //   // multiple: true,
-        // } ),
-        // f.textarea( {
-        //   key: 'myTextarea',
-        //   readonly: true,
-        //   value: "Some text",
-        // } ),
-        // f.select( {
-        //   key: 'mySelect',
-        //   collection: {
-        //     1: 'One',
-        //     2: 'Two',
-        //     3: 'Three',
-        //   },
-        //   value: [ '1', '3'],
-        //   readonly: true,
-        //   required: true,
-        //   placeholder: '',
-        //   multiple: true,
-        // } ),
-        // f.checkboxes( {
-        //   key: 'myCheckboxes',
-        //   collection: {
-        //     1: 'One',
-        //     2: 'Two',
-        //     3: 'Three',
-        //   },
-        //   value: [ '1', '3'],
-        //   // readonly: true,
-        //   required: true,
-        //   placeholder: '',
-        //   multiple: true,
-        // } ),
-        // f.radios( {
-        //   key: 'myRadios',
-        //   collection: {
-        //     1: 'One',
-        //     2: 'Two',
-        //     3: 'Three',
-        //   },
-        //   value: '3',
-        //   // readonly: true,
-        //   required: true,
-        //   placeholder: '',
-        //   multiple: true,
-        // } ),
-        // f.checkbox( {
-        //   key: 'myCheckbox',
-        //   placeholder: 'Click me!',
-        //   readonly: true,
-        //   value: 'on',
-        // } ),
-        // a.select( [
-        //   a.option( "One", { value: '1' } ),
-        //   a.option( "Two", { value: '2' } ),
-        // ], {
-        //   name: "mySelect[]",
-        //   multiple: true,
-        // } ),
-        f.submit(),
-        // x.appkit.form.check( {
-        //   name: 'myCheck',
-        //   epithet: "Click me!"
-        // } ),
-        // x.appkit.form.select( {
-        //   name: 'mySelect',
-        //   collection: { 0: 'Low', 1: 'Medium', 3: 'High' },
-        // } ),
-        // x.appkit.form.textarea( {
-        //   name: 'myTextarea',
-        //   collection: { 0: 'Low', 1: 'Medium', 3: 'High' },
-        // } ),
-      ],
-    } )
-  ] )</script> -->
-
-
-
-
-
-
-
-
-
-
-
-
+  window.onload = () => {
+    systemLoadingSpinner.style.opacity = 0
+    setTimeout( function() { systemLoadingSpinner.remove() }, 1000 );
+    ax( app )
+  }
+</script>
 
 </body>
 </html>

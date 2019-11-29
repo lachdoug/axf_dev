@@ -5,16 +5,15 @@ ax.extension.report = function( options={} ) {
 
   let shims = [ this.report.shim(), ...( options.shims || [] ) ]
 
-  let f = this.report.factory( {
+  let r = this.report.factory( {
     shims: shims,
     scope: options.scope,
     params: options.params,
     object: options.object,
   } )
 
-  return f.report( {
+  return r.report( {
     report: options.report,
-    url: options.url,
     reportTag: options.reportTag,
   } )
 
