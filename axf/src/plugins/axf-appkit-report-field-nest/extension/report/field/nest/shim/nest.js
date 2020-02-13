@@ -78,7 +78,7 @@ nest = function( f, options={} ) {
     //   }
     // },
     $focus: function() {
-      this.$('|appkit-form-control').$focus()
+      this.$('|appkit-report-control').$focus()
     },
     // $on: {
     //   'axf.appkit.report.nest.item.move': (e,el) =>

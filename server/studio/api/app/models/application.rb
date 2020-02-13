@@ -23,8 +23,8 @@ module Server
           end
 
           def self.all
-            Dir.glob( "#{ path }/*" ).map do |entry_path|
-              id = entry_path.sub( "#{ path }/", '' )
+            Dir.glob( "#{ data_dir }/*" ).map do |entry_path|
+              id = entry_path.sub( "#{ data_dir }/", '' )
               new( id )
             end.sort_by do |application|
               application.name
@@ -40,11 +40,11 @@ module Server
           def self.create( params )
             raise Error::MissingParam.new ':url' if params[:url].to_s.empty?
             id = Repo.create  url: params[:url],
-                              path: path
+                              path: data_dir
             { id: id }
           end
 
-          def self.path
+          def self.data_dir
             'data/applications'
           end
 
@@ -66,8 +66,9 @@ module Server
             {
               id: id,
               name: name,
+              remote: repo.remote,
               branch: repo.branch.current,
-              readme: readme.content,
+              # readme: readme.content,
             }
           end
 
@@ -91,17 +92,17 @@ module Server
             @views ||= Views.new( self )
           end
 
-          def path
-            @path ||= "#{ self.class.path }/#{ id }"
+          def parent_dir
+            @parent_dir ||= "#{ self.class.data_dir }/#{ id }"
           end
 
           def name
-            raise Error::NoRecord.new id unless project_dir
-            @name ||= project_dir.sub( "#{path}/", '' )
+            raise Error::NoRecord.new id unless parent_dir
+            @name ||= repo_dir.sub( "#{ parent_dir }/", '' )
           end
 
-          def project_dir
-            Dir.glob( "#{path}/*" )[0]
+          def repo_dir
+            Dir.glob( "#{ parent_dir }/*" )[0]
           end
 
           def active
@@ -109,7 +110,7 @@ module Server
           end
 
           def delete
-            FileUtils.rm_rf path
+            FileUtils.rm_rf parent_dir
             {}
           end
 

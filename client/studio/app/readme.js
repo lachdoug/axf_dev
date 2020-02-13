@@ -1,11 +1,11 @@
 app.readme = ( parent, path ) => controller => (a,x) => [
 
+  app.entryHeadings(path),
+
   app.http(
     `/~/${ path }/readme`,
     ( response, el ) => {
-      let readme = response.content
-
-      el.$nodes = [
+      response.json().then( readme => el.$nodes = [
 
         a.h5( 'Readme' ),
 
@@ -29,7 +29,7 @@ app.readme = ( parent, path ) => controller => (a,x) => [
           }
         } )
 
-      ]
+      ] )
 
     },
     {

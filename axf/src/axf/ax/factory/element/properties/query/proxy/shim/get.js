@@ -11,7 +11,7 @@ ax.factory.element.properties.query.proxy.shim.get = function( collection, pendi
       let result = node[ property ]
       if ( ax.is.undefined( result ) ) {
         // debugger
-        ax.log.error( `Ax query for ${ property } is undefined for:`, node )
+        console.error( `Ax query for '${ property }' is undefined on:`, node )
       } else if ( ax.is.function( result ) ) {
         pending[i] = result
       } else {

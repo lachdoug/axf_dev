@@ -392,7 +392,7 @@
 //         ]
 //       } ),
 //       f.button( {
-//         onclick: (e,el) => { ax.log( el.$('^form').$data() ) }
+//         onclick: (e,el) => { console( el.$('^form').$data() ) }
 //       } )
 //     ],
 //
@@ -1194,7 +1194,7 @@
 // //     //       required: true,
 // //     //       pattern: "[0-9A-Z]{4,8}",
 // //     //       invalid: (a,b)=>{
-// //     //         ax.log( b )
+// //     //         console( b )
 // //     //         return b.valueMissing ?
 // //     //           "Gimme value..." :
 // //     //           `You can't enter ${ a }!`

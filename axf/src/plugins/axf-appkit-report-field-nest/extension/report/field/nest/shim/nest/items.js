@@ -18,25 +18,7 @@ items = function( f, options ) {
 
     return a['|appkit-report-nest-item'](
       reportFn( ff ),
-      {
-        $rescope: function( scope, index ) {
-
-          ff.index = index
-          ff.scope = `${ scope }[${ index }]`
-
-          let namedElements = x.lib.unnested( this, `[name^="${ scope }"]` )
-
-          namedElements.forEach( function( el ) {
-            if ( el.tagName == 'APPKIT-FORM-NEST') {
-              el.$rescope( scope, index )
-            } else {
-              el.$('^|appkit-report-nest').$rescopeElement( el, scope, index )
-            }
-          } )
-
-        },
-        ...options.itemTag,
-      }
+      options.itemTag
     )
 
   }.bind( this )

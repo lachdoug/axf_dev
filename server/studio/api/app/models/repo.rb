@@ -5,7 +5,10 @@ module Server
         class Repo
 
           def self.create( params )
-            cloning = Cloning.new params[:url], params[:path], params[:namespace]
+            cloning = Cloning.new params[:url],
+                                  params[:path]
+                                  # ,
+                                  # params[:namespace]
             cloning.process
           end
 
@@ -45,7 +48,7 @@ module Server
           end
 
           def path
-            @path ||= "#{ owner.path }/#{ owner.name }"
+            @path ||= owner.repo_dir
           end
 
           def branch

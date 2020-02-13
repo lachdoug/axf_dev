@@ -1,5 +1,7 @@
 app.namespaces.index = (controller) => (a,x) => [
 
+  a.h5( 'Namespaces' ),
+
   a['div.clearfix']( a['div.btn-group.float-right']( [
     app.button( {
       label: app.icon( 'fa fa-plus', 'New namespace' ),
@@ -19,20 +21,22 @@ app.namespaces.index = (controller) => (a,x) => [
   app.http(
     '/~/namespaces',
     ( response, el ) => {
-      let namespaces = response.content || []
+      response.json().then( namespaces => {
 
-      el.$nodes = [
-        namespaces.length == 0 ? 'None' : null,
-        namespaces.map( namespace => a.p( [
-          app.button( {
-            label: app.icon( 'fa fa-caret-right', namespace.name ),
-            onclick: (e,el) => {
-              controller.open( namespace.id )
-            },
-            title: namespace.remote,
-          } ),
-        ] ) )
-      ]
+        el.$nodes = [
+          namespaces.length == 0 ? 'None' : null,
+          namespaces.map( namespace => a.p( [
+            app.button( {
+              label: app.icon( 'fa fa-caret-right', namespace.name ),
+              onclick: (e,el) => {
+                controller.open( namespace.id )
+              },
+              title: namespace.remote,
+            } ),
+          ] ) )
+        ]
+
+      } )
 
     },
     {

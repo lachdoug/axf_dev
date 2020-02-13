@@ -4,7 +4,7 @@ app.settings = ( controller ) => (a,x) => [
   app.http(
     '/~/settings',
     ( response, el ) => {
-      let settings = response.content || []
+      let settings = response.json() || []
 
       el.$nodes = [
 

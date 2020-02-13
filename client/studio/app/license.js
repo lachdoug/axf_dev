@@ -1,9 +1,11 @@
 app.license = ( parent, path ) => controller => (a,x) => [
 
+  app.entryHeadings(path),
+
   app.http(
     `/~/${ path }/license`,
     ( response, el ) => {
-      let license = response.content
+      let license = response.json()
 
       el.$nodes = [
 

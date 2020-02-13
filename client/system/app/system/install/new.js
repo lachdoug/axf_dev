@@ -22,9 +22,7 @@ app.system.install.new = ( controller ) => (a,x) => [
     `/~/~/engine_builder/resolve_blueprint?${
       x.lib.query.from.object( { blueprint_url: controller.params.blueprint_url } )
     }`,
-    ( response, el ) => {
-
-      let blueprint = response.content
+    ( response, el ) => response.json().then( blueprint => {
 
       el.$nodes = [
 
@@ -117,7 +115,7 @@ app.system.install.new = ( controller ) => (a,x) => [
 
       ]
 
-    },
+    } ),
     {
       placeholder: app.hourglass( 'Loading blueprint')
     }

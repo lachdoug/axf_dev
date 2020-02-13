@@ -1,7 +1,7 @@
 cc.report.shim = {
 
   help: ( r, target ) => ( options={} ) => {
-    let help = options.help ? (a,x) => x.md( options.help ) : null
+    let help = options.help ? (a,x) => app.md( options.help ) : null
     return target( {
       ...options,
       help: help,
@@ -10,7 +10,7 @@ cc.report.shim = {
 
   template: ( r, target ) => ( options={} ) => {
     debugger
-    let template = options.template ? (a,x) => x.md( options.template(r) ) : null
+    let template = options.template ? (a,x) => cc.md( options.template(r) ) : null
     return template
   },
 
@@ -24,6 +24,8 @@ cc.report.shim = {
           ...options.markdownTag,
         }
       } ),
+    code: ( r, target ) => ( options={} ) => (a,x) => x.codemirror.report.control( r, options ),
+
   },
 
 

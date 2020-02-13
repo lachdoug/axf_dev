@@ -137,6 +137,7 @@ ax.extension.simplemde.form.control = function( f, options ) {
       this.$$('textarea').removeAttribute('disabled')
     },
     $focus: function () {
+      this.$refresh()
       this.$simplemde.codemirror.focus()
     },
 

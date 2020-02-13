@@ -1,16 +1,12 @@
 ax.factory.element.properties.accessors.on = function ( element ) {
 
   element.$on = function( handlers ) {
-    for ( let handler in handlers ) {
-      element.$off( handler )
-      element.$events[ handler ] = handlers[ handler ]
+    for ( let handle in handlers ) {
+      element.$off( handle )
+      element.$events[handle] = (e) => handlers[handle].call(element, e, element, element.$state)
       element.addEventListener(
-        handler.split(':')[0],
-        function(e) {
-          element.$events[handler] &&
-          element.$events[handler].
-          call( this, e, element, element.$state )
-        }
+        handle.split(':')[0],
+        element.$events[handle]
       )
     }
   }

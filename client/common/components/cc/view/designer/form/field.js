@@ -78,7 +78,7 @@ cc.view.designer.form.field = (f) => [
                 // required: true,
                 // placeholder: 'Required',
                 dependent: {
-                  target: 'display',
+                  key: 'display',
                   value: 'custom'
                 }
               } ),
@@ -103,7 +103,7 @@ cc.view.designer.form.field = (f) => [
 
         ],
         dependent: {
-          target: 'control',
+          key: 'control',
           pattern: '^(?!hidden).*$',
         },
       } ),
@@ -111,7 +111,7 @@ cc.view.designer.form.field = (f) => [
       f.field( {
         key: 'placeholder',
         dependent: {
-          target: 'control',
+          key: 'control',
           pattern: '^(?!(hidden|check|checks|radios|one|many|table|json)$)(\w*)',
         }
       } ),
@@ -138,7 +138,7 @@ cc.view.designer.form.field = (f) => [
             as: 'check',
             // checked: 'required',
             // dependent: {
-            //   target: '[..]control',
+            //   key: '[..]control',
             //   pattern: '^(string|password|select|combobox|check)$',
             // },
           } ),
@@ -160,7 +160,7 @@ cc.view.designer.form.field = (f) => [
               } ),
             ] } ),
             dependent: {
-              target: '[..]control',
+              key: '[..]control',
               pattern: '^number$',
             },
           } ),
@@ -180,14 +180,14 @@ cc.view.designer.form.field = (f) => [
               } ),
             ] } ),
             dependent: {
-              target: '[..]control',
+              key: '[..]control',
               pattern: '^(string|password|combobox)$',
             },
           } ),
           ff.field( {
             key: 'pattern',
             dependent: {
-              target: '[..]control',
+              key: '[..]control',
               pattern: '^(string|password|combobox)$',
             },
           } ),
@@ -196,25 +196,17 @@ cc.view.designer.form.field = (f) => [
           } ),
         ],
         dependent: {
-          target: 'control',
+          key: 'control',
           pattern: '^(string|select|text|check|radios|password|combobox|color|date|email|number|tel|time|url|code|markdown|country|language|timezone)$',
         },
 
       } ),
 
       f.field( {
-        key: 'item',
-        dependent: {
-          target: 'control',
-          pattern: '^(many|table)',
-        },
-      } ),
-
-      f.field( {
         key: 'value',
         label: 'Default value',
         dependent: {
-          target: 'control',
+          key: 'control',
           pattern: '^(?!(one|many|table)$).*$',
         }
       } ),
@@ -238,8 +230,11 @@ cc.view.designer.form.field = (f) => [
               fff.field( { key: 'value' } ),
               fff.field( { key: 'label' } ),
             ],
+            addable: true,
+            removable: true,
+            sortable: true,
             dependent: {
-              target: 'type',
+              key: 'type',
               value: 'static',
             }
           } ),
@@ -247,14 +242,51 @@ cc.view.designer.form.field = (f) => [
             key: 'scope',
             // placeholder: 'Required',
             dependent: {
-              target: 'type',
+              key: 'type',
               pattern: '^dynamic$',
             }
           } ),
         ],
         dependent: {
-          target: 'control',
+          key: 'control',
           pattern: '^(select|radios|checks|multiselect|combobox)$',
+        }
+      } ),
+
+      f.fieldset( {
+        // key: 'nest',
+        // as: 'one',
+        // label: false,
+        layout: 'vertical',
+        body: [
+          f.field( {
+            key: 'item',
+          } ),
+          f.field( {
+            key: 'addable',
+            as: 'check',
+            value: 'on',
+            label: false,
+            check: { label: 'Addable' },
+          } ),
+          f.field( {
+            key: 'removable',
+            as: 'check',
+            value: 'on',
+            label: false,
+            check: { label: 'Removable' },
+          } ),
+          f.field( {
+            key: 'sortable',
+            as: 'check',
+            label: false,
+            check: { label: 'Sortable' },
+          } ),
+
+        ],
+        dependent: {
+          key: 'control',
+          pattern: '^(many|table)$',
         }
       } ),
 
@@ -278,7 +310,7 @@ cc.view.designer.form.field = (f) => [
           ] } ),
         ],
         dependent: {
-          target: 'control',
+          key: 'control',
           value: 'check',
         },
       } ),
@@ -306,14 +338,14 @@ cc.view.designer.form.field = (f) => [
               } ),
             ],
             dependent: {
-              target: 'confirm',
+              key: 'confirm',
               value: 'on',
             },
           } ),
 
         ],
         dependent: {
-          target: 'control',
+          key: 'control',
           value: 'password',
         },
       } ),
@@ -337,7 +369,7 @@ cc.view.designer.form.field = (f) => [
           } ),
         ],
         dependent: {
-          target: 'control',
+          key: 'control',
           value: 'code',
         },
       } ),
@@ -358,15 +390,14 @@ cc.view.designer.form.field = (f) => [
           as: 'many',
           item: 'form component',
           form: cc.view.designer.form.component,
-          // dependent: {
-          //   target: 'control',
-          //   pattern: '^(one|many|table)$',
-          // }
+          addable: true,
+          removable: true,
+          sortable: true,
         } ),
       ]
     } ),
     dependent: {
-      target: 'control',
+      key: 'control',
       pattern: '^(one|many|table)$',
     }
   } ),

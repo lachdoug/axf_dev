@@ -1,18 +1,16 @@
-app.router = (a,x) => a['div|app-router'](
+app.router = (a,x) => a['app-router'](
   x.router(
     ( controller ) => [
       app.nav( controller ),
       controller.routes(
         {
-          '/': app.home,
+          // '/': controller => controller.open + '', // app.home,
           '/login': app.login,
           '/logout': app.logout,
           '/timeout': app.timeout,
           '/applications*': app.applications,
-          // '/services*': app.services,
-          '/services*': app.namespaces,
+          '/namespaces*': app.namespaces,
           '/settings': app.settings,
-
           // '*': app.notFound,
         },
         {
@@ -22,13 +20,8 @@ app.router = (a,x) => a['div|app-router'](
       ),
     ],
     {
-      default: controller => a['p.error']( [ controller, `Not found: CLIENT ${ controller.path } in ${ controller.scope || 'root' }` ] )
-      //   home: '/applications',
+      default: controller => a['p.error']( [ controller, `Not found: CLIENT ${ controller.path } in ${ controller.scope || 'root' }` ] ),
+      home: '/applications',
     }
   ),
 )
-
-// app.routes = ( controller, routes, options={} ) => (a,x) => controller.routes( routes, {
-//   lazy: true,
-//   transition: options.transition ? [ 'crossfade', { time: 500 } ] : false,
-// } )

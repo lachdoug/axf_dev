@@ -18,7 +18,7 @@ table = function ( r, options ) {
                 let label = options.label || x.lib.text.labelize( options.key )
                 return a.th( a['|appkit-report-field']( [
                   label,
-                  r.helpbutton( {
+                  options.help ? r.helpbutton( {
                     helpbuttonTag: {
                       $on: {
                         'click: toggle help': function() {
@@ -27,7 +27,7 @@ table = function ( r, options ) {
                         },
                       },
                     },
-                  } ),
+                  } ) : null,
                 ] ), options.thTag )
               }
             } else {
@@ -50,7 +50,7 @@ table = function ( r, options ) {
 
         let rrP = new Proxy( rr, {
           get: ( target, property ) => {
-            if ( property == 'field' ) {
+            if ( property === 'field' ) {
               return ( options ) => {
                 let help = options.help
                 // debugger

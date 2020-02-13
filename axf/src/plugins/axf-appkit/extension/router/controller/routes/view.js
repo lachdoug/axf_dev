@@ -68,7 +68,7 @@ view = ( config ) => ( routesElement, location ) => {
         $init: function() {
           if ( location.anchor ) {
             let anchored = document.getElementById( location.anchor )
-            if ( !anchored ) ax.log.warn( `Appkit router view cannot find #${ location.anchor }` )
+            if ( !anchored ) console.warn( `Appkit router view cannot find #${ location.anchor }` )
             if ( anchored ) anchored.scrollIntoView()
           }
         }

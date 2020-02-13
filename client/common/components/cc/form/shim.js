@@ -5,22 +5,22 @@ cc.form.shim = {
       ...options.asyncformTag,
       $on: {
         'axf.appkit.http.complete': (e,el) => {
-          el.$$('button[type="submit"]').$revert()
+          el.$$('button[type="submit"]').$$.forEach( button => {
+            button.$revert && button.$revert()
+          } )
         },
         'axf.appkit.http.error': (e,el) => {
-          el.$$('button[type="submit"]').$revert()
+          el.$$('button[type="submit"]').$$.forEach( button => {
+            button.$revert && button.$revert()
+          } )
         },
-        // 'axf.appkit.form.control.invalid': (e,el) => {
-        //   debugger
-        //   el.$$('button[type="submit"]').$revert()
-        // },
         ...( options.asyncformTag || {} ).$on
       },
     },
   } ),
   // field: ( f, target ) => ( options={} ) => {
   //   // debugger
-  //   let help = options.help ? (a,x) => x.md( options.help ) : null
+  //   let help = options.help ? (a,x) => cc.md( options.help ) : null
   //   // debugger
   //   return target( {
   //     ...options,
@@ -29,7 +29,7 @@ cc.form.shim = {
   // },
 
   help: ( f, target ) => ( options={} ) => {
-    let help = options.help ? (a,x) => x.md( options.help ) : null
+    let help = options.help ? (a,x) => cc.md( options.help ) : null
     return target( {
       ...options,
       help: help,
@@ -37,7 +37,7 @@ cc.form.shim = {
   },
 
   template: ( f, target ) => ( options={} ) => {
-    let template = options.template ? (a,x) => x.md( options.template(f) ) : null
+    let template = options.template ? (a,x) => cc.md( options.template(f) ) : null
     return template
   },
 
@@ -81,20 +81,105 @@ cc.form.shim = {
   } ),
 
   controls: {
+
     combobox: ( f, target ) => ( options={} ) => (a,x) => f.controls.selectinput( options ),
     json: ( f, target ) => ( options={} ) => (a,x) => x.jsoneditor.form.control( f, { theme: 'bootstrap3', ...options } ),
     code: ( f, target ) => ( options={} ) => (a,x) => x.codemirror.form.control( f, options ),
     markdown: ( f, target ) => ( options={} ) => (a,x) => x.simplemde.form.control( f, options ),
+
+    table: ( f, target ) => ( options={} ) => target( {
+      ...options,
+      sortOnButton: {
+        ...options.sortOnButton,
+        buttonTag: {
+          class: 'btn btn-outline-secondary app-btn',
+          ...( options.sortOnButton || {} ).buttonTag,
+        },
+      },
+      addButton: {
+        ...options.addButton,
+        buttonTag: {
+          class: 'btn btn-outline-secondary app-btn',
+          ...( options.addButton || {} ).buttonTag,
+        },
+      },
+      upButton: {
+        ...options.upButton,
+        buttonTag: {
+          class: 'btn btn-outline-secondary app-btn',
+          ...( options.upButton || {} ).buttonTag,
+        },
+      },
+      downButton: {
+        ...options.downButton,
+        buttonTag: {
+          class: 'btn btn-outline-secondary app-btn',
+          ...( options.downButton || {} ).buttonTag,
+        },
+      },
+      removeButton: {
+        ...options.removeButton,
+        buttonTag: {
+          class: 'btn btn-outline-secondary app-btn',
+          ...( options.removeButton || {} ).buttonTag,
+        },
+      },
+
+    } ),
+
+    many: ( f, target ) => ( options={} ) => target( {
+      ...options,
+      sortOnButton: {
+        ...options.sortOnButton,
+        buttonTag: {
+          class: 'btn btn-outline-secondary app-btn',
+          ...( options.sortOnButton || {} ).buttonTag,
+        },
+      },
+      addButton: {
+        ...options.addButton,
+        buttonTag: {
+          class: 'btn btn-outline-secondary app-btn',
+          ...( options.addButton || {} ).buttonTag,
+        },
+      },
+      upButton: {
+        ...options.upButton,
+        buttonTag: {
+          class: 'btn btn-outline-secondary app-btn',
+          ...( options.upButton || {} ).buttonTag,
+        },
+      },
+      downButton: {
+        ...options.downButton,
+        buttonTag: {
+          class: 'btn btn-outline-secondary app-btn',
+          ...( options.downButton || {} ).buttonTag,
+        },
+      },
+      removeButton: {
+        ...options.removeButton,
+        buttonTag: {
+          class: 'btn btn-outline-secondary app-btn',
+          ...( options.removeButton || {} ).buttonTag,
+        },
+      },
+
+    } ),
+
   },
 
   buttons: (f) => ( options={} ) => (a,x) => a['app-form-buttons']( [
     f.button( {
-      label: '✖ Cancel',
+      label: app.icon( 'fa fa-times', 'Cancel' ),
       to: cc.hourglass( 'Cancelling…' ),
       ...options.cancel
     } ),
     ' ',
-    f.submit( options.submit ),
+    f.submit( {
+      label: app.icon( 'fa fa-check', 'Submit' ),
+      ...options.submit
+    } ),
   ], {
     ...options.buttonsTag,
     style: {

@@ -4,7 +4,7 @@ cc.view.designer.report = (f) => f.field( {
     label: false,
     layout: 'vertical',
     dependent: {
-      target: 'type',
+      key: 'type',
       pattern: '^report$',
     },
     form: (ff) => [
@@ -35,6 +35,9 @@ cc.view.designer.report = (f) => f.field( {
             item: 'report component',
             form: cc.view.designer.report.component,
             layout: 'vertical',
+            addable: true,
+            removable: true,
+            sortable: true,
           } ),
         ],
       } ),

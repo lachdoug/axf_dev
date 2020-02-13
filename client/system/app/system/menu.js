@@ -1,22 +1,7 @@
-app.system.menu = ( controller, systemSettings ) => (a,x) => [
+app.system.menu = ( system, controller ) => (a,x) => [
 
-  app.btn(
-    app.icon( 'fas fa-hdd', 'System' ),
-    () => controller.open( '/system' ),
-    {
-      class: 'btn btn-outline-primary d-block w-100 text-left',
-    }
-  ),
-
-  a['div.container'](
-    app.system.applications( controller ),
-  ),
-
-  a.hr,
-
-  a['div.container'](
-    app.system.services( controller ),
-  ),
-
+  app.system.menu.system( system, controller ),
+  app.system.menu.applications( controller ),
+  app.system.menu.services( controller ),
 
 ]

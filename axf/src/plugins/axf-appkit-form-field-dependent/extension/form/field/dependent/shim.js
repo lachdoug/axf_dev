@@ -33,7 +33,7 @@ ax.extension.form.field.dependent.shim = function() {
       formTag: {
         ...options.formTag,
         $init: function() {
-          options.$init && options.$init( arguments )
+          options.formTag && options.formTag.$init && options.formTag.$init.bind( this )( arguments )
           this.$checkDependents()
         },
         $checkDependents: function() {

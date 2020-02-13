@@ -1,9 +1,12 @@
-app.system.
-applications = ( controller ) => (a,x) => a['app-system-applications']( [
-  app.http( '/~/~/containers/engines/status', ( result, el ) => {
-    let applications = x.lib.object.sort( result.content )
-    el.$nodes = a['app-system-containers']( Object.keys( applications ).map(
-      name => app.system.applications.application( controller, name, applications[name] )
-    ) )
+app.system.applications = ( controller ) => (a,x) => [
+  // a.h3( 'Application' ),
+
+  controller.routes( {
+    '/?': 'app.system.applications.index',
+    '/:name': app.system.applications.show,
+    '/:name/installation': app.system.applications.installation,
+  }, {
+    lazy: true,
   } )
-] ),
+
+]

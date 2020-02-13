@@ -7,7 +7,7 @@ form = ( f, options={} ) => {
   let form = options.form || ( () => null )
 
   let formTagOptions = {
-    method: 'POST',
+    method: options.method || 'POST',
     action: options.url,
     $data: function() {
       return new FormData( this )
@@ -15,12 +15,9 @@ form = ( f, options={} ) => {
     $object: function() {
       return x.form.object( this.$data() )
     },
-    // $serialize: function() {
-    //   return JSON.stringify( this.$object() )
-    // },
     ...options.formTag
   }
-
+// debugger
   return a.form( form(f), formTagOptions )
 
 }

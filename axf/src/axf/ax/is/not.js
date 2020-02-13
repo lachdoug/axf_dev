@@ -17,7 +17,7 @@ ax.is.not = new Proxy(
       if ( ax.is.function( ax.is[ property ] ) ) {
         return ( value ) => !ax.is[ property ]( value )
       } else {
-        ax.log.error( `ax.is does not support .${ property }()` )
+        console.error( `ax.is does not support .${ property }()` )
       }
 
     }

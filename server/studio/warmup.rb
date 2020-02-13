@@ -4,7 +4,7 @@ module Server
 
     rack.warmup do |app|
 
-      # Sessions directoy stores session files named by session id.
+      # Sessions directory stores session files named by session id.
       # Modification time for a file is used as the activity timestamp for session timeout.
       FileUtils.mkdir_p 'sessions'
 

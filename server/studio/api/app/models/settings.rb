@@ -6,6 +6,7 @@ module Server
 
           def initialize( current_user )
             @current_user = current_user
+            @consumable_namespaces = ConsumableNamespaces.new
           end
 
           def to_json
@@ -15,7 +16,7 @@ module Server
           def to_h
             {
               public_key: @current_user.public_key,
-              
+              consumable_namespaces: @consumable_namespaces.to_a,
             }
           end
 

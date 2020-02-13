@@ -13,7 +13,7 @@ module Server
 
             def to_h
               {
-                branch: owner.repo.branch.current,
+                # branch: owner.repo.branch.current,
                 content: content,
               }
             end
@@ -27,6 +27,12 @@ module Server
             rescue Errno::ENOENT
               return '{}'
             end
+
+            def update( io )
+              owner.repo.write 'blueprint.json', io.read
+              return 'Success'
+            end
+
             #
             # def blueprint
             #   @blueprint ||= JSON.parse( blueprint_json )

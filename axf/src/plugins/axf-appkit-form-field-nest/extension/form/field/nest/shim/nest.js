@@ -37,7 +37,7 @@ nest = function( f, options={} ) {
 
       let namedElements = x.lib.unnested( this, `[name^="${ scope }"]` )
       namedElements.forEach( function( el ) {
-        if ( el.tagName == 'APPKIT-FORM-NEST') {
+        if ( el.dataset.axfComponent == 'appkit-form-nest') {
           el.$rescope( scope, index )
         } else {
           this.$rescopeElement( el, scope, index )
@@ -78,7 +78,8 @@ nest = function( f, options={} ) {
       }
     },
     $focus: function() {
-      this.$('|appkit-form-control').$focus()
+      let first = this.$('|appkit-form-control')
+      if ( first ) first.$focus()
     },
     $on: {
       'axf.appkit.form.nest.item.move': (e,el) =>

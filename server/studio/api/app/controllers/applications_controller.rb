@@ -19,10 +19,10 @@ module Server
           Application.find( params[:id] ).to_json
         end
 
-        get '/applications/:id/name' do
-          content_type :'application/json'
-          { name: Application.find( params[:id] ).name }.to_json
-        end
+        # get '/applications/:id/name' do
+        #   content_type :'application/json'
+        #   { name: Application.find( params[:id] ).name }.to_json
+        # end
 
         delete '/applications/:id' do
           content_type :'application/json'

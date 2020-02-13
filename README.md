@@ -187,60 +187,110 @@ scope/target with commas rather than [][][]
 
 
 
+Publisher - A software developer
+- has many SoftwareProducts
+- belongs to Account
 
+SoftwareProduct
+- has many Listings
+- belongs to Publisher
 
+UserDomain - An Engines userspace
+- has many Systems
+- has many Subscriptions
+- has many DomainNames
 
+System - A Linux computer running Engines System
+- belongs to UserDomain
+- has many Deployments
 
-# Autom
+DomainName - An internet domain name
+- belongs to UserDomain
+- has many CertifiedDomainNames
 
-### Australasian Token Market
+CertifiedDomainName - A domain name with an SSL cert.
+- belongs to DomainName
+- belongs to Certificate
+- has many BuildPackages
 
-### Security Token Issuer + Exchange
+Certificate - An SSL Certificate
+- has many CertifiedDomainNames
 
+Catalogue - A software product store or library
+- has many Listings
+- has many PrivateRepos
 
+PrivateRepo - A git repo with added public keys
+- belongs to Catalogue
+- has many LicenceAgreements
 
-## What?
+Listing - A catalogue entry, i.e. published software
+- belongs to Catalogue
+- belongs to SoftwareProduct
+- has many TermsOfUse
+- :title/:name/:label
+- :blueprint_url
+- :icon_url
 
-* IDPS-style masterfund
-* Administered on blockchain
-* With a broad menu
-* And a secondary market for tokens
+Subscription - An acceptance of the licence T&Cs
+- belongs to UserDomain
+- belongs to Listing
+- belongs to TermsOfUse
+- belongs to PrivateRepo
+- has many Scaffolds
 
+Scaffold - First stage of installation
+- belongs to Subscription
+- has many DataConnections
+- <some blueprint stuff>
+- has many BuildPackages
 
+BuildPackage - Second stage of installation
+- belongs to Scaffold
+- <some blueprint stuff>
+- belongs to CertifiedDomainName
+- has many Deployments
 
-## Why?
+Deployment - Final stage of installation
+- belongs to BuildPackage
+- belongs to System
+- belongs to Billable
+- <some blueprint stuff>
 
-* Digital natives like tokens
-* No supply of quality product
-  - Most issuers offshore and regulator-phobic
-  - Many offerings are commercially-naive, or outright scams
-  - Poor liquidity, wide spreads
+DataConnection - A deployment using a data bundle
+- belongs to Scaffold
+- belongs to DataBundle
 
-* Answers lie in funds management principles
-* Security tokens are just units
+DataBundle - Persistent data from a software product
+- has many DataConnections
+- belongs to DataService
 
-* Blockchain touted as a threat to financial services
-* Jury out on exactly where this will happen
-* Incumbents struggle to innovate
-* Some financial services firms feel a strategic imperative to be in the sector
-* A blockchain-centric funds business potentially attractive acquisition target
+DataService - A server of persistent data
+- has many DataBundles
+- belongs to ServiceType
 
-* Could actually be a good business
+DataServiceType
+- <some service definition stuff>
 
+Billable - An accrual of software licence fees
+- belongs to Subscription
+- belongs to Deployment
 
-## Organisational principles
+TermsOfUse - A set of licence T&Cs
+- belongs to TermsOfUseType
+- belongs to Listing
+- has many LicenceAgreements
 
-* Sales culture
-* Great product UX
-* Love the regulator
+TermsOfUseType - A type of software licence
+- has many TermsOfUse
 
+Account - An Engines financial account
+- may have one Publisher
+- may have one User
 
-## Blockchain
+Transaction - A transfer between Accounts
+- belongs to Account - credit
+- belongs to Account - debit
 
-* Utility tokens vs. Security tokens
-
-* Administrative efficiencies
-  - Automation of unit registry and fund accounting
-  - Expose an API ( for system integration )
-
-* Secondary trading of tokens/units
+User - An end user
+- Individual or Organisation

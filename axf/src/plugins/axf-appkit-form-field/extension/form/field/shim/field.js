@@ -8,21 +8,13 @@ field = function( f, options={} ) {
     options.label = options.label || false
   }
 
-  let fieldTagOptions = {
-    ...options.fieldTag,
-    style: {
-      display: 'block',
-      ...( options.fieldTag || {} ).style
-    }
-  }
-
-  return a['|appkit-form-field']( [
+  return a['div|appkit-form-field']( [
     this.field.header( f, options ),
     a['|appkit-form-field-body']( [
       f.help( options ),
       f.control( options ),
       f.hint( options ),
     ], options.bodyTag ),
-  ], fieldTagOptions )
+  ], options.fieldTag )
 
 }

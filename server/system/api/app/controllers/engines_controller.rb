@@ -3,8 +3,13 @@ module Server
     module App
       module Controllers
 
+        post '/dev' do
+          content_type 'text/terminal'
+          params.to_yaml
+        end
+
         get '/reconnected' do
-          @engines.get( '/undefined_endpoint' )
+          @engines.get( '/undefined_endpoint', { timeout: 5 } )
         rescue Error::System404
           # System has responded with a 404, so it must be back up!
           return 'System connected.'

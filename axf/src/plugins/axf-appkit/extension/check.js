@@ -16,7 +16,7 @@ check = function( options ) {
   let inputTagOptions = {
     type: options.type || 'checkbox',
     name: options.name,
-    value: options.checked,
+    value: checked,
     required: options.required,
     readonly: options.readonly,
     checked: options.value == checked ? 'checked' : undefined,

@@ -1,7 +1,7 @@
 app.repo.branch.set = path => controller => (a,x) => app.http(
   `/~/${ path }/repo/branch`,
   ( response, el ) => {
-    let branch = response.content
+    let branch = response.json()
 
     el.$nodes = [
       a.h5( 'Set branch' ),

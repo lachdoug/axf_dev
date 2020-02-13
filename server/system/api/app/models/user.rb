@@ -41,16 +41,20 @@ module Server
             File.write filepath, token
           end
 
-          def within_timeout
-            last_activity_at = timestamp
-            return false unless last_activity_at
-            last_activity_at + @settings.session_timeout_seconds > Time.now
+          def session_timeout_seconds
+            @settings.session_timeout_seconds
           end
 
           private
 
           def filepath
             "sessions/#{ @session[:session_id] }"
+          end
+
+          def within_timeout
+            last_activity_at = timestamp
+            return false unless last_activity_at
+            last_activity_at + session_timeout_seconds > Time.now
           end
 
           def timestamp

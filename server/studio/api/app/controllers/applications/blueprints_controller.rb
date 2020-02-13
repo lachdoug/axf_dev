@@ -10,7 +10,7 @@ module Server
 
         post '/applications/:id/blueprint' do
           content_type :'application/json'
-          Application.find( params[:id] ).blueprint.update( params[:blueprint] ).to_json
+          Application.find( params[:id] ).blueprint.update( request.body ).to_json
         end
 
       end

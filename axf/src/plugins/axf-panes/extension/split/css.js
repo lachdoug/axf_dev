@@ -1,6 +1,6 @@
 ax.css( {
 
-  '[data-axf-component="axf-panes"]': {
+  '|axf-panes': {
 
     position: 'fixed',
     top: 0,
@@ -8,7 +8,7 @@ ax.css( {
     right: 0,
     bottom: 0,
 
-    '[data-axf-component="axf-panes-proximate"]': {
+    '|axf-panes-proximate': {
       display: 'block',
       position: 'absolute',
       left: 0,
@@ -19,7 +19,7 @@ ax.css( {
       overflowX: 'hidden',
     },
 
-    '[data-axf-component="axf-panes-adjacent"]': {
+    '|axf-panes-adjacent': {
       display: 'block',
       position: 'absolute',
       right: 0,
@@ -32,7 +32,7 @@ ax.css( {
       // color: '#fff',
     },
 
-    '[data-axf-component="axf-panes-drag"]': {
+    '|axf-panes-drag': {
       display: 'block',
       position: 'absolute',
       left: 'calc( 50% - 2px )',
@@ -47,27 +47,27 @@ ax.css( {
 
     '&.dragable': {
       cursor: 'grabbing',
-      '[data-axf-component="axf-panes-drag"]': {
+      '|axf-panes-drag': {
         background: '#aaa',
       },
     },
 
     '&:not(.dragable)': {
-      '[data-axf-component="axf-panes-drag"]': {
+      '|axf-panes-drag': {
         cursor: 'ew-resize',
       },
     },
 
     '&.vertical': {
 
-      '[data-axf-component="axf-panes-proximate"]': {
+      '|axf-panes-proximate': {
         bottom: 'calc( 50% + 2px )',
         right: 0,
         // overflowY: 'hidden',
         // overflowX: 'auto',
       },
 
-      '[data-axf-component="axf-panes-adjacent"]': {
+      '|axf-panes-adjacent': {
         // width: '100%',
         left: 0,
         top: 'calc( 50% + 2px )',
@@ -76,7 +76,7 @@ ax.css( {
         // overflowX: 'auto',
       },
 
-      '[data-axf-component="axf-panes-drag"]': {
+      '|axf-panes-drag': {
         display: 'block',
         position: 'absolute',
         top: 'calc( 50% - 2px )',
@@ -88,7 +88,7 @@ ax.css( {
       },
 
       '&:not(.dragable)': {
-        '[data-axf-component="axf-panes-drag"]': {
+        '|axf-panes-drag': {
           cursor: 'ns-resize',
         },
       },

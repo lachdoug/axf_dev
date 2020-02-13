@@ -4,8 +4,8 @@ dependent = function( options ) {
   let a = ax.a
   let x = ax.x
 
-  if ( options.target ) {
-    let parts = options.target.split( '[..]' )
+  if ( options.key ) {
+    let parts = options.key.split( '[..]' )
     let keys = parts.pop()
     let scope = options.scope
     for ( let i in parts ) {
@@ -20,8 +20,8 @@ dependent = function( options ) {
   let dependentTag = {
     $init: function () {
       if( this.$dependable() ) {
-        let dependency = this.$dependency()
-        dependency.$registerDependent( this )
+        this.$dependency = x.form.field.dependent.shim.dependent.dependency( this, options )
+        this.$dependency.$registerDependent( this )
       }
     },
     $registerDependent: function( dependent ) {
@@ -51,14 +51,15 @@ dependent = function( options ) {
     $dependable: function() {
       return options.name || options.selector
     },
-    $dependency: function() {
-      return x.form.field.dependent.shim.dependent.dependency( this, options )
-    },
     $value: function() {
       return this.$('|appkit-form-control').$value()
     },
     $match: function() {
-      return x.form.field.dependent.shim.dependent.match( this, options )
+      if ( this.$dependency ) {
+        return x.form.field.dependent.shim.dependent.match( this, options )
+      } else {
+        return true
+      }
     },
     $check: function() {
       if ( this.$match() ) {

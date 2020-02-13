@@ -19,13 +19,17 @@ ax.extension.form.async.shim = function() {
           $disable: function() {
             let controls = [ ...this.$controls(), ...this.$buttons() ]
             for ( let i in controls ) {
-              controls[i].$disable && controls[i].$disable()
+              x.lib.element.visible( controls[i] ) &&
+              controls[i].$disable &&
+              controls[i].$disable()
             }
           },
           $enable: function() {
             let controls = [ ...this.$controls(), ...this.$buttons() ]
             for ( let i in controls ) {
-              controls[i].$enable && controls[i].$enable()
+              x.lib.element.visible( controls[i] ) &&
+              controls[i].$enable &&
+              controls[i].$enable()
             }
           },
           ...options.formTag,
@@ -41,16 +45,15 @@ ax.extension.form.async.shim = function() {
               if ( submitter && submitter.name ) {
                 data.append( submitter.name, submitter.value )
               }
-
+//
               el.$disable && el.$disable()
-
+//
               let resultDisplay = el.$('^|appkit-asyncform |appkit-asyncform-result')
 
               resultDisplay.$nodes = (a,x) => x.http( {
-                url: el.action,
+                url: el.getAttribute( 'action' ),
                 body: data,
-                method: el.method,
-                target: resultDisplay,
+                method: el.getAttribute( 'method' ),
                 when: options.when,
                 success: options.success,
                 error: options.error,
@@ -68,8 +71,13 @@ ax.extension.form.async.shim = function() {
                     resultDisplay.scrollIntoView()
                   }
 
+
                 },
               } )
+// debugger
+//               form.unbind('submit')
+// console.log('Submit!!!')
+              return false
 
             },
             ...( options.formTag || {} ).$on

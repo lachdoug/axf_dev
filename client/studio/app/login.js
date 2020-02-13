@@ -3,8 +3,9 @@ app.login = ( controller ) => (a,x) => a['app-login'](
     a.h3( "Log in" ),
     app.form( {
       url: '/~/session',
-      success: () => {
+      success: ( response, el ) => {
         nav.$setUser( true )
+        el.$send( 'app.server.authenticated' )
         controller.open()
       },
       when: {

@@ -14,8 +14,8 @@ ax.css.styles.rules = function( styleSpec, selectors=[] ) {
           selectorPart = ax.kebab( selectorPart )
         }
         if ( selectorPart[0] == '|' ) {
-          let match = selectorPart.match( /^\|(.*)/ )
-          selectorPart = `[data-axf-component="${ match[1] }"]`
+          let match = selectorPart.match( /^\|([a-zA-Z0-9-_]*)(.*)/ )
+          selectorPart = `[data-axf-component="${ match[1] }"]${ match[2] }`
         }
         result += ax.css.styles.rules( selected, selectors.concat( selectorPart ) )
       } )

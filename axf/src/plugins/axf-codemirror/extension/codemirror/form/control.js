@@ -17,7 +17,7 @@ ax.extension.codemirror.form.control = function(
       },
       $setKeymap: function () {
         this.$('textarea').$codemirror.setOption(
-          keyMap,
+          'keyMap',
           this.$( '|appkit-form-codemirror-keymap' ).$value() || null,
         )
       },

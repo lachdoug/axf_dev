@@ -2,7 +2,7 @@
  * Throw an error.
  *
  * @since 0.0.0
- * @namespace ax.log.error
+ * @namespace ax
  *
  * @param {string} message
  *

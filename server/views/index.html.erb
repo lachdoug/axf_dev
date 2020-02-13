@@ -27,6 +27,8 @@
   <script src='/node_modules/codemirror/addon/display/placeholder.js'></script>
   <script src='/node_modules/codemirror/mode/shell/shell.js'></script>
   <script src='/node_modules/codemirror/mode/javascript/javascript.js'></script>
+  <script src='/node_modules/codemirror/mode/lua/lua.js'></script>
+  <script src='/node_modules/codemirror/mode/r/r.js'></script>
   <script src='/node_modules/codemirror/mode/ruby/ruby.js'></script>
   <script src='/node_modules/codemirror/mode/python/python.js'></script>
   <script src='/node_modules/codemirror/mode/xml/xml.js'></script>
@@ -79,11 +81,10 @@ left: 0; top: 0; right: 0; bottom: 0; z-index: 1000; pointer-events: none;">
 
 <script>
 
-  let $currentUser = '<%= @current_user.class.to_s %>'
-
-  let $preferences = {
+  let $settings = {
+    // username: '<%= @current_user.class.to_s %>',
+    // sessionTimeoutSeconds: <%= ( ENV['SESSION_TIMEOUT_MINUTES'] || 30 ).to_f %>,
     codeEditorKeymap: 'vim',
-    enableServiceDesigner: <%= Server::Api.respond_to?( :enable_services_designer ) ? Server::Api.enable_services_designer : false %>,
   }
 
   window.onload = () => {

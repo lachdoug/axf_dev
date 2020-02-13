@@ -1,20 +1,10 @@
 app.view.disconnected = ( controller ) => (a,x) => a['app-disconnected'](
   [
-    a.h3( "Reconnect" ),
-    app.system.polling(
-      '/~/reconnected',
-      ( result, el ) => el.$send( 'systemReconnected' )
+    a.h3( "Disconnected" ),
+    app.btn(
+      app.icon( "fas fa-sync-alt", "Reconnect" ),
+      () => controller.load( '/reconnect' )
     )
-  ],
-  {
-    // $init: (el) => setTimeout(
-    //   () => {
-    //     debugger
-    //     app.http( '/~/system/status', (e,el) => {
-    //       return el.$send( 'systemReconnected' )
-    //     } )
-    //   },
-    //   1000
-    // )
-  }
+  ]
+
 )

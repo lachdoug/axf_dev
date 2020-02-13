@@ -43,6 +43,15 @@ check = function( f, options ) {
         for ( let input of inputs ) {
           input.removeAttribute('disabled')
         }
+        this.$processUnchecked()
+      }
+    },
+
+    $processUnchecked: function() {
+      if ( this.$('input[type=checkbox]').checked ) {
+        this.$('input[type=hidden]').setAttribute( 'disabled', 'disabled' )
+      } else {
+        this.$('input[type=hidden]').removeAttribute('disabled')
       }
     },
 
@@ -53,6 +62,7 @@ check = function( f, options ) {
     $valid: function() {
       this.$('input[type=checkbox]').setCustomValidity('')
       if( this.$validity().valid ) {
+        this.$processUnchecked()
         return true
       } else {
         if ( checkOptions.invalid ) {

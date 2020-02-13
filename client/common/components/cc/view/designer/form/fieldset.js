@@ -46,6 +46,9 @@ cc.view.designer.form.fieldset = (f) => [
         item: 'fieldset component',
         form: cc.view.designer.form.component,
         layout: 'vertical',
+        addable: true,
+        removable: true,
+        sortable: true,
       } ),
 
     ],

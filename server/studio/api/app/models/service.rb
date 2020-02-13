@@ -34,9 +34,9 @@ module Server
           #   { id: id }
           # end
 
-          def self.path
-            "data/services"
-          end
+          # def self.path
+          #   "data/services"
+          # end
 
           def initialize( namespace_id, id )
             @namespace_id = namespace_id
@@ -60,7 +60,7 @@ module Server
               namespace: namespace.name,
               remote: repo.remote,
               branch: repo.branch.current,
-              readme: readme.content,
+              # readme: readme.content,
               # blueprint: blueprint,
             }
           end
@@ -81,17 +81,17 @@ module Server
             @blueprint ||= Blueprint.new( self )
           end
 
-          def path
-            @path ||= "#{ self.class.path }/#{ namespace_id }/#{ id }"
+          def parent_dir
+            @parent_dir ||= "data/workspaces/#{ namespace_id }/services/#{ id }"
           end
 
           def name
-            raise Error::NoRecord.new id unless project_dir
-            @name ||= project_dir.sub( "#{path}/", '' )
+            raise Error::NoRecord.new id unless parent_dir
+            @name ||= repo_dir.sub( "#{parent_dir}/", '' )
           end
 
-          def project_dir
-            Dir.glob( "#{path}/*" )[0]
+          def repo_dir
+            Dir.glob( "#{parent_dir}/*" )[0]
           end
 
           def active
@@ -99,7 +99,7 @@ module Server
           end
 
           def delete
-            FileUtils.rm_rf path
+            FileUtils.rm_rf parent_dir
             {}
           end
 

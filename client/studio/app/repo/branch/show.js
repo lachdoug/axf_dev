@@ -1,7 +1,7 @@
 app.repo.branch.show = ( parent, path ) => controller => (a,x) => app.http(
   `/~/${ path }/repo/branch`,
   ( response, el ) => {
-    let branch = response.content
+    let branch = response.json()
 
     el.$nodes = [
 

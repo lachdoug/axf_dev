@@ -1,4 +1,4 @@
-cc.view.designer = ( controller, url, object ) => (a,x) => cc.form( {
+cc.view.designer = ( controller, url, object ) => (a,x) => app.form( {
   object: object,
   url: url,
   scope: 'view',
@@ -19,6 +19,9 @@ cc.view.designer = ( controller, url, object ) => (a,x) => cc.form( {
       item: 'view component',
       form: cc.view.designer.component,
       layout: 'vertical',
+      sortable: true,
+      addable: true,
+      removable: true,
     } ),
 
     f.field( {
@@ -26,6 +29,9 @@ cc.view.designer = ( controller, url, object ) => (a,x) => cc.form( {
       item: 'test',
       as: 'many',
       layout: 'vertical',
+      sortable: true,
+      addable: true,
+      removable: true,
       form: (ff) => [
 
         ff.field( {
@@ -43,7 +49,7 @@ cc.view.designer = ( controller, url, object ) => (a,x) => cc.form( {
         a.p( [
 
           cc.button( {
-            label: cc.icon( 'fa fa-flask', 'Run test' ),
+            label: app.icon( 'fa fa-flask', 'Run test' ),
             onclick: (e,el) => {
 
               let form = el.$('^form')
@@ -66,6 +72,7 @@ cc.view.designer = ( controller, url, object ) => (a,x) => cc.form( {
               }
 
               let viewSpec = el.$('^form').$object().view
+
               Object.values( viewSpec.components ).map( component => {
                 if ( component.type == 'form' ) component.form.url = '/~/test'
               } )
@@ -74,7 +81,7 @@ cc.view.designer = ( controller, url, object ) => (a,x) => cc.form( {
                 // a.hr,
                 ...cc.view.builder( viewSpec, params ),
                 // cc.button( {
-                //   label: cc.icon( 'fa fa-times', 'Clear test result' ),
+                //   label: app.icon( 'fa fa-times', 'Clear test result' ),
                 //   // buttonTag: {
                 //   //   class: 'btn btn-secondary',
                 //   // },

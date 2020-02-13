@@ -20,7 +20,7 @@ app.applications.new = (controller) => (a,x) => [
       } ),
     ],
     success: ( response, el ) => {
-      let application = response.content
+      let application = response.json()
       controller.open( `/applications/${ application.id }` )
     }
   } )

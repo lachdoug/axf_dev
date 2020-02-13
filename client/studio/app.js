@@ -1,8 +1,8 @@
-let app = (a,x) => a['div|app.container'](
-  [
+let app = (a,x) => a['app'](
+  a['div.container']( [
     app.router,
     app.modal(),
-  ],
+  ] ),
   {
     $on: {
       'app.server.not.authenticated': (e,el) => {
@@ -14,6 +14,7 @@ let app = (a,x) => a['div|app.container'](
       'appkit.router.open': (e,el) => {
         nav.$update()
       },
+      // 'appkit.router.load'
     }
   }
 )

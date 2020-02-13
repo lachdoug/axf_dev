@@ -17,7 +17,7 @@ ax.extension.popup = function( component, options={} ) {
     $on: {
       // 'axf.appkit.context.popup.close': (e,el) => {
       // },
-      'click': (e,el) => {
+      'click: close submenus': (e,el) => {
         if ( options.menu ) {
           let menu = el.$('|appkit-menu')
           menu && menu.$closeSubmenus()
@@ -93,7 +93,7 @@ ax.extension.popup = function( component, options={} ) {
       }
 
       el.$on( {
-        'contextmenu': (e) => {
+        'click: show popup': (e) => {
           e.preventDefault()
           e.stopPropagation()
           popup.$nodes = popupContents

@@ -11,6 +11,9 @@ cc.view.designer.form.row = (f) => (a,x) => [
         form: cc.view.designer.form.component,
         label: false,
         layout: 'vertical',
+        addable: true,
+        removable: true,
+        sortable: true,
       } ),
 
     ],

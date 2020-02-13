@@ -5,13 +5,11 @@ app.views.edit = ( parent, path ) => (controller) => (a,x) => [
   app.http(
     `/~/${ path }/views/${ controller.params.view_id }`,
     ( response, el ) => {
-      let view = response.content || []
-
-      el.$nodes = [
+      response.json().then( view => el.$nodes = [
 
         app.view.designer( controller, `/~/${ path }/views/${ controller.params.view_id }`, view )
 
-      ]
+      ] )
 
     },
     {

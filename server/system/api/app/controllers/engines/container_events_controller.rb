@@ -18,18 +18,35 @@ module Server
                 if event[:no_op]
                   data = {}
                 else
-                  if event[:container_type] == 'service' || event[:container_type] == 'app'
+                  if event[:from] == 'system'
+                    serializedSystemStatus = @engines.get( "/system/status" ).body
+                    serializedBuilderStatus = @engines.get( "/engine_builder/status" ).body
+                    systemStatus = JSON.parse( serializedSystemStatus, symbolize_names: true )
+                    builderStatus = JSON.parse( serializedBuilderStatus, symbolize_names: true )
+                    update = { status: systemStatus.merge( builderStatus ) }
+                    data = {
+                      type: :system_status_update,
+                      system_status_update: update,
+                      api_event: event
+                    }.to_json
+                  elsif event[:container_type] == 'service' || event[:container_type] == 'app'
                     name = event[:container_name]
                     type = event[:container_type] == 'service' ? 'service' : 'application'
                     typeForRoute = type == 'service' ? 'service' : 'engine'
-                    status = JSON.parse(
-                      @engines.get( "/containers/#{ typeForRoute }/#{ name }/status" ),
-                      symbolize_names: true
-                    )
+                    # begin
+                      serializedStatus = @engines.get( "/containers/#{ typeForRoute }/#{ name }/status" ).body
+                      status = JSON.parse( serializedStatus, symbolize_names: true )
+                    # rescue => e
+                    #   raise e
+                    # end
                     update = { type: type, name: name, status: status }
-                    data = { type: :container_status_update, container_status_update: update }.to_json
+                    data = {
+                      type: :container_status_update,
+                      container_status_update: update,
+                      api_event: event
+                    }.to_json
                   else
-                    data = { type: :unhandled_event, unhandled_event: event }.to_json
+                    data = { type: :unhandled_event, api_event: event }.to_json
                   end
                 end
                 logger.info "STREAM:#{ started }: Container events stream sending data.\n#{ data }\n"

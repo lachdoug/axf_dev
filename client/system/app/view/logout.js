@@ -2,6 +2,7 @@ app.view.logout = ( controller ) => (a,x) => a['app-logout'](
   app.http(
     '/~/session',
     ( result, el  ) => {
+      el.$send( 'app.unauthenticated' )
       el.$nodes = a.$$.p(
         a.h3( "Logged out" ),
         app.btn(

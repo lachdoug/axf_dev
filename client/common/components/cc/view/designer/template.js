@@ -13,7 +13,7 @@ cc.view.designer.template = (f) => f.fieldset( {
     ]
   } ),
   dependent: {
-    target: 'type',
+    key: 'type',
     pattern: '^template$',
   },
 } ),

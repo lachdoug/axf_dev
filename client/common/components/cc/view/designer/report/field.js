@@ -14,6 +14,8 @@ cc.view.designer.report.field = (f) => [
       { value: 'textarea', label: 'Text area' },
       { value: 'boolean', label: 'Boolean' },
       { disabled: 'hr' },
+      { value: 'hidden', label: 'Hidden' },
+      { disabled: 'hr' },
       { value: 'color', label: 'Color' },
       { value: 'date', label: 'Date' },
       { value: 'email', label: 'Email' },
@@ -70,7 +72,7 @@ cc.view.designer.report.field = (f) => [
                 // required: true,
                 // placeholder: 'Required',
                 dependent: {
-                  target: 'display',
+                  key: 'display',
                   value: 'custom'
                 }
               } ),
@@ -95,7 +97,7 @@ cc.view.designer.report.field = (f) => [
 
         ],
         // dependent: {
-        //   target: 'control',
+        //   key: 'control',
         //   pattern: '^(?!hidden).*$',
         // },
       } ),
@@ -103,7 +105,7 @@ cc.view.designer.report.field = (f) => [
       f.field( {
         key: 'placeholder',
         dependent: {
-          target: 'control',
+          key: 'control',
           pattern: '^(?!boolean|object|one|many|table)$',
         }
       } ),
@@ -125,7 +127,7 @@ cc.view.designer.report.field = (f) => [
       //   key: 'value',
       //   label: 'Default value',
       //   dependent: {
-      //     target: 'control',
+      //     key: 'control',
       //     pattern: '^(?!(one|many|table)$).*$',
       //   }
       // } ),
@@ -149,8 +151,11 @@ cc.view.designer.report.field = (f) => [
               fff.field( { key: 'value' } ),
               fff.field( { key: 'label' } ),
             ],
+            addable: true,
+            removable: true,
+            sortable: true,
             dependent: {
-              target: 'type',
+              key: 'type',
               value: 'static',
             }
           } ),
@@ -158,13 +163,13 @@ cc.view.designer.report.field = (f) => [
             key: 'scope',
             // placeholder: 'Required',
             dependent: {
-              target: 'type',
+              key: 'type',
               pattern: '^dynamic$',
             }
           } ),
         ],
         dependent: {
-          target: 'control',
+          key: 'control',
           pattern: '^select$',
         }
       } ),
@@ -185,7 +190,7 @@ cc.view.designer.report.field = (f) => [
           ] } ),
         ],
         dependent: {
-          target: 'control',
+          key: 'control',
           value: 'boolean',
         },
       } ),
@@ -209,7 +214,7 @@ cc.view.designer.report.field = (f) => [
           } ),
         ],
         dependent: {
-          target: 'control',
+          key: 'control',
           value: 'code',
         },
       } ),
@@ -234,7 +239,7 @@ cc.view.designer.report.field = (f) => [
       ]
     } ),
     dependent: {
-      target: 'control',
+      key: 'control',
       pattern: '^(one|many|table)$',
     }
   } ),

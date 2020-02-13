@@ -32,13 +32,13 @@ module Server
             end
 
             def create( view )
-              raise Error::MissingParam.new ':name' if params[:name].to_s.empty?
               @to_h = to_h.push( view )
               save
               { name: view[:name] }
             end
+            
             def update( name, view )
-              raise Error::MissingParam.new ':name' if params[:name].to_s.empty?
+              raise Error::MissingParam.new ':name' if name.to_s.empty?
               index = to_h.each_with_index.select { |view,i| view[:name] == name }.map(&:last)[0]
               @to_h[index] = view
               save

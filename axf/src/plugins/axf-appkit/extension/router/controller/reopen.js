@@ -1,2 +1,2 @@
-ax.extension.router.controller.
-reopen = config => () => config.router[0].$go()
+// ax.extension.router.controller.
+// reopen = config => () => config.router[0].$go()

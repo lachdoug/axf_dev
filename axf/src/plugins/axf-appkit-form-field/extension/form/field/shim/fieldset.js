@@ -34,6 +34,10 @@ fieldset = function( f, options={} ) {
         controls[i].$enable && controls[i].$enable()
       }
     },
+    $focus: function() {
+      let first = this.$controls()[0]
+      if ( first ) first.$focus()
+    },
   } )
 
   return a['fieldset|appkit-form-fieldset']( [

@@ -4,7 +4,7 @@ output = function( options={} ) {
   let a = ax.a
   let x = ax.x
 
-  let value = options.value || null
+  let value = options.value || ''
   let type = options.type || 'string'
 
   if ( type ) {

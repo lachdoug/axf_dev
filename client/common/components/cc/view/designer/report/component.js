@@ -23,7 +23,7 @@ cc.view.designer.report.component = (f) => [
     label: false,
     layout: 'vertical',
     dependent: {
-      target: 'type',
+      key: 'type',
       pattern: '^field$',
     },
     form: cc.view.designer.report.field
@@ -35,7 +35,7 @@ cc.view.designer.report.component = (f) => [
     label: false,
     layout: 'vertical',
     dependent: {
-      target: 'type',
+      key: 'type',
       pattern: '^fieldset$',
     },
     form: cc.view.designer.report.fieldset
@@ -47,7 +47,7 @@ cc.view.designer.report.component = (f) => [
     label: false,
     layout: 'vertical',
     dependent: {
-      target: 'type',
+      key: 'type',
       pattern: '^row$',
     },
     form: cc.view.designer.report.row
@@ -59,7 +59,7 @@ cc.view.designer.report.component = (f) => [
     label: false,
     layout: 'vertical',
     dependent: {
-      target: 'type',
+      key: 'type',
       pattern: '^form$',
     },
     form: cc.view.designer.report.form
@@ -71,7 +71,7 @@ cc.view.designer.report.component = (f) => [
     label: false,
     layout: 'vertical',
     dependent: {
-      target: 'type',
+      key: 'type',
       pattern: '^template$',
     },
   } ),

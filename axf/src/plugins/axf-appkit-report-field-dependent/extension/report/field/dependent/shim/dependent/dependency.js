@@ -13,18 +13,18 @@ dependent.dependency = ( el, options ) => {
   }
 
   let search = options.search || '^|appkit-report'
-// debugger
-  let selected = el.$( search ).$( selector )
 
-  if ( selected ) {
-    selected = selected.$('^|appkit-report-field-dependent')
-    if ( selected ) {
-      return selected
-    } else {
-      ax.log.error( `Form field failed to find <appkit-report-field-dependent> parent for its dependency using options:`,  options )
-    }
+  let target = el.$( search ).$( selector )
+  let targetDependency
+
+  if ( target ) {
+    targetDependency = target.$('^|appkit-report-field-dependent')
+  }
+
+  if ( targetDependency ) {
+    return targetDependency
   } else {
-    ax.log.error( `Form field failed to select its dependency using options:`, options )
+    console.error( `Report field failed to find a dependency target using options:`, options )
   }
 
 }

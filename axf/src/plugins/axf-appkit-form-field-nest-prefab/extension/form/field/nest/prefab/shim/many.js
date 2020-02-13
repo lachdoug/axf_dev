@@ -23,7 +23,7 @@ many = function ( f, options ) {
         itemsTag: {
           ...options.itemsTag,
           $on: {
-            'sortupdate': (e,el) => {
+            'sortupdate: rescope items': (e,el) => {
               el.$rescopeItems()
             },
             // 'axf.appkit.form.nest.items.rescope': (e,el) => {

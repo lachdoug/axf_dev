@@ -15,7 +15,7 @@ ax.tag.proxy.function = function( component ) {
   } if ( ax.is.object( component) ) {
     return ax.factory.element( component )
   } else {
-    ax.log.error( 'Component must be String or Object.' )
+    console.error( 'Component must be String or Object.' )
   }
 
 }

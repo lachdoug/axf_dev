@@ -7,9 +7,7 @@ app.views.show = ( parent, path ) => (controller) => (a,x) => [
   app.http(
     `/~/${ path }/views/${ controller.params.view_id }`,
     ( response, el ) => {
-      let view = response.content || []
-
-      el.$nodes = [
+      response.json().then( view => el.$nodes = [
 
         app.button( {
           label: app.icon( 'fa fa-edit', 'Edit' ),
@@ -21,7 +19,7 @@ app.views.show = ( parent, path ) => (controller) => (a,x) => [
 
         a.pre( [ view ] )
 
-      ]
+      ] )
 
     },
     {

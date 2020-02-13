@@ -5,14 +5,14 @@ app.view.restarting = ( controller ) => (a,x) => a['app-restarting'](
       '/~/system/status',
       ( result, el ) =>  {
         if ( result.is_rebooting ) {
-          el.$send( 'systemRestarting' )
+          throw new Error( 'Restarting' )
         } else {
-          el.$send( 'systemReconnected' )
+          el.$send( 'app.reconnected' )
         }
       },
       {
         status: {
-          503: ( result, el ) => el.$send( 'systemReconnected' )
+          503: ( result, el ) => el.$send( 'app.reconnected' )
         }
       }
     )

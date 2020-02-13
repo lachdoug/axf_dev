@@ -22,7 +22,7 @@ cc.view.designer.form.component = (f) => [
     label: false,
     layout: 'vertical',
     dependent: {
-      target: 'type',
+      key: 'type',
       pattern: '^field$',
     },
     form: cc.view.designer.form.field
@@ -34,7 +34,7 @@ cc.view.designer.form.component = (f) => [
     label: false,
     layout: 'vertical',
     dependent: {
-      target: 'type',
+      key: 'type',
       pattern: '^fieldset$',
     },
     form: cc.view.designer.form.fieldset
@@ -46,7 +46,7 @@ cc.view.designer.form.component = (f) => [
     label: false,
     layout: 'vertical',
     dependent: {
-      target: 'type',
+      key: 'type',
       pattern: '^row$',
     },
     form: cc.view.designer.form.row
@@ -58,7 +58,7 @@ cc.view.designer.form.component = (f) => [
     label: false,
     layout: 'vertical',
     dependent: {
-      target: 'type',
+      key: 'type',
       pattern: '^template$',
     },
   } ),

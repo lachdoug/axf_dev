@@ -48,6 +48,7 @@ ax.extension.report.field.shim = function() {
     control: ( r, target ) => ( options={} ) => this.shim.control( r, options ),
     controls: {
       output: ( r, target ) => ( options={} ) => this.shim.controls.output( r, options ),
+      boolean: ( r, target ) => ( options={} ) => this.shim.controls.boolean( r, options ),
       json: ( r, target ) => ( options={} ) => this.shim.controls.json( r, options ),
       // number: ( r, target ) => ( options={} ) => this.shim.controls.select( r, options ),
       // preformatted: ( r, target ) => ( options={} ) => this.shim.controls.preformatted( r, options ),

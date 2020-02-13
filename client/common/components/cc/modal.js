@@ -1,4 +1,4 @@
-cc.modal = ( options={} ) => (a,x) => a['|app-modal'](
+cc.modal = ( options={} ) => (a,x) => a['app-modal'](
   a['div.modal'](
     a['div.modal-dialog'](
       a['div.modal-content'](),

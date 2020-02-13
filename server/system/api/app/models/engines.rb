@@ -87,14 +87,15 @@ module Server
 
           def response_for( &block )
             yield
-          rescue RestClient::Forbidden
+          rescue  RestClient::Forbidden
             raise Error::NotAuthenticated
-          rescue RestClient::NotFound => e
+          rescue  RestClient::NotFound => e
             raise Error::System404.new e
-          rescue RestClient::MethodNotAllowed
+          rescue  RestClient::MethodNotAllowed => e
             raise Error::SystemApiWarning.new e
-          rescue RestClient::InternalServerError => e
-            raise Error::System500.new e
+          rescue  RestClient::NotAcceptable,
+                  RestClient::InternalServerError => e
+            raise Fatal::SystemError.new e
           rescue  Errno::EHOSTUNREACH,
                   Errno::ECONNREFUSED,
                   Errno::ECONNRESET,

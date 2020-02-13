@@ -14,21 +14,25 @@ table = function ( f, options ) {
         let ffP = new Proxy( ff, {
           get: ( target, property ) => {
             if ( property == 'field' ) {
-              return ( options ) => {
-                let label = options.label || x.lib.text.labelize( options.key )
+              return ( itemOptions ) => {
+                let label = itemOptions.label || x.lib.text.labelize( itemOptions.key )
                 return a.th( a['|appkit-form-field']( [
                   label,
-                  options.help ? ff.helpbutton( {
+                  itemOptions.help ? ff.helpbutton( {
                     helpbuttonTag: {
                       $on: {
                         'click: toggle help': function() {
                           this.$state = !this.$state
-                          this.$('^table', `|appkit-form-field-help[data-field-key="${ options.key }"]`).$toggle()
+                          this.$('^table', `|appkit-form-field-help[data-field-key="${ itemOptions.key }"]`).$toggle()
                         },
                       },
                     },
                   } ) : null,
-                ] ), options.thTag )
+                ] ), {
+                  // width: '100%',
+                  ...options.thTag,
+                  ...itemOptions.thTag
+                } )
               }
             } else {
               return a.td
@@ -38,7 +42,10 @@ table = function ( f, options ) {
 
         let headerCells = function() {
           let cells = form(ffP) || []
-          cells.push( a.th() )
+          cells.push( a.th( {
+            width: '10%',
+            ...options.thTag
+          } ) )
           return cells
         }
 
@@ -141,18 +148,18 @@ table = function ( f, options ) {
 
               cells.push( a.td(
                 a['|appkit-form-nest-table-item-buttons']( [
-                  fffP.up( {
+                  options.sortable ? fffP.up( {
                     itemTarget: (el) => el.$('^tr'),
                     ...options.upButton
-                  } ),
-                  fffP.down( {
+                  } ) : null,
+                  options.sortable ? fffP.down( {
                     itemTarget: (el) => el.$('^tr'),
                     ...options.downButton
-                  } ),
-                  fffP.remove( {
+                  } ) : null,
+                  options.removable ? fffP.remove( {
                     itemTarget: (el) => el.$('^tr'),
                     ...options.removeButton
-                  } ),
+                  } ) : null,
                 ], options.itemButtonsTag )
               ) )
               return cells
@@ -208,15 +215,15 @@ table = function ( f, options ) {
 
         return a['|appkit-form-nest-table-footer']( [
 
-          a['|appkit-form-nest-add-button'](
+          options.addable ? a['|appkit-form-nest-add-button'](
             ff.add( {
               target: (el) => el.$('^|appkit-form-nest tbody'),
               ...options.addButton,
             } ),
             options.addButtonTag
-          ),
+          ) : null,
 
-          a['|appkit-form-nest-sort-buttons']( [
+          options.sortable ? a['|appkit-form-nest-sort-buttons']( [
             a['|appkit-form-nest-sort-on']( ff.button( {
               label: '⬍',
               onclick: (e,el) => {
@@ -245,7 +252,7 @@ table = function ( f, options ) {
               },
 
             } ),
-          ], options.sortButtonsTag ),
+          ], options.sortButtonsTag ) : null,
 
         ], options.footerTag )
 

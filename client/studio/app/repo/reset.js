@@ -55,7 +55,7 @@ app.repo.reset = ( parent, path ) => controller => (a,x) => [
 //  app.http(
 //   `/~/${ path }/repo`,
 //   ( response, el ) => {
-//     let repo = response.content
+//     let repo = response.json()
 //
 //     // up.$set()
 //

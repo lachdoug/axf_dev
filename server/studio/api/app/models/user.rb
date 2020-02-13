@@ -43,6 +43,10 @@ module Server
             "#{ Dir.home }/.ssh/#{ @settings.ssh_public_key_filename }"
           end
 
+          def session_timeout_seconds
+            @settings.session_timeout_seconds
+          end
+
           private
 
           def filepath
@@ -52,7 +56,7 @@ module Server
           def within_timeout
             last_activity_at = timestamp
             return false unless last_activity_at
-            last_activity_at + @settings.session_timeout_seconds > Time.now
+            last_activity_at + session_timeout_seconds > Time.now
           end
 
           def timestamp

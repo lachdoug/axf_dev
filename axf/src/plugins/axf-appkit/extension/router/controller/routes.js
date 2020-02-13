@@ -89,6 +89,8 @@ routes = ( config, startLocation ) => function( routes, options={} ) {
           this.$nodes = locatedView.component
         }
 
+        this.$send( 'appkit.router.load' )
+
       }
 
       this.$matched = locatedView.matched

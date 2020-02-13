@@ -2,7 +2,6 @@ ax.css( {
 
   '.app-library': {
     display: 'block',
-    // columns: '200px',
 
     '> button': {
       textAlign: 'left',

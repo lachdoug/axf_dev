@@ -1,35 +1,35 @@
 let formDesignerTestParams = [
 
-  {
-    "components": [
-      {
-        type: 'report',
-        report: {
-          scope: '',
-          components: [
-            {
-              type: 'field',
-              field: {
-                key: 'mynum',
-              }
-            }
-          ],
-        }
-      }
-    ],
-    tests: [
-      {
-        parameters: {
-          mynum: 'Hi',
-          pets: [
-            { name: 'Puss' },
-            { name: 'Fido' },
-
-          ],
-        }
-      }
-    ]
-  },
+  // {
+  //   "components": [
+  //     {
+  //       type: 'report',
+  //       report: {
+  //         scope: '',
+  //         components: [
+  //           {
+  //             type: 'field',
+  //             field: {
+  //               key: 'mynum',
+  //             }
+  //           }
+  //         ],
+  //       }
+  //     }
+  //   ],
+  //   tests: [
+  //     {
+  //       parameters: {
+  //         mynum: 'Hi',
+  //         pets: [
+  //           { name: 'Puss' },
+  //           { name: 'Fido' },
+  //
+  //         ],
+  //       }
+  //     }
+  //   ]
+  // },
 
   {
     "components": {

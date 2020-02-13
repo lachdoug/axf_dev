@@ -84,7 +84,11 @@ module Server
 
       end
 
-      class System500 < Error
+    end
+
+    class Fatal < StandardError
+
+      class SystemError < Fatal
 
         def initialize(e)
           @body = e.http_body
@@ -106,8 +110,8 @@ module Server
 
       end
 
-
     end
+
 
     not_found do
       content_type :text

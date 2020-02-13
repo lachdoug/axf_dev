@@ -1,12 +1,10 @@
 app.home = ( controller ) => (a,x) => [
 
-  // a.h3( 'Home' ),
   app.http(
     '/~/',
     ( response, el ) => {
-      let home = response.content || []
 
-      el.$nodes = [
+      response.json().then( home => el.$nodes = [
         // x.popup( "Hi", {
         //   menu: [ {
         //     label: 'Hi'
@@ -15,20 +13,21 @@ app.home = ( controller ) => (a,x) => [
 
         // home,
 
-        a.h3( 'Applications' ),
+        app.button( {
+          label: app.icon( 'fa fa-caret-right', 'Applications' ),
+          onclick: () => controller.open(
+            'applications'
+          ),
+        } ),
 
         home.applications.active.map( (application) => app.button( {
           label: app.icon( 'fa fa-caret-right', application.name ),
-          onclick: () => controller.open(
-            `/applications/${ application.id }`
-          ),
+          onclick: () => controller.open( `/applications/${ application.id }` ),
         } ) ),
-
-        a.h3( 'Services' ),
 
         home.namespaces.map( (namespace) => [
 
-          a.h5( namespace.name ),
+          a.h5( `${ namespace.name } services` ),
 
           namespace.services.active.map( (service) => app.button( {
             label: app.icon( 'fa fa-caret-right', service.name ),
@@ -42,7 +41,8 @@ app.home = ( controller ) => (a,x) => [
 
 
 
-      ]
+      ] )
+
 
     }
   )

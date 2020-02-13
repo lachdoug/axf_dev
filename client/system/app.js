@@ -11,7 +11,7 @@ let app = (a,x) => a['app']( [
 //   // style: "display: block;",
 // } )
 
-// app.nav = (controller) => (a,x) => a['div|app-nav']( [
+// app.nav = (controller) => (a,x) => a['app-nav']( [
 //
 //   // app.link( {
 //   //   label: [
@@ -33,7 +33,7 @@ let app = (a,x) => a['app']( [
 //     class: 'btn btn-outline-secondary',
 //   } ),
 //
-//   a['|app-nav-buttons']( [
+//   a['app-nav-buttons']( [
 //
 //     app.button( {
 //       label: 'Applications',
@@ -78,7 +78,7 @@ let app = (a,x) => a['app']( [
 //     this.$update()
 //   },
 //   $setUser: function( user ) {
-//     let buttons = this.$('|app-nav-buttons')
+//     let buttons = this.$('app-nav-buttons')
 //     user ? x.lib.animate.fade.in( buttons ) : x.lib.animate.fade.out( buttons )
 //   },
 //   $path: () => window.location.pathname,

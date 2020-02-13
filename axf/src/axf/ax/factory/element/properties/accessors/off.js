@@ -1,11 +1,14 @@
 ax.factory.element.properties.accessors.off = function ( element ) {
 
-  element.$off = function ( event ) {
-    
+  element.$off = function ( handle ) {
+
     element.removeEventListener(
-      event.split(':')[0],
-      element.$events[ event ]
+      handle.split(':')[0],
+      element.$events[handle]
     )
+
+    delete element.$events[handle]
+
   }
 
   return element

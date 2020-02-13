@@ -15,9 +15,7 @@ app.views.index = ( parent, path ) => (controller) => (a,x) => [
   app.http(
     `/~/${ path }/views`,
     ( response, el ) => {
-      let views = response.content || []
-
-      el.$nodes = [
+      response.json().then( views => el.$nodes = [
 
         views.length == 0 ? 'None' : null,
         views.map( view => a.p( [
@@ -29,7 +27,7 @@ app.views.index = ( parent, path ) => (controller) => (a,x) => [
             title: `View ${ view.name }`,
           } ),
         ] ) )
-      ]
+      ] )
 
     },
     {

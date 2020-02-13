@@ -271,7 +271,16 @@ ax.extension.bootstrap.report.shim = function() {
           },
         },
 
-      } )
+      } ),
+
+      boolean: ( r, target ) => ( options={} ) => target( {
+        ...options,
+        booleanTag: {
+          class: 'p-2 d-block',
+          ...options.outputTag,
+        },
+      } ),
+
     },
 
 

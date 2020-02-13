@@ -7,7 +7,7 @@ crossfade = function( options={} ) {
   let time = ( options.time || 500 ) / 2
   let component = options.initial
 
-  return a['|appkit-transition']( {
+  return a['div|appkit-transition']( {
     $init: function () {
       this.style.display = 'none'
       if( component ) {

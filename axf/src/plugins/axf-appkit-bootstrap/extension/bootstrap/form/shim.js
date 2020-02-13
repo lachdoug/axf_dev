@@ -109,37 +109,25 @@ ax.extension.bootstrap.form.shim = function() {
       },
     } ),
 
-    check: ( f, target ) => ( options={} ) => {
-
-      let checkTagClass
-
-      // if ( options.layout == 'vertical' ) {
-      //   checkTagClass = 'custom-control custom-checkbox'
-      // } else {
-      // }
-      checkTagClass = 'custom-control custom-checkbox m-2'
-
-      return target( {
-        ...options,
-        checkTag: {
-          class: checkTagClass,
-          ...options.checkTag,
-        },
-        inputTag: {
-          class: 'custom-control-input',
-          ...options.inputTag,
-        },
-        labelTag: {
-          class: 'custom-control-label',
-          ...options.labelTag,
-        },
-        wrapperTag: {
-          class: 'd-inline-block p-1',
-          ...options.wrapperTag,
-        }
-      } )
-
-    },
+    check: ( f, target ) => ( options={} ) => target( {
+      ...options,
+      checkTag: {
+        class: 'custom-control custom-checkbox m-2',
+        ...options.checkTag,
+      },
+      inputTag: {
+        class: 'custom-control-input',
+        ...options.inputTag,
+      },
+      labelTag: {
+        class: 'custom-control-label',
+        ...options.labelTag,
+      },
+      wrapperTag: {
+        class: 'd-inline-block p-1',
+        ...options.wrapperTag,
+      }
+    } ),
 
     checks: ( f, target ) => ( options={} ) => target( {
       ...options,
@@ -234,35 +222,35 @@ ax.extension.bootstrap.form.shim = function() {
         sortOnButton: {
           ...options.sortOnButton,
           buttonTag: {
-            class: 'btn btn-outline-primary',
+            class: 'btn btn-secondary',
             ...( options.sortOnButton || {} ).buttonTag,
           },
         },
         addButton: {
           ...options.addButton,
           buttonTag: {
-            class: 'btn btn-outline-primary',
+            class: 'btn btn-secondary',
             ...( options.addButton || {} ).buttonTag,
           },
         },
         upButton: {
           ...options.upButton,
           buttonTag: {
-            class: 'btn btn-outline-primary',
+            class: 'btn btn-secondary',
             ...( options.upButton || {} ).buttonTag,
           },
         },
         downButton: {
           ...options.downButton,
           buttonTag: {
-            class: 'btn btn-outline-primary',
+            class: 'btn btn-secondary',
             ...( options.downButton || {} ).buttonTag,
           },
         },
         removeButton: {
           ...options.removeButton,
           buttonTag: {
-            class: 'btn btn-outline-primary',
+            class: 'btn btn-secondary',
             ...( options.removeButton || {} ).buttonTag,
           },
         },
@@ -296,35 +284,35 @@ ax.extension.bootstrap.form.shim = function() {
         sortOnButton: {
           ...options.sortOnButton,
           buttonTag: {
-            class: 'btn btn-outline-primary',
+            class: 'btn btn-secondary',
             ...( options.sortOnButton || {} ).buttonTag,
           },
         },
         addButton: {
           ...options.addButton,
           buttonTag: {
-            class: 'btn btn-outline-primary',
+            class: 'btn btn-secondary',
             ...( options.addButton || {} ).buttonTag,
           },
         },
         upButton: {
           ...options.upButton,
           buttonTag: {
-            class: 'btn btn-outline-primary',
+            class: 'btn btn-secondary',
             ...( options.upButton || {} ).buttonTag,
           },
         },
         downButton: {
           ...options.downButton,
           buttonTag: {
-            class: 'btn btn-outline-primary',
+            class: 'btn btn-secondary',
             ...( options.downButton || {} ).buttonTag,
           },
         },
         removeButton: {
           ...options.removeButton,
           buttonTag: {
-            class: 'btn btn-outline-primary',
+            class: 'btn btn-secondary',
             ...( options.removeButton || {} ).buttonTag,
           },
         },

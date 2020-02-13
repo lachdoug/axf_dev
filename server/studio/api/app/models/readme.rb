@@ -22,7 +22,7 @@ module Server
 
           def to_h
             {
-              branch: owner.repo.branch.current,
+              # branch: owner.repo.branch.current,
               content: content,
             }
           end

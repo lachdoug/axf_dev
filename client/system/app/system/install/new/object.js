@@ -1,26 +1,25 @@
 app.system.install.new.object = ( install ) => {
 
-  // let blueprint = install.blueprint
-  // let default_domain = install.default_domain
-  // let engine_names = install.engine_names
-  // let hostnames = install.hostnames
-  // let locale = install.locale
-
   let dig = ( ...keys ) => ax.x.lib.object.dig( install.blueprint, keys )
 
+  let environment_variables = ( dig( 'software', 'environment_variables' ) || [] )
+  let variables = environment_variables.filter(
+    environment_variable => environment_variable.ask_at_build_time
+  )
+
   return {
-    blueprint_url: install.blueprint_url,
+    repository_url: install.blueprint_url,
     icon_url: install.icon_url,
     engine_name: dig ( 'software', 'base', 'name' ),
     memory: dig( 'software', 'base', 'memory', 'recommended' ),
     minimum_memory: dig( 'software', 'base', 'memory', 'required' ),
     country_code: install.locale.country_code,
-    language_code: install.locale.lang_code,
+    lang_code: install.locale.lang_code,
     http_protocol: dig ( 'software', 'base', 'http_protocol' ),
     host_name: dig ( 'software', 'base', 'name' ),
     domain_name: install.default_domain,
 
-    services: install.services.map( service => ( {
+    attached_services: install.services.map( service => ( {
       publisher_namespace: service.definition.publisher_namespace,
       type_path: service.definition.type_path,
       create_types: {
@@ -36,18 +35,17 @@ app.system.install.new.object = ( install ) => {
       adoptable: service.adoptable.map( service => `${ service.parent_engine }/${ service.service_handle }` ),
     } ) ),
 
-    environment_variables:  dig( 'software', 'environment_variables' ) || [],
-
+    variables:  variables.map( variable => v0EnginesField( variable ) ),
 
     domains: Object.keys( install.domains ),
     application_names: Object.keys( install.applications_status ),
-
 
     reserved_engine_names: install.reserved_engine_names,
     reserved_hostnames: install.reserved_hostnames,
     locale: install.locale,
 
     blueprint: install.blueprint,
+
   }
 
 }

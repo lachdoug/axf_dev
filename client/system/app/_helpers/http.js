@@ -3,14 +3,17 @@ app.http = function( route, success, options={} ) {
   return (a,x) => x.http( {
     url: route,
     success: success,
-    catch: options.catch || ( ( error, el ) => el.$send( 'systemDisconnected' ) ),
+    catch: options.catch || ( ( error, el ) => el.$send( 'app.disconnected' ) ),
     ...options,
     when: {
-      401: ( response, el ) => el.$send( 'systemNotAuthenticated' ),
-      418: ( response, el ) => el.$send( 'systemSessionTimeout' ),
-      503: ( response, el ) => el.$send( 'systemDisconnected' ),
+      401: ( response, el ) => el.$send( 'app.unauthenticated' ),
+      418: ( response, el ) => el.$send( 'app.timeout' ),
+      503: ( response, el ) => el.$send( 'app.disconnected' ),
       'text/terminal': ( response, el ) => response.text().then( result => {
-        el.$nodes = app.xterm( { text: result } )
+        el.$nodes = app.xterm( {
+          text: result,
+          label: response.status == 500 ? a['.error']( 'Error' ) : options.label,
+        } )
       } ),
       ...options.when
       // 'application/octet-stream': ( response, el ) => {

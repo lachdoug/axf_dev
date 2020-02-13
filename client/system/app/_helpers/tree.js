@@ -1,0 +1,1 @@
+app.tree = cc.tree

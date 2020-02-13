@@ -5,13 +5,13 @@ module Server
         class Repo
           class Cloning
 
-            def initialize( url, destination, namespace )
+            def initialize( url, destination ) #, namespace )
               @url = url
               @destination = destination
-              @namespace = namespace
+              # @namespace = namespace
             end
 
-            attr_reader :url, :destination, :namespace
+            attr_reader :url, :destination #, :namespace
 
             def process
               reset
@@ -30,16 +30,16 @@ module Server
               Dir.glob( "#{ tmp }/*" )[0].sub( "#{ tmp }/", '' )
             end
 
-            def namespaced_name
-              namespace ? "#{ namespace }/#{ name }" : name
-            end
+            # def namespaced_name
+            #   namespace ? "#{ namespace }/#{ name }" : name
+            # end
 
             def id
-              @id ||= Digest::MD5.hexdigest namespaced_name
+              @id ||= Digest::MD5.hexdigest name
             end
 
             def check
-              raise Error::RepoAlreadyExists.new namespaced_name if File.exist? path
+              raise Error::RepoAlreadyExists.new name if File.exist? path
               FileUtils.mkpath path
             end
 

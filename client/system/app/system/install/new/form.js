@@ -1,21 +1,22 @@
 app.system.install.new.form = ( controller, install ) => (a,x) => {
 
   return app.form( {
+    // url: '/~/dev',
     url: '/~/~/containers/engines/build',
-    // success: () => controller.open( '/install/monitor' ),
+    success: () => controller.open( '../monitor' ),
     object: install,
-    scope: 'install',
+    scope: 'api_vars',
     form: (f) => [
 
-      f.field( { key: 'blueprint_url', as: 'input/hidden' } ),
+      f.field( { key: 'repository_url', as: 'input/hidden' } ),
       f.field( { key: 'icon_url', as: 'input/hidden' } ),
 
       f.field( { key: 'engine_name', label: 'Name', required: 'required' } ),
       f.field( { key: 'memory', label: 'Memory (MB)', as: 'input/number', min: f.object.minimum_memory, required: 'required' } ),
 
       a.p( a.small( 'Locale' ), { class: 'border-bottom' } ),
-      f.field( { key: 'country_code', as: 'country' } ),
-      f.field( { key: 'language_code', as: 'language' } ),
+      f.field( { key: 'country_code', label: 'Country', as: 'country' } ),
+      f.field( { key: 'lang_code', label: 'Language', as: 'language' } ),
 
       a.p( a.small( 'Network' ), { class: 'border-bottom' } ),
       f.field( { key: 'http_protocol', label: 'HTTP protocol', as: 'select', selections: {
@@ -29,229 +30,168 @@ app.system.install.new.form = ( controller, install ) => (a,x) => {
 
       a.p( a.small( 'Services' ), { class: 'border-bottom' } ),
 
+      a['div.form-row']( [
+
+        a['div.col-sm-4']( 'Bind' ),
+        a['div.col-sm-8'](
+          f.object.attached_services.map( service => [
+            // service,
+            a['.app-install-form-service']( [
+              `${
+                service.publisher_namespace
+              }/${
+                service.type_path
+              }`,
+              f.field( {
+                name: 'api_vars[attached_services][][publisher_namespace]',
+                value: service.publisher_namespace,
+                as: 'input/hidden'
+              } ),
+              f.field( {
+                name: 'api_vars[attached_services][][type_path]',
+                value: service.type_path,
+                as: 'input/hidden'
+              } ),
+              f.field( {
+                name: 'api_vars[attached_services][][create_type]',
+                label: false,
+                layout: 'vertical',
+                as: 'select',
+                selections: service.create_types,
+              } ),
+              f.field( {
+                name: 'api_vars[attached_services][][share]',
+                label: false,
+                layout: 'vertical',
+                as: 'select',
+                placeholder: 'Share...',
+                required: true,
+                selections: service.shareable,
+                dependent: {
+                  search: '^.app-install-form-service',
+                  selector: '[name="api_vars[attached_services][][create_type]"]',
+                  value: 'share_existing'
+                },
+              } ),
+              f.field( {
+                name: 'api_vars[attached_services][][adopt]',
+                label: false,
+                layout: 'vertical',
+                as: 'select',
+                placeholder: 'Adopt...',
+                required: true,
+                selections: service.adoptable,
+                dependent: {
+                  search: '^.app-install-form-service',
+                  selector: '[name="api_vars[attached_services][][create_type]"]',
+                  value: 'adopt_orphan'
+                },
+              } ),
+
+            ] )
+          ] ),
+
+        ),
+
+      ] ),
+
+      f.field( {
+        key: 'permission',
+        label: false,
+        as: 'check',
+        check: {
+          label: 'Permission'
+        }
+        // placeholder: 'Permission as...',
+        // selections: f.object.application_names,
+      } ),
+
       f.field( {
         key: 'permission_as',
-        label: 'Sharing',
+        label: false,
         as: 'select',
-        placeholder: 'Permission as...',
+        placeholder: 'as...',
+        required: true,
         selections: f.object.application_names,
+        dependent: {
+          key: 'permission',
+
+        }
       } ),
+
+
+
+
+      // f.field( {
+      //   key: 'attached_services',
+      //   label: 'Mount',
+      //   as: 'many',
+      //   removable: false,
+      //   sortable: false,
+      //   form: (ff) => [
+      //     `${
+      //       ff.object.publisher_namespace
+      //     }/${
+      //       ff.object.type_path
+      //     }`,
+      //     ff.field( { key: 'publisher_namespace', as: 'input/hidden' } ),
+      //     ff.field( { key: 'type_path', as: 'input/hidden' } ),
+      //     ff.field( {
+      //       key: 'create_type',
+      //       label: false,
+      //       layout: 'vertical',
+      //       as: 'select',
+      //       selections: ff.object.create_types,
+      //     } ),
+      //     ff.field( {
+      //       key: 'share',
+      //       label: false,
+      //       layout: 'vertical',
+      //       as: 'select',
+      //       placeholder: 'Share...',
+      //       required: true,
+      //       selections: ff.object.shareable,
+      //       dependent: { target: 'create_type', value: 'share_existing' },
+      //     } ),
+      //     ff.field( {
+      //       key: 'adopt',
+      //       label: false,
+      //       layout: 'vertical',
+      //       as: 'select',
+      //       placeholder: 'Adopt...',
+      //       required: true,
+      //       selections: ff.object.adoptable,
+      //       dependent: { target: 'create_type', value: 'adopt_orphan' },
+      //     } ),
+      //   ],
+      // } ),
+
+      f.object.variables.length > 0 ?
+        a.p( a.small( 'Environment' ), { class: 'border-bottom' } ) :
+        null,
 
       f.field( {
-        key: 'services',
-        label: 'Attach',
-        as: 'many',
-        removable: false,
-        sortable: false,
+        key: 'variables',
+        as: 'one',
+        layout: 'vertical',
+        label: false,
         form: (ff) => [
-          `${
-            ff.object.publisher_namespace
-          }/${
-            ff.object.type_path
-          }`,
-          ff.field( { key: 'publisher_namespace', as: 'input/hidden' } ),
-          ff.field( { key: 'type_path', as: 'input/hidden' } ),
-          ff.field( {
-            key: 'create_type',
-            label: false,
-            layout: 'vertical',
-            as: 'select',
-            selections: ff.object.create_types,
-          } ),
-          ff.field( {
-            key: 'share',
-            label: false,
-            layout: 'vertical',
-            as: 'select',
-            placeholder: 'Share...',
-            required: true,
-            selections: ff.object.shareable,
-            dependent: { target: 'create_type', value: 'share_existing' },
-          } ),
-          ff.field( {
-            key: 'adopt',
-            label: false,
-            layout: 'vertical',
-            as: 'select',
-            placeholder: 'Adopt...',
-            required: true,
-            selections: ff.object.adoptable,
-            dependent: { target: 'create_type', value: 'adopt_orphan' },
-          } ),
-        ],
+          ff.object.map( variable => ff.field( variable ) )
+        ]
       } ),
-
-      a.p( a.small( 'Environment' ), { class: 'border-bottom' } ),
-
-      f.object.environment_variables,
 
       f.buttons( {
         cancel: {
           onclick: () => controller.open( '..' ),
         }
       } ),
-      install,
+
     ]
   } )
 
 }
 
-
-// /~/~/system/config/default_domain
-// /~/~/system/reserved/engine_names
-// /~/~/system/reserved/hostnames
-
-// /~/~/system/control/base_os/locale
-// {
-//   "lang_code": "en",
-//   "country_code": "US"
-// }
-
-
-
-// country_code
-// language_code
-// http_protocol
-// host_name
-// domain_name
-
 /*
-		var blueprint = this._data.blueprint;
-		var name = this._availableEngineNameFor(blueprint.software.base.name);
-		var heading = dig ( blueprint, "metadata", "software", "display", "label" ) ||
-									dig (	blueprint, "metadata", "software", "display", "title" ) ||
-									name;
-		var comment = dig ( blueprint, "software", "base", "install_form_comment" );
-		var blueprintUrl = this._blueprintUrl;
-		var iconUrl = this._iconUrl;
-		var requiredMemory = dig ( blueprint, "software", "base", "memory", "required" ) || 0;
-		var recommendedMemory = dig ( blueprint, "software", "base", "memory", "recommended" ) || 0;
-		var country = this._data.locale.country_code;
-		var language = this._data.locale.lang_code;
-		var defaultHttpProtocol = dig ( blueprint, "software", "base", "http_protocol" );
-		var defaultDomain = this._data.default_domain;
-		var domains = this._data.domains;
-		var installedApps = this._data.installed_apps;
-		var environmentVariables = blueprint.software.environment_variables || [];
-		var serviceConfigurations = blueprint.software.service_configurations || [];
-		var installedPackagesRequiringAuthentication = ( blueprint.software.installed_packages || [] ).filter( function( obj ) { return obj.authentication } );
-
-		var licenseLabel = dig ( blueprint, "metadata", "software", "license", "label" );
-		var licenseUrl = dig ( blueprint, "metadata", "software", "license", "url" );
-
-		return form ( {
-			components: [
-				{ $type: "h4", $text: heading },
-				comment ? { $components: [ markdown( comment ), { $type: "hr" } ] } : {},
-				{
-					class: "clearfix",
-					$components: [
-						button( {
-							class: "installNewAppFormCustomCollapse",
-							wrapperClass: "pull-right",
-							icon: "fa fa-edit",
-							text: "Custom",
-							onclick: function () {
-								$(".installNewAppFormCustomCollapse").toggle();
-							}
-						} ),
-					]
-				},
-				{
-					style: "display: none;",
-					class: "installNewAppFormCustomCollapse",
-					$components: [
-						formField({ type: "hidden", name: "data[blueprint_url]", value: blueprintUrl }),
-						formField({ type: "hidden", name: "data[icon_url]", value: iconUrl }),
-						formField( {
-							name: "data[engine_name]",
-							id: "installNewAppFormField_container_name",
-							label: "Name",
-							value: name,
-							onchange: function( e ) {
-								installNewApp._checkContainerNameReserved();
-							},
-						} ),
-						formField( {
-							type: "number",
-							name: "data[memory]",
-							id: "installNewAppFormField_memory",
-							label: "Memory MB",
-							min: requiredMemory,
-							value: recommendedMemory,
-							hint: "Required " + requiredMemory + "MB. Recommended " + recommendedMemory + "MB."
-						} ),
-						legend ( { text: "Locale" } ),
-						formField( {
-							type: "country",
-							name: "data[country_code]",
-							id: "installNewAppFormField_country",
-							label: "Country",
-							value: country
-						} ),
-						formField( {
-							type: "language",
-							name: "data[language_code]",
-							id: "installNewAppFormField_language",
-							label: "Language",
-							value: language
-						} ),
-						legend ( { text: "Network" } ),
-						formField( {
-							type: "select",
-							name: "data[http_protocol]",
-							id: "installNewAppFormField_http_protocol",
-							label: "HTTP Protocol",
-							collection: availableHttpProtocols( defaultHttpProtocol ),
-							value: defaultHttpProtocol
-						}),
-						formField( {
-							name: "data[host_name]",
-							id: "installNewAppFormField_host_name",
-							label: "Host name",
-							value: name.replace(/_/g,'-'),
-							onchange: function( e ) {
-								installNewApp._checkFqdnReserved();
-							},
-						}),
-						formField( {
-							type: "select",
-							name: "data[domain_name]",
-							id: "installNewAppFormField_domain_name",
-							label: "Domain name",
-							value: defaultDomain,
-							collection: domains,
-							onchange: function( e ) {
-								installNewApp._checkFqdnReserved();
-							},
-						} ),
-						legend ( { text: "Sharing" } ),
-						formField( {
-							type: "select",
-							name: "data[permission_as]",
-							label: "Permission as",
-							collectionIncludeBlank: true,
-							collection: installedApps,
-							placeholder: " ",
-							value: "",
-							required: false,
-						} ),
-						serviceConfigurations.length ? legend ( { text: "Services" } ) : {},
-						{ $components: serviceConfigurations.map(
-							function (obj, i) {
-								return installNewApp._formServiceConfigurationFields (obj, i);
-							}
-						) },
-						environmentVariables.length ? legend ( { text: "Environment variables" } ) : {},
-					]
-				},
-				{
-					$components: environmentVariables.map(
-						function (obj, i) {
-							return installNewApp._formEnvironmentVariableField (obj, i)
-						}
-					)
-				},
 				installedPackagesRequiringAuthentication.length ? legend ( { text: "Package authentication" } ) : {},
 				{ $components: installedPackagesRequiringAuthentication.map(
 					function (obj, i) {

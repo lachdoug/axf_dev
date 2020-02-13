@@ -1,5 +1,5 @@
 ax.extension.codemirror.form.control.mode = function(
-  f, options={}
+  f, name, options={}
 ) {
 
   let a = ax.a
@@ -8,57 +8,63 @@ ax.extension.codemirror.form.control.mode = function(
   let component
   let value
 
-  let modeLabel = function( mode ) {
-    let labels = {
-      shell: 'Shell',
-      javascript: 'JavaScript',
-      ruby: 'Ruby',
-      python: 'Python',
-      xml: 'XML',
-      yaml: 'YAML',
-    }
-    return labels[ mode ] || mode
+  let selectName
+
+  if ( name.endsWith(']') ) {
+    selectName = name.replace(/(.*)(\])$/, "$1_mode$2" )
+  } else {
+    selectName = name + '_mode'
   }
+
+  // let modeLabel = function( mode ) {
+  //   let labels = {
+  //     // shell: 'Shell',
+  //     // javascript: 'JavaScript',
+  //     // ruby: 'Ruby',
+  //     // python: 'Python',
+  //     // xml: 'XML',
+  //     // yaml: 'YAML',
+  //   }
+  //   return labels[ mode ] || mode
+  // }
 
   if ( ax.is.string( options ) ) {
 
-    component = a.label( modeLabel( options ) )
+    component = a.label( options )
     value = () => options
 
   } else if ( options ) {
 
-    // if ( ax.is.not.object( options ) ) {
-    //   options = {}
-    // }
-
     let selections = options.selections
+
     if ( ax.is.undefined( selections ) ) {
       selections = Object.keys( CodeMirror.modes ) // List of installed language modes
       selections.shift(); // remove null
+    }
 
-      if ( selections.length > 0 ) {
-        selections = selections.map( ( mode ) => [ mode, modeLabel( mode ) ] )
-        component = f.element.select( {
-          placeholder: '𝍣 Mode',
-          selections: selections,
-          value: options.value,
-          selectTag: {
-            $on: { 'change: set CodeMirror mode': function () {
-              this.$('^|appkit-form-codemirror').$setMode()
-            } },
-            ...options.selectTag
-          },
-        } )
-        value = function() {
-          return this.$('select').value
-        }
-
-      } else {
-
-        component = null
-        value = () => ''
-
+    if ( ax.is.object( selections ) && Object.entries( selections ).length > 0 ) {
+      // selections = selections.map( ( mode ) => [ mode, modeLabel( mode ) ] )
+      component = f.select( {
+        name: selectName,
+        placeholder: '𝍣 Mode',
+        selections: selections,
+        value: options.value,
+        selectTag: {
+          $on: { 'change: set CodeMirror mode': function () {
+            this.$('^|appkit-form-codemirror').$setMode()
+          } },
+          ...options.selectTag
+        },
+      } )
+      value = function() {
+        return this.$('select').value
       }
+
+    } else {
+
+      component = null
+      value = () => ''
+
     }
 
 

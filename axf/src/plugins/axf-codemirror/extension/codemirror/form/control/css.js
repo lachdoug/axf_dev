@@ -1,8 +1,8 @@
 ax.css( {
-  '[data-axf-component="appkit-form-codemirror"]': {
+  '|appkit-form-codemirror': {
     display: 'block',
     border: '1px solid #b3b3b3',
-    '[data-axf-component="appkit-form-codemirror-toolbar"]': {
+    '|appkit-form-codemirror-toolbar': {
       display: 'block',
       overflow: 'auto',
       backgroundColor: 'white',
@@ -19,7 +19,7 @@ ax.css( {
         backgroundColor: 'transparent',
       }
     },
-    '[data-axf-component="appkit-form-codemirror-mode"], [data-axf-component="appkit-form-codemirror-keymap"]': {
+    '|appkit-form-codemirror-mode, |appkit-form-codemirror-keymap': {
       // display: 'inline-block',
       // border: '1px solid #e6e6e6',
       'select': {
@@ -29,7 +29,7 @@ ax.css( {
         margin: '2px 10px',
       }
     },
-    '[data-axf-component="appkit-form-codemirror-toolbar-right"]': {
+    '|appkit-form-codemirror-toolbar-right': {
       float: 'right',
     },
     '&.fullscreen': {
@@ -42,7 +42,7 @@ ax.css( {
       borderRadius: '0px',
       zIndex: 999,
     },
-    '[data-axf-component="appkit-form-codemirror-editor"]': {
+    '|appkit-form-codemirror-editor': {
       'div.CodeMirror': {
         minHeight: '2em',
         border: 'unset',

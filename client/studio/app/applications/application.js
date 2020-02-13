@@ -1,28 +1,18 @@
 app.applications.application = (controller) => (a,x) => [
 
-  app.http(
-    `/~/applications/${ controller.params.application_id }/name`,
-    ( response, el ) => {
-      let application = response.content
-      el.$nodes = [
-        a.h3( application.name ),
-      ]
-    },
-    // {
-    //   placeholder: a.p(
-    //     app.icon( 'fa fa-spinner fa-spin', 'Loading application name' )
-    //   )
-    // }
+  app.entryHeadings(
+    `applications/${ controller.params.application_id }`
   ),
 
   controller.routes( {
-    '/?': app.applications.application.show,
+    '/?': app.applications.show,
     '/repo/?*': app.repo( 'application', `applications/${ controller.params.application_id }` ),
-    '/delete': app.applications.application.delete,
+    '/delete': app.applications.delete,
     '/readme': app.readme( 'application', `applications/${ controller.params.application_id }`),
     '/license': app.license( 'application', `applications/${ controller.params.application_id }`),
     '/views/?*': app.views( 'application', `applications/${ controller.params.application_id }`),
-    '/blueprint': app.applications.application.blueprint,
+    '/blueprint/?*': app.applications.blueprint,
+    // '/metadata': app.applications.blueprint.metadata,
   }, {
     lazy: true,
     // transition: [ 'crossfade', { time: 1000 } ],

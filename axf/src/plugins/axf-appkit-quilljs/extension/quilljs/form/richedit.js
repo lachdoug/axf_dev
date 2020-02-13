@@ -39,7 +39,7 @@ ax.extension.quilljs.form.richedit = function(
       if ( this.$quill ) {
         value = this.$quill.getContents()
       } else {
-        ax.log.error(Quill not initialized.)
+        console.error('Quill not initialized.')
         options.value
       }
       if ( JSON.stringify( value ) === {\ops\:[{\insert\:\\\n\}]} ) {

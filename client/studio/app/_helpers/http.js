@@ -1,7 +1,7 @@
-app.http = function( route, success, options={} ) {
+app.http = function( url, success, options={} ) {
   // debugger
   return (a,x) => x.http( {
-    url: route,
+    url: url,
     success: success,
     when: {
       401: ( response, el ) => el.$send( 'app.server.not.authenticated' ),

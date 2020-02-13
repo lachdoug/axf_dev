@@ -1,5 +1,7 @@
 app.applications.index = (controller) => (a,x) => [
 
+  a.h5( 'Applications' ),
+
   a['div.clearfix']( a['div.btn-group.float-right']( [
     app.button( {
       label: app.icon( 'fa fa-plus', 'New application' ),
@@ -15,9 +17,7 @@ app.applications.index = (controller) => (a,x) => [
   app.http(
     '/~/applications',
     ( response, el ) => {
-      let applications = response.content || []
-
-      el.$nodes = [
+      response.json().then( applications => el.$nodes = [
 
         applications.length == 0 ? 'None' : null,
         applications.map( application => a.p( [
@@ -29,7 +29,7 @@ app.applications.index = (controller) => (a,x) => [
             title: application.remote,
           } ),
         ] ) )
-      ]
+      ] )
 
     },
     {

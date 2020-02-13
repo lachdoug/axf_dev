@@ -4,7 +4,7 @@ cc.view.designer.form = (f) => f.field( {
     label: false,
     layout: 'vertical',
     dependent: {
-      target: 'type',
+      key: 'type',
       pattern: '^form$',
     },
     form: (ff) => [
@@ -46,6 +46,9 @@ cc.view.designer.form = (f) => f.field( {
             item: 'form component',
             form: cc.view.designer.form.component,
             layout: 'vertical',
+            sortable: true,
+            addable: true,
+            removable: true,
           } ),
         ],
       } ),

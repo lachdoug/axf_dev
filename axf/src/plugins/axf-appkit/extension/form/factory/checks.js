@@ -16,7 +16,7 @@ checks = function( options={} ) {
     } else if ( selection.disabled == 'br' ) {
       label =  ''
     }
-ax.log( '*check_selection', selection )
+// ax.log( '*check_selection', selection )
     return x.check( {
       name: options.name,
       value: value.includes( selection.value ) ? selection.value : '',

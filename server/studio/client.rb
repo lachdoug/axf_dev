@@ -4,7 +4,7 @@ module Server
     require_relative '../assets/studio_client'
 
     set :views, File.join( root, "../views" )
-        
+
     get '/app.js' do
       content_type :'application/javascript'
       Server::Assets::StudioClient.package

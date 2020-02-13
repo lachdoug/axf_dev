@@ -24,10 +24,11 @@ items = function( f, options ) {
           ff.index = index
           ff.scope = `${ scope }[${ index }]`
 
+
           let namedElements = x.lib.unnested( this, `[name^="${ scope }"]` )
 
           namedElements.forEach( function( el ) {
-            if ( el.tagName == 'APPKIT-FORM-NEST') {
+            if ( el.dataset.axfComponent == 'appkit-form-nest') {
               el.$rescope( scope, index )
             } else {
               el.$('^|appkit-form-nest').$rescopeElement( el, scope, index )
@@ -66,7 +67,6 @@ items = function( f, options ) {
       this.$$(':scope > |appkit-form-nest-item').$$.forEach( function( itemTag, index ) {
         itemTag.$rescope( f.scope, index )
       } )
-      this.$send( 'axf.appkit.form.nest.items.rescope' )
     },
     ...options.itemsTag,
     $on: {
