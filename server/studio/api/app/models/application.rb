@@ -106,7 +106,7 @@ module Server
           end
 
           def active
-            !repo.diff.empty?
+            !repo.localDiff.empty?
           end
 
           def delete

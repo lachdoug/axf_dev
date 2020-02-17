@@ -5,8 +5,8 @@ module Server
         class Namespace
           class Services
 
-            def initialize( namespace )
-              @namespace = namespace
+            def initialize( workspace )
+              @namespace = workspace.namespace
             end
 
             attr_reader :namespace
@@ -21,15 +21,18 @@ module Server
                   id: service.id,
                   name: service.name,
                   active: service.active,
-                  # remote: repo.remote,
-                  # branch: repo.branch,
-                  # readme: repo.readme,
                 }
               end
             end
 
             def to_json
               to_h.to_json
+            end
+
+            def active
+              to_h.select do |service|
+                service[:active]
+              end
             end
 
             def count

@@ -8,18 +8,20 @@ module Server
           #   @current_user = current_user
           # end
 
-          def to_json
+          def self.to_json
             to_h.to_json
           end
 
-          def to_h
+          def self.to_h
             {
-              applications: {
-                count: Application.count,
-                active: Application.active,
+              applications: Application.active,
+              namespaces: Namespace.all.map{ |namespace|
+                {
+                  id: namespace.id,
+                  name: namespace.name,
+                  services: namespace.workspace.services.active
+                }
               },
-              namespaces: Namespace.to_h,
-              # git_user: @settings.git_username
             }
           end
 

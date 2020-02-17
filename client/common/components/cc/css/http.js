@@ -1,9 +1,9 @@
 ax.css( {
 
-  '|appkit-http-result': {
+  '|appkit-http-response > pre': {
     color: 'blue',
   },
-  '|appkit-http-result.error': {
+  '|appkit-http-response.error > pre': {
     color: 'red',
   },
 

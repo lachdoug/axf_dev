@@ -5,7 +5,7 @@ module Server
 
         get '/' do
           content_type :'application/json'
-          Home.new.to_json
+          Home.to_json
         end
 
       end

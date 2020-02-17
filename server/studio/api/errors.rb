@@ -3,6 +3,10 @@ module Server
 
     class Error < StandardError
 
+      def content_type
+        :text
+      end
+
       class NotAuthenticated < Error
 
         def to_s
@@ -65,6 +69,22 @@ module Server
       end
 
 
+      class GitError < Error
+
+        def initialize( message )
+          @message = message
+        end
+
+        def to_s
+          "Git error.\n\n#{ @message }"
+        end
+
+        def status
+          400
+        end
+
+      end
+
       class JsonParse < Error
 
         def initialize( message )
@@ -118,7 +138,7 @@ module Server
     end
 
     error Error do |e|
-      content_type :text
+      content_type e.content_type
       status e.status
       e.message
     end

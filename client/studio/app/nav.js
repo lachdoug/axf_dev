@@ -5,7 +5,7 @@ app.nav = (controller) => (a,x) => a['app-nav']( [
       app.logo( 20 ),
       'Engines Studio',
     ],
-    onclick: () => controller.open( '/applications' ),
+    onclick: () => controller.open( '/' ),
     title: 'Home',
     class: 'btn btn-outline-secondary app-btn',
   } ),
@@ -47,11 +47,6 @@ app.nav = (controller) => (a,x) => a['app-nav']( [
   ], {
     style: { display: 'none' },
   } ),
-
-  // app.http( '/~/session', () => {
-  //   nav.$setUser( true )
-  // } ),
-
 ], {
   id: 'nav',
   $init: function() {
@@ -68,6 +63,8 @@ app.nav = (controller) => (a,x) => a['app-nav']( [
     let active = ( path.match( /\w+/ ) || [''] )[0]
     nav.$$( `.app-nav-btn` ).classList.remove('active')
     nav.$$( `.app-nav-btn-${ active }` ).classList.add('active')
+  },
+  $timeoutCheck: function() {
     this.$('app-nav-timeout-check').$check()
   },
   $open: function( path ) {

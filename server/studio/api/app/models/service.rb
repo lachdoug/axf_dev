@@ -4,40 +4,6 @@ module Server
       module Models
         class Service
 
-          #
-          # def self.count
-          #   all.count
-          # end
-          #
-          # def self.all
-          #   Dir.glob( "#{ path }/*/*" ).map do |entry_path|
-          #     p "entry_path #{ entry_path }"
-          #     namespace_id, id = entry_path.sub( "#{ path }/", '' ).split( '/' )
-          #     new( namespace_id, id )
-          #   end.sort_by do |service|
-          #     [ service.namespace.name, service.name ]
-          #   end
-          # end
-          #
-          # def self.active
-          #   all.select do |service|
-          #     service.active
-          #   end
-          # end
-          #
-          # def self.create( namespace, params )
-          #   raise Error::MissingParam.new ':url, :path' if
-          #     params[:path].to_s.empty? || params[:url].to_s.empty?
-          #   id = Repo.create url: params[:url],
-          #               path: "#{ path }/#{ namespace.id }",
-          #               namespace: namespace.name
-          #   { id: id }
-          # end
-
-          # def self.path
-          #   "data/services"
-          # end
-
           def initialize( namespace_id, id )
             @namespace_id = namespace_id
             @id = id
@@ -95,7 +61,7 @@ module Server
           end
 
           def active
-            !repo.diff.empty?
+            !repo.localDiff.empty?
           end
 
           def delete

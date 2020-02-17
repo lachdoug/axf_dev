@@ -47,6 +47,8 @@ ax.extension.http = function( options={} ) {
       return { $init: (el) => response.json().then( result => el.$nodes = result ) }
     } else if ( contentType == 'text/html' ) {
       return { $init: (el) => response.text().then( result => el.$html = result ) }
+    } else if ( contentType == 'text/plain' ) {
+      return { $init: (el) => response.text().then( result => el.$nodes = a.pre( result ) ) }
     } else {
       return { $init: (el) => response.text().then( result => el.$text = result ) }
     }
@@ -57,8 +59,15 @@ ax.extension.http = function( options={} ) {
     $nodes: options.placeholder || null,
     $init: (el) => {
 
+      let url = options.url
+
+      if ( options.query ) {
+        let query = x.lib.query.from.object( options.query )
+        url = `${ url }?${ query }`
+      }
+
       el.$send( 'axf.appkit.http.start' )
-      fetch( options.url, {
+      fetch( url, {
         method: options.method,
         headers: options.headers,
         body: options.body,

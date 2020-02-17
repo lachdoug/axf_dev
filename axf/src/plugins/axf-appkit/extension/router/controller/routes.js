@@ -38,16 +38,10 @@ routes = ( config, startLocation ) => function( routes, options={} ) {
     $init: init,
     $nodes: component,
 
-    // $open: function( path, query, anchor ) {
-    //
-    //   if ( path[0] === '/' ) {
-    //     config.router[0].$open( path, query, anchor )
-    //   } else {
-    //     path = this.$scope + ( path ? `/${ path }` : '' )
-    //     config.router[0].$open( path, query, anchor )
-    //   }
-    //
-    // },
+    $reload: function() {
+      this.$matched = false
+      this.$config.router[0].$go()
+    },
 
     $load: function( path, query, anchor ) {
 
@@ -89,11 +83,11 @@ routes = ( config, startLocation ) => function( routes, options={} ) {
           this.$nodes = locatedView.component
         }
 
+        this.$matched = locatedView.matched
+
         this.$send( 'appkit.router.load' )
 
       }
-
-      this.$matched = locatedView.matched
 
     },
 

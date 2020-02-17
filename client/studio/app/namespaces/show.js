@@ -30,10 +30,10 @@ app.namespaces.show = controller => (a,x) => [
             } ),
             a['div.btn-group.float-right']( [
               app.button( {
-                label: app.icon( 'fas fa-redo', 'Update' ),
-                title: 'Update',
+                label: app.icon( 'fas fa-file-download', 'Pull' ),
+                title: 'Pull namespace',
                 onclick: (e,el) => {
-                  controller.open( 'update' )
+                  controller.open( 'pull' )
                 }
               } ),
               app.up( controller, 'Return to namespaces' ),

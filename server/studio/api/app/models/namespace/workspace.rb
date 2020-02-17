@@ -16,7 +16,8 @@ module Server
               {
                 exists: true,
                 branch: repo.branch.current,
-                services: namespace.services.to_h
+                remote: repo.remote,
+                # services: namespace.services.to_h
               } :
               { exists: false }
             end
@@ -49,6 +50,18 @@ module Server
 
             def repo
               @repo ||= Repo.new( self )
+            end
+
+            def readme
+              @readme ||= Readme.new( self )
+            end
+
+            def license
+              @license ||= License.new( self )
+            end
+
+            def services
+              @services ||= Services.new( self )
             end
 
             def name

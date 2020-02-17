@@ -1,9 +1,9 @@
 ax.extension.router.controller.routes.
 view = ( config ) => ( routesElement, location ) => {
-// debugger
+
   let scope = config.scope || ''
   let scopedpath = location.path.slice( scope.length )
-  let match = config.match || []
+  let match = config.match || {}
   let splat = config.splat || []
   let component
   let slash
@@ -51,7 +51,7 @@ view = ( config ) => ( routesElement, location ) => {
     config.default
 
   }
-// debugger
+
   if ( ax.is.function( component ) ) {
     let controller = ax.x.router.controller( {
       router: [ ...config.router, routesElement ],

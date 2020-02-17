@@ -36,7 +36,7 @@ module Server
           # end
 
           def remote
-            @remote ||= `git -C '#{ path }' remote get-url origin`.strip
+            @remote ||= git( 'remote get-url origin' ).strip
           end
 
           def read( filepath )
@@ -55,18 +55,49 @@ module Server
             @branch ||= Branch.new self
           end
 
+          def remoteDiff
+            git 'diff origin'
+          end
+
+          def localDiff
+            git 'diff'
+          end
+
           def diff
-            @diff ||= `git -C '#{ path }' diff`
+            {
+              local: localDiff,
+              remote: remoteDiff,
+            }
           end
 
           def status
-            @status ||= `git -C '#{ path }' status -s`.tap do |status|
+            @status ||= git( 'status -s' ).tap do |status|
               return @status = 'Up to date' if status.empty?
             end
           end
 
           def reset
-            `git -C '#{ path }' reset --hard origin/master`
+            git 'reset --hard origin/master'
+          end
+
+          def pull
+            git 'pull'
+          end
+
+          def commit( commit )
+            git 'add -A'
+            git "commit -m #{ commit[:message] }"
+          end
+
+          def push
+            git 'push'
+          end
+
+          def git( command )
+            stdout, stderr, status = Open3.
+              capture3( "git -C '#{ path }' #{ command }" )
+            raise Error::GitError.new( stderr.empty? ? stdout : stderr ) unless status.exitstatus === 0
+            stdout
           end
 
 

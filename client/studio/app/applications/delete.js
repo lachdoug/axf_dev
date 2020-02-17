@@ -22,19 +22,20 @@ app.applications.delete = (controller) => (a,x) => [
         el.$('^').$nodes = app.http(
           `/~/applications/${ controller.params.application_id }`,
           ( response, el ) => {
-            let application = response.json()
-            el.$nodes = [
-              a.p( 'Application has been deleted.' ),
-              a['div.clearfix']( [
-                app.button( {
-                  label: app.icon( 'fa fa-check', 'OK' ),
-                  onclick: (e,el) => {
-                    controller.open( '/applications' )
-                  },
-                  title: 'Return to applications',
-                } ),
-              ] ),
-            ]
+            response.json().then( result => {
+              el.$nodes = [
+                a.p( 'Application has been deleted.' ),
+                a['div.clearfix']( [
+                  app.button( {
+                    label: app.icon( 'fa fa-check', 'OK' ),
+                    onclick: (e,el) => {
+                      controller.open( '/applications' )
+                    },
+                    title: 'Return to applications',
+                  } ),
+                ] ),
+              ]
+            } )
           },
           {
             method: 'DELETE',

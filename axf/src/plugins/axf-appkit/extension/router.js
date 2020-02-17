@@ -114,7 +114,6 @@ ax.extension.router =
         path: path,
         query: query,
         anchor: anchor,
-        // location: this.$location
       } } )
 
     },

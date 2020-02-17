@@ -1,7 +1,5 @@
 app.readme = ( parent, path ) => controller => (a,x) => [
 
-  app.entryHeadings(path),
-
   app.http(
     `/~/${ path }/readme`,
     ( response, el ) => {

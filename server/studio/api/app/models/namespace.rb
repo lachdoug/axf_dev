@@ -13,10 +13,6 @@ module Server
               {
                 name: namespace.name,
                 id: namespace.id,
-                # services: {
-                #   count: namespace.services.count,
-                #   active: namespace.services.active,
-                # },
               }
             end
           end
@@ -87,6 +83,10 @@ module Server
             @license ||= License.new( self )
           end
 
+          def definitions
+            @definitions ||= Definitions.new( self )
+          end
+          
           def name
             raise Error::NoRecord.new id unless parent_dir
             @name ||= repo_dir.sub( "#{ parent_dir }/", '' )
@@ -102,10 +102,6 @@ module Server
 
           def workspace
             Workspace.new( self )
-          end
-
-          def services
-            Services.new( self )
           end
 
           def delete

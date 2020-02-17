@@ -14,30 +14,22 @@ app.namespaces.workspace.services.index = controller => (a,x) => [
   ] ) ),
 
   app.http(
-    `/~/namespaces/${ controller.params.namespace_id }/workspace`,
+    `/~/namespaces/${ controller.params.namespace_id }/workspace/services`,
     ( response, el ) => {
-      response.json().then( workspace => {
+      response.json().then( services => {
 
-        if ( workspace.exists ) {
-
-          el.$nodes = [
-            workspace.services.length == 0 ? 'None' : null,
-            workspace.services.map( service => a.p( [
-              app.button( {
-                label: app.icon( 'fa fa-caret-right', service.name ),
-                onclick: (e,el) => {
-                  controller.open( service.id )
-                },
-                title: service.remote,
-              } ),
-            ] ) )
-          ]
-
-        } else {
-
-          controller.open( 'setup' )
-
-        }
+        el.$nodes = [
+          services.length == 0 ? 'None' : null,
+          services.map( service => a.p( [
+            app.button( {
+              label: app.icon( 'fa fa-caret-right', service.name ),
+              onclick: (e,el) => {
+                controller.open( service.id )
+              },
+              title: service.remote,
+            } ),
+          ] ) )
+        ]
 
       } )
 

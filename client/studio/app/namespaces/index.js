@@ -31,7 +31,7 @@ app.namespaces.index = (controller) => (a,x) => [
               onclick: (e,el) => {
                 controller.open( namespace.id )
               },
-              title: namespace.remote,
+              title: namespace.name,
             } ),
           ] ) )
         ]

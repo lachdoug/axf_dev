@@ -26,7 +26,7 @@ module Server
 
         delete '/namespaces/:id' do
           content_type :'application/json'
-          Namespace.find( params[:id] ).delete.to_json
+          Namespace.new( params[:id] ).delete.to_json
         end
 
 

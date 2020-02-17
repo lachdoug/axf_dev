@@ -20,8 +20,9 @@ app.applications.new = (controller) => (a,x) => [
       } ),
     ],
     success: ( response, el ) => {
-      let application = response.json()
-      controller.open( `/applications/${ application.id }` )
+      response.json().then( application => {
+        controller.open( `/applications/${ application.id }` )
+      } )
     }
   } )
 
