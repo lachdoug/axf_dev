@@ -285,7 +285,7 @@
 //
 // ]
 //
-// app.view1 = (a,x) => a['div.container']( [
+// app.1 = (a,x) => a['div.container']( [
 //   app.css,
 //
 //   a.h2( 'Form builder' ),
@@ -400,7 +400,7 @@
 //
 // ] )
 //
-// app.view2 = (a,x) => a['div.container']( [
+// app.2 = (a,x) => a['div.container']( [
 //   app.css,
 //
 //   a.h2( 'Form builder' ),

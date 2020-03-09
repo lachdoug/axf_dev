@@ -11,10 +11,8 @@ let app = (a,x) => a['app'](
       'app.server.session.timeout': (e,el) => {
         nav.$load( '/timeout' )
       },
-      'appkit.router.open': (e,el) => {
-        nav.$update()
-      },
       'appkit.router.load': (e,el) => {
+        nav.$update()
         let noCheck = [ '/timeout', '/login', '/logout' ]
         if ( !noCheck.includes( e.detail.path ) ) nav.$timeoutCheck()
       },

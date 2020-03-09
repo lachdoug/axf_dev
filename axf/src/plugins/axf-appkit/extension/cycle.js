@@ -8,7 +8,7 @@ ax.extension.cycle = function( options={} ) {
 
   let max = collection.length - 1
 
-  let component = {
+  let cycleTag = {
     $state: 0,
     $nodes: (el,i) => collection[i],
     $init: function() {
@@ -24,9 +24,10 @@ ax.extension.cycle = function( options={} ) {
         }, period )
       }
       cycle()
-    }
+    },
+    ...options.cycleTag
   }
 
-  return a['|appkit-cycle']( component, options.cycleTag )
+  return a['|appkit-cycle']( null, cycleTag )
 
 }

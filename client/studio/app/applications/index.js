@@ -1,4 +1,4 @@
-app.applications.index = (controller) => (a,x) => [
+app.applications.index = controller => (a,x) => [
 
   a.h5( 'Applications' ),
 
@@ -16,25 +16,22 @@ app.applications.index = (controller) => (a,x) => [
 
   app.http(
     '/~/applications',
-    ( response, el ) => {
-      response.json().then( applications => el.$nodes = [
+    ( applications, el ) => el.$nodes = [
 
-        applications.length == 0 ? 'None' : null,
-        applications.map( application => a.p( [
-          app.button( {
-            label: app.icon( 'fa fa-caret-right', application.name ),
-            onclick: (e,el) => {
-              controller.open( application.id )
-            },
-            title: application.remote,
-          } ),
-        ] ) )
-      ] )
-
-    },
+      applications.length == 0 ? 'None' : null,
+      applications.map( application => a.p( [
+        app.button( {
+          label: app.icon( 'fa fa-caret-right', application.name ),
+          onclick: (e,el) => {
+            controller.open( application.id )
+          },
+          title: application.remote,
+        } ),
+      ] ) )
+    ],
     {
       placeholder: a.p(
-        app.icon( 'fa fa-spinner fa-spin', 'Loading applications' )
+        app.hourglass( 'Loading applications' )
       )
     }
   )

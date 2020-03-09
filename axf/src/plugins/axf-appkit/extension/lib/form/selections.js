@@ -1,4 +1,4 @@
-ax.extension.lib.form.selections = function( selections=[] ) {
+ax.extension.lib.form.selections = function( selections ) {
 
   if ( ax.is.array( selections ) ) {
     selections = selections.map( function(selection) {
@@ -11,7 +11,7 @@ ax.extension.lib.form.selections = function( selections=[] ) {
       }
     } )
   } else {
-    selections = Object.keys( selections ).map(function( key ) {
+    selections = Object.keys( selections || {} ).map(function( key ) {
       let label = selections[key]
       return { value: key , label: label }
     } )

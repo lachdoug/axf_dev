@@ -17,11 +17,14 @@ app.namespaces.workspace.new = controller => (a,x) => [
       el.$('^').$nodes = [
         app.http(
           `/~/namespaces/${ controller.params.namespace_id }/workspace`,
-          () => controller.open( '..' ),
+          ( result, el ) => {
+            workspaceBranch.$text = result.branch
+            controller.open( '..' )
+          },
           {
             method: 'POST',
             placeholder: a.p(
-              app.icon( 'fa fa-spinner fa-spin', 'Creating workspace' )
+              app.hourglass( 'Creating workspace' )
             )
           }
         )

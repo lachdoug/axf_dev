@@ -1,6 +1,6 @@
-app.applications.reset = (controller) => (a,x) => [
+app.applications.reset = controller => (a,x) => [
 
-  a.p( 'Reset application? Local changes will be lost.' ),
+  a.p( 'Reset branch?' ),
   a.p( [
 
     app.button( {
@@ -15,18 +15,27 @@ app.applications.reset = (controller) => (a,x) => [
     app.button( {
       label: app.icon( 'fa fa-undo', 'Reset' ),
       class: 'btn btn-danger',
-      title: 'Reset application',
+      title: 'Reset branch',
       onclick: (e,el) => {
 
         el.$('^').$nodes = app.http(
           `/~/applications/${ controller.params.application_id }/reset`,
-          ( response, el ) => {
-            controller.open( '..' )
-          },
+          ( result, el ) => el.$nodes = [
+            a.pre( result.message ),
+            a['div.clearfix']( [
+              app.button( {
+                label: app.icon( 'fa fa-check', 'OK' ),
+                onclick: (e,el) => {
+                  controller.open( '..' )
+                },
+                title: 'Return to application',
+              } ),
+            ] ),
+          ],
           {
             method: 'POST',
             placeholder: a.p(
-              app.icon( 'fa fa-spinner fa-spin', 'Reseting application' )
+              app.hourglass( 'Resetting branch' )
             )
           }
         )

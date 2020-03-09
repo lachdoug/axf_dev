@@ -180,11 +180,7 @@ app.system.install.new.form = ( controller, install ) => (a,x) => {
         ]
       } ),
 
-      f.buttons( {
-        cancel: {
-          onclick: () => controller.open( '..' ),
-        }
-      } ),
+      f.btns( controller ),
 
     ]
   } )

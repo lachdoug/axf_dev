@@ -1,5 +1,5 @@
 ax.extension.report.field.extras.controls.
-language = ( f, options={} ) => {
+language = ( r, options={} ) => {
 
   let a = ax.a
   let x = ax.x
@@ -43,7 +43,7 @@ language = ( f, options={} ) => {
   }
 
   return a['|appkit-report-control'](
-    f.select( selectOptions ),
+    r.select( selectOptions ),
     controlTagOptions
   )
 

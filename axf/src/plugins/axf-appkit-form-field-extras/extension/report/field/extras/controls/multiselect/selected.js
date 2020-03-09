@@ -5,7 +5,7 @@ multiselect.selected = function(
 
   let a = ax.a
 
-  return a['div|appkit-report-multiselect-selected']( {
+  return a['div|appkit-report-multiselect-selected']( null, {
 
     $state: [],
 

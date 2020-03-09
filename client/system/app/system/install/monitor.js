@@ -1,15 +1,15 @@
-app.system.install.monitor = ( controller ) => (a,x) => [
+app.system.install.monitor = controller => (a,x) => [
 
   a['div.clearfix'](
     a['div.float-right']( [
-      app.btn( app.icon( 'fa fa-arrow-up' ), (e,el) => controller.open( '..' ) ),
+      app.up( controller, 'Close' ),
     ] )
   ),
 
   a.h5( 'Monitor installation' ),
   app.http(
     '/~/~/engine_builder/params',
-    ( response, el ) => response.json().then( installing => {
+    ( installing, el ) => installing => {
 // debugger
       if ( installing.engine_name ) {
         el.$nodes = [
@@ -22,7 +22,7 @@ app.system.install.monitor = ( controller ) => (a,x) => [
           }` ),
 
           app.xterm( { label: 'Builder log' } ),
-          a['appkit-event-source']( {
+          a['appkit-event-source']( null, {
             $init: function() {
               this.$eventsource = new EventSource( '/~/eventsource/builder' )
               this.$eventsource.onmessage = function(e) {
@@ -57,12 +57,13 @@ app.system.install.monitor = ( controller ) => (a,x) => [
           a.p( a['.error']( 'Not installing.' ) ),
           app.btn(
             app.icon( "fa fa-check", "OK" ),
-            () => controller.open( '..' )
+            () => controller.open( '..' ),
+            { class: 'btn btn-primary' },
           )
         ]
       }
 
-    } )
+    }
   ),
 
 ]

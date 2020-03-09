@@ -3,24 +3,62 @@ ax.extension.http = function( options={} ) {
   let a = ax.a
   let x = ax.x
 
+  let singleRequest
+  let urls = options.url
+  // let success = options.success
+  // let error = options.error
+
+  if ( ax.is.not.array( urls ) ) {
+    singleRequest = true
+    urls = [ urls ]
+  }
+if ( options.target ) debugger
   let customCallbacks = options.when || {}
 
-  let responseCallback = function( response, el ) {
+  let responsesSuccess = function( responses, el ) {
 
-    let callback
-    let status = response.status
+    el.$send( 'axf.appkit.http.success' )
 
-    if ( status >= 200 && status < 300 ) {
-      callback = options.success || defaultCallback( 'success' )
+    if ( options.success ) {
+      Promise.all(
+        responses.map( response => contentPromiseFor( response ) )
+      ).then( responses => {
+
+        if ( singleRequest ) {
+          options.success.bind(el)( responses[0], el )
+        } else {
+          options.success.bind(el)( responses, el )
+        }
+
+      } )
+
     } else {
-      callback = options.error || defaultCallback( 'error' )
-    }
 
-    callback.bind(el)( response, el )
+      el.$nodes = responses.map(
+        response => a[`|appkit-http-response.success`]( null, {
+          $init: el => defaultContent( response, el )
+        } )
+      )
+
+    }
 
   }
 
-  let defaultCallback = ( type ) => ( response, el ) => {
+  let responseError = ( response, el ) => {
+
+    el.$send( 'axf.appkit.http.error' )
+
+    if ( options.error ) {
+      options.error.bind(el)( response, el )
+    } else {
+      el.$nodes = a[`|appkit-http-response.error`]( null, {
+        $init: el => defaultContent( response, el )
+      } )
+    }
+
+  }
+
+  let defaultContent = ( response, el ) => {
 
     let contentType = response.headers.get('content-type')
 
@@ -33,76 +71,119 @@ ax.extension.http = function( options={} ) {
       if ( contentHandler ) {
         contentHandler.bind(el)( response, el )
       } else {
-        let target = options.target || el
-        target.$nodes = a[`|appkit-http-response.${ type }`]( componentFor( contentType, response ) )
+        el.$nodes = a( { $init: componentFor( contentType, response ) } )
       }
 
     }
 
   }
 
-  let componentFor = function( contentType, response ) {
+  let contentPromiseFor = response => {
+
+    let contentType = response.headers.get('content-type')
+
+    if ( contentType ) {
+      contentType = contentType.split(';')[0]
+      if ( contentType == 'application/json' ) {
+        return response.json()
+      } else {
+        return response.text()
+      }
+    } else {
+      return null
+    }
+  }
+
+  let componentFor = ( contentType, response ) => {
 
     if ( contentType == 'application/json' ) {
-      return { $init: (el) => response.json().then( result => el.$nodes = result ) }
+      return (el) => contentPromiseFor( response ).
+        then( content => el.$nodes = content )
     } else if ( contentType == 'text/html' ) {
-      return { $init: (el) => response.text().then( result => el.$html = result ) }
+      return (el) => contentPromiseFor( response ).
+        then( content => el.$html = content )
     } else if ( contentType == 'text/plain' ) {
-      return { $init: (el) => response.text().then( result => el.$nodes = a.pre( result ) ) }
+      return (el) => contentPromiseFor( response ).
+        then( content => el.$nodes = a.pre( content ) )
     } else {
-      return { $init: (el) => response.text().then( result => el.$text = result ) }
+      return (el) => contentPromiseFor( response ).
+        then( content => el.$text = content )
     }
 
   }
 
-  return a['|appkit-http']( {
-    $nodes: options.placeholder || null,
+  return a['|appkit-http']( options.placeholder || null, {
     $init: (el) => {
 
-      let url = options.url
+      el.$send( 'axf.appkit.http.start' )
 
-      if ( options.query ) {
-        let query = x.lib.query.from.object( options.query )
-        url = `${ url }?${ query }`
+      let optionFor = ( key, i ) => {
+        if ( ax.is.array( options[key] ) ) {
+          return options[key][i]
+        } else {
+          return options[key]
+        }
       }
 
-      el.$send( 'axf.appkit.http.start' )
-      fetch( url, {
-        method: options.method,
-        headers: options.headers,
-        body: options.body,
-        ...options.fetch,
-      } )
-      .then( response => {
+      Promise.all(
+        urls.map( ( url, i ) => {
 
-        if ( response.status >= 200 && response.status < 300 ) {
-          el.$send( 'axf.appkit.http.success' )
-        } else {
-          el.$send( 'axf.appkit.http.error' )
+          let query = optionFor( 'query', i )
+
+          if ( query ) {
+            url = `${ url }?${ x.lib.query.from.object( query ) }`
+          }
+
+          return fetch( url, {
+            method: optionFor( 'method', i ),
+            headers: optionFor( 'headers', i ),
+            body: optionFor( 'body', i ),
+            ...optionFor( 'fetch', i ),
+          } )
+        } )
+      ).then( responses => {
+
+        let hadError
+
+        for ( let i in responses ) {
+
+          let response = responses[i]
+
+          if ( response.status < 200 || response.status >= 300 ) {
+
+            let statusErrorCallback = customCallbacks[ response.status ]
+
+            if ( statusErrorCallback ) {
+              statusErrorCallback.bind(el)( response, el )
+            } else {
+              responseError( response, el )
+            }
+
+            console.warn( `Received HTTP status ${ response.status } when fetching ${ optionFor( 'method', i ) || 'GET' } ${ response.url }.` )
+
+            hadError = true
+            break // Exit promise on first error.
+
+          }
         }
 
-        let statusCallback = customCallbacks[ response.status ]
-
-        if ( statusCallback ) {
-          statusCallback.bind(el)( response, el )
-        } else {
-          responseCallback( response, el )
-        }
+        if ( !hadError ) responsesSuccess( responses, el )
 
       } ).catch( error => {
 
-        console.error( 'Ax appkit http error.', error.message )
+        console.error( 'Ax appkit http error.', error.message, el )
         if ( options.catch ) options.catch( error, el )
 
       } ).finally( () => {
 
         // el is ususally removed from DOM by callback,
-        // so get parent for sending complete event
+        // so get parent for sending complete event and calling complete fn.
         let parent = el.$('^')
         if( options.complete ) {
           options.complete.bind(parent)(parent)
         }
-        // Parent sometimes removed too, such as when user navigates away before complate.
+        // Parent sometimes removed too, by complete fn,
+        // or when router navigates away.
         if ( parent ) parent.$send( 'axf.appkit.http.complete' )
 
       } )

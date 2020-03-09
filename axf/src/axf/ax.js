@@ -11,7 +11,7 @@
  *
  * @return {htmlElement} The new element
  */
-let ax = function ( component=null, options={} ) {
+let ax = function ( component, options={} ) {
 
   let element = ax.factory( component )
   let target = options.target

@@ -1,4 +1,4 @@
-app.system.domains.add = ( controller ) => (a,x) => [
+app.system.domains.add = controller => (a,x) => [
 
   a.h5( 'Add' ),
 
@@ -18,22 +18,19 @@ app.system.domains.add = ( controller ) => (a,x) => [
       f.field( {
         key: 'self_hosted',
         as: 'check',
-        checked: 'true',
-        unchecked: 'false',
+        // checked: 'true',
+        // unchecked: 'false',
       } ),
 
       f.field( {
         key: 'internal_only',
         as: 'check',
-        checked: 'true',
-        unchecked: 'false',
+        // checked: 'true',
+        // unchecked: 'false',
       } ),
 
-      f.buttons( {
-        cancel: {
-          onclick: () => controller.open( '..' ),
-        }
-      } ),
+      f.btns( controller ),
+
 
     ]
   } )

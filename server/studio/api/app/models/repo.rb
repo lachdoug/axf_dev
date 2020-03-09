@@ -5,11 +5,7 @@ module Server
         class Repo
 
           def self.create( params )
-            cloning = Cloning.new params[:url],
-                                  params[:path]
-                                  # ,
-                                  # params[:namespace]
-            cloning.process
+            Clone.new( params[:url], params[:path] ).process
           end
 
           def initialize( owner )
@@ -31,10 +27,6 @@ module Server
             }
           end
 
-          # def name
-          #   owner.name
-          # end
-
           def remote
             @remote ||= git( 'remote get-url origin' ).strip
           end
@@ -47,6 +39,12 @@ module Server
             File.write "#{ path }/#{ filepath }", content
           end
 
+          def delete( filepath )
+            FileUtils.rm_rf "#{ path }/#{ filepath }"
+            compact
+            {}
+          end
+
           def path
             @path ||= owner.repo_dir
           end
@@ -55,60 +53,69 @@ module Server
             @branch ||= Branch.new self
           end
 
-          def remoteDiff
-            git 'diff origin'
+          def unpushedDiff
+            git 'diff origin..HEAD'
           end
 
-          def localDiff
-            git 'diff'
+          def uncommitted
+            git 'diff HEAD'
           end
 
           def diff
             {
-              local: localDiff,
-              remote: remoteDiff,
+              uncommitted: uncommitted,
+              unpushed: unpushedDiff,
             }
           end
 
           def status
-            @status ||= git( 'status -s' ).tap do |status|
-              return @status = 'Up to date' if status.empty?
-            end
+            @status ||= git 'status'
           end
 
           def reset
-            git 'reset --hard origin/master'
+            { message: git( 'reset --hard origin/master' ) }
           end
 
           def pull
-            git 'pull'
+            { message: git( "pull origin #{ branch.current }" ) }
           end
 
           def commit( commit )
             git 'add -A'
-            git "commit -m #{ commit[:message] }"
+            { message: git( "commit -m #{ commit[:message] }" ) }
           end
 
           def push
-            git 'push'
+            { message: git( "push -u origin #{ branch.current }" ) }
           end
 
           def git( command )
             stdout, stderr, status = Open3.
               capture3( "git -C '#{ path }' #{ command }" )
-            raise Error::GitError.new( stderr.empty? ? stdout : stderr ) unless status.exitstatus === 0
-            stdout
+              result = stdout === '' ?
+                stderr :
+                stderr === '' ? stdout : "#{ stdout }\n#{ stderr }"
+            raise Error::GitError.new result unless status.exitstatus === 0
+            result
           end
 
+          def dirty?
+            !clean?
+          end
 
-          #
-          # def uncommitted_diff
-          #   @uncommitted_diff ||= `git -C #{ path } diff HEAD`
-          # end
-          #
-          # def committed_diff
-          #   @committed_diff ||= `git -C #{ path } diff origin/master..HEAD`
-          # end
+          def clean?
+            uncommitted.empty? && unpushedDiff.empty?
+          end
+
+          def compact
+            Dir.glob( "#{ path }/**/*" ).select do |entry|
+              File.directory? entry
+            end.select do |entry|
+              ( Dir.entries( entry ) - %w[ . .. ] ).empty?
+            end.each do |entry|
+              Dir.rmdir entry
+            end
+          end
 
         end
       end

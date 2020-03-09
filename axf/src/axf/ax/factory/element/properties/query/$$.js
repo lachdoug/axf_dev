@@ -4,8 +4,6 @@ ax.factory.element.properties.query.$$ = function( selector ) {
 
   let collection = Array.from( this.querySelectorAll( selector ) )
 
-  return ax.factory.element.properties.query(
-    collection
-  )
+  return ax.factory.element.properties.query( collection )
 
 }

@@ -1,4 +1,4 @@
-app.applications.new = (controller) => (a,x) => [
+app.applications.new = controller => (a,x) => [
 
   a.h3('New application'),
 
@@ -19,11 +19,9 @@ app.applications.new = (controller) => (a,x) => [
         }
       } ),
     ],
-    success: ( response, el ) => {
-      response.json().then( application => {
-        controller.open( `/applications/${ application.id }` )
-      } )
-    }
+    success: application => controller.open(
+      `/applications/${ application.id }`
+    )
   } )
 
 ]

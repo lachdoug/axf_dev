@@ -1,4 +1,4 @@
-app.views.delete = ( parent, path ) => ( controller ) => (a,x) => [
+app.views.delete = ( parent, path ) => controller => (a,x) => [
 
   'Delete view'
 

@@ -5,18 +5,18 @@ module Server
         class Application
           class Views
 
-            def initialize( owner )
-              @owner = owner
+            def initialize( application )
+              @application = application
             end
 
-            attr_reader :owner
+            attr_reader :application
 
-            def to_h
-              @to_h ||= JSON.parse content, symbolize_names: true
+            def to_a
+              @to_a ||= JSON.parse content, symbolize_names: true
             end
 
             def to_json
-              to_h.to_json
+              to_a.to_json
             end
 
             def find( name )
@@ -26,7 +26,7 @@ module Server
             end
 
             def content
-              owner.repo.read 'views.json'
+              application.repo.read 'views.json'
             rescue Errno::ENOENT
               return '[]'
             end
@@ -36,7 +36,7 @@ module Server
               save
               { name: view[:name] }
             end
-            
+
             def update( name, view )
               raise Error::MissingParam.new ':name' if name.to_s.empty?
               index = to_h.each_with_index.select { |view,i| view[:name] == name }.map(&:last)[0]
@@ -46,7 +46,7 @@ module Server
             end
 
             def save
-              owner.repo.write 'views.json', JSON.pretty_generate( to_h )
+              application.repo.write 'views.json', JSON.pretty_generate( to_h )
             end
             #
             # def blueprint

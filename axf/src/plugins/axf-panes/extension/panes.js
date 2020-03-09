@@ -58,7 +58,7 @@ ax.extension.panes = function ( options={} ) {
 
   return a['|axf-panes']( [
     a['|axf-panes-proximate']( proximate ),
-    a['|axf-panes-drag']( { $on: {
+    a['|axf-panes-drag']( null, { $on: {
       'mousedown': (e,el) => {
         el.$('^|axf-panes').classList.add( 'dragable' )
         document.addEventListener( 'mousemove', move )

@@ -1,4 +1,4 @@
-app.reportEnginesV1Input = r => r.field( {
+app.reportEnginesV1Input = r => (a,x) => r.field( {
   key: 'input',
   as: 'one',
   layout: 'vertical',
@@ -37,20 +37,30 @@ app.reportEnginesV1Input = r => r.field( {
       key: 'collection',
       as: 'one',
       report: (rrr) => [
-        rrr.field( {
-          key: 'items',
-          as: 'table',
-          label: false,
-          layout: 'vertical',
-          report: (rrrr) => [
-            rrrr.field( {
-              key: 'value',
-            } ),
-            rrrr.field( {
-              key: 'label',
-            } ),
-          ]
-        } ),
+
+        a.div( Object.keys( rrr.object.items ).length ?
+          x.list( rrr.object.items ) :
+          a.i( 'None' ),
+          {
+            class: 'border border-light p-2 d-block',
+          }
+        ),
+
+
+        // rrr.field( {
+        //   key: 'items',
+        //   as: 'table',
+        //   label: false,
+        //   layout: 'vertical',
+        //   report: (rrrr) => [
+        //     rrrr.field( {
+        //       key: 'value',
+        //     } ),
+        //     rrrr.field( {
+        //       key: 'label',
+        //     } ),
+        //   ]
+        // } ),
         rrr.field( {
           key: 'include_blank',
           as: 'boolean',

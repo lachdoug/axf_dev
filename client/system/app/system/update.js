@@ -1,10 +1,10 @@
-app.system.update = ( controller ) => (a,x) => a['app-system-update']( [
+app.system.update = controller => (a,x) => [
 
   a.h3( "Update Engines system" ),
 
   a['div.clearfix'](
     a['div.float-right']( [
-      app.btn( app.icon( 'fa fa-arrow-up' ), (e,el) => controller.open() ),
+      app.up( controller, 'Close' ),
     ] )
   ),
 
@@ -14,7 +14,7 @@ app.system.update = ( controller ) => (a,x) => a['app-system-update']( [
       app.btn(
         app.icon( "fa fa-check", "OK" ),
         (e,el) => el.$('^app-system-update-http').$start(),
-        { class: 'btn btn-primary' }
+        { class: 'btn btn-primary' },
       ),
     ],
     {
@@ -27,6 +27,5 @@ app.system.update = ( controller ) => (a,x) => a['app-system-update']( [
       },
     }
   ),
-  //
 
-] )
+]

@@ -22,8 +22,11 @@ class ApplicationBlueprintServiceConfigurations {
     return this.collection.map(fn)
   }
 
-  new() {
-    let service_configurations = new ApplicationBlueprintServiceConfiguration( this, {} )
+  new( namespace, type ) {
+    let service_configurations = new ApplicationBlueprintServiceConfiguration( this, {
+      publisher_namespace: namespace,
+      type_path: type,
+    } )
     service_configurations.isNew = true
     return service_configurations
   }

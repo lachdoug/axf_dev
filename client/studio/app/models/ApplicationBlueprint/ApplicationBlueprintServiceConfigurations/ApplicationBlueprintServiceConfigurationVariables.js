@@ -1,8 +1,7 @@
-// class ApplicationBlueprintScheduleParams {
+// class ApplicationBlueprintServiceConfigurationVariables {
 //
-//   constructor( schedule, object ) {
-//     this.schedule = schedule
-//     // debugger
+//   constructor( serviceConfiguration, object ) {
+//     this.serviceConfiguration = serviceConfiguration
 //     this.assign( object )
 //   }
 //
@@ -15,7 +14,7 @@
 //   }
 //
 //   actionatorVariables() {
-//     let actionator = this.schedule.actionator() || {}
+//     let actionator = this.serviceConfiguration.actionator() || {}
 //     let variables = actionator.variables || {}
 //     return variables.collection || []
 //   }

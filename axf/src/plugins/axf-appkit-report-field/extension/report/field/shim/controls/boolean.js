@@ -23,9 +23,12 @@ boolean = function( r, options ) {
 
   }
 
+  let trueLabel = options.trueLabel || '✔ True'
+  let falseLabel = options.falseLabel || '❌ False'
+
   return a['|appkit-report-control'](
     a['|appkit-report-boolean'](
-      options.value ? '✔ True': '❌ False',
+      options.value ? trueLabel : falseLabel,
       options.booleanTag,
     ),
     controlTagOptions

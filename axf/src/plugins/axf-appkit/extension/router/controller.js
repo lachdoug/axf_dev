@@ -24,7 +24,7 @@ ax.extension.router.controller = ( config ) => ( location ) => {
       routes: ax.x.router.controller.routes( config, location ),
       load: ax.x.router.controller.load( config ),
       open: ax.x.router.controller.open( config ),
-      // reopen: ax.x.router.controller.reopen( config ),
+      reopen: ax.x.router.controller.reopen( config ),
     }
 
 }

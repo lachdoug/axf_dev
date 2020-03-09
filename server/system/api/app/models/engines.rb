@@ -44,6 +44,11 @@ module Server
             api_call( route, block_response: block_response )
           end
 
+          def upstream_chunks( route, &block )
+            block_response = asChunks &block
+            api_call( route, block_response: block_response, method: :post )
+          end
+
           private
 
           def asChunks
@@ -87,6 +92,8 @@ module Server
 
           def response_for( &block )
             yield
+          # rescue => e
+          #   debugger
           rescue  RestClient::Forbidden
             raise Error::NotAuthenticated
           rescue  RestClient::NotFound => e

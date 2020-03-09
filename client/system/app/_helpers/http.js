@@ -12,7 +12,8 @@ app.http = function( route, success, options={} ) {
       'text/terminal': ( response, el ) => response.text().then( result => {
         el.$nodes = app.xterm( {
           text: result,
-          label: response.status == 500 ? a['.error']( 'Error' ) : options.label,
+          label: response.status == 500 ? a['.error']( 'Server error' ) : null,
+          ...options.xterm,
         } )
       } ),
       ...options.when

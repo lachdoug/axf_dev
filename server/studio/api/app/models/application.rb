@@ -13,7 +13,7 @@ module Server
               {
                 id: application.id,
                 name: application.name,
-                active: application.active
+                active: application.active?
               }
             end
           end
@@ -39,9 +39,12 @@ module Server
 
           def self.create( params )
             raise Error::MissingParam.new ':url' if params[:url].to_s.empty?
-            id = Repo.create  url: params[:url],
-                              path: data_dir
-            { id: id }
+            id = Repo.create url: params[:url], path: data_dir
+            branch = new( id ).repo.branch.current
+            {
+              id: id,
+              branch: branch,
+            }
           end
 
           def self.data_dir
@@ -68,7 +71,7 @@ module Server
               name: name,
               remote: repo.remote,
               branch: repo.branch.current,
-              # readme: readme.content,
+              active: active?,
             }
           end
 
@@ -98,59 +101,21 @@ module Server
 
           def name
             raise Error::NoRecord.new id unless parent_dir
-            @name ||= repo_dir.sub( "#{ parent_dir }/", '' )
+            repo_dir.sub( "#{ parent_dir }/", '' )
           end
 
           def repo_dir
             Dir.glob( "#{ parent_dir }/*" )[0]
           end
 
-          def active
-            !repo.localDiff.empty?
+          def active?
+            repo.dirty?
           end
 
           def delete
             FileUtils.rm_rf parent_dir
             {}
           end
-
-          #
-          # def remote
-          #   @remote ||= `git -C '#{ path }' remote get-url origin`.strip
-          # end
-          #
-          # def blueprint_json
-          #   File.read "#{ path }/blueprint.json"
-          # rescue Errno::ENOENT
-          #   return '{}'
-          # end
-          #
-          # def blueprint
-          #   @blueprint ||= JSON.parse( blueprint_json )
-          # rescue JSON::ParserError => e
-          #   raise Error::JsonParse.new e.message
-          # end
-          #
-          # def readme
-          #   File.read "#{ path }/README.md"
-          # rescue Errno::ENOENT
-          #   return ''
-          # end
-          #
-          # def show
-          #   {
-          #     id: id,
-          #     name: name,
-          #     remote: remote,
-          #     readme: readme,
-          #     blueprint: blueprint,
-          #   }
-          # end
-          #
-          # def delete
-          #   FileUtils.rm_rf "#{ path }"
-          # end
-
 
         end
       end

@@ -1,5 +1,8 @@
 ax.factory.undefined = function () {
 
-  ax.throw( 'Component is undefined.' )
+  return this.element( {
+    $text: 'UNDEFINED',
+    $init: el => console.error( 'Component is undefined:', el )
+  } )
 
 }

@@ -1,6 +1,5 @@
-cc.up = ( controller, title='Return', path='..' ) => cc.button( {
-  // id: 'up',
-  label: cc.icon( 'fa fa-arrow-up' ),
+cc.up = ( controller, title='Close', path='..' ) => cc.button( {
+  label: cc.icon( 'fa fa-times', 'Close' ),
   onclick: (e,el) => {
     controller.open( path )
   },

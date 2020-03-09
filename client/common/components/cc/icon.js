@@ -11,7 +11,7 @@ cc.icon = function( klass, text, options={} ) {
   let x = ax.x
 
   var component = [
-    ax.a.span( { class: klass } )
+    a.span( null, { class: klass } )
   ]
 
   if ( text ) {
@@ -28,6 +28,6 @@ cc.icon = function( klass, text, options={} ) {
     ...options.iconTag
   }
 
-  return ax.a['app-icon']( component, iconTag )
+  return a['app-icon']( component, iconTag )
 
 }

@@ -4,11 +4,11 @@ helpbutton = function( options={} ) {
   let a = ax.a
   let x = ax.x
 
-  return a['|appkit-form-field-helpbutton']( {
+  return a['|appkit-form-field-helpbutton']( null, {
     $state: false,
-    $nodes: function() {
+    $nodes: ( el, show ) => {
       return a['|appkit-form-field-helpbutton-text'](
-        { $text: this.$state ? ' ❓ ✖ ' : ' ❓ ' }
+        el.show ? ' ❓ ✖ ' : ' ❓ '
       )
     },
     ...options.helpbuttonTag,

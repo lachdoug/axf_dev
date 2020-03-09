@@ -112,7 +112,7 @@ ax.extension.popup = function( component, options={} ) {
 
   return (a,x) => a['|appkit-context']( [
     a['|appkit-context-content']( component, contentTagOptions ),
-    a['|appkit-context-popup']( popupTagOptions )
+    a['|appkit-context-popup']( null, popupTagOptions )
   ], contextTagOptions )
 
 

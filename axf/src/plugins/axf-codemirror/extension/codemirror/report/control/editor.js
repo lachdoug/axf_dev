@@ -5,7 +5,7 @@ ax.extension.codemirror.report.control.editor = function(
   let a = ax.a
 
   return a['|appkit-report-codemirror-editor'](
-    ax.a.textarea(
+    a.textarea(
       options.value,
       {
         $init: function() {

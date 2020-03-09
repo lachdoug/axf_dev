@@ -1,4 +1,4 @@
-app.namespaces.index = (controller) => (a,x) => [
+app.namespaces.index = controller => (a,x) => [
 
   a.h5( 'Namespaces' ),
 
@@ -20,28 +20,21 @@ app.namespaces.index = (controller) => (a,x) => [
 
   app.http(
     '/~/namespaces',
-    ( response, el ) => {
-      response.json().then( namespaces => {
-
-        el.$nodes = [
-          namespaces.length == 0 ? 'None' : null,
-          namespaces.map( namespace => a.p( [
-            app.button( {
-              label: app.icon( 'fa fa-caret-right', namespace.name ),
-              onclick: (e,el) => {
-                controller.open( namespace.id )
-              },
-              title: namespace.name,
-            } ),
-          ] ) )
-        ]
-
-      } )
-
-    },
+    ( namespaces, el ) => el.$nodes = [
+      namespaces.length == 0 ? 'None' : null,
+      namespaces.map( namespace => a.p( [
+        app.button( {
+          label: app.icon( 'fa fa-caret-right', namespace.name ),
+          onclick: (e,el) => {
+            controller.open( namespace.id )
+          },
+          title: namespace.name,
+        } ),
+      ] ) )
+    ],
     {
       placeholder: a.p(
-        app.icon( 'fa fa-spinner fa-spin', 'Loading namespaces' )
+        app.hourglass( 'Loading namespaces' )
       )
     }
   )

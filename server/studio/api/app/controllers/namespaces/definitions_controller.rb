@@ -3,14 +3,14 @@ module Server
     module App
       module Controllers
 
-        get '/namespaces/:id/definitions' do
+        get '/namespaces/:namespace_id/definitions' do
           content_type :'application/json'
-          Namespace.find( params[:id] ).definitions.to_json
+          Namespace.find( params[:namespace_id] ).definitions.to_json
         end
 
-        get '/namespaces/:id/definitions/entry' do
+        get '/namespaces/:namespace_id/definitions/query' do
           content_type :'application/json'
-          Namespace.find( params[:id] ).definitions.find( params[:type] ).to_json
+          Namespace.find( params[:namespace_id] ).definitions.find( params[:type] ).to_json
         end
 
       end

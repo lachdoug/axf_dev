@@ -8,11 +8,10 @@ ax.extension.chartjs = function( options={} ) {
         this.$('canvas').getContext('2d'), options.chartjs || {}
       )
     },
-    $tag: 'div',
     ...options.wrapperTag,
   }
 
-  return a['axf-chartjs-chart-wrapper']( [
+  return a['div|axf-chartjs-chart-wrapper']( [
     a.canvas( null, options.canvasTag ),
   ], wrapperTag )
 

@@ -1,7 +1,12 @@
-app.views.new = ( parent, path ) => (controller) => (a,x) => [
+app.views.new = ( parent, path ) => controller => (a,x) => [
 
   a.h5( 'New view' ),
 
-  app.view.designer( controller, `/~/${ path }/views`, {} )
+  app.view.designer(
+    controller,
+    `/~/${ path }/views`,
+    {},
+    view => controller.open( `../${ view.name }` )
+  )
 
 ]

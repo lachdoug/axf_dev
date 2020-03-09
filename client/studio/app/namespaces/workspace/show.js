@@ -2,113 +2,135 @@ app.namespaces.workspace.show = controller => (a,x) => [
 
   app.http(
     `/~/namespaces/${ controller.params.namespace_id }/workspace`,
-    ( response, el ) => {
-      response.json().then( workspace => {
+    ( workspace, el ) => {
 
-        if ( workspace.exists ) {
+      if ( workspace.exists ) {
 
-          el.$nodes = [
+        el.$nodes = [
 
-            app.http(
-              `/~/namespaces/${ controller.params.namespace_id }/workspace/readme`,
-              ( response, el ) => {
-                response.json().then( readme => {
-                  el.$nodes = [
+          app.http(
+            `/~/namespaces/${ controller.params.namespace_id }/workspace/readme`,
+            ( readme, el ) => el.$nodes = [
 
-                    a.h5('Workspace'),
+              a['div.clearfix']( [
+                app.button( {
+                  label: app.icon( 'fa fa-caret-right', 'Readme' ),
+                  title: 'Readme',
+                  onclick: (e,el) => {
+                    controller.open( 'readme' )
+                  }
+                } ),
+                app.button( {
+                  label: app.icon( 'fa fa-caret-right', 'License' ),
+                  title: 'License',
+                  onclick: (e,el) => {
+                    controller.open( 'license' )
+                  }
+                } ),
+                app.button( {
+                  label: app.icon( 'fa fa-caret-right', 'Definitions' ),
+                  title: 'Definitions',
+                  onclick: (e,el) => {
+                    controller.open( 'definitions' )
+                  }
+                } ),
+                app.button( {
+                  label: app.icon( 'fa fa-caret-right', 'Services' ),
+                  title: 'Services',
+                  onclick: (e,el) => {
+                    controller.open( 'services' )
+                  }
+                } ),
+                a['div.btn-group.float-right']( [
+                  app.button( {
+                    label: app.icon( 'fab fa-git-alt', 'Branch' ),
+                    title: 'Branch',
+                    onclick: (e,el) => {
+                      controller.open( 'branch' )
+                    }
+                  } ),
+                  app.button( {
+                    label: app.icon( 'fas fa-clipboard-list', 'Status' ),
+                    title: 'Status',
+                    onclick: (e,el) => {
+                      controller.open( 'status' )
+                    }
+                  } ),
+                  app.button( {
+                    label: app.icon( 'fas fa-bookmark', 'Commit' ),
+                    title: 'Commit',
+                    onclick: (e,el) => {
+                      controller.open( 'commit' )
+                    }
+                  } ),
+                  app.button( {
+                    label: app.icon( 'fas fa-file-upload', 'Push' ),
+                    title: 'Push',
+                    onclick: (e,el) => {
+                      controller.open( 'push' )
+                    }
+                  } ),
+                  app.button( {
+                    label: app.icon( 'fas fa-file-download', 'Pull' ),
+                    title: 'Pull namespace',
+                    onclick: (e,el) => {
+                      controller.open( 'pull' )
+                    }
+                  } ),
 
-                    a['div.clearfix']( [
-                      app.button( {
-                        label: app.icon( 'fa fa-caret-right', 'Readme' ),
-                        title: 'Readme',
-                        onclick: (e,el) => {
-                          controller.open( 'readme' )
-                        }
-                      } ),
-                      app.button( {
-                        label: app.icon( 'fa fa-caret-right', 'License' ),
-                        title: 'License',
-                        onclick: (e,el) => {
-                          controller.open( 'license' )
-                        }
-                      } ),
-                      // app.button( {
-                      //   label: app.icon( 'fa fa-caret-right', 'Definitions' ),
-                      //   title: 'Definitions',
-                      //   onclick: (e,el) => {
-                      //     controller.open( 'definitions' )
-                      //   }
-                      // } ),
-                      app.button( {
-                        label: app.icon( 'fa fa-caret-right', 'Services' ),
-                        title: 'Services',
-                        onclick: (e,el) => {
-                          controller.open( 'services' )
-                        }
-                      } ),
-                      a['div.btn-group.float-right']( [
-                        app.button( {
-                          label: app.icon( 'fab fa-git-alt', 'Repo' ),
-                          title: 'Repo',
-                          onclick: (e,el) => {
-                            controller.open( 'repo' )
-                          }
-                        } ),
-                        app.up( controller, 'Return to namespace' ),
+                  app.up( controller, 'Return to namespace' ),
 
-                      ] ),
-                    ] ),
+                ] ),
+              ] ),
 
 
 
-                    a.p( readme.content ?
-                      app.md( readme.content ) :
-                      a['.error']( 'No readme!' ),
-                      { class: 'border border-light p-2' }
-                    ),
+              a.p( readme.content ?
+                app.md( readme.content ) :
+                a['.error']( 'No readme!' ),
+                { class: 'border border-light p-2' }
+              ),
 
+              a['div.clearfix']( a['div.btn-group.float-right']( [
+                app.button( {
+                  label: app.icon( 'fa fa-undo', 'Reset' ),
+                  class: 'btn btn-outline-danger app-btn',
+                  onclick: (e,el) => {
+                    controller.open( 'reset' )
+                  },
+                  title: 'Reset application',
+                } ),
+                app.button( {
+                  label: app.icon( 'fa fa-trash', 'Delete' ),
+                  class: 'btn btn-outline-danger app-btn',
+                  onclick: (e,el) => {
+                    controller.open( 'delete' )
+                  },
+                  title: 'Delete workspace',
+                } ),
+              ] ) ),
 
-                  ]
-                } )
-              },
-              {
-                placeholder: a.p(
-                  app.icon( 'fa fa-spinner fa-spin', 'Loading namespace' )
-                )
-              }
-            ),
+            ],
+            {
+              placeholder: a.p(
+                app.hourglass( 'Loading workspace' )
+              )
+            }
+          ),
 
-          ]
+        ]
 
-        } else {
+      } else {
 
-          controller.open( 'new' )
+        controller.open( 'new' )
 
-        }
-      } )
-
+      }
     },
     {
       placeholder: a.p(
-        app.icon( 'fa fa-spinner fa-spin', 'Loading workspace' )
+        app.hourglass( 'Loading workspace' )
       )
     }
   )
-
-
-
-  // controller.routes( {
-  //   '/?': app.namespaces.services.index( namespace ),
-  //   '/:service_id*': app.namespaces.services.service( namespace ),
-  //   // '/delete': app.namespaces.delete,
-  //   // '/repo/?*': app.repo( 'namespace', `namespaces/${ controller.params.namespace_id }` ),
-  //   // '/readme/?': app.readme( 'namespace', `namespaces/${ controller.params.namespace_id }`),
-  //   // '/license/?': app.license( 'namespace', `namespaces/${ controller.params.namespace_id }`),
-  //   // '/definitions/?*': app.namespaces.definitions,
-  //   // '/*': app.services,
-  //   // '*': app.notFound
-  // }, {
-  //   lazy: true,
-  // } ),
 
 ]

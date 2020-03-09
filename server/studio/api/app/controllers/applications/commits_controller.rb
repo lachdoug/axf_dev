@@ -3,9 +3,9 @@ module Server
     module App
       module Controllers
 
-        post '/applications/:id/commit' do
+        post '/applications/:application_id/commit' do
           content_type :'application/json'
-          Application.new( params[:id] ).repo.commit( params[:commit] ).to_json
+          Application.new( params[:application_id] ).repo.commit( params[:commit] ).to_json
         end
 
       end

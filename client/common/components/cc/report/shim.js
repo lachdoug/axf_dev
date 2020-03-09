@@ -15,6 +15,13 @@ cc.report.shim = {
   },
 
   controls: {
+
+    boolean: ( f, target ) => ( options={} ) => (a,x) => target( {
+      ...options,
+      trueLabel: a['.boolean-true']( app.icon( 'fa fa-check', 'True' ) ),
+      falseLabel: a['.boolean-false']( app.icon( 'fa fa-times', 'False' ) ),
+    } ),
+
     // json: ( r, target ) => ( options={} ) => (a,x) => x.jsoneditor.report.control( r, { theme: 'bootstrap3', ...options } ),
     markdown: ( r, target ) => ( options={} ) =>
       (a,x) => x.markedjs.report.control( r, {

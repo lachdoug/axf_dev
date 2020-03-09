@@ -5,16 +5,15 @@ module Server
         class Service
           class Blueprint
 
-            def initialize( owner )
-              @owner = owner
+            def initialize( service )
+              @service = service
             end
 
-            attr_reader :owner
+            attr_reader :service
 
             def to_h
               {
-                # branch: owner.repo.branch.current,
-                content: content,
+                object: object,
               }
             end
 
@@ -23,16 +22,25 @@ module Server
             end
 
             def content
-              owner.repo.read 'blueprint.json'
+              service.repo.read 'blueprint.json'
             rescue Errno::ENOENT
               return '{}'
             end
-            #
-            # def blueprint
-            #   @blueprint ||= JSON.parse( blueprint_json )
-            # rescue JSON::ParserError => e
-            #   raise Error::JsonParse.new e.message
-            # end
+
+            def update( io )
+              service.repo.write 'blueprint.json', io.read
+              return 'Success'
+            end
+
+            def object
+              @object ||= JSON.parse content, symbolize_names: true
+            rescue => e
+              raise Error::JsonParse.new( e.message )
+            end
+
+            def type
+              object.dig :software, :base, :type_path
+            end
 
           end
         end

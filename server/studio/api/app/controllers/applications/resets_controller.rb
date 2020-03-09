@@ -3,9 +3,9 @@ module Server
     module App
       module Controllers
 
-        post '/applications/:id/reset' do
+        post '/applications/:application_id/reset' do
           content_type :'application/json'
-          Application.new( params[:id] ).repo.reset.to_json
+          Application.new( params[:application_id] ).repo.reset.to_json
         end
 
       end

@@ -1,4 +1,4 @@
-app.logout = ( controller ) => (a,x) => a['app-logout'](
+app.logout = controller => (a,x) => a['app-logout'](
   app.http(
     '/~/session',
     ( result, el  ) => {

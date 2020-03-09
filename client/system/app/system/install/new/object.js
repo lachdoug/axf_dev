@@ -35,7 +35,7 @@ app.system.install.new.object = ( install ) => {
       adoptable: service.adoptable.map( service => `${ service.parent_engine }/${ service.service_handle }` ),
     } ) ),
 
-    variables:  variables.map( variable => v0EnginesField( variable ) ),
+    variables:  variables.map( variable => enginesFieldV1( variable ) ),
 
     domains: Object.keys( install.domains ),
     application_names: Object.keys( install.applications_status ),

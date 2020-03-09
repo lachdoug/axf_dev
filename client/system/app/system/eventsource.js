@@ -1,4 +1,5 @@
 app.system.eventsource = (a,x) => a['app-system-eventsource'](
+  null,
   {
     $digest: function(e) {
       let serializedData = e.data
@@ -35,7 +36,7 @@ app.system.eventsource = (a,x) => a['app-system-eventsource'](
           // The error is shown at the start of the console of freshly loaded page.
           // The timeout below gives a potential reload a moment to do its thing, which
           // will mean that timeout function will not be called and no error will be thrown.
-          // If the page does not reload, the timeout will complate and the function will execute as normal.
+          // If the error was not caused by page reload, the timeout will complete and the function will execute as normal.
           setTimeout( () => {
             console.error( `Container events stream ${ this.$started } - Unexpected error.` )
             this.$send( 'app.disconnected' )

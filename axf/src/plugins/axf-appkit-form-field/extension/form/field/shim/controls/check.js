@@ -5,6 +5,7 @@ check = function( f, options ) {
 
   let checkOptions = {
     ...options,
+    label: '', // Label for check needs to be specified in options.check
     ...options.check
   }
 

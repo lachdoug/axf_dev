@@ -20,10 +20,9 @@ json = function( options={} ) {
   let jsonTagOptions = {
     name: options.name,
     type: options.type,
-    $text: component,
     ...options.jsonTag
   }
 
-  return a['pre|appkit-report-json']( jsonTagOptions )
+  return a['pre|appkit-report-json']( component, jsonTagOptions )
 
 }

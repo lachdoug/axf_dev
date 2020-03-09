@@ -1,39 +1,38 @@
-app.namespaces.workspace.services.service = controller => (a,x) => [
+app.namespaces.workspace.services.service = namespace => controller => (a,x) => [
 
   app.http(
     `/~/namespaces/${ controller.params.namespace_id }/workspace/services/${ controller.params.service_id }`,
-    ( response, el ) => {
-      response.json().then( service => {
+    ( service, el ) => el.$nodes = [
 
-        el.$nodes = [
+      a.hr,
 
-          a.h3( service.name ),
-          a.small( service.remote ),
-          a.h5( service.branch ),
+      a.h3( service.name ),
+      a.small( service.remote ),
+      a.h5( service.branch, {
+        id: 'serviceBranch',
+      } ),
 
-          controller.routes( {
-            '/?': app.namespaces.workspace.services.show,
-            // '/:service_id*': app.namespaces.services.service( namespace ),
-            '/delete': app.namespaces.workspace.services.delete,
-            // '/repo/?*': app.repo( 'namespace', `namespaces/${ controller.params.namespace_id }` ),
-            '/readme/?': app.readme( 'service', `namespaces/${ controller.params.namespace_id }/workspace/services/${ controller.params.service_id }`),
-            '/license/?': app.license( 'service', `namespaces/${ controller.params.namespace_id }/workspace/services/${ controller.params.service_id }`),
-            // '/definitions/?*': app.namespaces.definitions,
-            // '/*': app.services,
-            // '*': app.notFound
-          }, {
-            lazy: true,
-          } ),
+      controller.routes( {
+        '/?': app.namespaces.workspace.services.show,
+        '/delete': app.namespaces.workspace.services.delete,
+        '/readme': app.readme( 'service', `namespaces/${ controller.params.namespace_id }/workspace/services/${ controller.params.service_id }`),
+        '/license': app.license( 'service', `namespaces/${ controller.params.namespace_id }/workspace/services/${ controller.params.service_id }`),
+        '/blueprint*': app.namespaces.workspace.services.blueprint( namespace ),
+        '/definition': app.namespaces.workspace.services.definition,
+        '/branch*': app.namespaces.workspace.services.branch,
+        '/status': app.namespaces.workspace.services.status,
+        '/commit': app.namespaces.workspace.services.commit,
+        '/push': app.namespaces.workspace.services.push,
+        '/reset': app.namespaces.workspace.services.reset,
+      }, {
+        lazy: true,
+      } ),
 
 
-        ]
-
-      } )
-
-    },
+    ],
     {
       placeholder: a.p(
-        app.icon( 'fa fa-spinner fa-spin', 'Loading service' )
+        app.hourglass( 'Loading service' )
       )
     }
   ),

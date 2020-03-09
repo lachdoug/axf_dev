@@ -11,6 +11,7 @@ app.applications.blueprint.environment_variables.index = blueprint => controller
       },
       title: 'New environment variable',
     } ),
+    app.up( controller, 'Return to blueprint' ),
   ] ) ),
 
   blueprint.environmentVariables.map(

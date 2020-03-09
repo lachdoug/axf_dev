@@ -118,7 +118,7 @@ ax.extension.context = function( options={} ) {
 
   return (a,x) => a['axf-context']( [
     a['axf-context-content']( component, contentTagOptions ),
-    a['axf-context-popup']( popupTagOptions )
+    a['axf-context-popup']( null, popupTagOptions )
   ], contextTagOptions )
 
 

@@ -21,26 +21,22 @@ app.namespaces.workspace.services.delete = controller => (a,x) => [
 
         el.$('^').$nodes = app.http(
           `/~/namespaces/${ controller.params.namespace_id }/workspace/services/${ controller.params.service_id }`,
-          ( response, el ) => {
-            response.json().then(
-              service => el.$nodes = [
-                a.p( 'Service has been deleted.' ),
-                a['div.clearfix']( [
-                  app.button( {
-                    label: app.icon( 'fa fa-check', 'OK' ),
-                    onclick: (e,el) => {
-                      controller.open( '../..' )
-                    },
-                    title: 'Return to services',
-                  } ),
-                ] ),
-              ]
-            )
-          },
+          ( service, el ) => el.$nodes = [
+            a.p( 'Service has been deleted.' ),
+            a['div.clearfix']( [
+              app.button( {
+                label: app.icon( 'fa fa-check', 'OK' ),
+                onclick: (e,el) => {
+                  controller.open( '../..' )
+                },
+                title: 'Return to services',
+              } ),
+            ] ),
+          ],
           {
             method: 'DELETE',
             placeholder: a.p(
-              app.icon( 'fa fa-spinner fa-spin', 'Deleting service' )
+              app.hourglass( 'Deleting service' )
             )
           }
         )

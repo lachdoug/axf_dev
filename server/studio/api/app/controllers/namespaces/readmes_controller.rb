@@ -3,14 +3,14 @@ module Server
     module App
       module Controllers
 
-        get '/namespaces/:id/readme' do
+        get '/namespaces/:namespace_id/readme' do
           content_type :'application/json'
-          Namespace.find( params[:id] ).readme.to_json
+          Namespace.find( params[:namespace_id] ).readme.to_json
         end
 
-        post '/namespaces/:id/readme' do
+        post '/namespaces/:namespace_id/readme' do
           content_type :'application/json'
-          Namespace.find( params[:id] ).readme.update( params[:readme] ).to_json
+          Namespace.find( params[:namespace_id] ).readme.update( params[:readme] ).to_json
         end
 
       end

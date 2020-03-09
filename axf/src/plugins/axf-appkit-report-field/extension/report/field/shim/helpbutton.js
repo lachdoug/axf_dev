@@ -4,11 +4,11 @@ helpbutton = function( options={} ) {
   let a = ax.a
   let x = ax.x
 
-  return a['|appkit-report-field-helpbutton']( {
+  return a['|appkit-report-field-helpbutton']( null, {
     $state: false,
     $nodes: function() {
       return a['|appkit-report-field-helpbutton-text'](
-        { $text: this.$state ? ' ❓ ✖ ' : ' ❓ ' }
+        this.$state ? ' ❓ ✖ ' : ' ❓ '
       )
     },
     $on: { 'click: toggle help': function() {

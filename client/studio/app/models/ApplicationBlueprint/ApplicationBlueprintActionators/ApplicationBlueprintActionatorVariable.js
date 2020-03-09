@@ -47,13 +47,22 @@ class ApplicationBlueprintActionatorVariable {
 
   get formObject() {
 
+    let items = []
+
+    for ( let key of Object.keys( this.object.input.collection.items ) ) {
+      items.push( {
+        value: key,
+        label: this.object.input.collection.items[key],
+      } )
+    }
+
     return {
       ...this.object,
       mandatory: this.object.mandatory ? 'on': null,
       input: {
         ...this.object.input,
         collection: {
-          items: this.object.input.collection.items,
+          items: items,
           include_blank: this.object.input.collection.include_blank ? 'on' : null,
         },
       },
@@ -66,7 +75,13 @@ class ApplicationBlueprintActionatorVariable {
     formObject.input = formObject.input || {}
     formObject.input.collection = formObject.input.collection || {}
     let items = formObject.input.collection.items || {}
-    formObject.input.collection.items = Object.values( items )
+
+    let mergedItems = {}
+    for ( let item of Object.values( items ) ) {
+      mergedItems[item.value] = item.label
+    }
+
+    formObject.input.collection.items = mergedItems
 
     this.assign( formObject )
 

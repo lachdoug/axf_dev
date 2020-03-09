@@ -8,13 +8,16 @@ app.applications.blueprint.actionators.variables.show = blueprint => controller 
     a.h5( `Actionator ${ actionator.id + 1 } variable ${ variable.id + 1 }` ),
     a.hr,
 
-    app.button( {
-      label: app.icon( 'fa fa-edit', 'Edit' ),
-      title: 'Edit',
-      onclick: (e,el) => {
-        controller.open( 'edit' )
-      },
-    } ),
+    a['div.clearfix']( a['div.btn-group.float-right']( [
+      app.button( {
+        label: app.icon( 'fa fa-edit', 'Edit' ),
+        title: 'Edit',
+        onclick: (e,el) => {
+          controller.open( 'edit' )
+        },
+      } ),
+      app.up( controller, 'Return to variables' ),
+    ] ) ),
 
     app.report( {
       object: variable.object,

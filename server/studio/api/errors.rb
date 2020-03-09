@@ -3,13 +3,17 @@ module Server
 
     class Error < StandardError
 
+      def to_s
+        message
+      end
+
       def content_type
         :text
       end
 
       class NotAuthenticated < Error
 
-        def to_s
+        def message
           "Not authenticated."
         end
 
@@ -26,7 +30,7 @@ module Server
           @repo_name = repo_name
         end
 
-        def to_s
+        def message
           "Repo '#{ @repo_name }' already exists."
         end
 
@@ -42,8 +46,8 @@ module Server
           @message = message
         end
 
-        def to_s
-          "Failed to clone repo.\n#{ @message }"
+        def message
+          "Failed to clone repo.\n\n#{ @message }"
         end
 
         def status
@@ -58,7 +62,7 @@ module Server
           @record = record
         end
 
-        def to_s
+        def message
           "No record for '#{ @record }'."
         end
 
@@ -75,7 +79,7 @@ module Server
           @message = message
         end
 
-        def to_s
+        def message
           "Git error.\n\n#{ @message }"
         end
 
@@ -91,7 +95,7 @@ module Server
           @message = message
         end
 
-        def to_s
+        def message
           "Failed to parse JSON.\n#{ @message }"
         end
 
@@ -107,7 +111,7 @@ module Server
           @params_list = params_list
         end
 
-        def to_s
+        def message
           "Missing parameter.\nExpects #{ @params_list }."
         end
 
@@ -119,7 +123,7 @@ module Server
 
       class Timeout < Error
 
-        def to_s
+        def message
           "Session timeout."
         end
 

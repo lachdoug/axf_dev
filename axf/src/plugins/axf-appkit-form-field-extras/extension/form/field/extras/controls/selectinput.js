@@ -41,17 +41,21 @@ selectinput = (f, options={} ) => {
     },
 
     $disable: function() {
-      let hiddeninput = this.$('|appkit-form-selectinput-hiddeninput input')
       let select = this.$('|appkit-form-selectinput-select select')
-      hiddeninput.disabled = 'disabled'
+      let input = this.$('|appkit-form-selectinput-input input')
+      let hiddeninput = this.$('|appkit-form-selectinput-hiddeninput input')
       select.disabled = 'disabled'
+      input.disabled = 'disabled'
+      hiddeninput.disabled = 'disabled'
     },
     $enable: function() {
       if ( !options.disabled ) {
-        let hiddeninput = this.$('|appkit-form-selectinput-hiddeninput input')
         let select = this.$('|appkit-form-selectinput-select select')
-        hiddeninput.removeAttribute('disabled')
+        let input = this.$('|appkit-form-selectinput-input input')
+        let hiddeninput = this.$('|appkit-form-selectinput-hiddeninput input')
         select.removeAttribute('disabled')
+        input.removeAttribute('disabled')
+        hiddeninput.removeAttribute('disabled')
       }
     },
     $on: { change: function () {

@@ -1,4 +1,4 @@
-app.login = ( controller ) => (a,x) => a['app-login'](
+app.login = controller => (a,x) => a['app-login'](
   [
     a.h3( "Log in" ),
     app.form( {
@@ -9,7 +9,7 @@ app.login = ( controller ) => (a,x) => a['app-login'](
         controller.open()
       },
       when: {
-        401: null,
+        401: null, // Perform default error behaviour on 401, i.e. Show error message.
       },
       form: (f) => [
         f.input( { name: 'name', value: 'Engines Studio', inputTag: { class: 'd-none' } } ),

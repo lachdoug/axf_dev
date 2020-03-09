@@ -1,6 +1,6 @@
 ax.css( {
 
   '.error': { color: 'red' },
-  // '.error, .error *': { color: 'red' },
+  '.success': { color: 'blue' }
 
 } )

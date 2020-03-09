@@ -7,6 +7,10 @@ module Server
         message
       end
 
+      def content_type
+        :text
+      end
+
       class NotAuthenticated < Error
 
         def message
@@ -51,11 +55,15 @@ module Server
         end
 
         def message
-          if @headers[:content_type] == 'application/json'
+          @message ||= parsed_message
+        end
+
+        def parsed_message
+          if @headers[:content_type] =~ /application\/json/
             object = JSON.parse( @body, symbolize_names: true )[:error_object] || {}
             message = object[:error_mesg]
           end
-          message || 'Unspecified Engines System API Error.'
+          message || 'Not allowed. ( No message provided by System API. )'
         end
 
         def status
@@ -71,6 +79,10 @@ module Server
         end
 
         def message
+          @message ||= parsed_message
+        end
+
+        def parsed_message
           "Engines System API route not found: #{
             @request.method.upcase
           } '#{
@@ -94,11 +106,11 @@ module Server
           @body = e.http_body
         end
 
-        # def full_message
-        #   message
-        # end
-        #
         def message
+          @message ||= parsed_message
+        end
+
+        def parsed_message
           "Engines System API server error:\n'#{
             JSON.parse( @body ).to_yaml
           }'."
@@ -120,7 +132,7 @@ module Server
     end
 
     error Error do |e|
-      content_type :text
+      content_type e.content_type
       status e.status
       e.message
     end

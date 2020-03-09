@@ -42,13 +42,25 @@ app.applications.blueprint.base = blueprint => controller => (a,x) => [
           https_only: "HTTPS only",
           http_only: "HTTP only",
         },
+        dependent: {
+          key: 'deployment_type',
+          value: 'web',
+        },
       } ),
       f.field( {
         key: 'framework_port_override',
         as: 'input/number',
+        dependent: {
+          key: 'deployment_type',
+          value: 'web',
+        },
       } ),
       f.field( {
         key: 'web_root_directory',
+        dependent: {
+          key: 'deployment_type',
+          value: 'web',
+        },
       } ),
       f.field( {
         key: 'username',

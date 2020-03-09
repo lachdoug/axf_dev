@@ -10,7 +10,7 @@ ax.extension.codemirror.form.control.toolbar = function(
       this.keymap( f, options.keymap || false ),
       a['|appkit-form-codemirror-toolbar-right'](
         a['|appkit-form-codemirror-fullscreen'](
-          a.button( { $text: '🗖' }, {
+          a.button( '🗖', {
             type: 'button',
             $on: {
               'click: toggle full screen': function() {

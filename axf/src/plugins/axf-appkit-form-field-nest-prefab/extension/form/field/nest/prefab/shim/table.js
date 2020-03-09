@@ -42,7 +42,7 @@ table = function ( f, options ) {
 
         let headerCells = function() {
           let cells = form(ffP) || []
-          cells.push( a.th( {
+          cells.push( a.th( null, {
             width: '10%',
             ...options.thTag
           } ) )

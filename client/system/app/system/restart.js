@@ -1,19 +1,19 @@
-app.system.restart = ( controller ) => (a,x) => a['app-system-restart']( [
+app.system.restart = controller => (a,x) => [
 
   a.h3( "Restart system" ),
 
-  a['app-system-restart-http']( {
+  a['app-system-restart-http']( null, {
     $start: function() {
       this.$nodes = app.http(
         '/~/~/system/control/base_os/restart',
-        ( response, el ) => { el.$send( 'app.restarting' ) },
+        ( response, el ) => el.$send( 'app.restarting' ),
       )
     },
   } ),
 
   app.btn(
     app.icon( "fa fa-times", "Cancel" ),
-    (e,el) => controller.open(),
+    () => controller.open( '..' ),
     { class: 'btn btn-secondary' }
   ),
 
@@ -25,4 +25,4 @@ app.system.restart = ( controller ) => (a,x) => a['app-system-restart']( [
     { class: 'btn btn-primary' }
   ),
 
-] )
+]

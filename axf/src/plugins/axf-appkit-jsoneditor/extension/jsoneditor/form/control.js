@@ -97,7 +97,7 @@ control = function( f, options={} ) {
   }
 
   return a['|appkit-form-control']( [
-    a.input( { name: options.name, type: 'hidden' } ),
+    a.input( null, { name: options.name, type: 'hidden' } ),
     a.div,
   ], controlTagOptions )
 

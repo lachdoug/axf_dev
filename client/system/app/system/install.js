@@ -1,4 +1,4 @@
-app.system.install = ( controller ) => (a,x) => [
+app.system.install = controller => (a,x) => [
   a.h3( 'Install' ),
 
   controller.routes( {
@@ -9,6 +9,7 @@ app.system.install = ( controller ) => (a,x) => [
     '/last': app.system.install.last,
   }, {
     lazy: true,
+    transition: 'crossfade',
   } )
 
 ]

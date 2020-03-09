@@ -11,7 +11,7 @@ ax.extension.codemirror.report.control.toolbar = function(
       ),
       a['|appkit-report-codemirror-toolbar-right'](
         a['|appkit-report-codemirror-fullscreen'](
-          a.button( { $text: '🗖' }, {
+          a.button( '🗖', {
             type: 'button',
             $on: {
               'click: toggle full screen': function() {

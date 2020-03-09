@@ -39,7 +39,11 @@ module Server
                     # rescue => e
                     #   raise e
                     # end
-                    update = { type: type, name: name, status: status }
+                    update = {
+                      type: type,
+                      name: name,
+                      status: status
+                    }
                     data = {
                       type: :container_status_update,
                       container_status_update: update,

@@ -20,13 +20,9 @@ ax.extension.router =
 
     $init: (el) => {
 
-      const pop = function() {
-
-        this.$go()
-
-      }.bind( el )
-
+      const pop = () => el.$go()
       window.addEventListener( 'popstate', pop )
+      el.$send( 'appkit.router.load', { detail: el.$location() } )
 
     },
 
@@ -102,6 +98,7 @@ ax.extension.router =
     },
 
     $load: function( path, query, anchor ) {
+// debugger
       let routes = this.$$('|appkit-router-routes').$$
 
       routes.forEach( (r) => {
@@ -122,6 +119,6 @@ ax.extension.router =
 
   }
 
-  return a['|appkit-router']( routerTag )
+  return a['|appkit-router']( null, routerTag )
 
 }

@@ -1,6 +1,6 @@
 ax.extension.table = function ( contents, options={} ) {
 
-  // let a = ax.a
+  let a = ax.a
   // let x. = ax.x
 
   // let table = this
@@ -73,6 +73,6 @@ ax.extension.table = function ( contents, options={} ) {
 
   // let tableTag = options.tableTag
 
-  return ax.a.table( component, options.tableTag )
+  return a.table( component, options.tableTag )
 
 }

@@ -13,7 +13,7 @@ app.applications.blueprint.schedules.params = blueprint => controller => (a,x) =
       schedule.params,
       (f) => [
         f.field( {
-          key: 'params',
+          key: 'actionator',
           as: 'many',
           layout: 'vertical',
           label: false,
@@ -25,6 +25,24 @@ app.applications.blueprint.schedules.params = blueprint => controller => (a,x) =
             ff.field( {
               key: 'value',
               label: ff.object.name,
+            } ),
+          ]
+        } ),
+        a.hr,
+        f.field( {
+          key: 'surplus',
+          as: 'many',
+          layout: 'vertical',
+          label: false,
+          addable: true,
+          sortable: true,
+          removable: true,
+          form: (ff) => [
+            ff.field( {
+              key: 'name',
+            } ),
+            ff.field( {
+              key: 'value',
             } ),
           ]
         } ),

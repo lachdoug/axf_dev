@@ -34,33 +34,13 @@ items = function( f, options ) {
     }
   }
 
-  return a['|appkit-report-nest-items']( itemsData.map(
-    item
-  ), {
-    // $add: function() {
-    //   this.append( item( {}, this.children.length ) )
-    // },
-    $count: function() {
-      return this.$$(':scope > |appkit-report-nest-item').$$.length
-    },
-    // $rescopeItems: function() {
-    //   this.$$(':scope > |appkit-report-nest-item').$$.forEach( function( itemTag, index ) {
-    //     itemTag.$rescope( f.scope, index )
-    //   } )
-    //   this.$send( 'axf.appkit.report.nest.items.rescope' )
-    // },
-    ...options.itemsTag,
-    // $on: {
-    //   'axf.appkit.report.nest.item.move': (e,el) => {
-    //     e.stopPropagation()
-    //     el.$rescopeItems()
-    //   },
-    //   'axf.appkit.report.nest.item.remove': (e,el) => {
-    //     e.stopPropagation()
-    //     el.$rescopeItems()
-    //   },
-    //   ...( options.itemsTag || {} ).$on
-    // },
+  return a['|appkit-report-nest-items'](
+    itemsData.length ? itemsData.map( item ) : ( options.empty || a.i( 'None' ) ),
+    {
+      $count: function() {
+        return this.$$(':scope > |appkit-report-nest-item').$$.length
+      },
+      ...options.itemsTag,
   } )
 
 }

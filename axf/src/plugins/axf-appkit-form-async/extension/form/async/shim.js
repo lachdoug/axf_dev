@@ -27,6 +27,7 @@ ax.extension.form.async.shim = function() {
           $enable: function() {
             let controls = [ ...this.$controls(), ...this.$buttons() ]
             for ( let i in controls ) {
+              console.log( controls[i].$enable + '' )
               x.lib.element.visible( controls[i] ) &&
               controls[i].$enable &&
               controls[i].$enable()
@@ -39,45 +40,56 @@ ax.extension.form.async.shim = function() {
               e.preventDefault()
 
               let form = el.$('^form')
-              let data = el.$data()
+              let formData = el.$data()
 
               let submitter = el.$('[type="submit"]:focus')
               if ( submitter && submitter.name ) {
-                data.append( submitter.name, submitter.value )
+                formData.append( submitter.name, submitter.value )
               }
-//
+
               el.$disable && el.$disable()
-//
-              let resultDisplay = el.$('^|appkit-asyncform |appkit-asyncform-result')
 
-              resultDisplay.$nodes = (a,x) => x.http( {
-                url: el.getAttribute( 'action' ),
-                body: data,
-                method: el.getAttribute( 'method' ),
-                when: options.when,
-                success: options.success,
-                error: options.error,
-                catch: options.catch,
-                complete: () => {
+              let resultEl = el.$('^|appkit-asyncform |appkit-asyncform-result')
+              let completeFn = () => {
+                el.$enable && el.$enable()
+                var windowTop = $(window).scrollTop();
+                var windowBottom = windowTop + $(window).height();
+                var resultTop = $(resultEl).offset().top;
+                var resultBottom = resultTop + $(resultEl).height();
+                if ( ( resultBottom > windowBottom ) || ( resultTop < windowTop ) ) {
+                  resultEl.scrollIntoView()
+                }
+                // el.$send( 'axf.appkit.form.async.complete' )
+              }
 
-                  el.$enable && el.$enable()
+              if( ax.is.function( options.action ) ) {
 
-                  var windowTop = $(window).scrollTop();
-                  var windowBottom = windowTop + $(window).height();
-                  var resultDisplayTop = $(resultDisplay).offset().top;
-                  var resultDisplayBottom = resultDisplayTop + $(resultDisplay).height();
+                let submit = {
+                  formData: formData,
+                  data: ax.x.lib.form.data.objectify( formData ),
+                  formEl: el,
+                  resultEl: resultEl,
+                  completeFn: completeFn
+                }
 
-                  if ( ( resultDisplayBottom > windowBottom ) || ( resultDisplayTop < windowTop ) ) {
-                    resultDisplay.scrollIntoView()
-                  }
+                options.action( submit ) && completeFn()
 
+              } else {
 
-                },
-              } )
-// debugger
-//               form.unbind('submit')
-// console.log('Submit!!!')
-              return false
+                resultEl.$nodes = (a,x) => x.http( {
+                  url: el.getAttribute( 'action' ),
+                  body: formData,
+                  method: el.getAttribute( 'method' ),
+                  when: options.when,
+                  success: options.success,
+                  error: options.error,
+                  catch: options.catch,
+                  complete: completeFn,
+                } )
+
+              }
+
+              // return false
 
             },
             ...( options.formTag || {} ).$on

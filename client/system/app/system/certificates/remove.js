@@ -1,4 +1,4 @@
-// app.system.certificates.remove = ( controller ) => (a,x) => [
+// app.system.certificates.remove = controller => (a,x) => [
 //
 //   a.h5( 'Remove' ),
 //

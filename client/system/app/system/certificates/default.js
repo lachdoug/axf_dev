@@ -1,4 +1,4 @@
-// app.system.certificates.default = ( controller ) => (a,x) => [
+// app.system.certificates.default = controller => (a,x) => [
 //
 //   a.h5( 'Default' ),
 //

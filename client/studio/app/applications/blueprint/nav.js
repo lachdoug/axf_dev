@@ -5,18 +5,6 @@ app.applications.blueprint.nav = ( blueprint, controller ) => (a,x) => a['ul.nav
       buttonTag: {
         class: 'btn btn-sm app-btn',
       },
-      label: app.icon( 'fa fa-caret-right', 'Views' ),
-      title: 'Views',
-      onclick: (e,el) => {
-        controller.open('../views')
-      },
-    } )
-  ),
-  a['li.nav-item'](
-    app.button( {
-      buttonTag: {
-        class: 'btn btn-sm app-btn',
-      },
       label: app.icon( 'fa fa-caret-right', 'Metadata' ),
       onclick: (e,el) => {
         controller.open('metadata')
@@ -276,5 +264,17 @@ app.applications.blueprint.nav = ( blueprint, controller ) => (a,x) => a['ul.nav
       },
     } )
   ) : null,
+  a['li.nav-item'](
+    app.button( {
+      buttonTag: {
+        class: 'btn btn-sm app-btn',
+      },
+      label: app.icon( 'fa fa-caret-right', 'Stages' ),
+      title: 'Stages',
+      onclick: (e,el) => {
+        controller.open('../stages')
+      },
+    } )
+  ),
 
 ] ),

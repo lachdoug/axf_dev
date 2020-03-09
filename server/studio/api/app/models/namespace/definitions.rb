@@ -5,40 +5,6 @@ module Server
         class Namespace
           class Definitions
 
-            class Definition
-
-              def initialize( definitions, type )
-                @definitions = definitions
-                @type = type
-              end
-
-              attr_reader :definitions, :type
-
-              def to_json
-                to_h.to_json
-              end
-
-              def to_h
-                {
-                  type: type,
-                  content: content,
-                }
-              end
-
-              def path
-                @path ||= "#{ definitions.path }/#{ type }/#{ name }.yaml"
-              end
-
-              def name
-                @name ||= type.match( /(\w+)$/ )[1]
-              end
-
-              def content
-                File.read path
-              end
-
-            end
-
             def initialize( namespace )
               @namespace = namespace
             end
@@ -54,16 +20,24 @@ module Server
             end
 
             def to_json
-              to_h.to_json
+              to_a.to_json
             end
 
-            def to_h
+            def to_a
               all.map do |definition|
-                {
-                  type: definition.type
-                }
+                { type: definition.type }
               end
             end
+
+            def lookup( type )
+              all.find { |definition| definition.type === type }
+            end
+
+            # def to_a
+            #   all.map do |definition|
+            #     definition.to_h
+            #   end
+            # end
 
             def all
               @all ||= Dir.glob( "#{ path }/**/*.yaml" ).map do |entry_path|
@@ -75,7 +49,6 @@ module Server
             end
 
           end
-
         end
       end
     end

@@ -1,4 +1,4 @@
-app.namespaces.new = (controller) => (a,x) => [
+app.namespaces.new = controller => (a,x) => [
 
   a.h5( 'New services namespace'),
 
@@ -20,9 +20,7 @@ app.namespaces.new = (controller) => (a,x) => [
         }
       } ),
     ],
-    success: ( response, el ) => {
-      controller.open( '..' )
-    }
+    success: namespace => controller.open( `../${ namespace.id }` )
   } ),
 
 ]

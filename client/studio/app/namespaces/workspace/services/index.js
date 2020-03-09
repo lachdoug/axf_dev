@@ -15,28 +15,21 @@ app.namespaces.workspace.services.index = controller => (a,x) => [
 
   app.http(
     `/~/namespaces/${ controller.params.namespace_id }/workspace/services`,
-    ( response, el ) => {
-      response.json().then( services => {
-
-        el.$nodes = [
-          services.length == 0 ? 'None' : null,
-          services.map( service => a.p( [
-            app.button( {
-              label: app.icon( 'fa fa-caret-right', service.name ),
-              onclick: (e,el) => {
-                controller.open( service.id )
-              },
-              title: service.remote,
-            } ),
-          ] ) )
-        ]
-
-      } )
-
-    },
+    ( services, el ) => el.$nodes = [
+      services.length == 0 ? 'None' : null,
+      services.map( service => a.p( [
+        app.button( {
+          label: app.icon( 'fa fa-caret-right', service.name ),
+          onclick: (e,el) => {
+            controller.open( service.id )
+          },
+          title: service.remote,
+        } ),
+      ] ) )
+    ],
     {
       placeholder: a.p(
-        app.icon( 'fa fa-spinner fa-spin', 'Loading services' )
+        app.hourglass( 'Loading services' )
       )
     }
   ),

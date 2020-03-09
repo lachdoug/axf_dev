@@ -3,14 +3,14 @@ module Server
     module App
       module Controllers
 
-        get '/applications/:id/license' do
+        get '/applications/:application_id/license' do
           content_type :'application/json'
-          Application.find( params[:id] ).license.to_json
+          Application.find( params[:application_id] ).license.to_json
         end
 
-        post '/applications/:id/license' do
+        post '/applications/:application_id/license' do
           content_type :'application/json'
-          Application.find( params[:id] ).license.update( params[:license] ).to_json
+          Application.find( params[:application_id] ).license.update( params[:license] ).to_json
         end
 
       end

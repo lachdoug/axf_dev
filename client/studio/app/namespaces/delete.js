@@ -1,6 +1,6 @@
-app.namespaces.delete = (controller) => (a,x) => [
+app.namespaces.delete = controller => (a,x) => [
 
-  a.h5( 'Delete namespace' ),
+  a.p( 'Delete namespace?' ),
   a.p( [
 
     app.button( {
@@ -21,25 +21,22 @@ app.namespaces.delete = (controller) => (a,x) => [
 
         el.$('^').$nodes = app.http(
           `/~/namespaces/${ controller.params.namespace_id }`,
-          ( response, el ) => {
-            let namespace = response.json()
-            el.$nodes = [
-              a.p( 'Namespace has been deleted.' ),
-              a['div.clearfix']( [
-                app.button( {
-                  label: app.icon( 'fa fa-check', 'OK' ),
-                  onclick: (e,el) => {
-                    controller.open( '/namespaces' )
-                  },
-                  title: 'Return to namespaces',
-                } ),
-              ] ),
-            ]
-          },
+          ( namespace, el ) => el.$nodes = [
+            a.p( 'Namespace has been deleted.' ),
+            a['div.clearfix']( [
+              app.button( {
+                label: app.icon( 'fa fa-check', 'OK' ),
+                onclick: (e,el) => {
+                  controller.open( '../..' )
+                },
+                title: 'Return to namespaces',
+              } ),
+            ] ),
+          ],
           {
             method: 'DELETE',
             placeholder: a.p(
-              app.icon( 'fa fa-spinner fa-spin', 'Deleting namespace' )
+              app.hourglass( 'Deleting namespace' )
             )
           }
         )

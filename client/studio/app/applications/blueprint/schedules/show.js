@@ -7,13 +7,16 @@ app.applications.blueprint.schedules.show = blueprint => controller => (a,x) => 
     a.h5( `Schedule ${ schedule.id + 1 }` ),
     a.hr,
 
-    app.button( {
-      label: app.icon( 'fa fa-edit', 'Edit' ),
-      title: 'Edit',
-      onclick: (e,el) => {
-        controller.open( 'edit' )
-      },
-    } ),
+    a['div.clearfix']( a['div.btn-group.float-right']( [
+      app.button( {
+        label: app.icon( 'fa fa-edit', 'Edit' ),
+        title: 'Edit',
+        onclick: (e,el) => {
+          controller.open( 'edit' )
+        },
+      } ),
+      app.up( controller, 'Return to schedules' ),
+    ] ) ),
 
     app.report( {
       object: schedule.object,

@@ -20,6 +20,6 @@ input = function( options={} ) {
     ...options.inputTag
   }
 
-  return a.input( inputTagOptions )
+  return a.input( null, inputTagOptions )
 
 }

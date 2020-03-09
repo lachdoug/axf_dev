@@ -1,4 +1,4 @@
-app.applications.push = (controller) => (a,x) => [
+app.applications.push = controller => (a,x) => [
 
   a.p( 'Push commits?' ),
   a.p( [
@@ -21,26 +21,22 @@ app.applications.push = (controller) => (a,x) => [
 
         el.$('^').$nodes = app.http(
           `/~/applications/${ controller.params.application_id }/push`,
-          ( response, el ) => {
-            response.json().then( result => {
-              el.$nodes = [
-                a.pre( result ),
-                a['div.clearfix']( [
-                  app.button( {
-                    label: app.icon( 'fa fa-check', 'OK' ),
-                    onclick: (e,el) => {
-                      controller.open( '..' )
-                    },
-                    title: 'Return to application',
-                  } ),
-                ] ),
-              ]
-            } )
-          },
+          ( result, el ) => el.$nodes = [
+            a.pre( result.message ),
+            a['div.clearfix']( [
+              app.button( {
+                label: app.icon( 'fa fa-check', 'OK' ),
+                onclick: (e,el) => {
+                  controller.open( '..' )
+                },
+                title: 'Return to application',
+              } ),
+            ] ),
+          ],
           {
             method: 'POST',
             placeholder: a.p(
-              app.icon( 'fa fa-spinner fa-spin', 'Pushing commits' )
+              app.hourglass( 'Pushing commits' )
             )
           }
         )

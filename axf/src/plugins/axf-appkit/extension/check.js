@@ -36,7 +36,7 @@ check = function( options ) {
   }
 
   return a['|appkit-check']( [
-    a.input( inputTagOptions ),
+    a.input( null, inputTagOptions ),
     a.label( options.label, labelTagOptions ),
   ], options.checkTag )
 

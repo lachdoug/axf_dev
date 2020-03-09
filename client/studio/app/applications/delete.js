@@ -1,4 +1,4 @@
-app.applications.delete = (controller) => (a,x) => [
+app.applications.delete = controller => (a,x) => [
 
   a.p( 'Delete application?' ),
   a.p( [
@@ -21,26 +21,22 @@ app.applications.delete = (controller) => (a,x) => [
 
         el.$('^').$nodes = app.http(
           `/~/applications/${ controller.params.application_id }`,
-          ( response, el ) => {
-            response.json().then( result => {
-              el.$nodes = [
-                a.p( 'Application has been deleted.' ),
-                a['div.clearfix']( [
-                  app.button( {
-                    label: app.icon( 'fa fa-check', 'OK' ),
-                    onclick: (e,el) => {
-                      controller.open( '/applications' )
-                    },
-                    title: 'Return to applications',
-                  } ),
-                ] ),
-              ]
-            } )
-          },
+          ( result, el ) => el.$nodes = [
+            a.p( 'Application has been deleted.' ),
+            a['div.clearfix']( [
+              app.button( {
+                label: app.icon( 'fa fa-check', 'OK' ),
+                onclick: (e,el) => {
+                  controller.open( '..' )
+                },
+                title: 'Return to applications',
+              } ),
+            ] ),
+          ],
           {
             method: 'DELETE',
             placeholder: a.p(
-              app.icon( 'fa fa-spinner fa-spin', 'Deleting application' )
+              app.hourglass( 'Deleting application' )
             )
           }
         )

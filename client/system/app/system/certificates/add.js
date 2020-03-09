@@ -1,4 +1,4 @@
-app.system.certificates.add = ( controller ) => (a,x) => [
+app.system.certificates.add = controller => (a,x) => [
 
   a.h5( 'Add' ),
 
@@ -29,33 +29,30 @@ app.system.certificates.add = ( controller ) => (a,x) => [
         unchecked: 'false',
       } ),
 
-      f.buttons( {
-        cancel: {
-          onclick: () => controller.open( '..' ),
-        }
-      } ),
+      f.btns( controller ),
 
     ],
-    formTag: {
-      $init: function() {
-        this.$off( 'submit: async submit' )
-      },
-      $on: { 'submit: custom submit': (e,el) => {
-        e.preventDefault()
-        if ( el.checkValidity() ) {
-          let domain = el.$data().get('domain')
-          el.$nodes = app.http(
-            `/~/~/system/domains/${ domain }`,
-            () => controller.open( '..' ),
-            {
-              method: 'DELETE',
-              placeholder: app.hourglass( `Removing domain...` )
-            }
-          )
 
-        }
-      } }
-    }
+    // formTag: {
+    //   $init: function() {
+    //     this.$off( 'submit: async submit' )
+    //   },
+    //   $on: { 'submit: custom submit': (e,el) => {
+    //     e.preventDefault()
+    //     if ( el.checkValidity() ) {
+    //       let domain = el.$data().get('domain')
+    //       el.$nodes = app.http(
+    //         `/~/~/system/domains/${ domain }`,
+    //         () => controller.open( '..' ),
+    //         {
+    //           method: 'DELETE',
+    //           placeholder: app.hourglass( `Removing domain...` )
+    //         }
+    //       )
+    //
+    //     }
+    //   } }
+    // }
   } )
 
 ]

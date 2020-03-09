@@ -1,4 +1,4 @@
-app.system.orphans = ( controller ) => (a,x) => [
+app.system.orphans = controller => (a,x) => [
 
   a.h3( 'System orphans' ),
 

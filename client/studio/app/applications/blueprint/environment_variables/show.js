@@ -7,13 +7,16 @@ app.applications.blueprint.environment_variables.show = blueprint => controller 
     a.h5( `Environment variable ${ environmentVariable.id + 1 }` ),
     a.hr,
 
-    app.button( {
-      label: app.icon( 'fa fa-edit', 'Edit' ),
-      title: 'Edit',
-      onclick: (e,el) => {
-        controller.open( 'edit' )
-      },
-    } ),
+    a['div.clearfix']( a['div.btn-group.float-right']( [
+      app.button( {
+        label: app.icon( 'fa fa-edit', 'Edit' ),
+        title: 'Edit',
+        onclick: (e,el) => {
+          controller.open( 'edit' )
+        },
+      } ),
+      app.up( controller, 'Return to environment variables' ),
+    ] ) ),
 
     app.report( {
       object: environmentVariable.object,

@@ -2,22 +2,16 @@ class ApplicationBlueprintScheduleParams {
 
   constructor( schedule, object ) {
     this.schedule = schedule
-    // debugger
     this.assign( object )
   }
 
   assign( object ) {
-    let result = {}
-    for ( let variable of this.actionatorVariables() ) {
-      result[variable.object.name] = object[variable.object.name]
-    }
-    this.object = result
+    this.object = object
   }
 
   actionatorVariables() {
     let actionator = this.schedule.actionator() || {}
-    let variables = actionator.variables || {}
-    return variables.collection || []
+    return actionator.variables.output()
   }
 
   output() {
@@ -25,19 +19,44 @@ class ApplicationBlueprintScheduleParams {
   }
 
   get formObject() {
-    let object = this.object
-    return { params: Object.keys( object ).map( key => ( {
-      name: key,
-      value: object[key]
-    } ) ) }
+
+    let variables = this.actionatorVariables()
+
+
+variables.map( variable => enginesFieldV1( variable ) )
+
+    let actionatorVariables = variables.map( variable => variable.name )
+    let surplus = Object.keys( this.object ).filter( param =>
+      !actionatorVariables.includes( param )
+    )
+
+    return {
+      actionator: actionatorVariables.map( key => ( {
+        name: key,
+        value: this.object[key] || variables.find( variable => variable.name === key ).value
+      } ) ),
+      surplus: surplus.map( key => ( {
+        name: key,
+        value: this.object[key]
+      } ) )
+    }
+
   }
 
   formSubmit( formObject ) {
+
     let object = {}
-    for (let item of Object.values( formObject.params ) ) {
+
+    let params = [
+      ...Object.values( formObject.actionator || {} ),
+      ...Object.values( formObject.surplus || {} )
+    ]
+
+    for (let item of params ) {
       object[item.name] = item.value
     }
     this.assign( object )
+
   }
 
 }

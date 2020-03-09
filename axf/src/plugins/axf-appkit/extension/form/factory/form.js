@@ -8,7 +8,7 @@ form = ( f, options={} ) => {
 
   let formTagOptions = {
     method: options.method || 'POST',
-    action: options.url,
+    action: options.url || options.action,
     $data: function() {
       return new FormData( this )
     },
@@ -17,7 +17,7 @@ form = ( f, options={} ) => {
     },
     ...options.formTag
   }
-// debugger
+
   return a.form( form(f), formTagOptions )
 
 }

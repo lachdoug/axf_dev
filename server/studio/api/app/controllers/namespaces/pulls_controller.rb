@@ -3,9 +3,9 @@ module Server
     module App
       module Controllers
 
-        get '/namespaces/:id/pull' do
+        get '/namespaces/:namespace_id/pull' do
           content_type :'application/json'
-          Namespace.find( params[:id] ).repo.pull.to_json
+          Namespace.find( params[:namespace_id] ).repo.pull.to_json
         end
 
       end

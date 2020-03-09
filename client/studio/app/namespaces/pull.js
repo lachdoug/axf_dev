@@ -1,6 +1,6 @@
 app.namespaces.pull = controller => (a,x) => [
 
-  a.p( 'Pull namespace updates?' ),
+  a.p( 'Pull namespace?' ),
 
   app.button( {
     label: app.icon( 'fa fa-times', 'Cancel' ),
@@ -20,26 +20,22 @@ app.namespaces.pull = controller => (a,x) => [
 
       el.$('^').$nodes = app.http(
         `/~/namespaces/${ controller.params.namespace_id }/pull`,
-        ( response, el ) => {
-          response.json().then(
-            service => el.$nodes = [
-              a.p( 'Namespace has been pulled.' ),
-              a['div.clearfix']( [
-                app.button( {
-                  label: app.icon( 'fa fa-check', 'OK' ),
-                  onclick: (e,el) => {
-                    controller.open( '..' )
-                  },
-                  title: 'Return to services',
-                } ),
-              ] ),
-            ]
-          )
-        },
+        ( pull, el ) => el.$nodes = [
+          a.pre( pull.message ),
+          a['div.clearfix']( [
+            app.button( {
+              label: app.icon( 'fa fa-check', 'OK' ),
+              onclick: (e,el) => {
+                controller.open( '..' )
+              },
+              title: 'Return to services',
+            } ),
+          ] ),
+        ],
         {
           // method: 'DELETE',
           placeholder: a.p(
-            app.icon( 'fa fa-spinner fa-spin', 'Pulling namespace' )
+            app.hourglass( 'Pulling namespace' )
           )
         }
       )

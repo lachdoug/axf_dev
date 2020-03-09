@@ -2,6 +2,7 @@ ax.extension.router.controller.
 routes = ( config, startLocation ) => function( routes, options={} ) {
 
   let a = ax.a
+  let x = ax.x
 
   config = { ...config }
 
@@ -61,16 +62,10 @@ routes = ( config, startLocation ) => function( routes, options={} ) {
       ) {
 
         let location = toLocation
-        let routes = this.$$('|appkit-router-routes').$$
+        let routes = x.lib.unnested( this, '|appkit-router-routes' )
 
         routes.forEach( (r) => {
-          // Call $locate on top-level routes only.
-          // Other routes will be replaced when top-level re-renders.
-          if ( r.$config.router.length === this.$config.router.length + 1 ) {
-            r.$load(
-              location.path, location.query, location.anchor
-            )
-          }
+          r.$load( location.path, location.query, location.anchor )
         } )
 
       } else {
@@ -85,7 +80,7 @@ routes = ( config, startLocation ) => function( routes, options={} ) {
 
         this.$matched = locatedView.matched
 
-        this.$send( 'appkit.router.load' )
+        // this.$send( 'appkit.router.load', { detail: toLocation }  )
 
       }
 
@@ -96,7 +91,7 @@ routes = ( config, startLocation ) => function( routes, options={} ) {
   }
 
   return a['|appkit-router-routes'](
-    routesTag
+    null, routesTag
   )
 
 }

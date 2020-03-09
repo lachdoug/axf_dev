@@ -25,7 +25,7 @@ ax.extension.quilljs.form.richedit = function(
       },
 
     } ),
-    a['|appkit-form-quilljs-richedit-textarea']( a.textarea( {
+    a['|appkit-form-quilljs-richedit-textarea']( a.textarea( null, {
       name: options.name,
       // value: options.value,
       disabled: options.disabled,

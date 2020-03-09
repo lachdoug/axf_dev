@@ -4,11 +4,6 @@ cc.form.shim = {
     asyncformTag: {
       ...options.asyncformTag,
       $on: {
-        'axf.appkit.http.complete': (e,el) => {
-          el.$$('button[type="submit"]').$$.forEach( button => {
-            button.$revert && button.$revert()
-          } )
-        },
         'axf.appkit.http.error': (e,el) => {
           el.$$('button[type="submit"]').$$.forEach( button => {
             button.$revert && button.$revert()
@@ -92,35 +87,35 @@ cc.form.shim = {
       sortOnButton: {
         ...options.sortOnButton,
         buttonTag: {
-          class: 'btn btn-outline-secondary app-btn',
+          class: 'btn app-btn',
           ...( options.sortOnButton || {} ).buttonTag,
         },
       },
       addButton: {
         ...options.addButton,
         buttonTag: {
-          class: 'btn btn-outline-secondary app-btn',
+          class: 'btn app-btn',
           ...( options.addButton || {} ).buttonTag,
         },
       },
       upButton: {
         ...options.upButton,
         buttonTag: {
-          class: 'btn btn-outline-secondary app-btn',
+          class: 'btn app-btn',
           ...( options.upButton || {} ).buttonTag,
         },
       },
       downButton: {
         ...options.downButton,
         buttonTag: {
-          class: 'btn btn-outline-secondary app-btn',
+          class: 'btn app-btn',
           ...( options.downButton || {} ).buttonTag,
         },
       },
       removeButton: {
         ...options.removeButton,
         buttonTag: {
-          class: 'btn btn-outline-secondary app-btn',
+          class: 'btn app-btn',
           ...( options.removeButton || {} ).buttonTag,
         },
       },
@@ -132,35 +127,35 @@ cc.form.shim = {
       sortOnButton: {
         ...options.sortOnButton,
         buttonTag: {
-          class: 'btn btn-outline-secondary app-btn',
+          class: 'btn app-btn',
           ...( options.sortOnButton || {} ).buttonTag,
         },
       },
       addButton: {
         ...options.addButton,
         buttonTag: {
-          class: 'btn btn-outline-secondary app-btn',
+          class: 'btn app-btn',
           ...( options.addButton || {} ).buttonTag,
         },
       },
       upButton: {
         ...options.upButton,
         buttonTag: {
-          class: 'btn btn-outline-secondary app-btn',
+          class: 'btn app-btn',
           ...( options.upButton || {} ).buttonTag,
         },
       },
       downButton: {
         ...options.downButton,
         buttonTag: {
-          class: 'btn btn-outline-secondary app-btn',
+          class: 'btn app-btn',
           ...( options.downButton || {} ).buttonTag,
         },
       },
       removeButton: {
         ...options.removeButton,
         buttonTag: {
-          class: 'btn btn-outline-secondary app-btn',
+          class: 'btn app-btn',
           ...( options.removeButton || {} ).buttonTag,
         },
       },
@@ -168,6 +163,14 @@ cc.form.shim = {
     } ),
 
   },
+
+  btns: (f) => ( controller, options={} ) => f.buttons( {
+    cancel: {
+      onclick: () => controller.open( '..' ),
+      ...options.cancel
+    },
+    ...options
+  } ),
 
   buttons: (f) => ( options={} ) => (a,x) => a['app-form-buttons']( [
     f.button( {

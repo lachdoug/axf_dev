@@ -1,18 +1,26 @@
 cc.collapse = ( options ) => (a,x) => a['app-collapse']( [
   cc.button( {
-    label: a['app-collapse-indicator']( {
-      $state: options.display,
-      $iconClass: function() {
-        return this.$state ? 'fa fa-caret-down' : 'fa fa-caret-right'
-      },
-      $nodes: ( el, display ) => cc.icon( el.$iconClass(), options.label )
-    } ),
+    label: a['app-collapse-indicator'](
+      ( el ) => cc.icon( el.$iconClass(), options.label ),
+      {
+        $state: options.display,
+        $iconClass: function() {
+          return this.$state ? 'fa fa-caret-down' : 'fa fa-caret-right'
+        },
+      }
+    ),
     onclick: (e,el) => el.$('^').$toggle(),
-    class: 'btn btn-outline-secondary app-btn',
+    class: 'btn app-btn',
+    ...options.button,
   } ),
   a['app-collapse-body'](
     options.body,
-    { style: { display: options.display ? 'unset': 'none' } }
+    { style:
+      {
+        display: options.display ? 'unset': 'none',
+        ...( options.body || {} ).style,
+      }
+    }
   ),
 
 ], {
@@ -24,8 +32,10 @@ cc.collapse = ( options ) => (a,x) => a['app-collapse']( [
     if ( display ) {
       x.lib.animate.fade.in( body )
       let firstControl = el.$$('|appkit-form-control').$$[0]
-      if ( ax.is.not.function( firstControl.$focus ) ) debugger
-      if ( firstControl ) firstControl.$focus()
+      if ( firstControl ) {
+        if ( ax.is.not.function( firstControl.$focus ) ) debugger
+        firstControl.$focus()
+      }
     } else {
       x.lib.animate.fade.out( body )
     }

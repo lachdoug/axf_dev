@@ -36,9 +36,16 @@ module Server
 
           def self.create( params )
             raise Error::MissingParam.new ':url' if params[:url].to_s.empty?
-            id = Repo.create  url: params[:url],
-                              path: data_dir
-            { id: id }
+            id = Repo.create url: params[:url], path: data_dir
+            branch = new( id ).repo.branch.current
+            {
+              id: id,
+              branch: branch,
+            }
+          end
+
+          def self.lookup( name )
+            all.find { |namespace| namespace.name === name }
           end
 
           def self.find( id )
@@ -67,7 +74,7 @@ module Server
               name: name,
               remote: repo.remote,
               branch: repo.branch.current,
-              # readme: readme.content,
+              active: active?,
             }
           end
 
@@ -86,10 +93,10 @@ module Server
           def definitions
             @definitions ||= Definitions.new( self )
           end
-          
+
           def name
             raise Error::NoRecord.new id unless parent_dir
-            @name ||= repo_dir.sub( "#{ parent_dir }/", '' )
+            repo_dir.sub( "#{ parent_dir }/", '' )
           end
 
           def parent_dir
@@ -100,11 +107,16 @@ module Server
             @repo_dir ||= Dir.glob( "#{ parent_dir }/*" )[0]
           end
 
+          def active?
+            repo.dirty?
+          end
+
           def workspace
             Workspace.new( self )
           end
 
           def delete
+            workspace.delete
             FileUtils.rm_rf parent_dir
             {}
           end

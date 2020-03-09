@@ -16,7 +16,7 @@ app.applications.blueprint.metadata = blueprint => controller => (a,x) => [
         form: (ff) => [
           ff.field( {
             key: 'title',
-            required: true,
+            // required: true,
           } ),
           ff.field( {
             key: 'version',

@@ -3,14 +3,14 @@ module Server
     module App
       module Controllers
 
-        get '/applications/:id/readme' do
+        get '/applications/:application_id/readme' do
           content_type :'application/json'
-          Application.find( params[:id] ).readme.to_json
+          Application.find( params[:application_id] ).readme.to_json
         end
 
-        post '/applications/:id/readme' do
+        post '/applications/:application_id/readme' do
           content_type :'application/json'
-          Application.find( params[:id] ).readme.update( params[:readme] ).to_json
+          Application.find( params[:application_id] ).readme.update( params[:readme] ).to_json
         end
 
       end

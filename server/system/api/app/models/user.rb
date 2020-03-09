@@ -45,16 +45,16 @@ module Server
             @settings.session_timeout_seconds
           end
 
-          private
-
-          def filepath
-            "sessions/#{ @session[:session_id] }"
-          end
-
           def within_timeout
             last_activity_at = timestamp
             return false unless last_activity_at
             last_activity_at + session_timeout_seconds > Time.now
+          end
+          
+          private
+
+          def filepath
+            "sessions/#{ @session[:session_id] }"
           end
 
           def timestamp

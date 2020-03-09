@@ -24,6 +24,6 @@ ax.extension.markedjs.markdown = function ( options={} ) {
     html = processMarkdown( content )
   }
 
-  return a['div|axf-markedjs-markdown']( { '$html': html }, options.markdownTag )
+  return a['div|axf-markedjs-markdown']( a( html ), options.markdownTag )
 
 }

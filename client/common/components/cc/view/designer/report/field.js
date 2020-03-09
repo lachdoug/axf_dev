@@ -235,6 +235,9 @@ cc.view.designer.report.field = (f) => [
           as: 'many',
           item: 'report component',
           form: cc.view.designer.report.component,
+          addable: true,
+          removable: true,
+          sortable: true,
         } ),
       ]
     } ),

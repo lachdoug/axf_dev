@@ -15,31 +15,20 @@ module Server
           Namespace.find( params[:namespace_id] ).workspace.services.create( params[:service] ).to_json
         end
 
-        get '/namespaces/:namespace_id/workspace/services/:id' do
+        get '/namespaces/:namespace_id/workspace/services/:service_id' do
           content_type :'application/json'
-          Namespace.find( params[:namespace_id] ).workspace.services.find( params[:id] ).to_json
+          Namespace.find( params[:namespace_id] ).workspace.services.find( params[:service_id] ).to_json
         end
 
-        get '/namespaces/:namespace_id/workspace/services/:id/name' do
+        get '/namespaces/:namespace_id/workspace/services/:service_id/name' do
           content_type :'application/json'
-          { name: Namespace.find( params[:namespace_id] ).workspace.services.find( params[:id] ).name }.to_json
+          { name: Namespace.find( params[:namespace_id] ).workspace.services.find( params[:service_id] ).name }.to_json
         end
 
-        delete '/namespaces/:namespace_id/workspace/services/:id' do
+        delete '/namespaces/:namespace_id/workspace/services/:service_id' do
           content_type :'application/json'
-          Namespace.find( params[:namespace_id] ).workspace.services.find( params[:id] ).delete.to_json
+          Namespace.find( params[:namespace_id] ).workspace.services.find( params[:service_id] ).delete.to_json
         end
-
-        # delete '/services/:id' do
-        #   content_type :'application/json'
-        #   Repo.new( params[:id] ).delete.to_json
-        # end
-
-
-        # post '/services' do
-        #   Repo.create( params.repo )
-        # end
-
 
       end
     end

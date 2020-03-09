@@ -11,7 +11,7 @@ module Server
           attr_reader :owner
 
           def content
-            owner.repo.read 'LICENSE.md'
+            owner.repo.read 'LICENSE'
           rescue Errno::ENOENT
             return ''
           end
@@ -28,7 +28,7 @@ module Server
           end
 
           def update( params )
-            owner.repo.write 'LICENSE.md', params[:content]
+            owner.repo.write 'LICENSE', params[:content]
             {}
           end
 

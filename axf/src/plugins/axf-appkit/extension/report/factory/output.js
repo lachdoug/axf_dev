@@ -5,19 +5,18 @@ output = function( options={} ) {
   let x = ax.x
 
   let value = options.value || ''
-  let type = options.type || 'string'
-
-  if ( type ) {
-    value = x.lib.coerce[ type ]( value )
-  }
+  // let type = options.type || 'string'
+  //
+  // if ( type ) {
+  //   value = x.lib.coerce[ type ]( value )
+  // }
 
   let outputTagOptions = {
     name: options.name,
-    type: options.type,
-    $text: value,
+    // type: options.type,
     ...options.outputTag
   }
 
-  return a['|appkit-report-output']( outputTagOptions )
+  return a['|appkit-report-output']( value, outputTagOptions )
 
 }

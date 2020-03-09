@@ -3,9 +3,9 @@ module Server
     module App
       module Controllers
 
-        post '/applications/:id/push' do
+        post '/applications/:application_id/push' do
           content_type :'application/json'
-          Application.new( params[:id] ).repo.push.to_json
+          Application.new( params[:application_id] ).repo.push.to_json
         end
 
       end

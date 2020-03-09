@@ -32,7 +32,7 @@ module Server
             end
 
             def git_branch
-              @git_branch ||= `git -C '#{ path }' branch`
+              @git_branch ||= repo.git 'branch'
             end
 
             def branches
@@ -41,21 +41,24 @@ module Server
 
             def set( name )
               if branches.include? name
-                `git -C '#{ path }' checkout #{ name }`
+                {
+                  current: name,
+                  message: repo.git( "checkout #{ name }" )
+                }
               else
-                `git -C '#{ path }' checkout -b #{ name }`
+                {
+                  current: name,
+                  message: repo.git( "checkout -b #{ name }")
+                }
               end
             end
 
             def remove( name )
-              # if branches.include? name
-                `git -C '#{ path }' branch -D #{ name }`
-              # else
-              #   `git -C '#{ path }' checkout -b #{ name }`
-              # end
+              {
+                name: name,
+                message: repo.git( "branch -D #{ name }" ),
+              }
             end
-
-
 
           end
         end

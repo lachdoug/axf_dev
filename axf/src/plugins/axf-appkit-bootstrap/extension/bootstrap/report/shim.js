@@ -129,6 +129,14 @@ ax.extension.bootstrap.report.shim = function() {
       },
     } ),
 
+    select: ( r, target ) => ( options={} ) => target( {
+      ...options,
+      selectTag: {
+        class: 'border border-light p-2 d-block',
+        ...options.selectTag,
+      },
+    } ),
+
     json: ( r, target ) => ( options={} ) => target( {
       ...options,
       jsonTag: {

@@ -11,7 +11,7 @@ many = function ( f, options ) {
         ff.items( {
           ...options,
           report: (fff) => [
-            a['|appkit-report-nest-many-item-header']( options.itemHeaderTag ),
+            a['|appkit-report-nest-many-item-header']( null, options.itemHeaderTag ),
             a['|appkit-report-nest-many-item-body']( options.report( fff ), options.itemBodyTag ),
           ],
         } ),

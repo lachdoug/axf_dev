@@ -1,10 +1,9 @@
 app.router = (a,x) => a['app-router'](
   x.router(
-    ( controller ) => [
+    controller => [
       app.nav( controller ),
       controller.routes(
         {
-          // '/': controller => controller.open + '', //
           '/?': app.home,
           '/login': app.login,
           '/logout': app.logout,
@@ -12,7 +11,6 @@ app.router = (a,x) => a['app-router'](
           '/applications*': app.applications,
           '/namespaces*': app.namespaces,
           '/settings': app.settings,
-          // '*': app.notFound,
         },
         {
           lazy: true,
@@ -22,7 +20,6 @@ app.router = (a,x) => a['app-router'](
     ],
     {
       default: controller => a['p.error']( [ controller, `Not found: CLIENT ${ controller.path } in ${ controller.scope || 'root' }` ] ),
-      // home: '/applications',
     }
   ),
 )

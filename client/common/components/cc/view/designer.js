@@ -1,15 +1,18 @@
-cc.view.designer = ( controller, url, object ) => (a,x) => app.form( {
+cc.view.designer = ( controller, url, object, successFn ) => (a,x) => app.form( {
   object: object,
   url: url,
   scope: 'view',
-  success: () => controller.open( '../..' ),
+  success: successFn,
   form: (f) => [
 
     f.field( {
       key: 'name',
       label: false,
+      required: true,
       layout: 'vertical',
       placeholder: 'Name',
+      pattern: '^[a-z0-9_]+$',
+      invalid: 'Permitted characters are lowercase letters, digits and underscores.',
     } ),
 
     f.field( {

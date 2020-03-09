@@ -1,25 +1,24 @@
-app.system = ( controller ) => (a,x) => a( {
+app.system = controller => (a,x) => a( {
   $init: function(el) {
-    Promise.all( [
+    el.$nodes = app.http( [
+      '/~/~/system/status',
+      '/~/~/engine_builder/status',
+      '/~/~/system/system_user/settings',
+      '/~/~/system/config/hostname',
+      '/~/~/system/version/ident',
+      '/~/~/system/version/base_os',
+    ], ( [ status, installer, settings, hostname, version, os ] ) => {
 
-      fetch( '/~/~/system/status' ).
-      then( response => response.json() ),
+      el.$send( 'app.connected' )
 
-      fetch( '/~/~/engine_builder/status' ).
-      then( response => response.json() ),
-
-      fetch( '/~/~/system/system_user/settings' ).
-      then( response => response.json() ),
-
-
-
-    ] ).then( ( [
-      system,
-      installer,
-      settings
-    ] ) => {
-
-      system = { ...system, ...installer, ...settings }
+      let system = {
+        ...status,
+        ...installer,
+        ...settings,
+        hostname: hostname,
+        version: version,
+        os: os,
+      }
 
       if ( system.is_rebooting ) {
         el.$send( 'app.restarting' )
@@ -31,11 +30,8 @@ app.system = ( controller ) => (a,x) => a( {
 
       el.$nodes = app.system.panes( system, controller )
 
-    } ).catch( error => {
-
-      console.warn( 'Failed to load system.' )
-
+    }, {
+      placeholder: a['div.text-center.mt-4']( app.hourglass( 'Loading system' ) )
     } )
-
   },
 } ),

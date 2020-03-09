@@ -1,14 +1,17 @@
 ax.extension.filepond = ( options={} ) => {
 
-  return ax.a['axf-filepond']( {
+  return ax.a['axf-filepond']( null, {
 
     $init: (el) => {
 
-      el.$nodes = FilePond.create( { server: '/', ...options.filepond } ).element
+      el.$nodes = FilePond.create( {
+        server: options.server,
+        ...options.filepond
+      } ).element
 
     },
 
-    ...options.tag
+    ...options.filepondTag
 
   } )
 

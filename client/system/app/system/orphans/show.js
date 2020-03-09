@@ -1,8 +1,8 @@
-app.system.orphans.show = ( controller ) => (a,x) => [
+app.system.orphans.show = controller => (a,x) => [
 
   a['div.clearfix'](
     a['div.float-right']( [
-      app.btn( app.icon( 'fa fa-arrow-up' ), (e,el) => controller.open( '../settings' ) ),
+      app.up( controller, 'Close' ),
     ] )
   ),
 
