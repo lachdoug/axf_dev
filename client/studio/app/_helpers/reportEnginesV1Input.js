@@ -42,7 +42,7 @@ app.reportEnginesV1Input = r => (a,x) => r.field( {
           x.list( rrr.object.items ) :
           a.i( 'None' ),
           {
-            class: 'border border-light p-2 d-block',
+            class: 'well d-block',
           }
         ),
 

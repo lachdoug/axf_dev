@@ -40,7 +40,7 @@ app.charts.storage = storage => (a,x) => {
             },
             {
               label: 'Free',
-              backgroundColor: 'lightgrey',
+              backgroundColor: 'lightgray',
               data: storage.map ( disk => disk.free )
             },
           ],

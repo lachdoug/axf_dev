@@ -1,8 +1,6 @@
 ax.extension.form.factory.
 submit = ( f, options={} ) => {
 
-  let a = ax.a
-
   let label = options.label || '✔ Submit'
 
   let buttonOptions = {
@@ -11,7 +9,7 @@ submit = ( f, options={} ) => {
     name: options.name,
     value: options.value,
     onclick: options.onclick,
-    to: options.to,
+    // to: options.to,
     title: options.title,
     buttonTag: options.buttonTag,
     ...options.button

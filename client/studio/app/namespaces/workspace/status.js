@@ -6,7 +6,7 @@ app.namespaces.workspace.status = controller => (a,x) => [
 
       a['div.clearfix']( [
         a['div.btn-group.float-right']( [
-          app.up( controller, 'Return to workspace' ),
+          app.close( controller, 'Return to workspace' ),
         ] ),
       ] ),
 

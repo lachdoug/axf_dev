@@ -24,7 +24,7 @@ app.system.label = controller => (a,x) => [
           as: 'input/color',
           label: 'Background',
         } ),
-        f.btns( controller ),
+        f.buttons(),
       ]
     } )
   ),

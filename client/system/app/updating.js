@@ -1,4 +1,4 @@
-app.updating = controller => (a,x) => [
+app.closedating = controller => (a,x) => [
   a.h3( "Updating system" ),
   app.system.polling(
     '/~/~/system/status',

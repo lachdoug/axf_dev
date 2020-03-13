@@ -31,7 +31,7 @@ ax.css( {
         display: 'none'
       },
       '&:hover': {
-        backgroundColor: 'lightgrey',
+        backgroundColor: 'lightgray',
       },
       button: {
         lineHeight: '1.5',
@@ -50,7 +50,7 @@ ax.css( {
       margin: 0,
       padding: 0,
       backgroundColor: 'white',
-      boxShadow: '0px 0px 5px grey',
+      boxShadow: '0px 0px 5px gray',
     },
   }
 } )

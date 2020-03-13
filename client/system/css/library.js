@@ -8,10 +8,10 @@ ax.css( {
       display: 'block',
       width: '100%',
       padding: '0px',
-      '&:hover': {
-        backgroundColor: '#007bff',
-        color: 'white',
-      }
+      // '&:hover': {
+      //   backgroundColor: '#007bff',
+      //   color: 'white',
+      // }
     },
 
   },

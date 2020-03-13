@@ -8,18 +8,18 @@ app.namespaces.definitions.index = controller => (a,x) => [
 
       a['div.clearfix']( [
         a['div.btn-group.float-right']( [
-          app.up( controller, 'Return to namespace' ),
+          app.close( controller, 'Return to namespace' ),
         ] ),
       ] ),
 
       definitions.map( definition => [
-        app.button( {
+        a.div( app.button( {
           label: app.icon( 'fa fa-caret-right', definition.type ),
           onclick: (e,el) => {
             controller.open( 'query', { type: definition.type } )
           },
           title: definition.type,
-        } ),
+        } ) ),
       ] ),
 
     ],

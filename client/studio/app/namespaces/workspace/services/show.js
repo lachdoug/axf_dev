@@ -62,20 +62,21 @@ app.namespaces.workspace.services.show = controller => (a,x) => [
               controller.open( 'push' )
             }
           } ),
-          app.up( controller, 'Return to namespace services' ),
+          app.close( controller, 'Return to namespace services' ),
         ] ),
       ] ),
 
-      a.p( readme.content ?
+      a.p(
+        readme.content ?
         app.md( readme.content ) :
         a['.error']( 'No readme!' ),
-        { class: 'border border-light p-2' }
+        { class: 'well' }
       ),
 
       a['div.clearfix']( a['div.btn-group.float-right']( [
         app.button( {
           label: app.icon( 'fa fa-undo', 'Reset' ),
-          class: 'btn btn-outline-danger app-btn',
+          class: 'btn app-btn-danger',
           onclick: (e,el) => {
             controller.open( 'reset' )
           },
@@ -83,7 +84,7 @@ app.namespaces.workspace.services.show = controller => (a,x) => [
         } ),
         app.button( {
           label: app.icon( 'fa fa-trash', 'Delete' ),
-          class: 'btn btn-outline-danger app-btn',
+          class: 'btn app-btn-danger',
           onclick: (e,el) => {
             controller.open( 'delete' )
           },

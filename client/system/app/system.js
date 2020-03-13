@@ -25,7 +25,7 @@ app.system = controller => (a,x) => a( {
       } else if ( system.is_base_system_updating ) {
         el.$send( 'app.os.updating' )
       } else if ( system.is_engines_system_updating ) {
-        el.$send( 'app.updating' )
+        el.$send( 'app.closedating' )
       }
 
       el.$nodes = app.system.panes( system, controller )

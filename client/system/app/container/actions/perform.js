@@ -13,7 +13,7 @@ app.container.actions.perform = ( controller, containerPath, action ) => (a,x) =
         action.variables.map( variable =>
           f.field( enginesFieldV1( variable ) )
         ),
-        f.btns( controller ),
+        f.buttons(),
       ],
       asyncformTag: {
         $on: {

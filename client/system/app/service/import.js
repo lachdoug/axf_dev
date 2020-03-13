@@ -5,7 +5,7 @@ app.service.import = controller => (a,x) => {
   return [
 
     a.h5( `Import` ),
-    a['div.clearfix']( a['div.float-right']( app.up( controller, 'Close' ) ) ),
+    a['div.clearfix']( a['div.float-right']( app.close( controller, 'Close' ) ) ),
     a.br,
 
     x.filepond( {

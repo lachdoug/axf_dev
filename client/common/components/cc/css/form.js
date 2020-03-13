@@ -22,12 +22,18 @@ ax.css( {
   },
 
   'option[disabled]': {
-    color: 'lightgrey',
+    color: 'lightgray',
   },
   '|appkit-form-multiselect-selected': {
     border: '1px solid #ced4da',
     borderTop: 'none',
-    padding: '0.375rem 0.74rem',
+    padding: '0.375rem 0 0.375rem 0.75rem',
+    '|appkit-form-multiselect-selected-item-remove': {
+      color: 'lightgray'
+    },
+    '|appkit-form-multiselect-selected-item-remove:hover': {
+      color: '#333'
+    },
   },
 
 

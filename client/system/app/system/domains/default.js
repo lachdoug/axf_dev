@@ -22,7 +22,7 @@ app.system.domains.default = controller => (a,x) => [
           required: 'required',
         } ),
 
-        f.btns( controller ),
+        f.buttons(),
 
 
       ]

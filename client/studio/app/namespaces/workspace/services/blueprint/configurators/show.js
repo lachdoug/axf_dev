@@ -15,7 +15,7 @@ app.namespaces.workspace.services.blueprint.configurators.show = blueprint => co
           controller.open( 'edit' )
         },
       } ),
-      app.up( controller, 'Return to configurators' ),
+      app.close( controller, 'Return to configurators' ),
     ] ) ),
 
     app.report( {
@@ -120,7 +120,7 @@ app.namespaces.workspace.services.blueprint.configurators.show = blueprint => co
     a['div.clearfix']( a['div.btn-group.float-right'](
       app.button( {
         label: app.icon( 'fa fa-trash', 'Delete' ),
-        class: 'btn btn-outline-danger app-btn',
+        class: 'btn app-btn-danger',
         onclick: (e,el) => {
           controller.open( 'delete' )
         },

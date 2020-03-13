@@ -20,7 +20,7 @@ app.system.domains.remove = controller => (a,x) => [
             required: 'required',
           } ),
 
-          f.btns( controller ),
+          f.buttons(),
 
         ],
 

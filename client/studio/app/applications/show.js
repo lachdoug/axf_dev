@@ -1,8 +1,18 @@
 app.applications.show = controller => (a,x) => [
 
   app.http(
-    `/~/applications/${ controller.params.application_id }/readme`,
-    ( readme, el ) => el.$nodes = [
+    [
+      `/~/applications/${ controller.params.application_id }/readme`,
+      `/~/applications/${ controller.params.application_id }/diff`,
+    ],
+    ( [ readme, diff ], el ) => el.$nodes = [
+
+      a['div.clearfix']( [
+        a['div.btn-group.float-right']( [
+          diff.uncommitted ? a['.success']( app.icon( 'fas fa-exclamation-triangle', 'Uncommitted changes.' ) ) : null,
+          diff.unpushed ? a['.success']( app.icon( 'fas fa-exclamation-triangle', 'Unpushed changes.' ) ) : null,
+        ] ),
+      ] ),
 
       a['div.clearfix']( [
         app.button( {
@@ -55,7 +65,14 @@ app.applications.show = controller => (a,x) => [
               controller.open( 'push' )
             }
           } ),
-          app.up( controller, 'Return to applications' ),
+          app.button( {
+            label: app.icon( 'fas fa-file-download', 'Pull' ),
+            title: 'Pull namespace',
+            onclick: (e,el) => {
+              controller.open( 'pull' )
+            }
+          } ),
+          app.close( controller, 'Return to applications' ),
 
         ] ),
       ] ),
@@ -63,13 +80,13 @@ app.applications.show = controller => (a,x) => [
       a.p( readme.content ?
         app.md( readme.content ) :
         a['.error']( 'No readme!' ),
-        { class: 'border border-light p-2' }
+        { class: 'well' }
       ),
 
       a['div.clearfix']( a['div.btn-group.float-right']( [
         app.button( {
           label: app.icon( 'fa fa-undo', 'Reset' ),
-          class: 'btn btn-outline-danger app-btn',
+          class: 'btn app-btn-danger',
           onclick: (e,el) => {
             controller.open( 'reset' )
           },
@@ -77,7 +94,7 @@ app.applications.show = controller => (a,x) => [
         } ),
         app.button( {
           label: app.icon( 'fa fa-trash', 'Delete' ),
-          class: 'btn btn-outline-danger app-btn',
+          class: 'btn app-btn-danger',
           onclick: (e,el) => {
             controller.open( 'delete' )
           },

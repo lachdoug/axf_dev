@@ -20,6 +20,7 @@ app.applications.application = controller => (a,x) => [
         '/status': app.applications.status,
         '/commit': app.applications.commit,
         '/push': app.applications.push,
+        '/pull': app.applications.pull,
         '/reset': app.applications.reset,
       }, {
         lazy: true,

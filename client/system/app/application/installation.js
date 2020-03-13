@@ -5,7 +5,7 @@ app.application.installation = controller =>  {
   return (a,x) => [
 
     a.h5( 'Installation' ),
-    a['div.clearfix']( a['div.float-right']( app.up( controller, 'Close' ) ) ),
+    a['div.clearfix']( a['div.float-right']( app.close( controller, 'Close' ) ) ),
 
     app.http(
       `/~/~/containers/engine/${ name }/build_report`,

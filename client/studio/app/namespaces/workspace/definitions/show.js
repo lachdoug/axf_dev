@@ -8,7 +8,7 @@ app.namespaces.workspace.definitions.show = controller => (a,x) => [
 
       a['div.clearfix']( [
         a['div.btn-group.float-right']( [
-          app.up( controller, 'Return to workspace' ),
+          app.close( controller, 'Return to workspace' ),
         ] ),
       ] ),
 
@@ -19,7 +19,7 @@ app.namespaces.workspace.definitions.show = controller => (a,x) => [
       a['div.clearfix']( a['div.btn-group.float-right'](
         app.button( {
           label: app.icon( 'fa fa-trash', 'Delete' ),
-          class: 'btn btn-outline-danger app-btn',
+          class: 'btn app-btn-danger',
           // confirm: 'Are you sure that you want to delete this namespace?',
           onclick: (e,el) => {
             controller.open( 'delete', controller.query )

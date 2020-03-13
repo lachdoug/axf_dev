@@ -34,7 +34,7 @@ app.namespaces.show = controller => (a,x) => [
               controller.open( 'pull' )
             }
           } ),
-          app.up( controller, 'Return to namespaces' ),
+          app.close( controller, 'Return to providers' ),
 
         ] ),
       ] ),
@@ -42,23 +42,23 @@ app.namespaces.show = controller => (a,x) => [
       a.p( readme.content ?
         app.md( readme.content ) :
         a['.error']( 'No readme!' ),
-        { class: 'border border-light p-2' }
+        { class: 'well' }
       ),
 
       a['div.clearfix']( a['div.btn-group.float-right'](
         app.button( {
           label: app.icon( 'fa fa-trash', 'Delete' ),
-          class: 'btn btn-outline-danger app-btn',
+          class: 'btn app-btn-danger',
           onclick: (e,el) => {
             controller.open( 'delete' )
           },
-          title: 'Delete namespace',
+          title: 'Delete provider',
         } ),
       ) ),
     ],
     {
       placeholder: a.p(
-        app.hourglass( 'Loading namespace' )
+        app.hourglass( 'Loading provider' )
       )
     }
   ),

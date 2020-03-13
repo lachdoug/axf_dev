@@ -1,7 +1,7 @@
 app.views.show = ( parent, path ) => controller => (a,x) => [
 
   a['div.clearfix']( a['div.btn-group.float-right']( [
-    app.up( controller, 'Return to views' ),
+    app.close( controller, 'Return to views' ),
   ] ) ),
 
   app.http(

@@ -13,8 +13,7 @@ app.settings = controller => (a,x) => [
         as: 'select',
         placeholder: 'Default',
         selections: {
-          'app-theme-mark': 'Mark',
-          'app-theme-lachlan': 'Lachlan',
+          'app-theme-dark': 'Dark',
         },
       } ),
       f.field( {
@@ -27,7 +26,7 @@ app.settings = controller => (a,x) => [
           sublime: 'Sublime',
         },
       } ),
-      f.btns( controller ),
+      f.buttons(),
     ],
     action: submition => {
       window.localStorage.cssTheme = submition.data.theme
@@ -44,7 +43,7 @@ app.settings = controller => (a,x) => [
   //     a.h3( 'Settings' ),
   //
   //     a['div.clearfix']( a['div.btn-group.float-right']( [
-  //       app.up( controller, 'Return to home' ),
+  //       app.close( controller, 'Return to home' ),
   //     ] ) ),
   //
   //     a['div.input-group']( [

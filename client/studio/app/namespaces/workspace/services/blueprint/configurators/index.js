@@ -11,7 +11,7 @@ app.namespaces.workspace.services.blueprint.configurators.index = blueprint => c
       },
       title: 'New configurator',
     } ),
-    app.up( controller, 'Return to blueprint' ),
+    app.close( controller, 'Return to blueprint' ),
   ] ) ),
 
   blueprint.configurators.map(

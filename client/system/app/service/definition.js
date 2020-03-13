@@ -5,7 +5,7 @@ app.service.definition = controller => (a,x) => {
   return [
 
     a.h5( `Definition` ),
-    a['div.clearfix']( a['div.float-right']( app.up( controller, 'Close' ) ) ),
+    a['div.clearfix']( a['div.float-right']( app.close( controller, 'Close' ) ) ),
     app.http(
       `/~/~/containers/service/${ name }/service_definition`,
       ( definition, el ) => el.$nodes = x.list( definition ),

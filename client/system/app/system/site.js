@@ -14,7 +14,7 @@ app.system.site = controller => (a,x) => [
           label: false,
           layout: 'vertical'
         } ),
-        f.btns( controller ),
+        f.buttons(),
       ]
     } )
   ),

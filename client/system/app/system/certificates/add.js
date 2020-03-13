@@ -29,7 +29,7 @@ app.system.certificates.add = controller => (a,x) => [
         unchecked: 'false',
       } ),
 
-      f.btns( controller ),
+      f.buttons(),
 
     ],
 

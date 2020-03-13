@@ -15,7 +15,7 @@ app.namespaces.workspace.services.blueprint.configurators.variables.index = blue
         },
         title: 'New variable',
       } ),
-      app.up( controller, 'Return to configurator' ),
+      app.close( controller, 'Return to configurator' ),
     ] ) ),
 
 

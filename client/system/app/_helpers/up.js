@@ -1,1 +1,0 @@
-app.up = cc.up

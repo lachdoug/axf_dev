@@ -1,16 +1,16 @@
 app.namespaces.index = controller => (a,x) => [
 
-  a.h5( 'Namespaces' ),
+  a.h5( 'Providers' ),
 
   a['div.clearfix']( a['div.btn-group.float-right']( [
     app.button( {
-      label: app.icon( 'fa fa-plus', 'New namespace' ),
+      label: app.icon( 'fa fa-plus', 'New provider' ),
       onclick: (e,el) => {
         controller.open( 'new' )
       },
-      title: 'New services namespace',
+      title: 'New services provider',
     } ),
-    app.up( controller, 'Return to home' ),
+    app.close( controller, 'Return to home' ),
 
     // app.button( {
     //   label: app.icon( 'far fa-list-alt', 'Namespaces' ),
@@ -34,7 +34,7 @@ app.namespaces.index = controller => (a,x) => [
     ],
     {
       placeholder: a.p(
-        app.hourglass( 'Loading namespaces' )
+        app.hourglass( 'Loading providers' )
       )
     }
   )

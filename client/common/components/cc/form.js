@@ -10,13 +10,4 @@ cc.form = ( options={} ) => (a,x) => x.form( {
     cc.form.shim
   ],
   ...options,
-  // when: {
-  //   401: ( response, el ) => el.$send( 'app.server.not.authenticated' ),
-  //   418: ( response, el ) => el.$send( 'app.server.session.timeout' ),
-  //   // 503: ( response, el ) => el.$send( 'systemDisconnected' ),
-  //   'text/terminal': ( response, el ) => response.text().then( result => {
-  //     el.$nodes = app.xterm( { text: result } )
-  //   } ),
-  //   ...options.when
-  // },
 } )

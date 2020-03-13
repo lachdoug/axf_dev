@@ -6,9 +6,8 @@ ax.extension.router.controller = ( config ) => ( location ) => {
     config.match = config.match  || {}
     config.splat = config.splat || []
     config.slash = config.slash || ''
-// debugger
+
     return {
-      // href: location.href,
       path: location.path,
       query: location.query,
       anchor: location.anchor,

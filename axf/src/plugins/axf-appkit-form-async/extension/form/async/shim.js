@@ -59,7 +59,7 @@ ax.extension.form.async.shim = function() {
                 if ( ( resultBottom > windowBottom ) || ( resultTop < windowTop ) ) {
                   resultEl.scrollIntoView()
                 }
-                // el.$send( 'axf.appkit.form.async.complete' )
+                el.$send( 'axf.appkit.form.async.complete' )
               }
 
               if( ax.is.function( options.action ) ) {
@@ -69,7 +69,8 @@ ax.extension.form.async.shim = function() {
                   data: ax.x.lib.form.data.objectify( formData ),
                   formEl: el,
                   resultEl: resultEl,
-                  completeFn: completeFn
+                  completeFn: completeFn,
+                  submitter: submitter,
                 }
 
                 options.action( submit ) && completeFn()

@@ -15,6 +15,13 @@ module Server
       erb :'index.html'
     end
 
+    post '*' do
+      status 200
+      content_type :'application/json'
+      params.to_json
+    end
+
+
     not_found do
       content_type :text
       status 404

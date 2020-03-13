@@ -12,7 +12,7 @@ app.btn(
       name: `${ name }`
     }
   ),
-  () => controller.open( `/system/applications/${ name }` ),
+  () => controller.open( `/applications/${ name }` ),
   {
     class: 'btn app-btn d-block w-100 text-left',
   }

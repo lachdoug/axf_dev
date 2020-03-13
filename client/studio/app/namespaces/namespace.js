@@ -21,7 +21,7 @@ app.namespaces.namespace = controller => (a,x) => [
     ],
     {
       placeholder: a.p(
-        app.hourglass( 'Loading namespace' )
+        app.hourglass( 'Loading provider' )
       )
     }
   ),

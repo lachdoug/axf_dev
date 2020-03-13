@@ -7,7 +7,7 @@ app.system.shutdown = controller => (a,x) => [
       // f.field( { key: 'user_name', value: 'engines', type: 'hidden' } ),
       f.textarea( { name: 'api_vars[reason]', placeholder: 'Reason for shutdown' } ),
       a.br,
-      f.btns( controller ),
+      f.buttons(),
     ]
   } )
 ]

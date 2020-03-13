@@ -4,7 +4,7 @@
 //
 //   a['div.clearfix'](
 //     a['div.float-right']( [
-//       app.up( controller, 'Close' ),
+//       app.close( controller, 'Close' ),
 //     ] )
 //   ),
 //
@@ -54,7 +54,7 @@
 //                     },
 //                     {
 //                       label: 'Free',
-//                       backgroundColor: 'lightgrey',
+//                       backgroundColor: 'lightgray',
 //                       data: disks.map ( disk => disk.free )
 //                     },
 //                   ],

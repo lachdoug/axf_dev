@@ -8,6 +8,16 @@ app.namespaces.workspace.show = controller => (a,x) => [
 
         el.$nodes = [
 
+          a.h5( [
+            'Workspace',
+            a.small( [
+              ' on branch ',
+              a.strong( workspace.branch, {
+                id: 'workspaceBranch'
+              } )
+            ] ),
+          ] ),
+
           app.http(
             `/~/namespaces/${ controller.params.namespace_id }/workspace/readme`,
             ( readme, el ) => el.$nodes = [
@@ -78,7 +88,7 @@ app.namespaces.workspace.show = controller => (a,x) => [
                     }
                   } ),
 
-                  app.up( controller, 'Return to namespace' ),
+                  app.close( controller, 'Return to namespace' ),
 
                 ] ),
               ] ),
@@ -88,13 +98,13 @@ app.namespaces.workspace.show = controller => (a,x) => [
               a.p( readme.content ?
                 app.md( readme.content ) :
                 a['.error']( 'No readme!' ),
-                { class: 'border border-light p-2' }
+                { class: 'well' }
               ),
 
               a['div.clearfix']( a['div.btn-group.float-right']( [
                 app.button( {
                   label: app.icon( 'fa fa-undo', 'Reset' ),
-                  class: 'btn btn-outline-danger app-btn',
+                  class: 'btn app-btn-danger',
                   onclick: (e,el) => {
                     controller.open( 'reset' )
                   },
@@ -102,7 +112,7 @@ app.namespaces.workspace.show = controller => (a,x) => [
                 } ),
                 app.button( {
                   label: app.icon( 'fa fa-trash', 'Delete' ),
-                  class: 'btn btn-outline-danger app-btn',
+                  class: 'btn app-btn-danger',
                   onclick: (e,el) => {
                     controller.open( 'delete' )
                   },

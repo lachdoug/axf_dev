@@ -24,7 +24,7 @@ app.charts.ram = ram => (a,x) => {
             },
             {
               label: 'Free',
-              backgroundColor: 'lightgrey',
+              backgroundColor: 'lightgray',
               data: [ ( free / total ) ]
             },
           ],

@@ -2,12 +2,12 @@ app.system.menu.
 applications = controller => (a,x) => app.http(
   '/~/~/containers/engines/status',
   ( applications, el ) => el.$nodes = [
-    a.hr,
     a['div.container']( [
+      a.hr,
       a['app-system-applications']( [
         app.btn(
           app.icon( 'fa fa-plus', 'Install' ),
-          (e,el) => controller.open( '/system/install' ),
+          (e,el) => controller.open( '/install' ),
           {
             class: 'btn app-btn d-block w-100 text-left',
           }

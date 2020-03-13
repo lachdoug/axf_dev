@@ -7,8 +7,8 @@ ax.extension.codemirror.form.control.toolbar = function(
   return a['|appkit-form-codemirror-toolbar'](
     [
       this.mode( f, options.name, options.mode || false ),
-      this.keymap( f, options.keymap || false ),
-      a['|appkit-form-codemirror-toolbar-right'](
+      a['|appkit-form-codemirror-toolbar-right']( [
+        this.keymap( f, options.keymap || false ),
         a['|appkit-form-codemirror-fullscreen'](
           a.button( '🗖', {
             type: 'button',
@@ -30,7 +30,7 @@ ax.extension.codemirror.form.control.toolbar = function(
               }
             }
           } )
-        )
+        ) ]
       ),
     ],
     options.toolbarTag

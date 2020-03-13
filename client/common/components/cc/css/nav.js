@@ -11,7 +11,7 @@ ax.css( {
 
     '.active': {
       color: 'white',
-      backgroundColor: 'lightgrey',
+      backgroundColor: 'lightgray',
     }
 
 

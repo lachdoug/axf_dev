@@ -10,7 +10,7 @@ app.system.install.url = controller => (a,x) => [
       // f.field( { key: 'user_name', value: 'engines', type: 'hidden' } ),
       f.input( { name: 'install[url]', placeholder: 'URL', type: 'url', required: 'true' } ),
       a.br,
-      f.btns( controller ),
+      f.buttons(),
       // f.buttons( {
       //   cancel: {
       //     onclick: () => controller.open( '..' ),

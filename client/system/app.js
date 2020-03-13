@@ -5,6 +5,9 @@ let app = (a,x) => a['app']( [
     ),
   ], {
   $on: {
+    'appkit.router.load': (e,el) => {
+      nav.$update()
+    },
     'app.authenticated': (e,el) => {
       el.$('^app app-nav').$setUser( true )
       nav.$reopen()
@@ -29,7 +32,7 @@ let app = (a,x) => a['app']( [
       el.$('app-system-eventsource').$close()
       nav.$open( '/updating/os' )
     },
-    'app.updating': (e,el) => {
+    'app.closedating': (e,el) => {
       el.$('^app app-nav').$setUser( false )
       el.$('app-system-eventsource').$close()
       nav.$open( '/updating' )

@@ -15,7 +15,7 @@ app.namespaces.workspace.services.blueprint.consumer_params.show = blueprint => 
           controller.open( 'edit' )
         },
       } ),
-      app.up( controller, 'Return to consumer params' ),
+      app.close( controller, 'Return to consumer params' ),
     ] ) ),
 
     app.report( {
@@ -55,7 +55,7 @@ app.namespaces.workspace.services.blueprint.consumer_params.show = blueprint => 
     a['div.clearfix']( a['div.btn-group.float-right'](
       app.button( {
         label: app.icon( 'fa fa-trash', 'Delete' ),
-        class: 'btn btn-outline-danger app-btn',
+        class: 'btn app-btn-danger',
         onclick: (e,el) => {
           controller.open( 'delete' )
         },

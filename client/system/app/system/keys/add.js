@@ -29,7 +29,7 @@ app.system.keys.add = controller => (a,x) => [
         // unchecked: 'false',
       } ),
 
-      f.btns( controller ),
+      f.buttons(),
 
     ]
   } )

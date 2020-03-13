@@ -4,7 +4,7 @@ app.system.update = controller => (a,x) => [
 
   a['div.clearfix'](
     a['div.float-right']( [
-      app.up( controller, 'Close' ),
+      app.close( controller, 'Close' ),
     ] )
   ),
 
@@ -21,7 +21,7 @@ app.system.update = controller => (a,x) => [
       $start: function() {
         this.$nodes = app.http(
           '/~/~/system/control/engines_system/update',
-          ( response, el ) => { el.$send( 'app.updating' ) },
+          ( response, el ) => { el.$send( 'app.closedating' ) },
           { placeholder: app.hourglass( 'Starting update...' ) }
         )
       },

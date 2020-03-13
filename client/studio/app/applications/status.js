@@ -6,7 +6,7 @@ app.applications.status = controller => (a,x) => [
 
       a['div.clearfix']( [
         a['div.btn-group.float-right']( [
-          app.up( controller, 'Return to applications' ),
+          app.close( controller, 'Return to applications' ),
         ] ),
       ] ),
 

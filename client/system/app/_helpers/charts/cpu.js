@@ -17,7 +17,7 @@ app.charts.cpu = cpu => (a,x) => x.chart( {
         },
         {
           label: 'Idle',
-          backgroundColor: 'lightgrey',
+          backgroundColor: 'lightgray',
           data: [
             ( 1 - cpu.one ) > 0 ? 1 - cpu.one : 0,
             ( 1 - cpu.five ) > 0 ? 1 - cpu.five : 0,

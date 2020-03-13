@@ -1,4 +1,2 @@
-cc.label = function( component ) {
-
-  return (a,x) => a.p( a.small( component ) )
-}
+cc.label = ( component, options ) => (a,x) =>
+a.p( a.small( component ), options )

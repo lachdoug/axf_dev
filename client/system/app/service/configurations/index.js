@@ -7,7 +7,7 @@ app.service.configurations.index = controller => (a,x) => {
   return [
 
     a.h5( `Configure` ),
-    a['div.clearfix']( a['div.float-right']( app.up( controller, 'Close' ) ) ),
+    a['div.clearfix']( a['div.float-right']( app.close( controller, 'Close' ) ) ),
     app.http(
       path,
       ( definition, el ) => {

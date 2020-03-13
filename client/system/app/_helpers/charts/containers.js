@@ -44,7 +44,7 @@ app.charts.containers = containers => (a,x) => {
             },
             {
               label: 'Headroom',
-              backgroundColor: 'lightgrey',
+              backgroundColor: 'lightgray',
               data: containers.map ( container => container.headroom )
             },
           ],

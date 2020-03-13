@@ -8,7 +8,7 @@ app.container.environment.show = type => controller => (a,x) => {
 
   return [
 
-    a['div.clearfix']( a['div.float-right']( app.up( controller, 'Close' ) ) ),
+    a['div.clearfix']( a['div.float-right']( app.close( controller, 'Close' ) ) ),
     app.http(
       path,
       ( container, el ) => {

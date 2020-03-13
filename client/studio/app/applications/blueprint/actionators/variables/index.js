@@ -15,7 +15,7 @@ app.applications.blueprint.actionators.variables.index = blueprint => controller
         },
         title: 'New variable',
       } ),
-      app.up( controller, 'Return to actionator' ),
+      app.close( controller, 'Return to actionator' ),
     ] ) ),
 
 

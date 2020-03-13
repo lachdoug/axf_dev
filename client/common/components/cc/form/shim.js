@@ -1,18 +1,22 @@
 cc.form.shim = {
-  form: ( f, target ) => ( options={} ) => target( {
-    ...options,
-    asyncformTag: {
-      ...options.asyncformTag,
-      $on: {
-        'axf.appkit.http.error': (e,el) => {
-          el.$$('button[type="submit"]').$$.forEach( button => {
-            button.$revert && button.$revert()
-          } )
+  form: ( f, target ) => ( options={} ) => {
+
+    return target( {
+      ...options,
+      asyncformTag: {
+        ...options.asyncformTag,
+        $on: {
+          'axf.appkit.form.async.complete': (e,el) => {
+            el.$$('button[type="submit"]').$$.forEach( button => {
+              button.$revert && button.$revert()
+            } )
+          },
+          ...( options.asyncformTag || {} ).$on
         },
-        ...( options.asyncformTag || {} ).$on
       },
-    },
-  } ),
+    } )
+
+  },
   // field: ( f, target ) => ( options={} ) => {
   //   // debugger
   //   let help = options.help ? (a,x) => cc.md( options.help ) : null
@@ -79,7 +83,10 @@ cc.form.shim = {
 
     combobox: ( f, target ) => ( options={} ) => (a,x) => f.controls.selectinput( options ),
     json: ( f, target ) => ( options={} ) => (a,x) => x.jsoneditor.form.control( f, { theme: 'bootstrap3', ...options } ),
-    code: ( f, target ) => ( options={} ) => (a,x) => x.codemirror.form.control( f, options ),
+    code: ( f, target ) => ( options={} ) => (a,x) => x.codemirror.form.control( f, {
+      keymap: window.localStorage.editorKeymap,
+      ...options
+    } ),
     markdown: ( f, target ) => ( options={} ) => (a,x) => x.simplemde.form.control( f, options ),
 
     table: ( f, target ) => ( options={} ) => target( {
@@ -164,18 +171,19 @@ cc.form.shim = {
 
   },
 
-  btns: (f) => ( controller, options={} ) => f.buttons( {
-    cancel: {
-      onclick: () => controller.open( '..' ),
-      ...options.cancel
-    },
-    ...options
-  } ),
+  // btns: (f) => ( controller, options={} ) => f.buttons( {
+  //   cancel: {
+  //     onclick: () => history.back(), // controller.open( '..', controller.query, controller.anchor ),
+  //     ...options.cancel
+  //   },
+  //   ...options
+  // } ),
 
   buttons: (f) => ( options={} ) => (a,x) => a['app-form-buttons']( [
     f.button( {
       label: app.icon( 'fa fa-times', 'Cancel' ),
       to: cc.hourglass( 'Cancelling…' ),
+      onclick: () => history.back(),
       ...options.cancel
     } ),
     ' ',
@@ -193,7 +201,7 @@ cc.form.shim = {
 
   row: ( f, target ) => ( options={} ) => (a,x) => a['div.row'](
     ( options.columns || [] ).map( (column) => a['div.col-sm'](column) ),
-    options.fieldsetTag
+    options.rowTag
   ),
 
 }

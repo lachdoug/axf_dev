@@ -12,6 +12,7 @@ ax.extension.form.shim = function() {
 
     form: (f) => ( options ) => this.factory.form( f, options ),
     submit: (f) => ( options ) => this.factory.submit( f, options ),
+    cancel: (f) => ( options ) => this.factory.cancel( f, options ),
 
   }
 

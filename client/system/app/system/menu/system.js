@@ -27,7 +27,7 @@ system = ( system, controller ) => (a,x) => a['div.container']( [
         $state: system,
       } ),
     ],
-    () => controller.open( '/system' ),
+    () => controller.open( '/' ),
     {
       class: 'btn app-btn d-block w-100 text-left mt-3',
     }

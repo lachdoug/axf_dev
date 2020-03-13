@@ -1,4 +1,8 @@
 ax.css( {
+  '|appkit-form-multiselect-selected': {
+    background: 'white',
+    color: '#333',
+  },
   '|appkit-form-multiselect-selected-item': {
     display: 'block',
     overflow: 'auto',

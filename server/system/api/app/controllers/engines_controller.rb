@@ -39,6 +39,14 @@ module Server
           result.body
         end
 
+        put '/~/*' do
+          path = request.fullpath.sub '/~/~', ''
+          result = @engines.put_api_vars( path, params[:api_vars] )
+          status result.code
+          content_type result.headers[:content_type]
+          result.body
+        end
+
       end
     end
   end

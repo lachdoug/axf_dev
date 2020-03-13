@@ -11,7 +11,7 @@ app.applications.blueprint.service_configurations.index = blueprint => controlle
       },
       title: 'New service configurations',
     } ),
-    app.up( controller, 'Return to blueprint' ),
+    app.close( controller, 'Return to blueprint' ),
   ] ) ),
 
   blueprint.serviceConfigurations.map(

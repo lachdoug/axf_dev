@@ -2,7 +2,7 @@ app.applications.blueprint.show = blueprint => controller => (a,x) => [
 
   a['div.clearfix']( [
     a['div.btn-group.float-right']( [
-      app.up( controller, 'Return to application' ),
+      app.close( controller, 'Return to application' ),
     ] ),
   ] ),
 

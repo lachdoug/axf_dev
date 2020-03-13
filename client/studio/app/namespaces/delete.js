@@ -1,6 +1,6 @@
 app.namespaces.delete = controller => (a,x) => [
 
-  a.p( 'Delete namespace?' ),
+  a.p( 'Delete provider?' ),
   a.p( [
 
     app.button( {
@@ -15,7 +15,7 @@ app.namespaces.delete = controller => (a,x) => [
     app.button( {
       label: app.icon( 'fa fa-trash', 'Delete' ),
       class: 'btn btn-danger',
-      title: 'Delete namespace',
+      title: 'Delete services provider',
       // confirm: 'Are you sure that you want to delete this namespace?',
       onclick: (e,el) => {
 
@@ -29,14 +29,14 @@ app.namespaces.delete = controller => (a,x) => [
                 onclick: (e,el) => {
                   controller.open( '../..' )
                 },
-                title: 'Return to namespaces',
+                title: 'Return to providers',
               } ),
             ] ),
           ],
           {
             method: 'DELETE',
             placeholder: a.p(
-              app.hourglass( 'Deleting namespace' )
+              app.hourglass( 'Deleting provider' )
             )
           }
         )

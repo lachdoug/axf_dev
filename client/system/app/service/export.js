@@ -5,7 +5,7 @@ app.service.export = controller => (a,x) => {
   return [
 
     a.h5( `Export` ),
-    a['div.clearfix']( a['div.float-right']( app.up( controller, 'Close' ) ) ),
+    a['div.clearfix']( a['div.float-right']( app.close( controller, 'Close' ) ) ),
     app.link( {
       label: app.icon( 'fa fa-check', 'OK' ),
       href: `/~/download/service/${ name }`,

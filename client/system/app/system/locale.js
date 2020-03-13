@@ -19,7 +19,7 @@ app.system.locale = controller => (a,x) => [
           label: 'Country',
           as: 'country',
         } ),
-        f.btns( controller ),
+        f.buttons(),
       ]
     } )
   ),

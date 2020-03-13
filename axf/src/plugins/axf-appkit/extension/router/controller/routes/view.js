@@ -5,6 +5,9 @@ view = ( config ) => ( routesElement, location ) => {
   let scopedpath = location.path.slice( scope.length )
   let match = config.match || {}
   let splat = config.splat || []
+  let lazy = config.lazy
+  let defaultContent = config.default
+  let transition = config.transition
   let component
   let slash
   let matched
@@ -36,10 +39,6 @@ view = ( config ) => ( routesElement, location ) => {
 
       break
 
-    // } else {
-    //
-    //   scope = null
-
     }
 
   }
@@ -47,7 +46,12 @@ view = ( config ) => ( routesElement, location ) => {
   if (!matched) {
 
     component = ax.is.undefined( config.default ) ?
-    `Not found '${ scopedpath }'` :
+    controller => {
+      let message = `'${ scopedpath }' not found`
+      let el = config.router[ config.router.length - 1 ]
+      console.warn( message, controller, config.router )
+      return (a,x) => a['.error']( message )
+    } :
     config.default
 
   }
@@ -59,8 +63,9 @@ view = ( config ) => ( routesElement, location ) => {
       match: match,
       splat: splat,
       slash: slash,
-      default: config.default,
-      transition: config.transition,
+      lazy: lazy,
+      default: defaultContent,
+      transition: transition,
     } )( location )
     component = ax.a['|appkit-router-view'](
       component( controller ),

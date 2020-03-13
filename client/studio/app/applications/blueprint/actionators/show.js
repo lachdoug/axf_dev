@@ -15,7 +15,7 @@ app.applications.blueprint.actionators.show = blueprint => controller => (a,x) =
           controller.open( 'edit' )
         },
       } ),
-      app.up( controller, 'Return to actionators' ),
+      app.close( controller, 'Return to actionators' ),
     ] ) ),
 
     app.report( {
@@ -90,7 +90,7 @@ app.applications.blueprint.actionators.show = blueprint => controller => (a,x) =
     a['div.clearfix']( a['div.btn-group.float-right'](
       app.button( {
         label: app.icon( 'fa fa-trash', 'Delete' ),
-        class: 'btn btn-outline-danger app-btn',
+        class: 'btn app-btn-danger',
         onclick: (e,el) => {
           controller.open( 'delete' )
         },

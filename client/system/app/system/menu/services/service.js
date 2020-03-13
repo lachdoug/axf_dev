@@ -13,7 +13,7 @@ app.btn(
       name: `${ name }`
     }
   ),
-  () => controller.open( `/system/services/${ name }` ),
+  () => controller.open( `/services/${ name }` ),
   {
     class: 'btn app-btn d-block w-100 text-left',
   }

@@ -16,7 +16,7 @@ app.applications.blueprint.service_configurations.show = blueprint => controller
           controller.open( 'edit' )
         },
       } ),
-      app.up( controller, 'Return to service configurations' ),
+      app.close( controller, 'Return to service configurations' ),
     ] ) ),
 
     app.report( {
@@ -44,7 +44,7 @@ app.applications.blueprint.service_configurations.show = blueprint => controller
     a['div.clearfix']( a['div.btn-group.float-right'](
       app.button( {
         label: app.icon( 'fa fa-trash', 'Delete' ),
-        class: 'btn btn-outline-danger app-btn',
+        class: 'btn app-btn-danger',
         onclick: (e,el) => {
           controller.open( 'delete' )
         },

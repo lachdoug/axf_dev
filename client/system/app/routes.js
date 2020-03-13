@@ -5,11 +5,12 @@ app.routes = controller => controller.routes( {
   '/disconnected': app.disconnected,
   '/reconnect': app.reconnect,
   '/restarting': app.restarting,
-  '/updating/os': app.updating.os,
-  '/updating': app.updating,
-  '/system*': app.system,
+  '/updating/os': app.closedating.os,
+  '/updating': app.closedating,
+  '/settings': app.settings,
+  '/?*': app.system,
 }, {
-  home: '/system',
+  // home: '/system',
   lazy: true,
   // transition: [ 'crossfade', null, { time: 10000 } ],
 } )

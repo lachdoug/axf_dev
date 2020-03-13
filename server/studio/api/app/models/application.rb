@@ -71,6 +71,7 @@ module Server
               name: name,
               remote: repo.remote,
               branch: repo.branch.current,
+              diff: repo.diff,
               active: active?,
             }
           end

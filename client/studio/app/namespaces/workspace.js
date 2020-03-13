@@ -1,12 +1,8 @@
 app.namespaces.workspace = namespace => controller => (a,x) => [
 
-  app.http(
-    `/~/namespaces/${ controller.params.namespace_id }/workspace`,
-    ( workspace, el ) => el.$nodes = [
-
-      a.h5( workspace.branch, {
-        id: 'workspaceBranch'
-      } ),
+  // app.http(
+  //   `/~/namespaces/${ controller.params.namespace_id }/workspace`,
+  //   ( workspace, el ) => el.$nodes = [
 
       controller.routes( {
         '/?': app.namespaces.workspace.show,
@@ -26,12 +22,12 @@ app.namespaces.workspace = namespace => controller => (a,x) => [
         lazy: true,
       } ),
 
-    ],
-    {
-      placeholder: a.p(
-        app.hourglass( 'Loading workspace' )
-      )
-    }
-  ),
+  //   ],
+  //   {
+  //     placeholder: a.p(
+  //       app.hourglass( 'Loading workspace' )
+  //     )
+  //   }
+  // ),
 
 ]

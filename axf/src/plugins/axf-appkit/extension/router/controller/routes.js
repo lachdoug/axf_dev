@@ -12,8 +12,10 @@ routes = ( config, startLocation ) => function( routes, options={} ) {
   let init
   let component
   let matched
-  let transition = ax.x.router.controller.routes.transition( options.transition )
+  let transition = ax.x.router.controller.routes.transition( options.transition || config.transition )
   let view = ax.x.router.controller.routes.view( config )
+
+  let lazy = ax.is.undefined( options.lazy ) ? config.lazy : options.lazy
 
   if ( transition ) {
     init = function() {
@@ -35,13 +37,12 @@ routes = ( config, startLocation ) => function( routes, options={} ) {
 
   let routesTag = {
     id: options.id,
-    $config: config,
     $init: init,
     $nodes: component,
 
     $reload: function() {
       this.$matched = false
-      this.$config.router[0].$go()
+      this.$('^|appkit-router').$go()
     },
 
     $load: function( path, query, anchor ) {
@@ -55,7 +56,7 @@ routes = ( config, startLocation ) => function( routes, options={} ) {
       let locatedView = view( this, toLocation )
 
       if (
-        options.lazy &&
+        lazy &&
         this.$scope == locatedView.scope &&
         locatedView.matched &&
         this.$matched
@@ -79,8 +80,6 @@ routes = ( config, startLocation ) => function( routes, options={} ) {
         }
 
         this.$matched = locatedView.matched
-
-        // this.$send( 'appkit.router.load', { detail: toLocation }  )
 
       }
 

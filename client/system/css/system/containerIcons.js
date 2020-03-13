@@ -3,7 +3,7 @@ ax.css( {
   'app-container-state-icon': {
 
     '.fa-long-arrow-alt-right' : {
-      color: 'grey',
+      color: 'gray',
     },
 
     '.fa-play' : {
@@ -15,7 +15,7 @@ ax.css( {
     },
 
     '.fa-circle' : {
-      color: 'grey',
+      color: 'gray',
     },
 
     '.fa-pause' : {

@@ -18,7 +18,7 @@ app.namespaces.workspace.branch.show = controller => (a,x) => [
             title: 'Remove branch',
             onclick: () => controller.open( 'remove' )
           } ),
-          app.up( controller, 'Return to namespace' ),
+          app.close( controller, 'Return to namespace' ),
 
         ] ),
       ),

@@ -11,7 +11,7 @@ app.namespaces.workspace.services.blueprint.consumer_params.index = blueprint =>
       },
       title: 'New consumer param',
     } ),
-    app.up( controller, 'Return to blueprint' ),
+    app.close( controller, 'Return to blueprint' ),
   ] ) ),
 
   blueprint.consumerParams.map(

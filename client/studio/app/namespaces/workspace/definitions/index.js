@@ -8,18 +8,18 @@ app.namespaces.workspace.definitions.index = controller => (a,x) => [
 
       a['div.clearfix']( [
         a['div.btn-group.float-right']( [
-          app.up( controller, 'Return to workspace' ),
+          app.close( controller, 'Return to workspace' ),
         ] ),
       ] ),
 
       definitions.map( definition => [
-        app.button( {
+        a.div( app.button( {
           label: app.icon( 'fa fa-caret-right', definition.type ),
           onclick: (e,el) => {
             controller.open( 'query', { type: definition.type } )
           },
           title: definition.type,
-        } ),
+        } ) ),
       ] ),
 
     ],

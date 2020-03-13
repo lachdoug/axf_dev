@@ -15,7 +15,7 @@ app.system.timezone = controller => (a,x) => [
           as: 'timezone',
           layout: 'vertical',
         } ),
-        f.btns( controller ),
+        f.buttons(),
       ]
     } )
   ),

@@ -3,9 +3,9 @@ module Server
     module App
       module Controllers
 
-        get '/applications/:application_id/status' do
+        get '/applications/:application_id/diff' do
           content_type :'application/json'
-          Application.new( params[:application_id] ).repo.status.to_json
+          Application.new( params[:application_id] ).repo.diff.to_json
         end
 
       end

@@ -26,7 +26,7 @@ app.container.memory = type => controller => (a,x) => {
                 label: false,
                 layout: 'vertical',
               } ),
-              f.btns( controller ),
+              f.buttons(),
             ]
           } )
         ]

@@ -5,7 +5,7 @@ app.nav = controller => (a,x) => a['app-nav']( [
       app.logo( 20 ),
       'Engines System',
     ],
-    onclick: () => window.location.href = '/system',
+    onclick: () => location.assign( '/' ),
     title: 'Home',
     class: 'btn app-btn',
   } ),

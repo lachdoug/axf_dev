@@ -1,6 +1,6 @@
 app.namespaces.pull = controller => (a,x) => [
 
-  a.p( 'Pull namespace?' ),
+  a.p( 'Pull provider?' ),
 
   app.button( {
     label: app.icon( 'fa fa-times', 'Cancel' ),
@@ -14,7 +14,7 @@ app.namespaces.pull = controller => (a,x) => [
   app.button( {
     label: app.icon( 'fas fa-file-download', 'Pull' ),
     class: 'btn btn-primary',
-    title: 'Pull namespace',
+    title: 'Pull provider',
     // confirm: 'Are you sure that you want to delete this service?',
     onclick: (e,el) => {
 
@@ -28,14 +28,14 @@ app.namespaces.pull = controller => (a,x) => [
               onclick: (e,el) => {
                 controller.open( '..' )
               },
-              title: 'Return to services',
+              title: 'Return to provider',
             } ),
           ] ),
         ],
         {
           // method: 'DELETE',
           placeholder: a.p(
-            app.hourglass( 'Pulling namespace' )
+            app.hourglass( 'Pulling provider' )
           )
         }
       )

@@ -27,7 +27,7 @@ cc.report.shim = {
       (a,x) => x.markedjs.report.control( r, {
         ...options,
         markdownTag: {
-          class: 'border border-light p-2',
+          class: 'well',
           ...options.markdownTag,
         }
       } ),

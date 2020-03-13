@@ -8,6 +8,10 @@ radios = function( options={} ) {
 
   let selections = x.lib.form.selections( options.selections )
 
+  if ( options.placeholder ) {
+    selections.unshift( { value: '', label: options.placeholder } )
+  }
+
   return selections.map( selection => {
 
     let label = selection.label

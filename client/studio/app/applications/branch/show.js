@@ -19,7 +19,7 @@ app.applications.branch.show = controller => (a,x) => [
             controller.open( 'remove' )
           }
         } ),
-        app.up( controller, 'Return to application' ),
+        app.close( controller, 'Return to application' ),
 
       ] ),
 

@@ -8,7 +8,7 @@ app.views.index = ( parent, path ) => controller => (a,x) => [
       },
       title: 'New view',
     } ),
-    app.up( controller, 'Return to home' ),
+    app.close( controller, 'Return to home' ),
   ] ) ),
 
 

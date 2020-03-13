@@ -28,7 +28,8 @@ module Server
             end
 
             def current
-              @current ||= git_branch.match(/\*\s*(\w+)/)[1]
+              return 'master' if repo.empty?
+              git_branch.match(/\*\s*(\w+)/)[1]
             end
 
             def git_branch

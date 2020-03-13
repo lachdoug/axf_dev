@@ -16,7 +16,7 @@ app.namespaces.workspace.services.blueprint.configurators.variables.show = bluep
           controller.open( 'edit' )
         },
       } ),
-      app.up( controller, 'Return to variables' ),
+      app.close( controller, 'Return to variables' ),
     ] ) ),
 
     app.report( {
@@ -41,7 +41,7 @@ app.namespaces.workspace.services.blueprint.configurators.variables.show = bluep
     a['div.clearfix']( a['div.btn-group.float-right'](
       app.button( {
         label: app.icon( 'fa fa-trash', 'Delete' ),
-        class: 'btn btn-outline-danger app-btn',
+        class: 'btn app-btn-danger',
         onclick: (e,el) => {
           controller.open( 'delete' )
         },

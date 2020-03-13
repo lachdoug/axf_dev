@@ -180,7 +180,7 @@ app.system.install.new.form = ( controller, install ) => (a,x) => {
         ]
       } ),
 
-      f.btns( controller ),
+      f.buttons(),
 
     ]
   } )

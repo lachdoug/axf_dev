@@ -27,7 +27,7 @@ app.container.environment.edit = type => controller => (a,x) => {
           form: (f) => [
 
             fields.map( field => f.field( field ) ),
-            f.btns( controller ),
+            f.buttons(),
           ]
         } )
 

@@ -5,6 +5,7 @@ ax.css( {
     '|appkit-form-codemirror-toolbar': {
       display: 'block',
       overflow: 'auto',
+      color: '#333',
       backgroundColor: 'white',
       borderBottom: '1px solid #e6e6e6',
       button: {

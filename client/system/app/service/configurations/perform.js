@@ -32,7 +32,7 @@ app.service.configurations.perform = controller => (a,x) => {
                 ...enginesFieldV1( variable ),
                 value: values[ variable.name ],
               } ) ),
-              f.btns( controller ),
+              f.buttons(),
             ],
             asyncformTag: {
               $on: {

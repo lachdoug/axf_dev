@@ -23,6 +23,13 @@ module Server
               **options
           end
 
+          def put( route, payload, options={} )
+            api_call route,
+              method: :put,
+              payload: payload,
+              **options
+          end
+
           def delete( route, options={} )
             api_call route,
               method: :delete,
@@ -32,6 +39,11 @@ module Server
           def post_api_vars( route, api_vars, options={} )
             payload = { 'api_vars': api_vars }.to_json
             post route, payload, options
+          end
+
+          def put_api_vars( route, api_vars, options={} )
+            payload = { 'api_vars': api_vars }.to_json
+            put route, payload, options
           end
 
           def stream_chunks( route, &block )

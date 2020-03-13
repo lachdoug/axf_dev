@@ -3,7 +3,11 @@ app.router = (a,x) => x.router(
     app.nav( controller ),
     app.system.eventsource,
     app.routes( controller ),
-  ] ,{
-    home: '/system',
+  ],
+  {
+    default: controller => a['p.error']( [
+      controller,
+      `Not found: CLIENT ${ controller.path } in ${ controller.scope || 'root' }`
+    ] ),
   }
 )

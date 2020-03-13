@@ -4,7 +4,7 @@
 //
 //   a['div.clearfix'](
 //     a['div.float-right']( [
-//       app.up( controller, 'Close' ),
+//       app.close( controller, 'Close' ),
 //     ] )
 //   ),
 //
@@ -78,7 +78,7 @@
 //                     },
 //                     {
 //                       label: 'Headroom',
-//                       backgroundColor: 'lightgrey',
+//                       backgroundColor: 'lightgray',
 //                       data: containers.map ( container => container.headroom )
 //                     },
 //                   ],

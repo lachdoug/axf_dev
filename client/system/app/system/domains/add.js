@@ -29,7 +29,7 @@ app.system.domains.add = controller => (a,x) => [
         // unchecked: 'false',
       } ),
 
-      f.btns( controller ),
+      f.buttons(),
 
 
     ]
