@@ -4,14 +4,30 @@ select = function( options={} ) {
   let a = ax.a
   let x = ax.x
 
-  let value = options.value || ''
+  let value = x.lib.form.collection.value( options.value )
   let selections = x.lib.form.selections( options.selections || {} )
-  let selected = selections.find( selection => selection.value === value ) || {}
-  let label = selected.label || options.placeholder || ''
+
+  let label = []
+
+  if ( ax.is.not.array( value ) ) {
+    value = [ value ]
+  }
+
+  for ( let selected of value ) {
+    let found = selections.find( selection => selection.value === selected )
+    if ( found ) {
+      label.push( found.label )
+    }
+  }
+  label = label.join( ', ' )
 
   let selectTagOptions = {
     name: options.name,
-    ...options.selectTag
+    ...options.selectTag,
+  }
+
+  if ( label.length == 0 ) {
+    label = a.span( options.placeholder || 'None', { class: 'placeholder' } )
   }
 
   return a['|appkit-report-select']( label, selectTagOptions )

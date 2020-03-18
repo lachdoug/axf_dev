@@ -81,7 +81,7 @@ app.applications.blueprint.actionators.show = blueprint => controller => (a,x) =
             controller.open( 'variables' )
           },
         } ),
-        x.list( actionator.variables.output() ),
+        x.output( actionator.variables.output() ),
 
       ]
     } ),

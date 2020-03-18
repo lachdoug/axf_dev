@@ -10,7 +10,7 @@ app.system.checkup = controller => (a,x) => [
 
   app.http(
     '/~/~/containers/check_and_act',
-    (  report, el ) => el.$nodes = x.list( report ),
+    (  report, el ) => el.$nodes = x.output( report ),
   )
 
 ]

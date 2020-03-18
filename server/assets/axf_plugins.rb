@@ -11,19 +11,13 @@ module Server
 
           './axf/src/plugins/axf-appkit/**/*.js',
           './axf/src/plugins/axf-appkit-form-async/**/*.js',
-          './axf/src/plugins/axf-appkit-form-field/**/*.js',
-          './axf/src/plugins/axf-appkit-form-field-dependent/**/*.js',
-          './axf/src/plugins/axf-appkit-form-field-nest/**/*.js',
-          './axf/src/plugins/axf-appkit-form-field-nest-prefab/**/*.js',
-
-          './axf/src/plugins/axf-appkit-report-field/**/*.js',
-          './axf/src/plugins/axf-appkit-report-field-dependent/**/*.js',
-          './axf/src/plugins/axf-appkit-report-field-nest/**/*.js',
-          './axf/src/plugins/axf-appkit-report-field-nest-prefab/**/*.js',
+          './axf/src/plugins/axf-appkit-field/**/*.js',
+          './axf/src/plugins/axf-appkit-field-extras/**/*.js',
+          './axf/src/plugins/axf-appkit-field-dependent/**/*.js',
+          './axf/src/plugins/axf-appkit-field-nest/**/*.js',
+          './axf/src/plugins/axf-appkit-field-nest-prefab/**/*.js',
 
           './axf/src/plugins/axf-appkit-bootstrap/**/*.js',
-
-          './axf/src/plugins/axf-appkit-form-field-extras/**/*.js',
 
           './axf/src/plugins/axf-dropdown/**/*.js',
           './axf/src/plugins/axf-xtermjs/**/*.js',

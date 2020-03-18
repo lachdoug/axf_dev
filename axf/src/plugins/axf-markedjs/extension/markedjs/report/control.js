@@ -1,18 +1,3 @@
-/**
- * Creates ax object for a Markedjs Markdown report output.
- *
- * @example
- * r.markdown( {
- *   key: mymarkedtext,
- *   value: Hello\n===\n
- * } ),
- * @param {object} options
- * @param {string} options.name The value for the name= attribute on the wrapper.
- * @param {(object|array)} options.value The markdown text.
- *
- * @return {object} ax object
- */
-
 ax.extension.markedjs.report.control = function(
   r, options={}
 ) {
@@ -20,17 +5,36 @@ ax.extension.markedjs.report.control = function(
   let a = ax.a
   let x = ax.x
 
+  let value = options.value
+  let component
+
+  if ( value ) {
+    component = x.markedjs.markdown( {
+      markdown: value,
+      markedjsTag: options.markedjsTag,
+    } )
+  } else {
+    component = a.span(
+      options.placeholder || 'None',
+      { class: 'placeholder' }
+    )
+  }
+
   return a['|appkit-report-control'](
-    options.value ? x.markedjs.markdown( {
-      markdown: options.value,
-      markdownTag: options.markdownTag,
-    } ) : options.placeholder,
+    a['|appkit-report-markdown'](
+      component,
+      options.markdownTag
+    ),
     {
 
-      name: options.name,
-
+      'data-name': options.name,
       $value: function() {
         return options.value
+      },
+
+      tabindex: 0,
+      $focus: function() {
+        this.focus()
       },
 
       ...options.controlTag

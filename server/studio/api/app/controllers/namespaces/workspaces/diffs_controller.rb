@@ -3,9 +3,9 @@ module Server
     module App
       module Controllers
 
-        get '/namespaces/:namespace_id/workspace/status' do
+        get '/namespaces/:namespace_id/workspace/diff' do
           content_type :'application/json'
-          Namespace.find( params[:namespace_id] ).workspace.repo.status.to_json
+          Namespace.find( params[:namespace_id] ).workspace.repo.diff.to_json
         end
 
       end

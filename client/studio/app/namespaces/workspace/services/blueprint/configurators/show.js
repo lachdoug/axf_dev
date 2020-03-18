@@ -111,7 +111,7 @@ app.namespaces.workspace.services.blueprint.configurators.show = blueprint => co
             controller.open( 'variables' )
           },
         } ),
-        x.list( configurator.variables.output() ),
+        x.output( configurator.variables.output() ),
 
       ]
     } ),

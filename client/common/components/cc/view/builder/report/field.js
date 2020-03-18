@@ -19,7 +19,8 @@ cc.view.builder.report.field = ( r, fieldSpec, params ) => {
   if ( fieldSpec.components ) {
     let componentsSpec = Object.values( fieldSpec.components || {} )
     field.report = (rr) => componentsSpec.map(
-      componentSpec => cc.view.builder.report.component( rr, componentSpec, params )
+      componentSpec => cc.view.builder.report.
+        component( rr, componentSpec, params )
     )
   }
 
@@ -42,7 +43,37 @@ cc.view.builder.report.field = ( r, fieldSpec, params ) => {
     field.label = false
   }
 
-  field.control = fieldSpec.control || 'text'
+  let controlTypes = {
+    string: { control: 'output' },
+    text: { control: 'textarea' },
+    preformatted: { control: 'preformatted' },
+    select: { control: 'select' },
+    boolean: { control: 'boolean' },
+    checkbox: { control: 'checkbox' },
+    checkboxes: { control: 'checkboxes' },
+    radios: { control: 'radios' },
+    password: { control: 'password' },
+    color: { control: 'color' },
+    datetime: { control: 'datetime' },
+    email: { control: 'email' },
+    number: { control: 'number' },
+    tel: { control: 'tel' },
+    url: { control: 'url' },
+    json: { control: 'json' },
+    output: { control: 'output' },
+    country: { control: 'country' },
+    language: { control: 'language' },
+    timezone: { control: 'timezone' },
+    markdown: { control: 'markdown' },
+    code: { control: 'code' },
+    one: { control: 'one' },
+    many: { control: 'many' },
+    table: { control: 'table' },
+  }
+
+  let control = fieldSpec.control || 'string'
+  let controlType = controlTypes[control]
+  field.control = controlType.control
   field[field.control] = fieldSpec[field.control]
 
   return r.field( field )

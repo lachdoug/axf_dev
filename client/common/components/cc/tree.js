@@ -24,7 +24,7 @@ cc.tree.branch = data => (a,x) => a.li( [
   } ),
 
   a.ul( [
-    a.li( x.list( data.content ) ),
+    a.li( x.output( data.content ) ),
     data.children.map( child => a.li( cc.tree.branch( child ) ) ),
   ], {
     style: { display: 'none' },

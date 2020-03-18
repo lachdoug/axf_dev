@@ -14,20 +14,20 @@ module Server
 
           attr_reader :owner
 
-          def to_json
-            to_h.to_json
-          end
-
-          def to_h
-            debugger
-            {
-              status: status,
-              branch: branch.current,
-              remote: remote,
-              diff: diff,
-              empty: empty?,
-            }
-          end
+          # def to_json
+          #   to_h.to_json
+          # end
+          #
+          # def to_h
+          #   debugger
+          #   {
+          #     status: status,
+          #     branch: branch.current,
+          #     remote: remote,
+          #     diff: diff,
+          #     # empty: empty?,
+          #   }
+          # end
 
           def remote
             @remote ||= git( 'remote get-url origin' ).strip
@@ -57,8 +57,8 @@ module Server
 
           def diff
             {
-              uncommitted: uncommitted,
-              unpushed: unpushed,
+              uncommitted: !uncommitted.empty?,
+              unpushed: !unpushed.empty?,
             }
           end
 
@@ -93,8 +93,6 @@ module Server
                 stderr === '' ? stdout : "#{ stdout }\n#{ stderr }"
             raise Error::GitError.new result unless status.exitstatus === 0
             result
-          # rescue Error::GitError => e
-          #   debugger
           end
 
           def dirty?
@@ -105,22 +103,12 @@ module Server
             uncommitted.empty? && unpushed.empty?
           end
 
-          def empty?
-            refs.empty?
-          end
-
           def unpushed
-            return '' if empty?
-            git 'diff origin..HEAD'
-          # rescue Error::GitError => e
-          #   debugger
+            git( 'diff origin..HEAD' )
           end
 
           def uncommitted
-            return '' if empty?
-            git 'diff HEAD'
-          # rescue Error::GitError => e
-          #   debugger
+            git( 'diff HEAD' )
           end
 
           def refs

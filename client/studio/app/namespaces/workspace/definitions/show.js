@@ -12,7 +12,7 @@ app.namespaces.workspace.definitions.show = controller => (a,x) => [
         ] ),
       ] ),
 
-      x.list( definition.object ),
+      x.output( definition.object ),
 
       a.hr,
 

@@ -28,8 +28,10 @@ module Server
             end
 
             def current
-              return 'master' if repo.empty?
+              # return 'master' if repo.empty?
               git_branch.match(/\*\s*(\w+)/)[1]
+            # rescue => e
+            #   debugger
             end
 
             def git_branch

@@ -27,7 +27,7 @@ app.applications.delete = controller => (a,x) => [
               app.button( {
                 label: app.icon( 'fa fa-check', 'OK' ),
                 onclick: (e,el) => {
-                  controller.open( '..' )
+                  controller.open( '../..' )
                 },
                 title: 'Return to applications',
               } ),

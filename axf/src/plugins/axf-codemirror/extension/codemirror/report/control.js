@@ -6,7 +6,7 @@ ax.extension.codemirror.report.control = function(
   let x = ax.x
   let report = x.codemirror.report
 
-  return a['|appkit-form-control'](
+  return a['|appkit-report-control'](
 
     a['|appkit-report-codemirror'](
       [
@@ -15,18 +15,32 @@ ax.extension.codemirror.report.control = function(
       ],
       {
 
-        name: options.name,
-
-        $value: function() {
-          return options.value
-        },
+        // name: options.name,
+        //
+        // $value: function() {
+        //   return options.value
+        // },
 
         ...options.codeTag
 
       }
     ),
 
-    options.controlTag
+    {
+      
+      'data-name': options.name,
+      $value: function() {
+        return options.value
+      },
+
+      tabindex: 0,
+      $focus: function() {
+        this.focus()
+      },
+
+      ...options.controlTag
+
+    }
 
   )
 

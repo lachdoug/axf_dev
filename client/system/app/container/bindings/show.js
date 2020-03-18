@@ -79,14 +79,14 @@ app.container.bindings.show = type => controller => (a,x) => {
       a.p( 'Consumers' ),
       app.http(
         `/~/~/containers/service/${ name }/consumers/`,
-        ( consumers, el ) => el.$nodes = x.list( consumers )
+        ( consumers, el ) => el.$nodes = x.output( consumers )
       ),
 
 
       a.p( 'Subservices' ),
       app.http(
         `/~/~/containers/service/${ name }/sub_services`,
-        ( subservices, el ) => el.$nodes = x.list( subservices )
+        ( subservices, el ) => el.$nodes = x.output( subservices )
       ),
 
     ] : null,

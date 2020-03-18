@@ -8,36 +8,39 @@ radios = function( options={} ) {
 
   let selections = x.lib.form.selections( options.selections )
 
-  if ( options.placeholder ) {
-    selections.unshift( { value: '', label: options.placeholder } )
-  }
+  // if ( options.placeholder ) {
+  //   selections.unshift( { value: '', label: options.placeholder } )
+  // }
 
-  return selections.map( selection => {
+  return a['|appkit-form-radios'](
+    selections.map( selection => {
 
-    let label = selection.label
+      let label = selection.label
 
-    if ( selection.disabled == 'hr' ) {
-      label = '—————'
-    } else if ( selection.disabled == 'br' ) {
-      label =  ''
-    }
+      if ( selection.disabled == 'hr' ) {
+        label = '—————'
+      } else if ( selection.disabled == 'br' ) {
+        label =  ''
+      }
 
-    return x.check( {
-      type: 'radio',
-      name: options.name,
-      value: value == selection.value ? selection.value : '',
-      label: label,
-      checked: selection.value,
-      required: options.required,
-      readonly: options.readonly,
-      inputTag: {
-        ...( ( options.disabled || selection.disabled ) ? { disabled: 'disabled' } : {} ),
-        ...options.inputTag
-      },
-      labelTag: options.labelTag,
-      checkTag: options.checkTag,
-    } )
+      return x.check( {
+        type: 'radio',
+        name: options.name,
+        value: value == selection.value ? true : false,
+        label: label,
+        checked: selection.value,
+        required: options.required,
+        readonly: options.readonly,
+        inputTag: {
+          ...( ( options.disabled || selection.disabled ) ? { disabled: 'disabled' } : {} ),
+          ...options.inputTag
+        },
+        labelTag: options.labelTag,
+        checkTag: options.checkTag,
+      } )
 
-  } )
+    } ),
+    options.radiosTag
+  )
 
 }

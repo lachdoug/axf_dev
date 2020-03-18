@@ -10,7 +10,7 @@ app.system.last_install = controller => (a,x) => [
 
   app.http(
     '/~/~/engine_builder/last_build/params',
-    ( installation, el ) => el.$nodes = x.list( installation ),
+    ( installation, el ) => el.$nodes = x.output( installation ),
   ),
   app.http(
     '/~/~/engine_builder/last_build/log',

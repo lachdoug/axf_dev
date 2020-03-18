@@ -18,23 +18,24 @@ cc.report.shim = {
 
     boolean: ( f, target ) => ( options={} ) => (a,x) => target( {
       ...options,
-      trueLabel: a['.boolean-true']( app.icon( 'fa fa-check', 'True' ) ),
-      falseLabel: a['.boolean-false']( app.icon( 'fa fa-times', 'False' ) ),
+      label: {
+        'true': a['.boolean-true']( app.icon( 'fa fa-check', 'True' ) ),
+        'false': a['.boolean-false']( app.icon( 'fa fa-times', 'False' ) ),
+      }
     } ),
 
-    // json: ( r, target ) => ( options={} ) => (a,x) => x.jsoneditor.report.control( r, { theme: 'bootstrap3', ...options } ),
     markdown: ( r, target ) => ( options={} ) =>
       (a,x) => x.markedjs.report.control( r, {
         ...options,
         markdownTag: {
-          class: 'well',
+          class: 'form-control text-dark h-100',
           ...options.markdownTag,
         }
       } ),
-    code: ( r, target ) => ( options={} ) => (a,x) => x.codemirror.report.control( r, options ),
+    code: ( r, target ) => ( options={} ) =>
+      (a,x) => x.codemirror.report.control( r, options ),
 
   },
-
 
   fieldset: ( r, target ) => ( options={} ) => (a,x) => f.dependent( {
     body: a['fieldset|appkit-form-control']( [

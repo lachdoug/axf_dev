@@ -40,6 +40,22 @@ module Server
 
       end
 
+      class RepoRequiresBranch < Error
+
+        def initialize( repo_name )
+          @repo_name = repo_name
+        end
+
+        def message
+          "Repo '#{ @repo_name }' requires a branch."
+        end
+
+        def status
+          400
+        end
+
+      end
+
       class RepoCloneFailed < Error
 
         def initialize( message )

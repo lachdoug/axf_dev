@@ -1,11 +1,12 @@
 app.settings = controller => (a,x) => [
 
-  a.h3( 'App settings' ),
+  a.h3( 'Settings' ),
 
   app.form( {
     object: {
       theme: window.localStorage.cssTheme,
       editor_keymap: window.localStorage.editorKeymap,
+      editor_default_mode: window.localStorage.editorDefaultMode
     },
     form: f => [
       f.field( {
@@ -13,7 +14,7 @@ app.settings = controller => (a,x) => [
         as: 'select',
         placeholder: 'Default',
         selections: {
-          'app-theme-dark': 'Dark',
+          dark: 'Dark',
         },
       } ),
       f.field( {
@@ -26,11 +27,18 @@ app.settings = controller => (a,x) => [
           sublime: 'Sublime',
         },
       } ),
+      f.field( {
+        key: 'editor_default_mode',
+        as: 'select',
+        placeholder: 'None',
+        selections: app.selections.script_modes,
+      } ),
       f.buttons(),
     ],
     action: submition => {
       window.localStorage.cssTheme = submition.data.theme
       window.localStorage.editorKeymap = submition.data.editor_keymap
+      window.localStorage.editorDefaultMode = submition.data.editor_default_mode
       location.assign( '/' )
     }
   } ),

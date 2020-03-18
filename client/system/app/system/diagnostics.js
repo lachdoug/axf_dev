@@ -30,7 +30,7 @@
 //     (e,el) => el.nextSibling.$nodes = app.http(
 //       '/~/~/containers/check_and_act',
 //       ( response, el ) => response.json().then(
-//         result => { el.$nodes = x.list( result ) }
+//         result => { el.$nodes = x.output( result ) }
 //       )
 //     )
 //   ),

@@ -4,7 +4,13 @@ check = function( options ) {
   let a = ax.a
   let x = ax.x
 
-  let checked = options.checked || 'on'
+//   let checked
+// debugger
+//   if ( options.checked ) {
+//     checked = options.value == checked ? 'checked' : undefined
+//   } else {
+//     checked = options.value ? 'checked' : undefined
+//   }
 
   let inputId
   if ( ( options.inputTag || {} ).id ) {
@@ -16,23 +22,17 @@ check = function( options ) {
   let inputTagOptions = {
     type: options.type || 'checkbox',
     name: options.name,
-    value: checked,
+    value: options.checked || 'on',
     required: options.required,
-    readonly: options.readonly,
-    checked: options.value == checked ? 'checked' : undefined,
+    onclick: options.readonly ? 'return false' : 'return true',
+    checked: options.value ? 'checked' : undefined,
     ...options.inputTag,
     id: inputId
   }
-// debugger
+
   let labelTagOptions = {
     for: inputId,
     ...options.labelTag,
-    // $on: {
-    //   'click: click input': (e,el) => {
-    //     el.previousSibling.click()
-    //   },
-    //   ...( options.labelTag || {} ).$on
-    // },
   }
 
   return a['|appkit-check']( [

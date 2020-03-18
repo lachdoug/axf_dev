@@ -125,36 +125,26 @@ function importServiceBlueprint( object ) {
   let schema = object.schema || {}
   let type = schema.type
 
-  if ( type === 'service_blueprint' ) {
+  let version = schema.version || {}
 
-    let version = schema.version || {}
+  let major = Number( version.major )
+  let minor = Number( version.minor )
 
-    let major = Number( version.major )
-    let minor = Number( version.minor )
+  if ( major === 0 && minor === 1 ) {
 
-    if ( major === 0 && minor === 1 ) {
+    // Current version, so do nothing
+    return object
 
-      // Current version, so do nothing
-      return object
+  } else if ( major === 1 && minor === 0 ) {
 
-    } else if ( major === 1 && minor === 0 ) {
-
-      // NASTY HACK:
-      // Some v0.1 blueprints were incorrectly marked as v1.0 by EDSv0.2
-      // v1.0 doesn't exist yet, so handle v1.0 blueprints as v0.1 blueprints
-      return object
-
-    } else {
-
-      // TODO: import old versions
-
-      ax.throw( `Unable to import this blueprint schema.` )
-
-    }
+    // NASTY HACK:
+    // Some v0.1 blueprints were incorrectly marked as v1.0 by EDSv0.2
+    // v1.0 doesn't exist yet, so handle v1.0 blueprints as v0.1 blueprints
+    return object
 
   } else {
 
-    ax.throw( `Invalid blueprint type. Must be service blueprint.` )
+    return {}
 
   }
 

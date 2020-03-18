@@ -39,7 +39,7 @@ app.reportEnginesV1Input = r => (a,x) => r.field( {
       report: (rrr) => [
 
         a.div( Object.keys( rrr.object.items ).length ?
-          x.list( rrr.object.items ) :
+          x.output( rrr.object.items ) :
           a.i( 'None' ),
           {
             class: 'well d-block',

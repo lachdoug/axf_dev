@@ -153,9 +153,9 @@ app.selections = {
     url: 'URL',
     file: 'File',
   },
-  input_types: {
+  v0_input_types: {
     boolean: "boolean [ Deprecated in favour of checkbox_boolean ]",
-    checkbox: "checkbox (Single check box. Uses first item in collection for unchecked and second item for checked.)",
+    checkbox: "checkbox",
     checkbox_boolean: "checkbox_boolean (Single check box. Returns 'true' when checked, otherwise 'false'. Input label shown beside checkbox.)",
     check_boxes: "check_boxes [ Deprecated in favour of checkboxes ]",
     checkboxes: "checkboxes (Multiple checkboxes. Return an array of checked values. Value can be a comma-separated list. Uses collection for checkbox values and labels.)",

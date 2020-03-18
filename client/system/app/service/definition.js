@@ -8,7 +8,7 @@ app.service.definition = controller => (a,x) => {
     a['div.clearfix']( a['div.float-right']( app.close( controller, 'Close' ) ) ),
     app.http(
       `/~/~/containers/service/${ name }/service_definition`,
-      ( definition, el ) => el.$nodes = x.list( definition ),
+      ( definition, el ) => el.$nodes = x.output( definition ),
       {
         placeholder: app.hourglass( 'Loading definition' )
       }

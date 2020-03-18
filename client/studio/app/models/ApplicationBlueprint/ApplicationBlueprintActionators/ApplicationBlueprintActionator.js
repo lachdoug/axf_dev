@@ -49,7 +49,9 @@ class ApplicationBlueprintActionator {
   formSubmit( formObject ) {
 
     formObject.script = formObject.script || {}
-    formObject.script.language = app.codemirrorLanguage( formObject.script.content_mode )
+    if ( formObject.script.content ) {
+      formObject.script.language = app.codemirrorLanguage( formObject.script.content_mode )
+    }
 
     this.assign( formObject )
 

@@ -47,6 +47,9 @@ ax.extension.bootstrap.form.shim = function() {
           class: headerTagClass,
           ...options.headerTag,
         },
+        labelTag: {
+          class: 'mb-0',
+        },
         bodyTag: {
           class: bodyTagClass,
           ...options.bodyTag,
@@ -109,10 +112,10 @@ ax.extension.bootstrap.form.shim = function() {
       },
     } ),
 
-    check: ( f, target ) => ( options={} ) => target( {
+    checkbox: ( f, target ) => ( options={} ) => target( {
       ...options,
       checkTag: {
-        class: 'custom-control custom-checkbox m-2',
+        class: `custom-control custom-checkbox ml-1`,
         ...options.checkTag,
       },
       inputTag: {
@@ -123,49 +126,49 @@ ax.extension.bootstrap.form.shim = function() {
         class: 'custom-control-label',
         ...options.labelTag,
       },
-      wrapperTag: {
-        class: 'd-inline-block p-1',
-        ...options.wrapperTag,
+      checkboxTag: {
+        class: options.layout === 'vertical' ? 'd-block' : 'd-block p-2',
+        ...options.checkboxTag,
       }
     } ),
 
-    checks: ( f, target ) => ( options={} ) => target( {
+    checkboxes: ( f, target ) => ( options={} ) => target( {
       ...options,
       checkTag: {
-        class: 'custom-control custom-checkbox',
-        ...options.buttonTag,
+        class: 'custom-control custom-checkbox ml-1',
+        ...options.checkTag,
       },
       inputTag: {
         class: 'custom-control-input',
-        ...options.buttonTag,
+        ...options.inputTag,
       },
       labelTag: {
         class: 'custom-control-label',
-        ...options.buttonTag,
+        ...options.labelTag,
       },
-      wrapperTag: {
-        class: 'p-1',
-        ...options.wrapperTag,
+      checkboxesTag: {
+        class: options.layout === 'vertical' ? 'd-block' : 'd-block p-2',
+        ...options.checkboxesTag,
       }
     } ),
 
     radios: ( f, target ) => ( options={} ) => target( {
       ...options,
       checkTag: {
-        class: 'custom-control custom-radio',
-        ...options.buttonTag,
+        class: 'custom-control custom-radio ml-1',
+        ...options.checkTag,
       },
       inputTag: {
         class: 'custom-control-input',
-        ...options.buttonTag,
+        ...options.inputTag,
       },
       labelTag: {
         class: 'custom-control-label',
-        ...options.buttonTag,
+        ...options.labelTag,
       },
-      wrapperTag: {
-        class: 'p-1',
-        ...options.wrapperTag,
+      radiosTag: {
+        class: options.layout === 'vertical' ? 'd-block' : 'd-block p-2',
+        ...options.radiosTag,
       }
     } ),
 

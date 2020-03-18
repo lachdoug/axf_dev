@@ -73,13 +73,21 @@ class ServiceBlueprintConfigurator {
   formSubmit( formObject ) {
 
     formObject.set_script = formObject.set_script || {}
-    formObject.set_script.language = app.codemirrorLanguage( formObject.set_script.content_mode )
+    if ( formObject.set_script.content ) {
+      formObject.set_script.language = app.codemirrorLanguage( formObject.set_script.content_mode )
+    }
     formObject.set_script_sudo = formObject.set_script_sudo || {}
-    formObject.set_script_sudo.language = app.codemirrorLanguage( formObject.set_script_sudo.content_mode )
+    if ( formObject.set_script_sudo.content ) {
+      formObject.set_script_sudo.language = app.codemirrorLanguage( formObject.set_script_sudo.content_mode )
+    }
     formObject.read_script = formObject.read_script || {}
-    formObject.read_script.language = app.codemirrorLanguage( formObject.read_script.content_mode )
+    if ( formObject.read_script.content ) {
+      formObject.read_script.language = app.codemirrorLanguage( formObject.read_script.content_mode )
+    }
     formObject.read_script_sudo = formObject.read_script_sudo || {}
-    formObject.read_script_sudo.language = app.codemirrorLanguage( formObject.read_script_sudo.content_mode )
+    if ( formObject.read_script_sudo.content ) {
+      formObject.read_script_sudo.language = app.codemirrorLanguage( formObject.read_script_sudo.content_mode )
+    }
 
     this.assign( formObject )
 

@@ -49,7 +49,7 @@ form = ( controller, blueprint, consumerParam ) => (a,x) => {
               key: 'type',
               as: 'select',
               placeholder: ' ',
-              selections: app.selections.input_types
+              selections: app.selections.v0_input_types
             } ),
             ff.field( {
               key: 'label',

@@ -3,17 +3,14 @@ require 'sinatra/extension'
 require 'sinatra/json'
 require 'sinatra/cookies'
 require 'sinatra/streaming'
-require 'byebug' if Sinatra::Base.development?
-
 require 'logger'
+require 'byebug' if Sinatra::Base.development?
 
 log_dir = "log"
 Dir.mkdir(log_dir) unless Dir.exists?(log_dir)
 file = File.new("#{log_dir}/#{Sinatra::Base.environment}.log", 'a+')
 file.sync = true
 use Rack::CommonLogger, file
-# configure do
-# end
 
 require './server'
 map('/axfunction') { run Server::Assets }

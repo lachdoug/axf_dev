@@ -164,8 +164,9 @@ class ServiceBlueprintScripts {
       'shutdown',
       'shutdown_sudo',
     ] ) {
-      formObject[key].language = app.codemirrorLanguage( formObject[key].content_mode )
-      delete formObject[key].content_mode
+      if ( formObject[key].content ) {
+        formObject[key].language = app.codemirrorLanguage( formObject[key].content_mode )
+      }
     }
 
     this.assign( formObject )

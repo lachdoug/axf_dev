@@ -9,8 +9,22 @@ app.applications.show = controller => (a,x) => [
 
       a['div.clearfix']( [
         a['div.btn-group.float-right']( [
-          diff.uncommitted ? a['.success']( app.icon( 'fas fa-exclamation-triangle', 'Uncommitted changes.' ) ) : null,
-          diff.unpushed ? a['.success']( app.icon( 'fas fa-exclamation-triangle', 'Unpushed changes.' ) ) : null,
+          diff.uncommitted ?
+          app.button( {
+            label: a['.text-info']( app.icon( 'fas fa-exclamation-triangle', 'Uncommitted changes' ) ),
+            title: 'Commit',
+            onclick: (e,el) => {
+              controller.open( 'commit' )
+            }
+          } ) : null,
+          diff.unpushed ?
+          app.button( {
+            label: a['.text-info']( app.icon( 'fas fa-exclamation-triangle', 'Unpushed changes' ) ),
+            title: 'Push',
+            onclick: (e,el) => {
+              controller.open( 'commit' )
+            }
+          } ) : null,
         ] ),
       ] ),
 
@@ -44,13 +58,13 @@ app.applications.show = controller => (a,x) => [
               controller.open( 'branch' )
             }
           } ),
-          app.button( {
-            label: app.icon( 'fas fa-clipboard-list', 'Status' ),
-            title: 'Status',
-            onclick: (e,el) => {
-              controller.open( 'status' )
-            }
-          } ),
+          // app.button( {
+          //   label: app.icon( 'fas fa-clipboard-list', 'Status' ),
+          //   title: 'Status',
+          //   onclick: (e,el) => {
+          //     controller.open( 'status' )
+          //   }
+          // } ),
           app.button( {
             label: app.icon( 'fas fa-bookmark', 'Commit' ),
             title: 'Commit',

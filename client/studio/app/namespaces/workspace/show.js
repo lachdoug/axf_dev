@@ -19,8 +19,32 @@ app.namespaces.workspace.show = controller => (a,x) => [
           ] ),
 
           app.http(
-            `/~/namespaces/${ controller.params.namespace_id }/workspace/readme`,
-            ( readme, el ) => el.$nodes = [
+            [
+              `/~/namespaces/${ controller.params.namespace_id }/workspace/readme`,
+              `/~/namespaces/${ controller.params.namespace_id }/workspace/diff`,
+            ],
+            ( [ readme, diff ], el ) => el.$nodes = [
+
+              a['div.clearfix']( [
+                a['div.btn-group.float-right']( [
+                  diff.uncommitted ?
+                  app.button( {
+                    label: a['.text-info']( app.icon( 'fas fa-exclamation-triangle', 'Uncommitted changes' ) ),
+                    title: 'Commit',
+                    onclick: (e,el) => {
+                      controller.open( 'commit' )
+                    }
+                  } ) : null,
+                  diff.unpushed ?
+                  app.button( {
+                    label: a['.text-info']( app.icon( 'fas fa-exclamation-triangle', 'Unpushed changes' ) ),
+                    title: 'Push',
+                    onclick: (e,el) => {
+                      controller.open( 'commit' )
+                    }
+                  } ) : null,
+                ] ),
+              ] ),
 
               a['div.clearfix']( [
                 app.button( {
@@ -59,13 +83,13 @@ app.namespaces.workspace.show = controller => (a,x) => [
                       controller.open( 'branch' )
                     }
                   } ),
-                  app.button( {
-                    label: app.icon( 'fas fa-clipboard-list', 'Status' ),
-                    title: 'Status',
-                    onclick: (e,el) => {
-                      controller.open( 'status' )
-                    }
-                  } ),
+                  // app.button( {
+                  //   label: app.icon( 'fas fa-clipboard-list', 'Status' ),
+                  //   title: 'Status',
+                  //   onclick: (e,el) => {
+                  //     controller.open( 'status' )
+                  //   }
+                  // } ),
                   app.button( {
                     label: app.icon( 'fas fa-bookmark', 'Commit' ),
                     title: 'Commit',

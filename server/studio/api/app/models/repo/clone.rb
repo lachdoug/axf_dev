@@ -15,7 +15,9 @@ module Server
             def process
               reset
               clone
-              check
+              check_unique
+              check_branch
+              create_destination
               move
               id
             end
@@ -33,13 +35,20 @@ module Server
               @id ||= Digest::MD5.hexdigest name
             end
 
-            def check
+            def check_unique
               raise Error::RepoAlreadyExists.new name if File.exist? path
-              FileUtils.mkpath path
+            end
+
+            def check_branch
+              raise Error::RepoRequiresBranch.new name unless has_branch?
             end
 
             def path
               "#{ destination }/#{ id }"
+            end
+
+            def create_destination
+              FileUtils.mkpath path
             end
 
             def move
@@ -53,6 +62,18 @@ module Server
             def reset
               FileUtils.rm_rf tmp
               FileUtils.mkpath tmp
+            end
+
+            def has_branch?
+              !branch.empty?
+            end
+
+            def branch
+              `git -C '#{ tmp_repo_path }' branch`
+            end
+
+            def tmp_repo_path
+              Dir.glob( "#{ tmp }/*" )[0]
             end
 
           end

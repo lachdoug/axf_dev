@@ -7,32 +7,32 @@ cc.view.designer.form.field = (f) => [
   f.field( {
     key: 'control',
     as: 'select',
+    placeholder: ' ',
     selections: [
-      { value: '', label: '' },
       { value: 'string', label: 'String' },
       { value: 'select', label: 'Select' },
       { value: 'text', label: 'Text' },
       { disabled: 'hr' },
-      { value: 'check', label: 'Checkbox' },
-      { value: 'checks', label: 'Checkboxes' },
+      { value: 'checkbox', label: 'Checkbox' },
+      { value: 'checkboxes', label: 'Checkboxes' },
       { value: 'radios', label: 'Radio buttons' },
       { disabled: 'hr' },
       { value: 'hidden', label: 'Hidden' },
       { value: 'password', label: 'Password' },
       { disabled: 'hr' },
       { value: 'combobox', label: 'Combo box' },
-      { value: 'multiselect', label: 'Multi-select' },
+      { value: 'multiselect', label: 'Multi select' },
       { disabled: 'hr' },
+      { value: 'number', label: 'Number' },
+      { value: 'url', label: 'URL' },
+      { value: 'email', label: 'Email' },
       { value: 'color', label: 'Color' },
       { value: 'date', label: 'Date' },
-      { value: 'email', label: 'Email' },
-      { value: 'number', label: 'Number' },
       { value: 'tel', label: 'Telephone' },
       { value: 'time', label: 'Time' },
-      { value: 'url', label: 'URL' },
       { disabled: 'hr' },
-      { value: 'code', label: 'Code' },
       { value: 'markdown', label: 'Markdown' },
+      { value: 'code', label: 'Code' },
       { disabled: 'hr' },
       { value: 'country', label: 'Country' },
       { value: 'language', label: 'Language' },
@@ -87,9 +87,9 @@ cc.view.designer.form.field = (f) => [
 
           f.field( {
             key: 'layout',
-            as: 'check',
+            as: 'checkbox',
             checked: 'vertical',
-            check: { label: 'Vertical' },
+            checkbox: { label: 'Vertical' },
           } ),
 
           f.field( {
@@ -112,7 +112,7 @@ cc.view.designer.form.field = (f) => [
         key: 'placeholder',
         dependent: {
           key: 'control',
-          pattern: '^(?!(hidden|check|checks|radios|one|many|table|json)$)(\w*)',
+          pattern: '^(?!(hidden|checkbox|checkboxes|radios|one|many|table|json)$)(\w*)',
         }
       } ),
 
@@ -135,7 +135,7 @@ cc.view.designer.form.field = (f) => [
         form: (ff) => [
           ff.field( {
             key: 'required',
-            as: 'check',
+            as: 'checkbox',
             // checked: 'required',
             // dependent: {
             //   key: '[..]control',
@@ -197,7 +197,7 @@ cc.view.designer.form.field = (f) => [
         ],
         dependent: {
           key: 'control',
-          pattern: '^(string|select|text|check|radios|password|combobox|color|date|email|number|tel|time|url|code|markdown|country|language|timezone)$',
+          pattern: '^(string|select|text|checkbox|checkboxes|radios|password|combobox|color|date|email|number|tel|time|url|code|markdown|country|language|timezone)$',
         },
 
       } ),
@@ -249,7 +249,7 @@ cc.view.designer.form.field = (f) => [
         ],
         dependent: {
           key: 'control',
-          pattern: '^(select|radios|checks|multiselect|combobox)$',
+          pattern: '^(select|radios|checkboxes|multiselect|combobox)$',
         }
       } ),
 
@@ -264,23 +264,23 @@ cc.view.designer.form.field = (f) => [
           } ),
           f.field( {
             key: 'addable',
-            as: 'check',
+            as: 'checkbox',
             value: 'on',
             label: false,
-            check: { label: 'Addable' },
+            checkbox: { label: 'Addable' },
           } ),
           f.field( {
             key: 'removable',
-            as: 'check',
+            as: 'checkbox',
             value: 'on',
             label: false,
-            check: { label: 'Removable' },
+            checkbox: { label: 'Removable' },
           } ),
           f.field( {
             key: 'sortable',
-            as: 'check',
+            as: 'checkbox',
             label: false,
-            check: { label: 'Sortable' },
+            checkbox: { label: 'Sortable' },
           } ),
 
         ],
@@ -291,7 +291,7 @@ cc.view.designer.form.field = (f) => [
       } ),
 
       f.field( {
-        key: 'check',
+        key: 'checkbox',
         as: 'one',
         form: (ff) => [
           ff.row( { columns: [
@@ -303,15 +303,15 @@ cc.view.designer.form.field = (f) => [
               key: 'checked',
               layout: 'vertical',
             } ),
-            ff.field( {
-              key: 'unchecked',
-              layout: 'vertical',
-            } ),
+            // ff.field( {
+            //   key: 'unchecked',
+            //   layout: 'vertical',
+            // } ),
           ] } ),
         ],
         dependent: {
           key: 'control',
-          value: 'check',
+          value: 'checkbox',
         },
       } ),
 
@@ -322,8 +322,8 @@ cc.view.designer.form.field = (f) => [
 
           f.field( {
             key: 'confirm',
-            as: 'check',
-            check: {
+            as: 'checkbox',
+            checkbox: {
               label: 'Show confirmation',
             },
           } ),

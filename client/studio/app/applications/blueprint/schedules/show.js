@@ -87,7 +87,7 @@ app.applications.blueprint.schedules.show = blueprint => controller => (a,x) => 
               controller.open( 'params' )
             },
           } ),
-          x.list( schedule.params.output() ),
+          x.output( schedule.params.output() ),
         ] : null,
 
       ]

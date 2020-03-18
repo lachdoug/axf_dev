@@ -7,33 +7,36 @@ cc.view.designer.report.field = (f) => [
   f.field( {
     key: 'control',
     as: 'select',
+    placeholder: ' ',
     selections: [
-      { value: '', label: '' },
+      { value: 'string', label: 'String' },
       { value: 'text', label: 'Text' },
+      { value: 'preformatted', label: 'Preformatted text' },
       { value: 'select', label: 'Selection' },
-      { value: 'textarea', label: 'Text area' },
+      { disabled: 'hr' },
       { value: 'boolean', label: 'Boolean' },
+      { value: 'checkbox', label: 'Checkbox' },
+      { value: 'checkboxes', label: 'Checkboxes' },
+      { value: 'radios', label: 'Radio buttons' },
       { disabled: 'hr' },
-      { value: 'hidden', label: 'Hidden' },
+      { value: 'password', label: 'Password' },
       { disabled: 'hr' },
-      { value: 'color', label: 'Color' },
-      { value: 'date', label: 'Date' },
-      { value: 'email', label: 'Email' },
       { value: 'number', label: 'Number' },
-      { value: 'tel', label: 'Telephone' },
-      { value: 'time', label: 'Time' },
+      { value: 'datetime', label: 'Datetime' },
       { value: 'url', label: 'URL' },
-      { disabled: 'hr' },
-      { value: 'code', label: 'Code' },
-      { value: 'markdown', label: 'Markdown' },
+      { value: 'email', label: 'Email' },
+      { value: 'tel', label: 'Telephone' },
+      { value: 'color', label: 'Color' },
       { disabled: 'hr' },
       { value: 'country', label: 'Country' },
       { value: 'language', label: 'Language' },
       { value: 'timezone', label: 'Timezone' },
       { disabled: 'hr' },
-      { value: 'list', label: 'List' },
-      { value: 'pre', label: 'Preformatted' },
-      { value: 'object', label: 'Object' },
+      { value: 'markdown', label: 'Markdown' },
+      { value: 'code', label: 'Code' },
+      { disabled: 'hr' },
+      { value: 'json', label: 'JSON' },
+      { value: 'output', label: 'Output' },
       { disabled: 'hr' },
       { value: 'one', label: 'One' },
       { value: 'many', label: 'Many' },
@@ -81,9 +84,9 @@ cc.view.designer.report.field = (f) => [
 
           f.field( {
             key: 'layout',
-            as: 'check',
+            as: 'checkbox',
             checked: 'vertical',
-            check: { label: 'Vertical' },
+            checkbox: { label: 'Vertical' },
           } ),
 
           f.field( {
@@ -103,10 +106,39 @@ cc.view.designer.report.field = (f) => [
       } ),
 
       f.field( {
+        key: 'parse',
+        as: 'checkbox',
+        dependent: {
+          key: 'control',
+          pattern: '^(output|json)$',
+        }
+      } ),
+
+      f.field( {
+        key: 'datetime',
+        as: 'one',
+        form: (ff) => [
+          ff.field( {
+            key: 'only',
+            as: 'radios',
+            selections: {
+              '': 'Both',
+              'time': 'Time',
+              'date': 'Date',
+            }
+          } ),
+        ],
+        dependent: {
+          key: 'control',
+          pattern: '^datetime$',
+        }
+      } ),
+
+      f.field( {
         key: 'placeholder',
         dependent: {
           key: 'control',
-          pattern: '^(?!boolean|object|one|many|table)$',
+          pattern: '^(?!boolean|checkbox|checkboxes|radios|one|many|table)$',
         }
       } ),
 

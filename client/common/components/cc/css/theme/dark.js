@@ -31,6 +31,13 @@ ax.css( {
       color: 'lightgray',
     },
 
+    '.form-control:focus, .custom-select:focus': {
+      boxShadow: '0 0 0 .2rem #90F9',
+    },
+    '.custom-control-input:focus ~ .custom-control-label::before': {
+      boxShadow: '0 0 0 .2rem #90F9',
+    },
+
     '.table': {
       color: 'lightgray',
     },

@@ -27,7 +27,7 @@ app.system.users.user.show = controller => (a,x) => [
         ),
       ),
       account.groups.length ?
-      x.list( account.groups ) :
+      x.output( account.groups ) :
       a.div( a.i( 'No groups' ), { class: 'pt-2' } ),
       a.hr,
 
@@ -47,7 +47,7 @@ app.system.users.user.show = controller => (a,x) => [
           )
         ),
         account.email.aliases.length ?
-        x.list( account.email.aliases ) :
+        x.output( account.email.aliases ) :
         a.div( a.i( 'No aliases' ), { class: 'pt-2' } ),
         a.br,
         a['div.float-right'](
@@ -57,7 +57,7 @@ app.system.users.user.show = controller => (a,x) => [
           )
         ),
         account.email.distribution_groups.length ?
-        x.list( account.email.distribution_groups ) :
+        x.output( account.email.distribution_groups ) :
         a.div( a.i( 'No lists' ), { class: 'pt-2' } ),
 
       ] : [

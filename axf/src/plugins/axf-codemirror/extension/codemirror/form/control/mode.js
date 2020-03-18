@@ -16,18 +16,6 @@ ax.extension.codemirror.form.control.mode = function(
     selectName = name + '_mode'
   }
 
-  // let modeLabel = function( mode ) {
-  //   let labels = {
-  //     // shell: 'Shell',
-  //     // javascript: 'JavaScript',
-  //     // ruby: 'Ruby',
-  //     // python: 'Python',
-  //     // xml: 'XML',
-  //     // yaml: 'YAML',
-  //   }
-  //   return labels[ mode ] || mode
-  // }
-
   if ( ax.is.string( options ) ) {
 
     component = a.label( options )

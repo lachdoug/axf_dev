@@ -11,7 +11,7 @@ app.namespaces.workspace.services.blueprint.show = blueprint => controller => (a
       app.namespaces.workspace.services.blueprint.nav( blueprint, controller )
     ] ),
     a['div.col-sm-10']( [
-      x.list( blueprint.output )
+      x.output( blueprint.output )
     ] ),
   ] )
 

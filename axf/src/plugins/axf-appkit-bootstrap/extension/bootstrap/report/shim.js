@@ -15,12 +15,10 @@ ax.extension.bootstrap.report.shim = function() {
         headerTagClass = ''
         bodyTagClass = ''
       } else {
-        fieldTagClass = 'mb-2 form-group form-row'
+        fieldTagClass = 'mb-1 form-group form-row'
         headerTagClass = 'd-inline-block align-top mt-2 col-sm-4'
         bodyTagClass = 'd-inline-block col-sm-8'
       }
-
-      // delete ( options.layout )
 
       return target( {
         ...options,
@@ -40,26 +38,9 @@ ax.extension.bootstrap.report.shim = function() {
           class: 'form-text text-muted',
           ...options.hintTag,
         },
-        // checkbox: {
-        //   checkTag: {
-        //     class: ''
-        //   }
-        // }
       } )
 
     },
-
-    // controls: {
-    //
-    //   table: ( r, target ) => ( options={} ) => target( {
-    //     ...options,
-    //     itemTag: {
-    //       class: 'p-n1', // For tables, negate margin on fields' form-group class.
-    //       ...options.itemTag,
-    //     },
-    //   } ),
-    //
-    // },
 
     button: ( r, target ) => ( options={} ) => target( {
       ...options,
@@ -69,101 +50,206 @@ ax.extension.bootstrap.report.shim = function() {
       },
     } ),
 
-    check: ( r, target ) => ( options={} ) => {
-
-      let checkTagClass
-
-      if ( options.layout == 'vertical' ) {
-        checkTagClass = 'custom-control custom-checkbox'
-      } else {
-        checkTagClass = 'custom-control custom-checkbox mt-2'
-      }
-
-      return target( {
-        ...options,
-        checkTag: {
-          class: checkTagClass,
-          ...options.buttonTag,
-        },
-        inputTag: {
-          class: 'custom-control-input',
-          ...options.buttonTag,
-        },
-        labelTag: {
-          class: 'custom-control-label',
-          ...options.buttonTag,
-        },
-        wrapperTag: {
-          class: 'd-inline-block p-1',
-          ...options.wrapperTag,
-        }
-      } )
-
-    },
-
-    // checkboxes: ( r, target ) => ( options={} ) => target( {
-    //   ...options,
-    //   checkTag: {
-    //     class: 'custom-control custom-checkbox',
-    //     ...options.buttonTag,
-    //   },
-    //   inputTag: {
-    //     class: 'custom-control-input',
-    //     ...options.buttonTag,
-    //   },
-    //   labelTag: {
-    //     class: 'custom-control-label',
-    //     ...options.buttonTag,
-    //   },
-    //   wrapperTag: {
-    //     class: 'p-1',
-    //     ...options.wrapperTag,
-    //   }
-    // } ),
-
-    output: ( r, target ) => ( options={} ) => target( {
+    checkbox: ( r, target ) => ( options={} ) => target( {
       ...options,
-      outputTag: {
-        class: 'border border-light p-2 d-block',
-        ...options.outputTag,
+      checkTag: {
+        class: `custom-control custom-checkbox ml-1`,
+        ...options.checkTag,
+      },
+      inputTag: {
+        class: 'custom-control-input',
+        ...options.inputTag,
+      },
+      labelTag: {
+        class: 'custom-control-label',
+        ...options.labelTag,
+      },
+      checkboxTag: {
+        class: options.layout === 'vertical' ? '' : 'd-block p-2',
+        ...options.checkboxTag,
+      }
+    } ),
+
+    checkboxes: ( r, target ) => ( options={} ) => target( {
+      ...options,
+      checkTag: {
+        class: 'custom-control custom-checkbox ml-1',
+        ...options.checkTag,
+      },
+      inputTag: {
+        class: 'custom-control-input',
+        ...options.inputTag,
+      },
+      labelTag: {
+        class: 'custom-control-label',
+        ...options.labelTag,
+      },
+      checkboxesTag: {
+        class: options.layout === 'vertical' ? '' : 'd-block p-2',
+        ...options.checkboxesTag,
+      }
+    } ),
+
+    radios: ( r, target ) => ( options={} ) => target( {
+      ...options,
+      checkTag: {
+        class: 'custom-control custom-radio ml-1',
+        ...options.checkTag,
+      },
+      inputTag: {
+        class: 'custom-control-input',
+        ...options.inputTag,
+      },
+      labelTag: {
+        class: 'custom-control-label',
+        ...options.labelTag,
+      },
+      radiosTag: {
+        class: options.layout === 'vertical' ? '' : 'd-block p-2',
+        ...options.radiosTag,
+      }
+    } ),
+
+    string: ( r, target ) => ( options={} ) => target( {
+      ...options,
+      stringTag: {
+        class: 'form-control text-dark bg-white p-2',
+        ...options.stringTag,
       },
     } ),
 
     select: ( r, target ) => ( options={} ) => target( {
       ...options,
       selectTag: {
-        class: 'border border-light p-2 d-block',
+        class: 'form-control text-dark h-100',
         ...options.selectTag,
       },
     } ),
 
-    json: ( r, target ) => ( options={} ) => target( {
+    text: ( r, target ) => ( options={} ) => target( {
       ...options,
-      jsonTag: {
-        class: 'border border-light p-2',
+      textTag: {
+        class: 'form-control text-dark bg-white h-100',
+        ...options.textTag,
+      },
+    } ),
+
+    output: ( r, target ) => ( options={} ) => target( {
+      ...options,
+      outputTag: {
+        class: 'form-control text-dark bg-white h-100',
         ...options.outputTag,
       },
     } ),
 
-
-
-    // select: ( r, target ) => ( options={} ) => target( {
-    //   ...options,
-    //   selectTag: {
-    //     class: 'custom-select',
-    //     ...options.selectTag,
-    //   },
-    // } ),
-    //
-    // textarea: ( r, target ) => ( options={} ) => target( {
-    //   ...options,
-    //   textareaTag: {
-    //     class: 'form-control',
-    //     ...options.textareaTag,
-    //   },
-    // } ),
-
     controls: {
+
+      boolean: ( r, target ) => ( options={} ) => target( {
+        ...options,
+        booleanTag: {
+          class: 'p-2 d-block',
+          ...options.booleanTag,
+        },
+      } ),
+
+      json: ( r, target ) => ( options={} ) => target( {
+        ...options,
+        jsonTag: {
+          class: 'form-control text-dark h-100',
+          ...options.jsonTag,
+        },
+      } ),
+
+      preformatted: ( r, target ) => ( options={} ) => target( {
+        ...options,
+        preformattedTag: {
+          class: 'form-control text-dark bg-white h-100',
+          ...options.preformattedTag,
+        },
+      } ),
+
+      password: ( r, target ) => ( options={} ) => target( {
+        ...options,
+        passwordTag: {
+          class: 'form-control text-dark bg-white',
+          ...options.passwordTag,
+        },
+      } ),
+
+      color: ( r, target ) => ( options={} ) => target( {
+        ...options,
+        colorTag: {
+          class: 'form-control text-dark',
+          ...options.colorTag,
+        },
+      } ),
+
+      datetime: ( r, target ) => ( options={} ) => target( {
+        ...options,
+        datetimeTag: {
+          class: 'form-control text-dark',
+          ...options.datetimeTag,
+        },
+      } ),
+
+      number: ( r, target ) => ( options={} ) => target( {
+        ...options,
+        numberTag: {
+          class: 'form-control text-dark',
+          ...options.numberTag,
+        },
+      } ),
+
+      tel: ( r, target ) => ( options={} ) => target( {
+        ...options,
+        telTag: {
+          class: 'form-control text-dark',
+          ...options.telTag,
+        },
+      } ),
+
+      email: ( r, target ) => ( options={} ) => target( {
+        ...options,
+        emailTag: {
+          class: 'form-control text-dark',
+          ...options.emailTag,
+        },
+      } ),
+
+      country: ( r, target ) => ( options={} ) => target( {
+        ...options,
+        countryTag: {
+          class: 'form-control text-dark',
+          ...options.countryTag,
+        },
+      } ),
+
+      language: ( r, target ) => ( options={} ) => target( {
+        ...options,
+        languageTag: {
+          class: 'form-control text-dark',
+          ...options.languageTag,
+        },
+      } ),
+
+      timezone: ( r, target ) => ( options={} ) => target( {
+        ...options,
+        timezoneTag: {
+          class: 'form-control text-dark',
+          ...options.timezoneTag,
+        },
+      } ),
+
+      url: ( r, target ) => ( options={} ) => target( {
+        ...options,
+        urlTag: {
+          class: 'form-control text-dark',
+          ...options.urlTag,
+        },
+      } ),
+
+
+
       table: ( r, target ) => ( options={} ) => target( {
         ...options,
         tableTag: {
@@ -281,16 +367,7 @@ ax.extension.bootstrap.report.shim = function() {
 
       } ),
 
-      boolean: ( r, target ) => ( options={} ) => target( {
-        ...options,
-        booleanTag: {
-          class: 'p-2 d-block',
-          ...options.outputTag,
-        },
-      } ),
-
     },
-
 
     submit: ( r, target ) => ( options={} ) => target( {
       ...options,

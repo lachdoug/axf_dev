@@ -21,8 +21,6 @@ ax.css( {
       }
     },
     '|appkit-form-codemirror-mode, |appkit-form-codemirror-keymap': {
-      // display: 'inline-block',
-      // border: '1px solid #e6e6e6',
       'select': {
         padding: '4px',
       },

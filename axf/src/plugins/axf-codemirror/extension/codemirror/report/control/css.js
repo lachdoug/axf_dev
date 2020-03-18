@@ -1,11 +1,11 @@
 ax.css( {
-
   '|appkit-report-codemirror': {
     display: 'block',
     border: '1px solid #b3b3b3',
     '|appkit-report-codemirror-toolbar': {
       display: 'block',
       overflow: 'auto',
+      color: '#333',
       backgroundColor: 'white',
       borderBottom: '1px solid #e6e6e6',
       button: {
