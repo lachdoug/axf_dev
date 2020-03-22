@@ -15,10 +15,10 @@ app.applications.blueprint.actionators.index = blueprint => controller => (a,x) 
   ] ) ),
 
   blueprint.actionators.map(
-    ( item, i ) => [ app.button( {
+    ( item, i ) => a.div( app.button( {
       label: `${ i + 1 }. ${ item.object.name }`,
       onclick: () => controller.open( `${i}` ),
-    } ) ]
+    } ) )
   ),
 
 ]

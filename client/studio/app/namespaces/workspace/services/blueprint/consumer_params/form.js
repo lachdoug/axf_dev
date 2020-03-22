@@ -24,19 +24,19 @@ form = ( controller, blueprint, consumerParam ) => (a,x) => {
         } ),
         f.field( {
           key: 'mandatory',
-          as: 'check',
+          as: 'checkbox',
         } ),
         f.field( {
           key: 'immutable',
-          as: 'check',
+          as: 'checkbox',
         } ),
         f.field( {
           key: 'ask_at_build_time',
-          as: 'check',
+          as: 'checkbox',
         } ),
         f.field( {
           key: 'build_time_only',
-          as: 'check',
+          as: 'checkbox',
         } ),
 
         a.hr,
@@ -87,9 +87,6 @@ form = ( controller, blueprint, consumerParam ) => (a,x) => {
                   as: 'table',
                   label: false,
                   layout: 'vertical',
-                  addable: true,
-                  removable: true,
-                  sortable: true,
                   form: (ffff) => [
                     ffff.field( {
                       key: 'value',
@@ -101,7 +98,7 @@ form = ( controller, blueprint, consumerParam ) => (a,x) => {
                 } ),
                 fff.field( {
                   key: 'include_blank',
-                  as: 'check',
+                  as: 'checkbox',
                 } ),
               ]
             } ),

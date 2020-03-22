@@ -11,10 +11,10 @@ let enginesFieldV1 = ( variable ) => {
   }
 
   let as = {
-    boolean: 'check',
-    check_boxes: 'checks',
-    checkboxes: 'checks',
-    checkbox: 'check',
+    boolean: 'checkbox',
+    check_boxes: 'checkboxes',
+    checkboxes: 'checkboxes',
+    checkbox: 'checkbox',
     checkbox_boolean: 'check',
     date: 'input/date',
     datetime: 'input/datetime',

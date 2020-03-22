@@ -24,7 +24,7 @@ app.applications.blueprint.database_seed = blueprint => controller => (a,x) => [
 
       f.field( {
         key: 'script',
-        as: 'check',
+        as: 'checkbox',
       } )
 
 

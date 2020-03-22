@@ -14,14 +14,11 @@ app.applications.blueprint.components = blueprint => controller => (a,x) => [
       } ),
       f.field( {
         key: 'extract',
-        as: 'check',
+        as: 'checkbox',
       } ),
       f.field( {
         key: 'sources',
         as: 'many',
-        addable: true,
-        removable: true,
-        sortable: true,
         layout: 'vertical',
         form: (ff) => [
           ff.field( {

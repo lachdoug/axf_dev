@@ -34,9 +34,6 @@ app.applications.blueprint.schedules.params = blueprint => controller => (a,x) =
           as: 'many',
           layout: 'vertical',
           label: false,
-          addable: true,
-          sortable: true,
-          removable: true,
           form: (ff) => [
             ff.field( {
               key: 'name',

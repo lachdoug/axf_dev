@@ -1,19 +1,13 @@
 ax.extension.report.field.nest.prefab.shim = function() {
 
-  let self = this
-
   return {
 
     controls: {
-
-      table: (f) => ( options ) => self.shim.table( f, options ),
-
-      many: (f) => ( options ) => self.shim.many( f, options ),
-
-      one: (f) => ( options ) => f.controls.nest( options )
-
+      table: r => options => this.shim.table( r, options ),
+      many: r => options => this.shim.many( r, options ),
+      one: r => options => r.controls.nest( options )
     },
-    
+
   }
 
 }

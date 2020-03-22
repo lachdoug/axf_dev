@@ -5,11 +5,11 @@ control = function( r, options={} ) {
   let x = ax.x
 
   let as = ( options.as || '' ).split( '/' )
-  let control = as[0] || 'string'
-  let type = as[1]
+  let control = options.control || as[0] || 'string'
+  let type = options.type || as[1]
 
   let controlFn = r.controls[control]
-  if ( !controlFn ) ax.throw( `Report field factory does not support control type '${ control }'.` )
+  if ( !controlFn ) ax.throw( `Report field factory does not support control '${ control }'.` )
 
   let key = options.key || ''
 

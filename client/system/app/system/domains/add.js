@@ -17,14 +17,14 @@ app.system.domains.add = controller => (a,x) => [
 
       f.field( {
         key: 'self_hosted',
-        as: 'check',
+        as: 'checkbox',
         // checked: 'true',
         // unchecked: 'false',
       } ),
 
       f.field( {
         key: 'internal_only',
-        as: 'check',
+        as: 'checkbox',
         // checked: 'true',
         // unchecked: 'false',
       } ),

@@ -1,4 +1,4 @@
-cc.view.designer.template = (f) => f.fieldset( {
+cc.control.designer.template = (f) => f.fieldset( {
   layout: 'vertical',
   label: false,
   body: cc.collapse( {

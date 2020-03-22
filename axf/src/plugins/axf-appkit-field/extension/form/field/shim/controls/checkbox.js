@@ -5,7 +5,6 @@ checkbox = function( f, options ) {
 
   let checkboxOptions = {
     ...options,
-    label: '', // Label for checkbox needs to be specified in options.checkbox
     ...options.checkbox
   }
 
@@ -21,10 +20,12 @@ checkbox = function( f, options ) {
 
     $value: function() {
       if ( this.$('input').checked ) {
-        return this.$('input').value()
+        return this.$('input').value
       // } else {
       //   return checkboxOptions.unchecked
-      }
+    } else {
+      return ''
+    }
     },
 
     $focus: function () {

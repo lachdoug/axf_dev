@@ -102,7 +102,7 @@ app.namespaces.workspace.services.blueprint.base = blueprint => controller => (a
       } ),
       f.field( {
         key: 'create_user',
-        as: 'check',
+        as: 'checkbox',
       } ),
 
       f.field( {

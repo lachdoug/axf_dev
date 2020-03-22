@@ -11,63 +11,63 @@ app.namespaces.workspace.services.blueprint.disposition = blueprint => controlle
 
       f.field( {
         key: 'dedicated',
-        as: 'check',
+        as: 'checkbox',
       } ),
       f.field( {
         key: 'persistent',
-        as: 'check',
+        as: 'checkbox',
       } ),
       f.field( {
         key: 'immutable',
-        as: 'check',
+        as: 'checkbox',
       } ),
       f.field( {
         key: 'attach_post_build',
-        as: 'check',
+        as: 'checkbox',
       } ),
       f.field( {
         key: 'attach_requires_restart',
-        as: 'check',
+        as: 'checkbox',
       } ),
       f.field( {
         key: 'soft_service',
-        as: 'check',
+        as: 'checkbox',
       } ),
       f.field( {
         key: 'shareable',
-        as: 'check',
+        as: 'checkbox',
       } ),
       f.field( {
         key: 'consumer_exportable',
-        as: 'check',
+        as: 'checkbox',
       } ),
       f.field( {
         key: 'stopped_ok',
-        as: 'check',
+        as: 'checkbox',
       } ),
       f.field( {
         key: 'kerberos_support',
-        as: 'check',
+        as: 'checkbox',
       } ),
       f.field( {
         key: 'host_network',
-        as: 'check',
+        as: 'checkbox',
       } ),
       f.field( {
         key: 'privileged',
-        as: 'check',
+        as: 'checkbox',
       } ),
       f.field( {
         key: 'no_ca_map',
-        as: 'check',
+        as: 'checkbox',
       } ),
       f.field( {
         key: 'consumerless',
-        as: 'check',
+        as: 'checkbox',
       } ),
       f.field( {
         key: 'start_syslog',
-        as: 'check',
+        as: 'checkbox',
       } ),
 
     ]

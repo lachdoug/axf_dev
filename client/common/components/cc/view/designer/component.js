@@ -1,4 +1,4 @@
-cc.view.designer.component = (f) => [
+cc.control.designer.component = (f) => [
 
   f.field( {
     key: 'type',
@@ -13,8 +13,8 @@ cc.view.designer.component = (f) => [
     },
   } ),
 
-  cc.view.designer.template(f),
-  cc.view.designer.form(f),
-  cc.view.designer.report(f),
+  cc.control.designer.template(f),
+  cc.control.designer.form(f),
+  cc.control.designer.report(f),
 
 ]

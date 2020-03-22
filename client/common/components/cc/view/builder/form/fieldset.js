@@ -1,10 +1,10 @@
-cc.view.builder.form.fieldset = ( f, fieldsetSpec, params ) => {
+cc.control.builder.form.fieldset = ( f, fieldsetSpec, params ) => {
 
   if ( fieldsetSpec.body ) {
     let componentsSpec = fieldsetSpec.body || []
     let result = []
     for ( let i in componentsSpec ) {
-      result.push( cc.view.builder.form.component( f, componentsSpec[i] ) )
+      result.push( cc.control.builder.form.component( f, componentsSpec[i] ) )
     }
     fieldsetSpec.body = result
   }

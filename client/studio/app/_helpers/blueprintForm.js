@@ -3,6 +3,7 @@ app.blueprintForm = (
   blueprint,
   entry,
   fields,
+  manipulator,
 ) => app.form( {
   object: entry.formObject,
   form: (f) => [
@@ -16,22 +17,22 @@ app.blueprintForm = (
   ],
   action: ( submition ) => {
 
-    let data = submition.data,
-        form = submition.formEl,
-        result = submition.resultEl,
-        complete = submition.completeFn
+    let data = manipulator ? manipulator( submition.data ) : submition.data,
+        form = submition.form,
+        output = submition.output,
+        complete = submition.complete
 
     let isNew = entry.isNew
     entry.formSubmit( data )
     let path = isNew ? `../${ entry.id }` : '..'
 
-    result.$nodes = app.http(
+    output.$nodes = app.http(
       blueprint.apiEndpoint,
       () => controller.open( path ),
       {
         complete: complete,
         method: 'POST',
-        placeholder: app.hourglass( `Saving blueprint...` ),
+        // placeholder: app.hourglass( `Saving blueprint...` ),
         headers: { 'Content-type': 'application/json' },
         body:  JSON.stringify( blueprint.output, null, 2 )
       }

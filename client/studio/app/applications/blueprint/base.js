@@ -74,7 +74,7 @@ app.applications.blueprint.base = blueprint => controller => (a,x) => [
       } ),
       f.field( {
         key: 'continuous_deployment',
-        as: 'check',
+        as: 'checkbox',
       } ),
       f.field( {
         key: 'memory',

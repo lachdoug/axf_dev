@@ -1,4 +1,4 @@
-cc.view.builder.form.row = ( f, componentSpec, params ) => {
+cc.control.builder.form.row = ( f, componentSpec, params ) => {
 
   let a = ax.a
   let x = ax.x
@@ -7,7 +7,7 @@ cc.view.builder.form.row = ( f, componentSpec, params ) => {
     let columnsSpec = componentSpec.columns || []
     let result = []
     for ( let i in columnsSpec ) {
-      result.push( cc.view.builder.form.component( f, columnsSpec[i] ) )
+      result.push( cc.control.builder.form.component( f, columnsSpec[i] ) )
     }
     componentSpec.columns = result
   }

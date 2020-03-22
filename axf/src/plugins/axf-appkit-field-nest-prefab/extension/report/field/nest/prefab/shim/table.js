@@ -38,7 +38,6 @@ table = function ( r, options ) {
 
         let headerCells = function() {
           let cells = report(rrP) || []
-          // cells.push( a.th() )
           return cells
         }
 
@@ -53,7 +52,6 @@ table = function ( r, options ) {
             if ( property === 'field' ) {
               return ( options ) => {
                 let help = options.help
-                // debugger
                 return a.td(
                   rr.help( {
                     ...options,
@@ -73,7 +71,6 @@ table = function ( r, options ) {
 
         let helpCells = function() {
           let cells = report(rrP) || []
-          // cells.push( a.th() )
           return cells
         }
 
@@ -102,7 +99,6 @@ table = function ( r, options ) {
 
         let hintCells = function() {
           let cells = report(rrP) || []
-          // cells.push( a.th() )
           return cells
         }
 
@@ -110,138 +106,42 @@ table = function ( r, options ) {
 
       }
 
+      let tableBody = () => rr.items( {
+        ...options.items,
+        report: (rrr) => {
 
-      let tableBody = function() {
-
-        // let items = function() {
-
-          return rr.items( {
-            ...options.items,
-            report: (rrr) => {
-
-              let rrrP = new Proxy( rrr, {
-                get: ( target, property ) => {
-                  if ( property == 'field' ) {
-                    return ( options ) => {
-                      return a.td( rrr.control( options ), {
-                        style: {
-                          verticalAlign: 'top',
-                          ...( options.tdTag || {} ).style
-                        },
-                        ...options.tdTag
-                      } )
-                    }
-                  } else {
-                    return target[property]
-                  }
+          let rrrP = new Proxy( rrr, {
+            get: ( target, property ) => {
+              if ( property == 'field' ) {
+                return ( options ) => {
+                  return a.td( rrr.control( options ), {
+                    style: {
+                      verticalAlign: 'top',
+                      ...( options.tdTag || {} ).style
+                    },
+                    ...options.tdTag
+                  } )
                 }
-              } )
-
-              let cells = report( rrrP )
-
-              // cells.push( a.td(
-              //   a['|appkit-report-nest-table-item-buttons']( [
-              //     rrrP.up( {
-              //       itemTarget: (el) => el.$('^tr'),
-              //       ...options.upButton
-              //     } ),
-              //     rrrP.down( {
-              //       itemTarget: (el) => el.$('^tr'),
-              //       ...options.downButton
-              //     } ),
-              //     rrrP.remove( {
-              //       itemTarget: (el) => el.$('^tr'),
-              //       ...options.removeButton
-              //     } ),
-              //   ], options.itemButtonsTag )
-              // ) )
-              return cells
-
-            },
-            itemsTag: {
-              $tag: 'tbody',
-              ...options.itemsTag,
-              // $on: {
-              //   'sortupdate': (e,el) => {
-              //     el.$rescopeItems()
-              //   },
-              //   // 'axf.appkit.report.nest.items.rescope': (e,el) => {
-              //   //   el.$$('.render-on-rescope').$render()
-              //   // },
-              //   ...( options.itemsTag || {} ).$on,
-              // },
-              // $sortable: function() {
-              //   this.$$('|appkit-report-nest-sort-off').click() // turn off sort on children
-              //   sortable( this, {
-              //     forcePlaceholderSize: true
-              //   } )
-              //   this.$('^|appkit-report-nest').$$('|appkit-report-nest-add-button button').$disable()
-              //   this.$$('[draggable] > td > *').style.pointerEvents = 'none' // do not let contents interfere with draggable
-              // },
-              // $unsortable: function() {
-              //   this.$$('[draggable] > td > *').style.pointerEvents = 'auto'
-              //   sortable( this, 'destroy' )
-              //   this.$('^|appkit-report-nest').$$('|appkit-report-nest-add-button button').$enable()
-              // },
-            },
-            itemTag: {
-              $tag: 'tr',
-              ...options.itemTag,
+              } else {
+                return target[property]
+              }
             }
           } )
 
-        // }
-        //
-        // return items()
+          let cells = report( rrrP )
 
-      }
+          return cells
 
-      // let tableButtons = function() {
-      //
-      //   return a['|appkit-report-nest-table-footer']( [
-      //
-      //     a['|appkit-report-nest-add-button'](
-      //       rr.add( {
-      //         target: (el) => el.$('^|appkit-report-nest tbody'),
-      //         ...options.addButton,
-      //       } ),
-      //       options.addButtonTag
-      //     ),
-      //
-      //     a['|appkit-report-nest-sort-buttons']( [
-      //       a['|appkit-report-nest-sort-on']( rr.button( {
-      //         label: '⬍',
-      //         onclick: (e,el) => {
-      //           el.$('^|appkit-report-nest tbody').$sortable()
-      //           let sortOn = el.$('^|appkit-report-nest-sort-on')
-      //           sortOn.style.display = 'none'
-      //           sortOn.nextSibling.style.display = ''
-      //           sortOn.nextSibling.$('button').$enable()
-      //         },
-      //         ...options.sortOnButton,
-      //       } ), options.sortOnTag ),
-      //       a['|appkit-report-nest-sort-off']( rr.button( {
-      //         label: '⬍',
-      //         onclick: (e,el) => {
-      //           el.$('^|appkit-report-nest tbody').$unsortable()
-      //           let sortOff = el.$('^|appkit-report-nest-sort-off')
-      //           sortOff.style.display = 'none'
-      //           sortOff.previousSibling.style.display = ''
-      //         },
-      //         ...options.sortOffButton,
-      //       } ), {
-      //         ...options.sortOffTag,
-      //         style: {
-      //           ...( options.sortOffTag || {} ).style,
-      //           display: 'none'
-      //         },
-      //
-      //       } ),
-      //     ], options.sortButtonsTag ),
-      //
-      //   ], options.footerTag )
-      //
-      // }
+        },
+        itemsTag: {
+          $tag: 'tbody',
+          ...options.itemsTag,
+        },
+        itemTag: {
+          $tag: 'tr',
+          ...options.itemTag,
+        }
+      } )
 
       return a['|appkit-report-nest-table-wrapper']( [
         a.table( [
@@ -250,7 +150,6 @@ table = function ( r, options ) {
           tableBody(),
           tableHint(),
         ], options.tableTag ),
-        // tableButtons()
       ], {
         ...options.wrapperTag,
         style: {

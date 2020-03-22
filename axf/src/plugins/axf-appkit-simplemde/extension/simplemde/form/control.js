@@ -80,7 +80,7 @@ ax.extension.simplemde.form.control = function( f, options ) {
     }
   ]
 
-  let controlTagOptions = {
+  let simplemdeTagOptions = {
 
     $init: function() {
       this.$setup()
@@ -121,25 +121,6 @@ ax.extension.simplemde.form.control = function( f, options ) {
         this.$simplemde.codemirror.refresh()
       }.bind( this ), 1 )
     },
-    $value: function() {
-      return this.$$('textarea').value()
-    },
-    $data: function() {
-      return this.$value()
-    },
-    $disable: function() {
-      // debugger
-      this.$$('textarea').setAttribute('disabled', 'disabled')
-    },
-    $enable: function() {
-      // debugger
-      this.$refresh()
-      this.$$('textarea').removeAttribute('disabled')
-    },
-    $focus: function () {
-      this.$refresh()
-      this.$simplemde.codemirror.focus()
-    },
 
     $on: {
       'keyup: update textarea': (e,el) => {
@@ -171,6 +152,31 @@ ax.extension.simplemde.form.control = function( f, options ) {
 
     },
 
+    ...options.simplemdeTag
+
+  }
+
+
+  let controlTagOptions = {
+
+    $value: function() {
+      return this.$$('textarea').value()
+    },
+    // $data: function() {
+    //   return this.$value()
+    // },
+    $disable: function() {
+      this.$$('textarea').setAttribute('disabled', 'disabled')
+    },
+    $enable: function() {
+      this.$('|appkit-form-simplemde').$refresh()
+      this.$$('textarea').removeAttribute('disabled')
+    },
+    $focus: function () {
+      // this.$refresh()
+      this.$('|appkit-form-simplemde').$simplemde.codemirror.focus()
+    },
+
     ...options.markdownTag
   }
 
@@ -179,7 +185,7 @@ ax.extension.simplemde.form.control = function( f, options ) {
         name: options.name,
         value: options.value,
         ...options.textareaTag,
-    } ) ),
+    } ), simplemdeTagOptions ),
     controlTagOptions
   )
 

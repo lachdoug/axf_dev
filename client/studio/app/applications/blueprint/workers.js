@@ -14,9 +14,6 @@ app.applications.blueprint.workers = blueprint => controller => (a,x) => [
       f.field( {
         key: 'commands',
         as: 'table',
-        addable: true,
-        removable: true,
-        sortable: true,
         label: false,
         layout: 'vertical',
         form: (ff) => [

@@ -11,9 +11,6 @@ app.namespaces.workspace.services.blueprint.soft_links = blueprint => controller
       f.field( {
         key: 'soft_links',
         as: 'table',
-        addable: true,
-        removable: true,
-        sortable: true,
         layout: 'vertical',
         label: false,
         form: (ff) => [

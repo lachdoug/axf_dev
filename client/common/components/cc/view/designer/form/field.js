@@ -1,4 +1,4 @@
-cc.view.designer.form.field = (f) => [
+cc.control.designer.form.field = (f) => [
 
   f.field( {
     key: 'key',
@@ -139,7 +139,7 @@ cc.view.designer.form.field = (f) => [
             // checked: 'required',
             // dependent: {
             //   key: '[..]control',
-            //   pattern: '^(string|password|select|combobox|check)$',
+            //   pattern: '^(string|password|select|combobox|checkbox)$',
             // },
           } ),
           ff.fieldset( {
@@ -230,16 +230,13 @@ cc.view.designer.form.field = (f) => [
               fff.field( { key: 'value' } ),
               fff.field( { key: 'label' } ),
             ],
-            addable: true,
-            removable: true,
-            sortable: true,
             dependent: {
               key: 'type',
               value: 'static',
             }
           } ),
           ff.field( {
-            key: 'scope',
+            key: 'key',
             // placeholder: 'Required',
             dependent: {
               key: 'type',
@@ -263,26 +260,12 @@ cc.view.designer.form.field = (f) => [
             key: 'item',
           } ),
           f.field( {
-            key: 'addable',
+            key: 'static',
             as: 'checkbox',
             value: 'on',
             label: false,
             checkbox: { label: 'Addable' },
           } ),
-          f.field( {
-            key: 'removable',
-            as: 'checkbox',
-            value: 'on',
-            label: false,
-            checkbox: { label: 'Removable' },
-          } ),
-          f.field( {
-            key: 'sortable',
-            as: 'checkbox',
-            label: false,
-            checkbox: { label: 'Sortable' },
-          } ),
-
         ],
         dependent: {
           key: 'control',
@@ -389,10 +372,7 @@ cc.view.designer.form.field = (f) => [
           layout: 'vertical',
           as: 'many',
           item: 'form component',
-          form: cc.view.designer.form.component,
-          addable: true,
-          removable: true,
-          sortable: true,
+          form: cc.control.designer.form.component,
         } ),
       ]
     } ),

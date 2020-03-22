@@ -11,9 +11,6 @@ app.applications.blueprint.file_write_permissions = blueprint => controller => (
       f.field( {
         key: 'file_write_permissions',
         as: 'table',
-        addable: true,
-        removable: true,
-        sortable: true,
         layout: 'vertical',
         label: false,
         // thTag: {
@@ -29,7 +26,7 @@ app.applications.blueprint.file_write_permissions = blueprint => controller => (
           } ),
           ff.field( {
             key: 'recursive',
-            as: 'check',
+            as: 'checkbox',
             // checked: true,
             thTag: {
               width: '75px',

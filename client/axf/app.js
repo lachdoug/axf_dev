@@ -1,9 +1,12 @@
 let people = {
   0: {
-    name: 'Fred',
+    name: {
+      first: 'Fred',
+      last: 'Smith'
+    },
     about: 'I am **Fred**.\n\nOK.',
     js: 'let a = 1;',
-    pets: [ 'cat', 'dog', 'fish', 'bird', 'animal1', 'animal2', 'animal3', 'animal4', 'animal5', 'animal6', 'animal7', 'animal8' ],
+    pets: [ 'cat', 'dog', 'fish', 'bird' ],
     car: 'Holden',
     color: 'red',
     sports: [ 'golf', 'cricket' ],
@@ -13,37 +16,36 @@ let people = {
     email: 'lachdoug@gmail.com',
     url: 'https://google.com',
     tel: '+61295608667',
+    jobs: [
+      { title: 'CEO', company: 'ABC Systems' },
+      { title: 'CFO', company: 'XYZ Ltd' },
+      { title: 'Manager', company: "HTTP 'r us" },
+      { title: 'Head of Stuff', company: 'Actionica' },
+    ]
   },
-  1: {
-    name: 'Jack',
-    about: 'I am **Jack**.',
-    js: 'let a = 1;',
-    pets: [ 'cat', 'dog' ],
-    car: 'Holden',
-    color: 'red',
-    sports: [ 'golf', 'cricket' ],
-    active: false,
-  },
-  2: {},
+  1: {},
 }
 
 let app = (a,x) => a['div.container']( [
-
-  a.h1( 'Hello world!' ),
 
   x.router( {
     routes: {
       '/': app.home,
       '/people*': app.people,
+      '/interface': app.interface
     },
     lazy: true,
     transition: 'crossfade',
     default: controller => [ 'You are lost.', controller ],
   } ),
 
+  app.modal(),
+
 ] )
 
 app.home = controller => (a,x) => [
+
+  a.h1( 'Hello world!' ),
   x.button( {
     label: 'People',
     onclick: () => controller.open( 'people' )
@@ -89,15 +91,41 @@ app.people.show = controller => (a,x) => [
     report: r => [
       r.field( {
         key: 'name',
-        placeholder: 'mmmm',
+        as: 'one',
+        report: rr => [
+          rr.field( {
+            key: 'first',
+          } ),
+          rr.field( {
+            key: 'last',
+          } ),
+        ]
+      } ),
+      r.field( {
+        key: 'jobs',
+        as: 'table',
+        report: rr => [
+          rr.field( {
+            key: 'title',
+          } ),
+          rr.field( {
+            key: 'company',
+            dependent: {
+              key: 'title',
+              value: 'CFO',
+            }
+          } ),
+        ]
       } ),
       r.field( {
         key: 'name',
+        layout: 'vertical',
         placeholder: 'mmmm',
         as: 'output',
       } ),
       r.field( {
         key: 'date',
+        layout: 'vertical',
         placeholder: 'mmmm',
         as: 'datetime',
         datetime: {
@@ -106,71 +134,84 @@ app.people.show = controller => (a,x) => [
       } ),
       r.field( {
         key: 'date',
+        layout: 'vertical',
         placeholder: 'mmmm',
         as: 'number',
       } ),
       r.field( {
         key: 'tel',
+        layout: 'vertical',
         placeholder: 'mmmm',
         as: 'tel',
       } ),
       r.field( {
         key: 'url',
+        layout: 'vertical',
         placeholder: 'mmmm',
         as: 'url',
       } ),
       r.field( {
         key: 'email',
+        layout: 'vertical',
         placeholder: 'mmmm',
         as: 'email',
       } ),
       r.field( {
         key: 'dunno',
+        layout: 'vertical',
         placeholder: 'mmmm',
         dependent: {
           key: 'name',
+          layout: 'vertical',
           value: 'Fred',
         }
       } ),
       r.field( {
-        key: 'name',
+        key: 'password',
+        layout: 'vertical',
         as: 'password',
-        placeholder: 'mmmm',
       } ),
 
       r.field( {
         key: 'country',
+        layout: 'vertical',
         as: 'country',
         placeholder: 'mmmm',
       } ),
       r.field( {
         key: 'timezone',
+        layout: 'vertical',
         as: 'timezone',
         placeholder: 'mmmm',
       } ),
       r.field( {
         key: 'language',
+        layout: 'vertical',
         as: 'language',
         placeholder: 'mmmm',
       } ),
 
       r.field( {
         key: 'about',
+        layout: 'vertical',
         as: 'text',
         placeholder: 'mmmm',
       } ),
       r.field( {
         key: 'about',
+        layout: 'vertical',
         as: 'preformatted',
         placeholder: 'mmmm',
       } ),
       r.field( {
         key: 'about',
+        layout: 'vertical',
         as: 'markdown',
         placeholder: 'mmmm',
       } ),
       r.field( {
         key: 'js',
+        layout: 'vertical',
         as: 'code',
         placeholder: 'mmmm',
         code: {
@@ -179,6 +220,7 @@ app.people.show = controller => (a,x) => [
       } ),
       r.field( {
         key: 'active',
+        layout: 'vertical',
         as: 'checkbox',
         placeholder: 'mmmm',
         checkbox: {
@@ -187,11 +229,13 @@ app.people.show = controller => (a,x) => [
       } ),
       r.field( {
         key: 'active',
+        layout: 'vertical',
         as: 'boolean',
         placeholder: 'mmmm',
       } ),
       r.field( {
         key: 'pets',
+        layout: 'vertical',
         as: 'checkboxes',
         placeholder: 'mmmm',
         selections: {
@@ -203,22 +247,26 @@ app.people.show = controller => (a,x) => [
       } ),
       r.field( {
         key: 'pets',
+        layout: 'vertical',
         as: 'output',
         placeholder: 'mmmm',
       } ),
       r.field( {
         key: 'car',
+        layout: 'vertical',
         as: 'select',
         placeholder: 'mmmm',
         selections: [ 'Ford', 'Holden' ],
       } ),
       r.field( {
         key: 'color',
+        layout: 'vertical',
         as: 'color',
         placeholder: 'mmmm',
       } ),
       r.field( {
         key: 'color',
+        layout: 'vertical',
         as: 'radios',
         placeholder: 'mmmm',
         selections: {
@@ -228,6 +276,7 @@ app.people.show = controller => (a,x) => [
       } ),
       r.field( {
         key: 'sports',
+        layout: 'vertical',
         as: 'select',
         placeholder: 'mmmm',
         selections: {
@@ -238,6 +287,7 @@ app.people.show = controller => (a,x) => [
       } ),
       r.field( {
         key: 'json',
+        layout: 'vertical',
         as: 'json',
         placeholder: 'mmmm',
         json: {
@@ -246,6 +296,7 @@ app.people.show = controller => (a,x) => [
       } ),
       r.field( {
         key: 'json',
+        layout: 'vertical',
         as: 'output',
         placeholder: 'mmmm',
         output: {
@@ -270,10 +321,37 @@ app.people.edit = controller => (a,x) => [
 ]
 
 app.people.fields = f => [
+
+  f.field( {
+    key: 'jobs',
+    as: 'table',
+    static: true,
+    form: ff => [
+      ff.field( {
+        key: 'title',
+      } ),
+      ff.field( {
+        key: 'company',
+        dependent: {
+          key: 'title',
+          value: 'CFO',
+        }
+      } ),
+    ]
+  } ),
+
   f.field( {
     key: 'name',
     layout: 'vertical',
-    placeholder: 'mmmm',
+    as: 'one',
+    form: ff => [
+      ff.field( {
+        key: 'first',
+      } ),
+      ff.field( {
+        key: 'last',
+      } ),
+    ],
   } ),
   f.field( {
     key: 'password',

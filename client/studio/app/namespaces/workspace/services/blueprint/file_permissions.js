@@ -11,9 +11,6 @@ app.namespaces.workspace.services.blueprint.file_permissions = blueprint => cont
       f.field( {
         key: 'file_permissions',
         as: 'many',
-        addable: true,
-        removable: true,
-        sortable: true,
         layout: 'vertical',
         label: false,
         form: (ff) => [
@@ -26,7 +23,7 @@ app.namespaces.workspace.services.blueprint.file_permissions = blueprint => cont
 
           ff.field( {
             key: 'recursive',
-            as: 'check',
+            as: 'checkbox',
           } ),
 
           ff.field( {

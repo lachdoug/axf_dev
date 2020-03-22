@@ -11,9 +11,6 @@ app.applications.blueprint.ports = blueprint => controller => (a,x) => [
       f.field( {
         key: 'ports',
         as: 'table',
-        addable: true,
-        removable: true,
-        sortable: true,
         layout: 'vertical',
         label: false,
         form: (ff) => [

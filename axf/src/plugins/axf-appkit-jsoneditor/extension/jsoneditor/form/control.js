@@ -6,15 +6,16 @@ control = function( f, options={} ) {
 
   let controlTagOptions = {
     $init: function() {
-      let el = this
+
+      let editor = this
+
       let jsoneditorOptions = {
-        // mode: 'view',
         onEditable: function (node) {
-          return !el.$disabled // Do not allow editing when disabled.
+          return !editor.$disabled // Do not allow editing when disabled.
         },
         onChange: function() {
-          el.$stash()
-          el.$send( 'axf.appkit.form.control.change' )
+          editor.$stash()
+          editor.$send( 'axf.appkit.form.control.change' )
         },
         ...options.jsoneditor
       }
@@ -22,15 +23,19 @@ control = function( f, options={} ) {
       this.$editor = new JSONEditor( this.$('div'), jsoneditorOptions )
 
       let value = options.value || 'null'
-      try {
-        if ( ax.is.string( value ) ) {
+
+      if ( options.parse ) {
+        try {
           value = JSON.parse( value )
+          this.$editor.set( value )
+          this.$stash()
         }
+        catch (error) {
+          this.$nodes = a['p.error']( `⚠ ${ error.message }` )
+        }
+      } else {
         this.$editor.set( value )
         this.$stash()
-      }
-      catch (error) {
-        this.$nodes = a['p.error']( `⚠ ${ error.message }` )
       }
 
     },
@@ -73,10 +78,10 @@ control = function( f, options={} ) {
   }
 
   return a['|appkit-form-control']( [
-    a['|appkit-form-codemirror']( [
+    a['|appkit-form-jsoneditor']( [
       a.input( null, { name: options.name, type: 'hidden' } ),
       a.div,
-    ] )
+    ], options.jsoneditorTag )
   ], controlTagOptions )
 
 }

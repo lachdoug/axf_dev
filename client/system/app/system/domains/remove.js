@@ -28,11 +28,11 @@ app.system.domains.remove = controller => (a,x) => [
 
           let domain = submition.data.domain
 
-          submition.resultEl.$nodes = app.http(
+          submition.output.$nodes = app.http(
             `/~/~/system/domains/${ domain }`,
             () => controller.open( '..' ),
             {
-              complete: submition.completeFn,
+              complete: submition.complete,
               method: 'DELETE'
             }
           )

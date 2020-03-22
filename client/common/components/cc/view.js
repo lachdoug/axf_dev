@@ -1,1 +1,1 @@
-cc.view = {}
+cc.control = {}

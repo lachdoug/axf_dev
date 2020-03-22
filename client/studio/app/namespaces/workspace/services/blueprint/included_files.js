@@ -11,9 +11,6 @@ app.namespaces.workspace.services.blueprint.included_files = blueprint => contro
       f.field( {
         key: 'included_files',
         as: 'many',
-        addable: true,
-        removable: true,
-        sortable: true,
         layout: 'vertical',
         label: false,
         form: (ff) => [
@@ -42,7 +39,7 @@ app.namespaces.workspace.services.blueprint.included_files = blueprint => contro
 
           ff.field( {
             key: 'template',
-            as: 'check',
+            as: 'checkbox',
           } ),
 
         ]

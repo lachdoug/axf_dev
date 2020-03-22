@@ -1,4 +1,4 @@
-cc.view.designer.form.component = (f) => [
+cc.control.designer.form.component = (f) => [
 
   f.field( {
     key: 'type',
@@ -25,7 +25,7 @@ cc.view.designer.form.component = (f) => [
       key: 'type',
       pattern: '^field$',
     },
-    form: cc.view.designer.form.field
+    form: cc.control.designer.form.field
   } ),
 
   f.field( {
@@ -37,7 +37,7 @@ cc.view.designer.form.component = (f) => [
       key: 'type',
       pattern: '^fieldset$',
     },
-    form: cc.view.designer.form.fieldset
+    form: cc.control.designer.form.fieldset
   } ),
 
   f.field( {
@@ -49,7 +49,7 @@ cc.view.designer.form.component = (f) => [
       key: 'type',
       pattern: '^row$',
     },
-    form: cc.view.designer.form.row
+    form: cc.control.designer.form.row
   } ),
 
   f.field( {

@@ -98,8 +98,8 @@ app.system.install.new.form = ( controller, install ) => (a,x) => {
       f.field( {
         key: 'permission',
         label: false,
-        as: 'check',
-        check: {
+        as: 'checkbox',
+        checkbox: {
           label: 'Permission'
         }
         // placeholder: 'Permission as...',

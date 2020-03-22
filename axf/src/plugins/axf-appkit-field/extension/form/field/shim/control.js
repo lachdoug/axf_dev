@@ -5,12 +5,12 @@ control = function( f, options={} ) {
   let x = ax.x
 
   let as = ( options.as || '' ).split( '/' )
-  let control = as[0] || options.control || 'input'
-  let type = as[1] || options.type
+  let control = options.control || as[0] || 'input'
+  let type = options.type || as[1]
 
   let controlFn = f.controls[control]
   // if ( !controlFn ) debugger
-  if ( !controlFn ) ax.throw( `Form field factory does not support control type '${ control }'.` )
+  if ( !controlFn ) ax.throw( `Form field factory does not support control '${ control }'.` )
 
   let key = options.key || ''
 

@@ -11,9 +11,6 @@ app.applications.blueprint.required_modules = blueprint => controller => (a,x) =
       f.field( {
         key: 'required_modules',
         as: 'table',
-        addable: true,
-        removable: true,
-        sortable: true,
         layout: 'vertical',
         label: false,
         form: (ff) => [

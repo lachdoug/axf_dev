@@ -30,7 +30,7 @@ radios = function( options={} ) {
         readonly: 'readonly',
         inputTag: {
           tabindex: -1,
-          ...( ( options.disabled || selection.disabled ) ? { disabled: 'disabled' } : {} ),
+          disabled: 'disabled',
           ...options.inputTag
         },
         labelTag: options.labelTag,

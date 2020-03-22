@@ -35,10 +35,8 @@ cc.form.shim = {
     } )
   },
 
-  template: ( f, target ) => ( options={} ) => {
-    let template = options.template ? (a,x) => cc.md( options.template(f) ) : null
-    return template
-  },
+  template: ( f, target ) => ( options={} ) => options.template ?
+    (a,x) => cc.md( options.template(f) ) : null,
 
   button: ( f, target ) => ( options={} ) => target( {
     ...options,
@@ -191,14 +189,14 @@ cc.form.shim = {
   // } ),
 
   buttons: (f) => ( options={} ) => (a,x) => a['app-form-buttons']( [
-    f.button( {
+    ( options.cancel == false ) ? null:  f.button( {
       label: app.icon( 'fa fa-times', 'Cancel' ),
       to: cc.hourglass( 'Cancelling…' ),
       onclick: () => history.back(),
       ...options.cancel
     } ),
     ' ',
-    f.submit( {
+    ( options.submit == false ) ? null:  f.submit( {
       label: app.icon( 'fa fa-check', 'Submit' ),
       ...options.submit
     } ),

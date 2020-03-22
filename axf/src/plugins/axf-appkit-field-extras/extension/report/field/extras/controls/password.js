@@ -55,7 +55,7 @@ password = function( r, options ) {
           ...options.button
         } ),
       ] :
-      a.span( options.placeholder, { class: 'placeholder' } ),
+      a.span( options.placeholder || 'None', { class: 'placeholder' } ),
       options.passwordTag
     ),
     controlTagOptions

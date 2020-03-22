@@ -14,40 +14,9 @@ nest = function( f, options={} ) {
     item: options.item,
   } )
 
-  // let rebasedName = function( name, scope, index ) {
-  //   let pattern = `^${ scope.replace( /(\[|\])/g, '\\$1' ) }\\[\\d+\\](.*)$`
-  //   let regex = new RegExp( pattern )
-  //   let match = name.match( regex )
-  //   return `${ scope }[${ index }]${ match[1] }`
-  // }
-
   let nestTagOptions = {
-
     name: nestFactory.scope,
-
-    // $rescopeElement: function( el, scope, index ) {
-    //   el.name = rebasedName( el.name, scope, index )
-    // },
-    //
-    // $rescope: function( scope, index ) {
-    //
-    //   let name = rebasedName( this.getAttribute( 'name' ), scope, index )
-    //   this.setAttribute( 'name', name )
-    //   nestFactory.scope = name
-    //
-    //   let namedElements = x.lib.unnested( this, `[name^="${ scope }"]` )
-    //   namedElements.forEach( function( el ) {
-    //     if ( el.tagName == 'APPKIT-FORM-NEST') {
-    //       el.$rescope( scope, index )
-    //     } else {
-    //       this.$rescopeElement( el, scope, index )
-    //     }
-    //   }.bind( this ) )
-    //
-    // },
-    //
     ...options.nestTag,
-
   }
 
   let controlTagOptions = {
@@ -59,37 +28,10 @@ nest = function( f, options={} ) {
         return null
       }
     },
-    // $controls: function() {
-    //   return x.lib.unnested( this, '|appkit-report-control' )
-    // },
-    // $buttons: function() {
-    //   return this.$$('button').$$
-    // },
-    // $disable: function() {
-    //   let controls = [ ...this.$controls(), ...this.$buttons() ]
-    //   for ( let i in controls ) {
-    //     controls[i].$disable && controls[i].$disable()
-    //   }
-    // },
-    // $enable: function() {
-    //   let controls = [ ...this.$controls(), ...this.$buttons() ]
-    //   for ( let i in controls ) {
-    //     controls[i].$enable && controls[i].$enable()
-    //   }
-    // },
     $focus: function() {
       this.$('|appkit-report-control').$focus()
     },
-    // $on: {
-    //   'axf.appkit.report.nest.item.move': (e,el) =>
-    //     el.$send( 'axf.appkit.report.control.change' ),
-    //   'axf.appkit.report.nest.item.add': (e,el) =>
-    //     el.$send( 'axf.appkit.report.control.change' ),
-    //   'axf.appkit.report.nest.item.remove': (e,el) =>
-    //     el.$send( 'axf.appkit.report.control.change' ),
-    // },
     ...options.controlTag,
-
   }
 
   return a['|appkit-report-control'](

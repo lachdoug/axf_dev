@@ -11,9 +11,6 @@ app.applications.blueprint.apache_httpd_configurations = blueprint => controller
       f.field( {
         key: 'apache_httpd_configurations',
         as: 'many',
-        addable: true,
-        removable: true,
-        sortable: true,
         layout: 'vertical',
         label: false,
         form: (ff) => [

@@ -1,4 +1,4 @@
-cc.view.designer.report = (f) => f.field( {
+cc.control.designer.report = (f) => f.field( {
     key: 'report',
     as: 'one',
     label: false,
@@ -12,18 +12,24 @@ cc.view.designer.report = (f) => f.field( {
       cc.collapse( {
         label: 'Options',
         body: [
-          ff.field( { key: 'scope' } ),
           ff.field( {
             key: 'back',
             as: 'one',
-            form: (fff) => [
-              fff.field( { key: 'hide', as: 'check' } ),
-              fff.field( { key: 'label' } ),
-            ]
+            form: (fff) => fff.row( { columns: [
+              fff.field( { key: 'hide', as: 'checkbox', layout: 'vertical', label: false, checkbox: { label: 'Hide button' } } ),
+              fff.field( { key: 'label', dependent: { key: 'hide', pattern: '^$' } } ),
+            ] } ),
+          } ),
+          ff.field( {
+            key: 'close',
+            as: 'one',
+            form: (fff) => fff.row( { columns: [
+              fff.field( { key: 'hide', as: 'checkbox', layout: 'vertical', label: false, checkbox: { label: 'Hide button' } } ),
+              fff.field( { key: 'label', dependent: { key: 'hide', pattern: '^$' } } ),
+            ] } ),
           } ),
         ],
       } ),
-
 
       cc.collapse( {
         label: 'Report',
@@ -33,11 +39,8 @@ cc.view.designer.report = (f) => f.field( {
             label: false,
             as: 'many',
             item: 'report component',
-            form: cc.view.designer.report.component,
+            form: cc.control.designer.report.component,
             layout: 'vertical',
-            addable: true,
-            removable: true,
-            sortable: true,
           } ),
         ],
       } ),

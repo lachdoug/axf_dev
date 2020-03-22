@@ -1,4 +1,4 @@
-cc.view.designer.report.field = (f) => [
+cc.control.designer.report.field = (f) => [
 
   f.field( {
     key: 'key',
@@ -183,16 +183,13 @@ cc.view.designer.report.field = (f) => [
               fff.field( { key: 'value' } ),
               fff.field( { key: 'label' } ),
             ],
-            addable: true,
-            removable: true,
-            sortable: true,
             dependent: {
               key: 'type',
               value: 'static',
             }
           } ),
           ff.field( {
-            key: 'scope',
+            key: 'key',
             // placeholder: 'Required',
             dependent: {
               key: 'type',
@@ -266,10 +263,7 @@ cc.view.designer.report.field = (f) => [
           layout: 'vertical',
           as: 'many',
           item: 'report component',
-          form: cc.view.designer.report.component,
-          addable: true,
-          removable: true,
-          sortable: true,
+          form: cc.control.designer.report.component,
         } ),
       ]
     } ),

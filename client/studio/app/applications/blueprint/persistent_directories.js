@@ -11,9 +11,6 @@ app.applications.blueprint.persistent_directories = blueprint => controller => (
       f.field( {
         key: 'persistent_directories',
         as: 'table',
-        addable: true,
-        removable: true,
-        sortable: true,
         layout: 'vertical',
         label: false,
         form: (ff) => [

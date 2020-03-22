@@ -11,9 +11,6 @@ app.applications.blueprint.apache_htaccess_files = blueprint => controller => (a
       f.field( {
         key: 'apache_htaccess_files',
         as: 'many',
-        addable: true,
-        removable: true,
-        sortable: true,
         layout: 'vertical',
         label: false,
         form: (ff) => [

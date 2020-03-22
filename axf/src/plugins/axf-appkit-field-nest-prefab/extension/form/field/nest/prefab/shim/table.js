@@ -42,10 +42,12 @@ table = function ( f, options ) {
 
         let headerCells = function() {
           let cells = form(ffP) || []
-          cells.push( a.th( null, {
-            width: '10%',
-            ...options.thTag
-          } ) )
+          if ( !options.static ) cells.push(
+            a.th( null, {
+              width: '10%',
+              ...options.thTag
+            } )
+          )
           return cells
         }
 
@@ -60,7 +62,6 @@ table = function ( f, options ) {
             if ( property == 'field' ) {
               return ( options ) => {
                 let help = options.help
-                // debugger
                 return a.td(
                   ff.help( {
                     ...options,
@@ -80,7 +81,7 @@ table = function ( f, options ) {
 
         let helpCells = function() {
           let cells = form(ffP) || []
-          cells.push( a.th() )
+          if ( !options.static ) cells.push( a.th() )
           return cells
         }
 
@@ -109,7 +110,7 @@ table = function ( f, options ) {
 
         let hintCells = function() {
           let cells = form(ffP) || []
-          cells.push( a.th() )
+          if ( !options.static ) cells.push( a.th() )
           return cells
         }
 
@@ -118,104 +119,92 @@ table = function ( f, options ) {
       }
 
 
-      let tableBody = function() {
+      let tableBody = () => ff.items( {
+        ...options.items,
+        form: (fff) => {
 
-        // let items = function() {
-
-          return ff.items( {
-            ...options.items,
-            form: (fff) => {
-
-              let fffP = new Proxy( fff, {
-                get: ( target, property ) => {
-                  if ( property == 'field' ) {
-                    return ( options ) => {
-                      return a.td( fff.control( options ), {
-                        style: {
-                          verticalAlign: 'top',
-                          ...( options.tdTag || {} ).style
-                        },
-                        ...options.tdTag
-                      } )
-                    }
-                  } else {
-                    return target[property]
-                  }
+          let fffP = new Proxy( fff, {
+            get: ( target, property ) => {
+              if ( property == 'field' ) {
+                return ( options ) => {
+                  return a.td( fff.control( options ), {
+                    style: {
+                      verticalAlign: 'top',
+                      ...( options.tdTag || {} ).style
+                    },
+                    ...options.tdTag
+                  } )
                 }
-              } )
-
-              let cells = form( fffP )
-
-              cells.push( a.td(
-                a['|appkit-form-nest-table-item-buttons']( [
-                  options.sortable ? fffP.up( {
-                    itemTarget: (el) => el.$('^tr'),
-                    ...options.upButton
-                  } ) : null,
-                  options.sortable ? fffP.down( {
-                    itemTarget: (el) => el.$('^tr'),
-                    ...options.downButton
-                  } ) : null,
-                  options.removable ? fffP.remove( {
-                    itemTarget: (el) => el.$('^tr'),
-                    ...options.removeButton
-                  } ) : null,
-                ], options.itemButtonsTag )
-              ) )
-              return cells
-
-            },
-            itemsTag: {
-              $tag: 'tbody',
-              ...options.itemsTag,
-              $on: {
-                'sortupdate': (e,el) => {
-                  el.$rescopeItems()
-                },
-                // 'axf.appkit.form.nest.items.rescope': (e,el) => {
-                //   el.$$('.render-on-rescope').$render()
-                // },
-                ...( options.itemsTag || {} ).$on,
-              },
-              $sortable: function() {
-                this.$$('|appkit-form-nest-sort-off button').click() // turn off sort on children
-                sortable( this, {
-                  forcePlaceholderSize: true
-                } )
-                this.$('^|appkit-form-nest').$$('|appkit-form-nest-add-button button').$disable()
-                let buttons = this.$('^|appkit-form-nest |appkit-form-nest-items').$$('button').$$
-                for ( let button of buttons ) {
-                  button.$disable && button.$disable()
-                }
-                this.$$('[draggable] > td *').style.pointerEvents = 'none' // do not let contents interfere with draggable
-              },
-              $unsortable: function() {
-                this.$$('[draggable] > td *').style.pointerEvents = 'auto'
-                sortable( this, 'destroy' )
-                this.$('^|appkit-form-nest').$$('|appkit-form-nest-add-button button').$enable()
-                let buttons = this.$('^|appkit-form-nest |appkit-form-nest-items').$$('button').$$
-                for ( let button of buttons ) {
-                  button.$enable && button.$enable()
-                }
-              },
-            },
-            itemTag: {
-              $tag: 'tr',
-              ...options.itemTag,
+              } else {
+                return target[property]
+              }
             }
           } )
 
-        // }
-        //
-        // return items()
+          let cells = form( fffP )
 
-      }
+          if ( !options.static ) cells.push( a.td(
+            a['|appkit-form-nest-table-item-buttons']( [
+              !options.static ? fffP.up( {
+                itemTarget: (el) => el.$('^tr'),
+                ...options.upButton
+              } ) : null,
+              !options.static ? fffP.down( {
+                itemTarget: (el) => el.$('^tr'),
+                ...options.downButton
+              } ) : null,
+              !options.static ? fffP.remove( {
+                itemTarget: (el) => el.$('^tr'),
+                ...options.removeButton
+              } ) : null,
+            ], options.itemButtonsTag )
+          ) )
+
+          return cells
+
+        },
+        itemsTag: {
+          $tag: 'tbody',
+          ...options.itemsTag,
+          $on: {
+            'sortupdate': (e,el) => {
+              el.$rescopeItems()
+            },
+            ...( options.itemsTag || {} ).$on,
+          },
+          $sortable: function() {
+            this.$$('|appkit-form-nest-sort-off button').click() // turn off sort on children
+            sortable( this, {
+              forcePlaceholderSize: true
+            } )
+            this.$('^|appkit-form-nest').$$('|appkit-form-nest-add-button button').$disable()
+            let buttons = this.$('^|appkit-form-nest |appkit-form-nest-items').$$('button').$$
+            for ( let button of buttons ) {
+              button.$disable && button.$disable()
+            }
+            this.$$('[draggable] > td *').style.pointerEvents = 'none' // do not let contents interfere with draggable
+          },
+          $unsortable: function() {
+            this.$$('[draggable] > td *').style.pointerEvents = 'auto'
+            sortable( this, 'destroy' )
+            this.$('^|appkit-form-nest').$$('|appkit-form-nest-add-button button').$enable()
+            let buttons = this.$('^|appkit-form-nest |appkit-form-nest-items').$$('button').$$
+            for ( let button of buttons ) {
+              button.$enable && button.$enable()
+            }
+          },
+        },
+        itemTag: {
+          $tag: 'tr',
+          ...options.itemTag,
+        }
+      } )
 
       let tableButtons = function() {
 
         return a['|appkit-form-nest-table-footer']( [
 
-          options.addable ? a['|appkit-form-nest-add-button'](
+          !options.static ? a['|appkit-form-nest-add-button'](
             ff.add( {
               target: (el) => el.$('^|appkit-form-nest tbody'),
               ...options.addButton,

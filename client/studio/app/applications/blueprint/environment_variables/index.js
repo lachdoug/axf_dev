@@ -15,10 +15,10 @@ app.applications.blueprint.environment_variables.index = blueprint => controller
   ] ) ),
 
   blueprint.environmentVariables.map(
-    ( item, i ) => [ app.button( {
+    ( item, i ) => a.div( app.button( {
       label: `${ i + 1 }. ${ item.object.name }`,
       onclick: () => controller.open( `${i}` ),
-    } ) ]
+    } ) )
   ),
 
 ]

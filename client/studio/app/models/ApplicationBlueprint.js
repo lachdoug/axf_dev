@@ -32,6 +32,7 @@ class ApplicationBlueprint {
     this.customPhpInis = new ApplicationBlueprintCustomPhpInis( this, framworkSpecific.custom_php_inis || [] )
     this.apacheHtaccessFiles = new ApplicationBlueprintApacheHtaccessFiles( this, framworkSpecific.apache_htaccess_files || [] )
     this.apacheHttpdConfigurations = new ApplicationBlueprintApacheHttpdConfigurations( this, framworkSpecific.apache_httpd_configurations || [] )
+    this.controls = new ApplicationBlueprintControls( this, software.controls || [] )
   }
 
   get apiEndpoint() {
@@ -84,6 +85,7 @@ class ApplicationBlueprint {
         workers: this.workers.output(),
         actionators: this.actionators.output(),
         schedules: this.schedules.output(),
+        controls: this.controls.output(),
         framework_specific: {
          rake_tasks: this.rakeTasks.output(),
          custom_php_inis: this.customPhpInis.output(),
@@ -99,7 +101,7 @@ class ApplicationBlueprint {
 
     }
 
-    return ax.x.lib.object.compact( JSON.parse( JSON.stringify( object) ) )
+    return ax.x.lib.compact( JSON.parse( JSON.stringify( object) ) )
 
   }
 

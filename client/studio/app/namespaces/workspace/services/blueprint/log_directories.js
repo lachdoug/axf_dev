@@ -11,9 +11,6 @@ app.namespaces.workspace.services.blueprint.log_directories = blueprint => contr
       f.field( {
         key: 'log_directories',
         as: 'table',
-        addable: true,
-        removable: true,
-        sortable: true,
         layout: 'vertical',
         form: (ff) => [
           ff.field( {

@@ -1,31 +1,31 @@
-ax.extension.output.element = function( object ) {
+ax.extension.output.element = function( value ) {
 
   let a = ax.a
   let x = ax.x
 
-  if ( ax.is.array( object ) ) {
-    return a.ol( object.map(
+  if ( ax.is.array( value ) ) {
+    return a.ol( value.map(
       ( element ) => a.li( x.output.element( element ) )
     ) )
-  } else if ( ax.is.null( object ) ) {
+  } else if ( ax.is.null( value ) ) {
     return a['|appkit-output-null']( null )
-  } else if ( ax.is.function( object ) ) {
-    return a['|appkit-output-function']( `𝑓 ${ object }` )
-  } else if ( ax.is.object( object ) ) {
+  } else if ( ax.is.function( value ) ) {
+    return a['|appkit-output-function']( `𝑓 ${ value }` )
+  } else if ( ax.is.object( value ) ) {
     return a.ul(
-      Object.keys( object ).map( ( key ) => {
+      Object.keys( value ).map( ( key ) => {
         return a.li( [
           a.label( key ), ' ',
-          x.output.element( object[ key ] )
+          x.output.element( value[ key ] )
         ] )
       } )
     )
-  } else if ( ax.is.number( object ) ) {
-    return a['|appkit-output-number']( object )
-  } else if ( ax.is.boolean( object ) ) {
-    return a['|appkit-output-boolean']( object )
+  } else if ( ax.is.number( value ) ) {
+    return a['|appkit-output-number']( value )
+  } else if ( ax.is.boolean( value ) ) {
+    return a['|appkit-output-boolean']( value )
   } else {
-    return a['|appkit-output-text']( object )
+    return a['|appkit-output-text']( value )
   }
 
 }

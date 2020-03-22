@@ -1,4 +1,4 @@
-cc.view.designer.report.component = (f) => [
+cc.control.designer.report.component = (f) => [
 
   f.field( {
     key: 'type',
@@ -26,7 +26,7 @@ cc.view.designer.report.component = (f) => [
       key: 'type',
       pattern: '^field$',
     },
-    form: cc.view.designer.report.field
+    form: cc.control.designer.report.field
   } ),
 
   f.field( {
@@ -38,7 +38,7 @@ cc.view.designer.report.component = (f) => [
       key: 'type',
       pattern: '^fieldset$',
     },
-    form: cc.view.designer.report.fieldset
+    form: cc.control.designer.report.fieldset
   } ),
 
   f.field( {
@@ -50,7 +50,7 @@ cc.view.designer.report.component = (f) => [
       key: 'type',
       pattern: '^row$',
     },
-    form: cc.view.designer.report.row
+    form: cc.control.designer.report.row
   } ),
 
   f.field( {
@@ -62,7 +62,7 @@ cc.view.designer.report.component = (f) => [
       key: 'type',
       pattern: '^form$',
     },
-    form: cc.view.designer.report.form
+    form: cc.control.designer.report.form
   } ),
 
   f.field( {

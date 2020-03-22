@@ -1,4 +1,4 @@
-cc.view.builder.form.field = ( f, fieldSpec, params ) => {
+cc.control.builder.form.field = ( f, fieldSpec, params ) => {
 
   let a = ax.a
   let x = ax.x
@@ -11,9 +11,7 @@ cc.view.builder.form.field = ( f, fieldSpec, params ) => {
     hint: fieldSpec.hint,
     layout: fieldSpec.layout,
     item: fieldSpec.item,
-    addable: fieldSpec.addable,
-    removable: fieldSpec.removable,
-    sortable: fieldSpec.sortable,
+    static: fieldSpec.static,
     confirmation: fieldSpec.confirmation,
     dependent: fieldSpec.dependent,
     placeholder: fieldSpec.placeholder,
@@ -22,14 +20,14 @@ cc.view.builder.form.field = ( f, fieldSpec, params ) => {
   if ( fieldSpec.components ) {
     let componentsSpec = Object.values( fieldSpec.components || {} )
     field.form = (ff) => componentsSpec.map(
-      componentSpec => cc.view.builder.form.component( ff, componentSpec, params )
+      componentSpec => cc.control.builder.form.component( ff, componentSpec, params )
     )
   }
 
   if ( fieldSpec.selections ) {
     let selectionsSpec = fieldSpec.selections
-    if ( selectionsSpec.type == 'dynamic' && selectionsSpec.scope ) {
-      let match = selectionsSpec.scope.match( /\[?\w+\]?/g ).map(
+    if ( selectionsSpec.type == 'dynamic' && selectionsSpec.key ) {
+      let match = selectionsSpec.key.match( /\[?\w+\]?/g ).map(
         part => part.match( /\w+/ )[0]
       )
       field.selections = x.lib.object.dig( params, match )

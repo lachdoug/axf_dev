@@ -14,7 +14,7 @@ app.applications.application = controller => (a,x) => [
         '/delete': app.applications.delete,
         '/readme': app.readme( 'application', `applications/${ controller.params.application_id }`),
         '/license': app.license( 'application', `applications/${ controller.params.application_id }`),
-        '/views*': app.views( 'application', `applications/${ controller.params.application_id }`),
+        // '/views*': app.views( 'application', `applications/${ controller.params.application_id }`),
         '/blueprint*': app.applications.blueprint,
         '/branch*': app.applications.branch,
         '/status': app.applications.status,

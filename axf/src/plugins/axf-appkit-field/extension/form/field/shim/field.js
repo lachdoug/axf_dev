@@ -12,7 +12,14 @@ field = function( f, options={} ) {
     this.field.header( f, options ),
     a['|appkit-form-field-body']( [
       f.help( options ),
-      f.control( options ),
+      f.control( {
+        ...options,
+        // Controls don't normally need labels. Checkbox is exception.
+        // Label for checkbox needs to be specified in options.checkbox.
+        // options.label and options.labelTag consumed by this.field.header()
+        label: '', 
+        labelTag: {},
+      } ),
       f.hint( options ),
     ], options.bodyTag ),
   ], options.fieldTag )

@@ -15,7 +15,7 @@ app.login = controller => (a,x) => app.form( {
       label: app.icon( 'fas fa-sign-in-alt' ),
       title: 'Log in',
       button: { to: app.hourglass() },
-      success: () => { controller.open() }
+      // success: () => { controller.open() }
     } ),
   ],
   formTag: { class: 'form-inline' },

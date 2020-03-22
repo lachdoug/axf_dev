@@ -1,4 +1,4 @@
-cc.view.designer.report.row = (f) => (a,x) => [
+cc.control.designer.report.row = (f) => (a,x) => [
 
   cc.collapse( {
     label: 'Columns',
@@ -8,12 +8,9 @@ cc.view.designer.report.row = (f) => (a,x) => [
         key: 'columns',
         as: 'many',
         item: 'column',
-        form: cc.view.designer.report.component,
+        form: cc.control.designer.report.component,
         label: false,
         layout: 'vertical',
-        addable: true,
-        removable: true,
-        sortable: true,
       } ),
 
     ],

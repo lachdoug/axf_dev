@@ -33,9 +33,10 @@ cc.collapse = ( options ) => (a,x) => a['app-collapse']( [
       x.lib.animate.fade.in( body )
       let firstControl = el.$$('|appkit-form-control').$$[0]
       if ( firstControl ) {
-        if ( ax.is.not.function( firstControl.$focus ) ) debugger
         firstControl.$focus()
       }
+      // SimpleMDE needs to be refreshed when it appears.
+      el.$$('|appkit-form-simplemde').$refresh()
     } else {
       x.lib.animate.fade.out( body )
     }

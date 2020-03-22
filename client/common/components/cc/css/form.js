@@ -1,28 +1,5 @@
 ax.css( {
 
-  '|appkit-report-control': {
-    display: 'block',
-    '&:focus, &:focus-within': {
-      boxShadow: '0 0 0 .2rem #FFD70077',
-    },
-    '.form-control:focus, .form-control:focus-within': {
-      borderColor: '#CED4DA',
-      boxShadow: 'unset',
-    }
-  },
-
-  // '|appkit-report-control:focus, |appkit-report-control:focus-within': {
-  //   boxShadow: '0 0 0 .2rem #FFD70077',
-  // },
-
-  '|appkit-report-control input:focus, |appkit-report-control textarea:focus': {
-    boxShadow: 'none',
-  },
-
-  '|appkit-report-check-wrapper, |appkit-report-checks, |appkit-report-radios': {
-    pointerEvents: 'none',
-  },
-
   '.placeholder, .form-control::placeholder, .CodeMirror-placeholder': {
     color: 'gray !important',
     fontStyle: 'italic',
@@ -52,7 +29,7 @@ ax.css( {
   'option[disabled]': {
     color: 'lightgray',
   },
-  
+
   '|appkit-form-multiselect-selected': {
     border: '1px solid #ced4da',
     borderTop: 'none',

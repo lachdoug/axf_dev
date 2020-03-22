@@ -32,8 +32,12 @@ cc.report.shim = {
           ...options.markdownTag,
         }
       } ),
-    code: ( r, target ) => ( options={} ) =>
-      (a,x) => x.codemirror.report.control( r, options ),
+
+      code: ( r, target ) => ( options={} ) =>
+        (a,x) => x.codemirror.report.control( r, options ),
+
+      terminal: ( r, target ) => ( options={} ) =>
+        (a,x) => x.xtermjs.report.control( r, options ),
 
   },
 

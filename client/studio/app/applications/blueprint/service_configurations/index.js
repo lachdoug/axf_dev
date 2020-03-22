@@ -15,10 +15,10 @@ app.applications.blueprint.service_configurations.index = blueprint => controlle
   ] ) ),
 
   blueprint.serviceConfigurations.map(
-    ( item, i ) => [ app.button( {
+    ( item, i ) => a.div( app.button( {
       label: `${ i + 1 }. ${ item.object.publisher_namespace } ${ item.object.type_path }`,
       onclick: () => controller.open( `${i}` ),
-    } ) ]
+    } ) )
   ),
 
 ]

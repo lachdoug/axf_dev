@@ -1,15 +1,11 @@
-cc.view.builder.report = ( reportSpec, params ) => (a,x) => {
+cc.control.builder.report = ( reportSpec, params ) => (a,x) => {
 
-  let scope = reportSpec.scope || ''
-  let keys = scope.match( /\w+/g ) || []
-  let object = x.lib.object.dig( params, keys )
-  let components = Object.values( reportSpec.components || {} )
-
-  return cc.view.builder.report.report( {
-    components: components,
-    scope: scope,
-    object: object,
+  return cc.control.builder.report.report( {
+    components: Object.values( reportSpec.components || {} ),
+    object: params,
     params: params,
+    back: reportSpec.back,
+    close: reportSpec.close,
   } )
 
 }

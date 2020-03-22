@@ -1,1 +1,1 @@
-// ax.extension.xtermjs.report = {}
+ax.extension.xtermjs.report = {}

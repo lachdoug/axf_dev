@@ -35,7 +35,12 @@ items = function( f, options ) {
   }
 
   return a['|appkit-report-nest-items'](
-    itemsData.length ? itemsData.map( item ) : ( options.empty || a.i( 'None' ) ),
+    itemsData.length ?
+    itemsData.map( item ) :
+    ( options.empty || a.span(
+      options.placeholder || 'None',
+      { class: 'placeholder' }
+    ) ),
     {
       $count: function() {
         return this.$$(':scope > |appkit-report-nest-item').$$.length

@@ -50,7 +50,6 @@
   <script type="application/javascript" src="/axfunction/axf.js" ></script>
   <script type="application/javascript" src="/axfunction/axf-plugins.js" ></script>
   <script type="application/javascript" src="/app.js" ></script>
-  <!-- <script type="application/javascript" src="/axf/themes/basic.js" ></script> -->
 
 </head>
 <body>
@@ -83,19 +82,16 @@
 </div>
 
 <script>
-
-  // let $settings = {
-  //   // username: '<%= @current_user.class.to_s %>',
-  //   // sessionTimeoutSeconds: <%= ( ENV['SESSION_TIMEOUT_MINUTES'] || 30 ).to_f %>,
-  //   codeEditorKeymap: 'vim',
-  // }
-
-  window.onload = () => {
-    window.localStorage.cssTheme && document.body.classList.add( `app-theme-${ window.localStorage.cssTheme }` )
-    loadingSpinner.style.opacity = 0
-    setTimeout( function() { loadingSpinner.remove() }, 1000 )
-    ax( app )
+window.onload = () => {
+  if( window.localStorage.cssTheme ) {
+    document.body.classList.add(
+      `app-theme-${ window.localStorage.cssTheme }`
+    )
   }
+  loadingSpinner.style.opacity = 0
+  setTimeout( function() { loadingSpinner.remove() }, 1000 )
+  ax( app )
+}
 </script>
 
 </body>

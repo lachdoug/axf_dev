@@ -111,7 +111,7 @@ class ServiceBlueprint {
 
     }
 
-    return ax.x.lib.object.compact( JSON.parse( JSON.stringify( object) ) )
+    return ax.x.lib.compact( JSON.parse( JSON.stringify( object) ) )
 
   }
 

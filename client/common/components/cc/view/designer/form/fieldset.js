@@ -1,4 +1,4 @@
-cc.view.designer.form.fieldset = (f) => [
+cc.control.designer.form.fieldset = (f) => [
 
   cc.collapse( {
     label: 'Options',
@@ -14,9 +14,9 @@ cc.view.designer.form.fieldset = (f) => [
 
       f.field( {
         key: 'layout',
-        as: 'check',
+        as: 'checkbox',
         checked: 'vertical',
-        check: { label: 'Vertical' },
+        checkbox: { label: 'Vertical' },
       } ),
 
       f.field( {
@@ -44,11 +44,8 @@ cc.view.designer.form.fieldset = (f) => [
         as: 'many',
         label: false,
         item: 'fieldset component',
-        form: cc.view.designer.form.component,
+        form: cc.control.designer.form.component,
         layout: 'vertical',
-        addable: true,
-        removable: true,
-        sortable: true,
       } ),
 
     ],

@@ -1,4 +1,4 @@
-cc.view.builder.report.field = ( r, fieldSpec, params ) => {
+cc.control.builder.report.field = ( r, fieldSpec, params ) => {
 
   let a = ax.a
   let x = ax.x
@@ -19,15 +19,15 @@ cc.view.builder.report.field = ( r, fieldSpec, params ) => {
   if ( fieldSpec.components ) {
     let componentsSpec = Object.values( fieldSpec.components || {} )
     field.report = (rr) => componentsSpec.map(
-      componentSpec => cc.view.builder.report.
+      componentSpec => cc.control.builder.report.
         component( rr, componentSpec, params )
     )
   }
 
   if ( fieldSpec.selections ) {
     let selectionsSpec = fieldSpec.selections
-    if ( selectionsSpec.type == 'dynamic' && selectionsSpec.scope ) {
-      let match = selectionsSpec.scope.match( /\[?\w+\]?/g ).map(
+    if ( selectionsSpec.type == 'dynamic' && selectionsSpec.key ) {
+      let match = selectionsSpec.key.match( /\[?\w+\]?/g ).map(
         part => part.match( /\w+/ )[0]
       )
       field.selections = x.lib.object.dig( params, match )
@@ -44,7 +44,7 @@ cc.view.builder.report.field = ( r, fieldSpec, params ) => {
   }
 
   let controlTypes = {
-    string: { control: 'output' },
+    string: { control: 'string' },
     text: { control: 'textarea' },
     preformatted: { control: 'preformatted' },
     select: { control: 'select' },

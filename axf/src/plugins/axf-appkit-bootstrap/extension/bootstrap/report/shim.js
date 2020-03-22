@@ -30,6 +30,9 @@ ax.extension.bootstrap.report.shim = function() {
           class: headerTagClass,
           ...options.headerTag,
         },
+        labelTag: {
+          class: 'mb-0',
+        },
         bodyTag: {
           class: bodyTagClass,
           ...options.bodyTag,
@@ -65,7 +68,7 @@ ax.extension.bootstrap.report.shim = function() {
         ...options.labelTag,
       },
       checkboxTag: {
-        class: options.layout === 'vertical' ? '' : 'd-block p-2',
+        class: 'd-block p-2',
         ...options.checkboxTag,
       }
     } ),
@@ -85,7 +88,7 @@ ax.extension.bootstrap.report.shim = function() {
         ...options.labelTag,
       },
       checkboxesTag: {
-        class: options.layout === 'vertical' ? '' : 'd-block p-2',
+        class: 'd-block p-2',
         ...options.checkboxesTag,
       }
     } ),
@@ -105,7 +108,7 @@ ax.extension.bootstrap.report.shim = function() {
         ...options.labelTag,
       },
       radiosTag: {
-        class: options.layout === 'vertical' ? '' : 'd-block p-2',
+        class: 'd-block p-2',
         ...options.radiosTag,
       }
     } ),
@@ -147,7 +150,7 @@ ax.extension.bootstrap.report.shim = function() {
       boolean: ( r, target ) => ( options={} ) => target( {
         ...options,
         booleanTag: {
-          class: 'p-2 d-block',
+          class:  'form-control text-dark',
           ...options.booleanTag,
         },
       } ),

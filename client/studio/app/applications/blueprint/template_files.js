@@ -11,9 +11,6 @@ app.applications.blueprint.template_files = blueprint => controller => (a,x) => 
       f.field( {
         key: 'template_files',
         as: 'many',
-        addable: true,
-        removable: true,
-        sortable: true,
         layout: 'vertical',
         label: false,
         form: (ff) => [

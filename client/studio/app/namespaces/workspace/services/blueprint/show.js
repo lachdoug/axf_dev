@@ -15,6 +15,4 @@ app.namespaces.workspace.services.blueprint.show = blueprint => controller => (a
     ] ),
   ] )
 
-
-
 ]

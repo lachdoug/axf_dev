@@ -15,6 +15,4 @@ app.applications.blueprint.show = blueprint => controller => (a,x) => [
     ] ),
   ] )
 
-
-
 ]

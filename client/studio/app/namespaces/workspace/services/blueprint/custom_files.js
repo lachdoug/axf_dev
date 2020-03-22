@@ -11,9 +11,6 @@ app.namespaces.workspace.services.blueprint.custom_files = blueprint => controll
       f.field( {
         key: 'custom_files',
         as: 'many',
-        addable: true,
-        removable: true,
-        sortable: true,
         layout: 'vertical',
         label: false,
         form: (ff) => [
@@ -52,12 +49,12 @@ app.namespaces.workspace.services.blueprint.custom_files = blueprint => controll
 
           ff.field( {
             key: 'execute',
-            as: 'check',
+            as: 'checkbox',
           } ),
 
           ff.field( {
             key: 'sudo',
-            as: 'check',
+            as: 'checkbox',
           } ),
 
         ]

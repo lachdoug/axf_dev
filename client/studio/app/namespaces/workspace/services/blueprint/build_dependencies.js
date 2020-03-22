@@ -11,9 +11,6 @@ app.namespaces.workspace.services.blueprint.build_dependencies = blueprint => co
       f.field( {
         key: 'build_dependencies',
         as: 'table',
-        addable: true,
-        removable: true,
-        sortable: true,
         layout: 'vertical',
         form: (ff) => [
           ff.field( {

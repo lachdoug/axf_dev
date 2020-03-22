@@ -127,7 +127,7 @@ ax.extension.bootstrap.form.shim = function() {
         ...options.labelTag,
       },
       checkboxTag: {
-        class: options.layout === 'vertical' ? 'd-block' : 'd-block p-2',
+        class: 'd-block p-2',
         ...options.checkboxTag,
       }
     } ),
@@ -147,7 +147,7 @@ ax.extension.bootstrap.form.shim = function() {
         ...options.labelTag,
       },
       checkboxesTag: {
-        class: options.layout === 'vertical' ? 'd-block' : 'd-block p-2',
+        class: 'd-block p-2',
         ...options.checkboxesTag,
       }
     } ),
@@ -167,7 +167,7 @@ ax.extension.bootstrap.form.shim = function() {
         ...options.labelTag,
       },
       radiosTag: {
-        class: options.layout === 'vertical' ? 'd-block' : 'd-block p-2',
+        class: 'd-block p-2',
         ...options.radiosTag,
       }
     } ),

@@ -16,7 +16,11 @@ field = function( r, options={} ) {
     this.field.header( r, options ),
     a['|appkit-report-field-body']( [
       r.help( options ),
-      r.control( options ),
+      r.control( {
+        ...options,
+        label: '',
+        labelTag: {},
+      } ),
       r.hint( options ),
     ], options.bodyTag ),
   ], fieldTagOptions )

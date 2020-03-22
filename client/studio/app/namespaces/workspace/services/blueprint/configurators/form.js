@@ -28,11 +28,11 @@ form = ( controller, blueprint, configurator ) => (a,x) => {
         } ),
         f.field( {
           key: 'enable_logging',
-          as: 'check',
+          as: 'checkbox',
         } ),
         f.field( {
           key: 'no_save',
-          as: 'check',
+          as: 'checkbox',
         } ),
         f.field( {
           key: 'set_script',

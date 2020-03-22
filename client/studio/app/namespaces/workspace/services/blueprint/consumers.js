@@ -11,9 +11,6 @@ app.namespaces.workspace.services.blueprint.consumers = blueprint => controller 
       f.field( {
         key: 'accepts',
         as: 'table',
-        addable: true,
-        removable: true,
-        sortable: true,
         layout: 'vertical',
         form: (ff) => [
           ff.field( {

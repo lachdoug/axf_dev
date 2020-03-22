@@ -11,9 +11,6 @@ app.applications.blueprint.custom_php_inis = blueprint => controller => (a,x) =>
       f.field( {
         key: 'custom_php_inis',
         as: 'many',
-        addable: true,
-        removable: true,
-        sortable: true,
         layout: 'vertical',
         label: false,
         form: (ff) => [

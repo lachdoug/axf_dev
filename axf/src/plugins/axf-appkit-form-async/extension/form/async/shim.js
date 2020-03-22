@@ -6,7 +6,7 @@ ax.extension.form.async.shim = function() {
   return {
 
     form:  ( f, target ) => ( options={} ) => a['|appkit-asyncform']( [
-      a['div|appkit-asyncform-result'](),
+      a['div|appkit-asyncform-output'](),
       a['|appkit-asyncform-body']( target( {
         ...options,
         formTag: {
@@ -27,7 +27,6 @@ ax.extension.form.async.shim = function() {
           $enable: function() {
             let controls = [ ...this.$controls(), ...this.$buttons() ]
             for ( let i in controls ) {
-              console.log( controls[i].$enable + '' )
               x.lib.element.visible( controls[i] ) &&
               controls[i].$enable &&
               controls[i].$enable()
@@ -49,35 +48,35 @@ ax.extension.form.async.shim = function() {
 
               el.$disable && el.$disable()
 
-              let resultEl = el.$('^|appkit-asyncform |appkit-asyncform-result')
+              let outputEl = el.$('^|appkit-asyncform |appkit-asyncform-output')
               let completeFn = () => {
                 el.$enable && el.$enable()
                 var windowTop = $(window).scrollTop();
                 var windowBottom = windowTop + $(window).height();
-                var resultTop = $(resultEl).offset().top;
-                var resultBottom = resultTop + $(resultEl).height();
-                if ( ( resultBottom > windowBottom ) || ( resultTop < windowTop ) ) {
-                  resultEl.scrollIntoView()
+                var outputTop = $(outputEl).offset().top;
+                var outputBottom = outputTop + $(outputEl).height();
+                if ( ( outputBottom > windowBottom ) || ( outputTop < windowTop ) ) {
+                  outputEl.scrollIntoView()
                 }
                 el.$send( 'axf.appkit.form.async.complete' )
               }
 
               if( ax.is.function( options.action ) ) {
 
-                let submit = {
+                let submition = {
                   formData: formData,
                   data: ax.x.lib.form.data.objectify( formData ),
-                  formEl: el,
-                  resultEl: resultEl,
-                  completeFn: completeFn,
+                  form: el,
+                  output: outputEl,
+                  complete: completeFn,
                   submitter: submitter,
                 }
 
-                options.action( submit ) && completeFn()
+                options.action( submition ) && completeFn()
 
               } else {
 
-                resultEl.$nodes = (a,x) => x.http( {
+                outputEl.$nodes = (a,x) => x.http( {
                   url: el.getAttribute( 'action' ),
                   body: formData,
                   method: el.getAttribute( 'method' ),

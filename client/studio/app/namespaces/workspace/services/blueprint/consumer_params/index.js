@@ -15,10 +15,10 @@ app.namespaces.workspace.services.blueprint.consumer_params.index = blueprint =>
   ] ) ),
 
   blueprint.consumerParams.map(
-    ( item, i ) => [ app.button( {
+    ( item, i ) => a.div( app.button( {
       label: `${ i + 1 }. ${ item.object.name }`,
       onclick: () => controller.open( `${i}` ),
-    } ) ]
+    } ) )
   ),
 
 ]

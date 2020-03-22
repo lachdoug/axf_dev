@@ -1,4 +1,4 @@
-cc.view.builder.report.row = ( r, componentSpec, params ) => {
+cc.control.builder.report.row = ( r, componentSpec, params ) => {
 
   let a = ax.a
   let x = ax.x
@@ -7,7 +7,7 @@ cc.view.builder.report.row = ( r, componentSpec, params ) => {
     let columnsSpec = componentSpec.columns || []
     let result = []
     for ( let i in columnsSpec ) {
-      result.push( cc.view.builder.report.component( r, columnsSpec[i] ) )
+      result.push( cc.control.builder.report.component( r, columnsSpec[i] ) )
     }
     componentSpec.columns = result
   }

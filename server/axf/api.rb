@@ -9,9 +9,9 @@ module Server
 
   class Api < Sinatra::Base
 
-    post '/dev' do
-      content_type 'text/terminal'
-      params.to_yaml
+    post '/test' do
+      content_type :'application/json'
+      params.to_json
     end
 
   end

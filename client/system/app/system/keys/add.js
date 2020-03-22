@@ -17,16 +17,12 @@ app.system.keys.add = controller => (a,x) => [
 
       f.field( {
         key: 'self_hosted',
-        as: 'check',
-        // checked: 'true',
-        // unchecked: 'false',
+        as: 'checkbox',
       } ),
 
       f.field( {
         key: 'internal_only',
-        as: 'check',
-        // checked: 'true',
-        // unchecked: 'false',
+        as: 'checkbox',
       } ),
 
       f.buttons(),

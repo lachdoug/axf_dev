@@ -28,11 +28,11 @@ app.system.keys.remove = controller => (a,x) => [
 
           let key = submition.data.key
 
-          submition.resultEl.$nodes = app.http(
+          submition.output.$nodes = app.http(
             `/~/~/system/keys/${ key }`,
             () => controller.open( '..' ),
             {
-              complete: submition.completeFn,
+              complete: submition.complete,
               method: 'DELETE',
               placeholder: app.hourglass( `Removing key...` )
             }

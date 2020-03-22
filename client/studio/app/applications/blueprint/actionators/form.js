@@ -41,11 +41,11 @@ form = ( controller, blueprint, actionator ) => (a,x) => {
         } ),
         f.field( {
           key: 'enable_logging',
-          as: 'check',
+          as: 'checkbox',
         } ),
         f.field( {
           key: 'background',
-          as: 'check',
+          as: 'checkbox',
         } ),
         f.field( {
           key: 'script',

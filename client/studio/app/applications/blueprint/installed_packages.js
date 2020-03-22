@@ -11,9 +11,6 @@ app.applications.blueprint.installed_packages = blueprint => controller => (a,x)
       f.field( {
         key: 'installed_packages',
         as: 'many',
-        addable: true,
-        removable: true,
-        sortable: true,
         layout: 'vertical',
         label: false,
         form: (ff) => [

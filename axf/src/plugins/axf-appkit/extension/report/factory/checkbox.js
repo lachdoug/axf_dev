@@ -9,6 +9,7 @@ checkbox = function( options={} ) {
       ...options,
       inputTag: {
         tabindex: -1,
+        disabled: 'disabled',
         ...options.inputTag,
       },
       ...options.checkbox,

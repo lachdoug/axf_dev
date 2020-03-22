@@ -13,9 +13,9 @@ many = function ( f, options ) {
         form: (fff) => [
           a['|appkit-form-nest-many-item-header']( [
             a['|appkit-form-nest-many-item-buttons']( [
-              options.sortable ? fff.up( options.upButton ) : null,
-              options.sortable ? fff.down( options.downButton ) : null,
-              options.removable ? fff.remove( options.removeButton ) : null,
+              !options.static ? fff.up( options.upButton ) : null,
+              !options.static ? fff.down( options.downButton ) : null,
+              !options.static ? fff.remove( options.removeButton ) : null,
             ], options.itemButtonsTag )
           ], options.itemHeaderTag ),
           a['|appkit-form-nest-many-item-body']( options.form( fff ), options.itemBodyTag ),
@@ -26,9 +26,6 @@ many = function ( f, options ) {
             'sortupdate: rescope items': (e,el) => {
               el.$rescopeItems()
             },
-            // 'axf.appkit.form.nest.items.rescope': (e,el) => {
-            //   el.$$('.render-on-rescope').$render()
-            // },
             ...( options.itemsTag || {} ).$on,
           },
           $sortable: function() {
@@ -65,7 +62,7 @@ many = function ( f, options ) {
 
       a['|appkit-form-nest-many-footer']( [
 
-        options.addable ? a['|appkit-form-nest-add-button'](
+        !options.static ? a['|appkit-form-nest-add-button'](
           ff.add( options.addButton ),
           options.addButtonWrapperTag
         ) : null,

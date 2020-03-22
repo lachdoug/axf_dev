@@ -11,9 +11,6 @@ app.applications.blueprint.rake_tasks = blueprint => controller => (a,x) => [
       f.field( {
         key: 'rake_tasks',
         as: 'table',
-        addable: true,
-        removable: true,
-        sortable: true,
         layout: 'vertical',
         label: false,
         form: (ff) => [
@@ -26,7 +23,7 @@ app.applications.blueprint.rake_tasks = blueprint => controller => (a,x) => [
           } ),
           ff.field( {
             key: 'always_run',
-            as: 'check',
+            as: 'checkbox',
             thTag: {
               width: '100px',
             },

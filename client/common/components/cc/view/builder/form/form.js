@@ -1,15 +1,33 @@
-cc.view.builder.form.form = ( options={} ) => (a,x) => {
+cc.control.builder.form.form = ( options={} ) => (a,x) => {
 
   let components = (f) => ( options.components || [] ).map(
-    ( componentSpec ) => cc.view.builder.form.component( f, componentSpec, options.params )
+    ( componentSpec ) => cc.control.builder.form.component( f, componentSpec, options.params )
   )
+
+  let cancelOptions = options.cancel || {}
+  let submitOptions = options.submit || {}
+
+  let cancelButtonOptions = cancelOptions.hide ?
+  false :
+  {
+    onclick: undefined,
+    buttonTag: { data: { dismiss: 'modal' } }
+  }
+
+  let submitButtonOptions = submitOptions.hide ?
+  false :
+  {
+    // onclick: undefined,
+    // buttonTag: { data: { dismiss: 'modal' } }
+  }
 
   let formFn = (f) => [
     ...components(f),
     a.p(
       f.buttons( {
-        cancel: { buttonTag: { data: { dismiss: 'modal' } } } }
-      )
+        cancel: cancelButtonOptions,
+        submit: submitButtonOptions,
+      } )
     ),
   ]
 

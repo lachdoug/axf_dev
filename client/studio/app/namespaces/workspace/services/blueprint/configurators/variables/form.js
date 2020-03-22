@@ -24,7 +24,7 @@ form = ( controller, blueprint, variable ) => (a,x) => {
         } ),
         f.field( {
           key: 'mandatory',
-          as: 'check',
+          as: 'checkbox',
         } ),
         a.hr,
         f.field( {
@@ -74,9 +74,6 @@ form = ( controller, blueprint, variable ) => (a,x) => {
                   as: 'table',
                   label: false,
                   layout: 'vertical',
-                  addable: true,
-                  removable: true,
-                  sortable: true,
                   form: (ffff) => [
                     ffff.field( {
                       key: 'value',
@@ -88,7 +85,7 @@ form = ( controller, blueprint, variable ) => (a,x) => {
                 } ),
                 fff.field( {
                   key: 'include_blank',
-                  as: 'check',
+                  as: 'checkbox',
                 } ),
               ]
             } ),
