@@ -33,7 +33,9 @@ module Server
 
         post '/~/*' do
           path = request.fullpath.sub '/~/~', ''
-          result = @engines.post_api_vars( path, params[:api_vars] )
+          result = @engines.post( path, request.body, {
+            content_type: headers['Content-Type']
+          } )
           status result.code
           content_type result.headers[:content_type]
           result.body
@@ -41,7 +43,9 @@ module Server
 
         put '/~/*' do
           path = request.fullpath.sub '/~/~', ''
-          result = @engines.put_api_vars( path, params[:api_vars] )
+          result = @engines.put( path, request.body, {
+            content_type: headers['Content-Type']
+          } )
           status result.code
           content_type result.headers[:content_type]
           result.body

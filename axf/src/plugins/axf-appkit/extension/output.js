@@ -3,8 +3,6 @@ ax.extension.output = function( value, options={} ) {
   let a = ax.a
   let x = ax.x
 
-  // let functions = options.functions || false
-
   let component
 
   if ( value ) {

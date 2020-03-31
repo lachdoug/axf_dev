@@ -39,7 +39,7 @@ ax.extension.form.async.shim = function() {
               e.preventDefault()
 
               let form = el.$('^form')
-              let formData = el.$data()
+              let formData = el.$formData()
 
               let submitter = el.$('[type="submit"]:focus')
               if ( submitter && submitter.name ) {

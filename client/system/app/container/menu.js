@@ -32,15 +32,6 @@ app.container.menu = ( controller, type ) => (a,x) => {
       menuButton( 'Installation', 'installation', 'fas fa-clipboard-check' ),
       menuButton( 'Blueprint', 'blueprint', 'fas fa-map' ),
     ],
-    // app.collapse( {
-    //   label: app.icon( 'fas fa-stethoscope', 'Diagnostics' ),
-    //   button: {
-    //     class: 'btn app-btn d-block w-100 text-left'
-    //   },
-    //   body: [
-    //
-    //   ]
-    // } ),
 
   ]
 

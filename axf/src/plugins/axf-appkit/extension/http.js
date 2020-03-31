@@ -12,7 +12,7 @@ ax.extension.http = function( options={} ) {
     singleRequest = true
     urls = [ urls ]
   }
-if ( options.target ) debugger
+// if ( options.target ) debugger
   let customCallbacks = options.when || {}
 
   let responsesSuccess = function( responses, el ) {

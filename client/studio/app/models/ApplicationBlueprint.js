@@ -32,7 +32,7 @@ class ApplicationBlueprint {
     this.customPhpInis = new ApplicationBlueprintCustomPhpInis( this, framworkSpecific.custom_php_inis || [] )
     this.apacheHtaccessFiles = new ApplicationBlueprintApacheHtaccessFiles( this, framworkSpecific.apache_htaccess_files || [] )
     this.apacheHttpdConfigurations = new ApplicationBlueprintApacheHttpdConfigurations( this, framworkSpecific.apache_httpd_configurations || [] )
-    this.controls = new ApplicationBlueprintControls( this, software.controls || [] )
+    this.dialogues = new ApplicationBlueprintDialogues( this, software.dialogues || [] )
   }
 
   get apiEndpoint() {
@@ -60,7 +60,6 @@ class ApplicationBlueprint {
   }
 
   get output() {
-
     let object = {
       metadata: {
         software: this.metadata.output(),
@@ -85,7 +84,7 @@ class ApplicationBlueprint {
         workers: this.workers.output(),
         actionators: this.actionators.output(),
         schedules: this.schedules.output(),
-        controls: this.controls.output(),
+        dialogues: this.dialogues.output(),
         framework_specific: {
          rake_tasks: this.rakeTasks.output(),
          custom_php_inis: this.customPhpInis.output(),

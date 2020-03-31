@@ -41,6 +41,7 @@ app.namespaces.workspace.services.blueprint = namespace => controller => (a,x) =
           '/build_dependencies': app.namespaces.workspace.services.blueprint.build_dependencies( blueprintObject ),
           '/file_permissions': app.namespaces.workspace.services.blueprint.file_permissions( blueprintObject ),
           '/soft_links': app.namespaces.workspace.services.blueprint.soft_links( blueprintObject ),
+          '/dialogues*': app.applications.blueprint.dialogues( blueprintObject ),
         } )
 
       ]

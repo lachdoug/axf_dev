@@ -33,6 +33,8 @@ else
   mode = ENV['MODE'] || 'system'
 end
 
+$SESSION_TIMEOUT_MINUTES = ENV['SESSION_TIMEOUT_MINUTES'] || 60
+
 require_relative "server/#{ mode }"
 map('/~') { run Server::Api }
 map('/') { run Server::Client }

@@ -1,1 +1,1 @@
-app.control = cc.control
+app.dialogue = cc.dialogue

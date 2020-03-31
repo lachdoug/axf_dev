@@ -9,11 +9,11 @@ form = ( f, options={} ) => {
   let formTagOptions = {
     method: options.method || 'POST',
     action: options.url || options.action,
-    $data: function() {
+    $formData: function() {
       return new FormData( this )
     },
-    $object: function() {
-      return x.form.object( this.$data() )
+    $data: function() {
+      return x.lib.form.data.objectify( this.$formData() )
     },
     ...options.formTag
   }

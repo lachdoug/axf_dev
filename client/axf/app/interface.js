@@ -1,4 +1,4 @@
-app.interface = controller => cc.control.designer( controller, '/~/test', app.interface.data )
+app.interface = controller => cc.dialogue.designer( controller, '/~/test', app.interface.data )
 
 app.interface.data = {
     "name": "dsafsafda",

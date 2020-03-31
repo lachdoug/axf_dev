@@ -82,6 +82,13 @@
 </div>
 
 <script>
+
+let uadminBlueprint = <%=
+File.read(
+  'data/workspaces/b5b2df292e7b0a234b61abbd29545e7e/services/1b8aae0e24c06bec45776e4eca91ccac/uadmin/blueprint.json'
+)
+%>
+
 window.onload = () => {
   if( window.localStorage.cssTheme ) {
     document.body.classList.add(

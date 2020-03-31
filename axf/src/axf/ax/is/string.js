@@ -1,14 +1,14 @@
 /**
  * Type Is String Checker.
- * Determines whether variable is a string.
+ * Determines whether value is a string.
  *
  * @since 0.0.0
  *
- * @param variable
+ * @param value
  *
  * @return {boolean}
  *
  */
-ax.is.string = function ( variable ) {
-  return typeof variable === 'string'
+ax.is.string = function ( value ) {
+  return typeof value === 'string'
 }

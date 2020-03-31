@@ -1,4 +1,4 @@
-cc.collapse = ( options ) => (a,x) => a['app-collapse']( [
+cc.collapse = ( options={} ) => (a,x) => a['app-collapse']( [
   cc.button( {
     label: a['app-collapse-indicator'](
       ( el ) => cc.icon( el.$iconClass(), options.label ),
@@ -15,10 +15,11 @@ cc.collapse = ( options ) => (a,x) => a['app-collapse']( [
   } ),
   a['app-collapse-body'](
     options.body,
-    { style:
-      {
+    {
+      ...options.bodyTag,
+      style: {
         display: options.display ? 'unset': 'none',
-        ...( options.body || {} ).style,
+        ...( options.bodyTag || {} ).style,
       }
     }
   ),

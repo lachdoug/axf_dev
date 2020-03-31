@@ -341,5 +341,17 @@ app.namespaces.workspace.services.blueprint.nav = ( blueprint, controller ) => (
       },
     } )
   ),
-
+  a['li.nav-item'](
+    app.button( {
+      buttonTag: {
+        class: 'btn btn-sm app-btn',
+      },
+      label: app.icon( 'fa fa-caret-right', 'Dialogues' ),
+      title: 'Dialogues',
+      onclick: (e,el) => {
+        controller.open('dialogues')
+      },
+    } )
+  ),
+  
 ] ),

@@ -19,10 +19,12 @@ check = function( options ) {
     inputId = x.lib.uuid.generate()
   }
 
+console.log( 'options.checked', options.checked )
+
   let inputTagOptions = {
     type: options.type || 'checkbox',
     name: options.name,
-    value: options.checked || 'on',
+    value: options.checked === '' ? '' : options.checked || 'on',
     required: options.required,
     onclick: options.readonly ? 'return false' : 'return true',
     checked: options.value ? 'checked' : undefined,

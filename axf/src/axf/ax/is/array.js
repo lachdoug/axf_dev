@@ -1,14 +1,13 @@
 /**
- * Type Is Array Checker.
- * Determines whether variable is an array.
+ * Determines whether value is an array.
  *
  * @since 0.0.0
  *
- * @param variable
+ * @param value
  *
  * @return {boolean}
  *
  */
-ax.is.array = function ( variable ) {
-  return variable instanceof Array
+ax.is.array = function ( value ) {
+  return value instanceof Array
 }

@@ -1,7 +1,7 @@
 ax.extension.form.factory.
 submit = ( f, options={} ) => {
 
-  let label = options.label || '✔ Submit'
+  let label = options.label === false ? '' : options.label || '✔ Submit'
 
   let buttonOptions = {
     label: label,

@@ -12,6 +12,6 @@ app.router = (a,x) => x.router( {
     } ),
   ],
   lazy: true,
-  transition: [ 'crossfade', { time: 500 } ],
+  transition: [ 'crossfade', { duration: 500 } ],
   default: controller => a['p.error']( [ controller, `Not found: CLIENT ${ controller.path } in ${ controller.scope || 'root' }` ] ),
 } )

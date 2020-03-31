@@ -1,14 +1,14 @@
 /**
  * Type Is True Checker.
- * Determines whether variable is true.
+ * Determines whether value is true.
  *
  * @since 0.0.0
  *
- * @param variable
+ * @param value
  *
  * @return {boolean}
  *
  */
-ax.is.true = function ( variable ) {
-  return variable === true
+ax.is.true = function ( value ) {
+  return value === true
 }

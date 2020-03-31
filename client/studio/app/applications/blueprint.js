@@ -34,7 +34,7 @@ app.applications.blueprint = controller => (a,x) => [
           '/custom_php_inis': app.applications.blueprint.custom_php_inis( blueprintObject ),
           '/apache_htaccess_files': app.applications.blueprint.apache_htaccess_files( blueprintObject ),
           '/apache_httpd_configurations': app.applications.blueprint.apache_httpd_configurations( blueprintObject ),
-          '/controls*': app.applications.blueprint.controls( blueprintObject ),
+          '/dialogues*': app.applications.blueprint.dialogues( blueprintObject ),
         } )
 
       ]

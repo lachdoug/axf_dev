@@ -1,9 +1,6 @@
 /**
  * Tag Generator proxy shim.
- * Creates arbitrary View Objects.
- * Intercepts get methods and returns a function that,
- * when called, returns a View Object with
- * the $tag property set to the method name for the get.
+ * Creates arbitrary HTML elements.
  *
  * @since 0.0.0
  * @namespace ax.tag.proxy
@@ -24,12 +21,10 @@
 
     } else {
 
-      return function ( component=null, attributes={} ) {
-
-        component = ax.tag.proxy.shim.component( component )
-        attributes = ax.tag.proxy.shim.attributes( property, attributes )
-        return ax.factory.element( { ...component, ...attributes } )
-      }
+      return ( component=null, attributes={} ) => ax.factory.element( {
+        ...ax.tag.proxy.shim.component( component ),
+        ...ax.tag.proxy.shim.attributes( property, attributes )
+      } )
 
     }
   }

@@ -1,14 +1,14 @@
 /**
  * Type Is Promise Checker.
- * Determines whether variable is a Promise.
+ * Determines whether value is a Promise.
  *
  * @since 0.0.0
  *
- * @param variable
+ * @param value
  *
  * @return {boolean}
  *
  */
-ax.is.promise = function ( variable ) {
-  return variable instanceof Promise
+ax.is.promise = function ( value ) {
+  return value instanceof Promise
 }

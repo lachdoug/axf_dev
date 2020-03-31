@@ -18,7 +18,10 @@ many = function ( f, options ) {
               !options.static ? fff.remove( options.removeButton ) : null,
             ], options.itemButtonsTag )
           ], options.itemHeaderTag ),
-          a['|appkit-form-nest-many-item-body']( options.form( fff ), options.itemBodyTag ),
+          a['|appkit-form-nest-many-item-body'](
+            options.form( fff ),
+            options.itemBodyTag 
+          ),
         ],
         itemsTag: {
           ...options.itemsTag,
@@ -67,7 +70,7 @@ many = function ( f, options ) {
           options.addButtonWrapperTag
         ) : null,
 
-        options.sortable ? a['|appkit-form-nest-sort-buttons']( [
+        !options.static ? a['|appkit-form-nest-sort-buttons']( [
           a['|appkit-form-nest-sort-on']( ff.button( {
             label: '⬍',
             onclick: (e,el) => {

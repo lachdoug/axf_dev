@@ -13,8 +13,8 @@ app.system.show.metrics = controller => (a,x) => app.http(
     app.system.show.metrics.memory( { ...memory, ram: ram } ),
     app.system.show.metrics.network( network ),
   ], {
-    $init: el => x.lib.animate.fade.in( el ),
-    style: { display: 'none' },
+    // $init: el => x.lib.animate.fade.in( el ),
+    // style: { display: 'none' },
   } )
 
 )

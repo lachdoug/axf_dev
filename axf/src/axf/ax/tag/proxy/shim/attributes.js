@@ -10,7 +10,6 @@ ax.tag.proxy.shim.attributes = function ( property, attributes ) {
   let component = ( property.match(/\|([\w-]+)/) || [] )[1]
   let id = ( property.match(/#([\w-]+)/) || [] )[1]
   let klass = ( property.match(/\.([\.\w-]+)/) || [] )[1]
-
   if ( tag ) attributes.$tag = attributes.$tag || tag
   if ( component ) attributes.$component = attributes.$component || component
   if ( id ) attributes.id = attributes.id || id

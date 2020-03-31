@@ -40,6 +40,7 @@ class ServiceBlueprint {
     this.buildDependencies = new ServiceBlueprintBuildDependencies( this, software.build_dependencies || [] )
     this.filePermissions = new ServiceBlueprintFilePermissions( this, software.file_permissions || [] )
     this.softLinks = new ServiceBlueprintSoftLinks( this, software.soft_links || [] )
+    this.dialogues = new ApplicationBlueprintDialogues( this, software.dialogues || [] )
   }
 
   get apiEndpoint() {
@@ -102,6 +103,7 @@ class ServiceBlueprint {
         build_dependencies: this.buildDependencies.output(),
         file_permissions: this.filePermissions.output(),
         soft_links: this.softLinks.output(),
+        dialogues: this.dialogues.output(),
       },
       schema: {
         type: 'service_blueprint',

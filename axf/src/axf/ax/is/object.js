@@ -1,14 +1,14 @@
 /**
  * Type Is Object Checker.
- * Determines whether variable is an object.
+ * Determines whether value is an object.
  *
  * @since 0.0.0
  *
- * @param variable
+ * @param value
  *
  * @return {boolean}
  *
  */
-ax.is.object = function ( variable ) {
-  return typeof variable === 'object'
+ax.is.object = function ( value ) {
+  return typeof value === 'object'
 }

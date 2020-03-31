@@ -1,10 +1,10 @@
-ax.css( {
-
-  '|appkit-http-response.success pre': {
-    color: 'blue',
-  },
-  '|appkit-http-response.error pre': {
-    color: 'red',
-  },
-
-} )
+// ax.css( {
+//
+//   '.success pre': {
+//     color: 'blue',
+//   },
+//   '.error pre': {
+//     color: 'red',
+//   },
+//
+// } )

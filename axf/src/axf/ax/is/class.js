@@ -1,14 +1,14 @@
 /**
  * Type Is Class Checker.
- * Determines whether variable is a class.
+ * Determines whether value is a class.
  *
  * @since 0.0.0
  *
- * @param variable
+ * @param value
  *
  * @return {boolean}
  *
  */
-ax.is.class = function ( variable ) {
-  return this.function( variable ) && ( '' + variable ).slice(0,5) === 'class'
+ax.is.class = function ( value ) {
+  return this.function( value ) && ( '' + value ).slice(0,5) === 'class'
 }

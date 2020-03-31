@@ -9,7 +9,6 @@ control = function( f, options={} ) {
   let type = options.type || as[1]
 
   let controlFn = f.controls[control]
-  // if ( !controlFn ) debugger
   if ( !controlFn ) ax.throw( `Form field factory does not support control '${ control }'.` )
 
   let key = options.key || ''
@@ -29,6 +28,10 @@ control = function( f, options={} ) {
     ...options[control]
   }
 
-  return controlFn( controlOptions )
+  if ( options.collection ) {
+    return x.form.field.shim.field.collection( f, controlFn, controlOptions )
+  } else {
+    return controlFn( controlOptions )
+  }
 
 }

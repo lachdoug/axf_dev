@@ -1,14 +1,14 @@
 /**
  * Type Is Boolean Checker.
- * Determines whether variable is boolean.
+ * Determines whether value is boolean.
  *
  * @since 0.0.0
  *
- * @param variable
+ * @param value
  *
  * @return {boolean}
  *
  */
-ax.is.boolean = function ( variable ) {
-  return typeof variable === 'boolean'
+ax.is.boolean = function ( value ) {
+  return typeof value === 'boolean'
 }

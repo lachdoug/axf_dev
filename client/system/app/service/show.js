@@ -19,25 +19,17 @@ app.service.show = controller => (a,x) => {
         el.$nodes = [
           a['app-container-state'](
             ax.x.transition.crossfade( {
-              initial: [
-                app.container.show.state( container ),
-                app.container.show.instructions( controller, container ),
-                app.container.show.metrics( container ),
-              ]
+              initial: app.container.show( 'service', controller, container )
             } ),
             {
               name: name,
               $state: container,
               $update: function( el, container ) {
-                this.$('|appkit-transition').$to( [
-                  app.container.show.state( container ),
-                  app.container.show.instructions( controller, container ),
-                  app.container.show.metrics( container ),
-                ] )
+                this.$('|appkit-transition').$to( app.container.show( 'service', controller, container ) )
               }
             }
           ),
-          app.container.show.websites( container ),
+
         ]
 
       },

@@ -269,10 +269,10 @@ app.applications.blueprint.nav = ( blueprint, controller ) => (a,x) => a['ul.nav
       buttonTag: {
         class: 'btn btn-sm app-btn',
       },
-      label: app.icon( 'fa fa-caret-right', 'Controls' ),
-      title: 'Controls',
+      label: app.icon( 'fa fa-caret-right', 'Dialogues' ),
+      title: 'Dialogues',
       onclick: (e,el) => {
-        controller.open('controls')
+        controller.open('dialogues')
       },
     } )
   ),

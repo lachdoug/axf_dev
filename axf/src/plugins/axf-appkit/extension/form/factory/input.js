@@ -17,9 +17,10 @@ input = function( options={} ) {
     step: options.step,
     placeholder: options.placeholder,
     autocomplete: options.autocomplete,
+    multiple: options.multiple,
     ...options.inputTag
   }
 
-  return a.input( null, inputTagOptions )
+  return a.input( this.select.options( options ), inputTagOptions )
 
 }

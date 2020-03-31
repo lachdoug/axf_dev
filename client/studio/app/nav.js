@@ -55,7 +55,7 @@ app.nav = controller => (a,x) => a['app-nav']( [
   // },
   $setUser: function( user ) {
     let buttons = this.$('app-nav-buttons')
-    user ? x.lib.animate.fade.in( buttons ) : x.lib.animate.fade.out( buttons )
+    user ? x.lib.animate.fade.in( buttons, { display: 'inline-block' } ) : x.lib.animate.fade.out( buttons )
   },
   $path: () => window.location.pathname,
   $update: function() {

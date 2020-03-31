@@ -6,7 +6,7 @@ selectinput = (f, options={} ) => {
 
   let selections = x.lib.form.selections( options.selections )
   selections.push( { disabled: 'hr' } )
-  selections.push( { value: '__USE_INPUT__', label: options.customValueLabel || '⬇ Custom value' } )
+  selections.push( { value: '__USE_INPUT__', label: options.customValueLabel || '⬇ Enter a value' } )
 
   let selectValue
   let inputValue
@@ -24,13 +24,13 @@ selectinput = (f, options={} ) => {
     $value: function() {
       return this.$('|appkit-form-selectinput-hiddeninput input').value
     },
-    $data: function() {
-      if ( options.datatype ) {
-        return ax.x.lib.coerce[ options.datatype ]( this.$value() )
-      } else {
-        return this.$value()
-      }
-    },
+    // $data: function() {
+    //   if ( options.datatype ) {
+    //     return ax.x.lib.coerce[ options.datatype ]( this.$value() )
+    //   } else {
+    //     return this.$value()
+    //   }
+    // },
     $focus: function () {
       let select = this.$('select')
       if ( select.value === '__USE_INPUT__' ) {

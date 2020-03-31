@@ -1,11 +1,11 @@
 /**
- * Writes an object's text content to its element
+ * Add text to element.
  *
  * @since 1.0.0
  *
- * @param {element} element An element with stale content.
+ * @param {element} element
  *
- * @return {element} The element with up-to-date content.
+ * @return {element} The element with content.
  */
 
 ax.factory.element.properties.render.text = function ( element ) {

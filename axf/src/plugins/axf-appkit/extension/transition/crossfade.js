@@ -4,41 +4,32 @@ crossfade = function( options={} ) {
   let a = ax.a
   let x = ax.x
 
-  let time = ( options.time || 500 ) / 2
-  let component = options.initial
+  let duration = ( options.duration || 500 ) / 2
 
   return a['div|appkit-transition']( null, {
     $init: function () {
+      let component = options.initial
       this.style.display = 'none'
       if( component ) {
-        this.$component = component
-        this.$in()
+        this.$in( component )
       }
     },
-    $in: function () {
-
-      this.$nodes = this.$component
+    $in: function( component ) {
+      this.$nodes = component
       x.lib.animate.fade.in( this, {
-        time: time,
+        duration: duration,
       } )
     },
     $to: function( component ) {
+      if ( this.style.display === 'none' ) {
+        this.$in( component )
+      } else {
+        x.lib.animate.fade.out( this, {
+          duration: duration,
+          complete: () => this.$in( component )
+        } )
+      }
 
-      component = ax.factory( component )
-
-      // if ( options.regulate && component.isEqualNode( this.$component ) ) {
-        // Do nothing. Keep existing content.
-      // } else {
-        this.$component = component
-        if ( this.style.display === 'none' ) {
-          this.$in()
-        } else {
-          x.lib.animate.fade.out( this, {
-            time: time,
-            complete: this.$in.bind( this )
-          } )
-        }
-      // }
     },
     ...options.transitionTag
   } )

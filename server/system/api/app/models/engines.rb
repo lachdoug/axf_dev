@@ -36,16 +36,6 @@ module Server
               **options
           end
 
-          def post_api_vars( route, api_vars, options={} )
-            payload = { 'api_vars': api_vars }.to_json
-            post route, payload, options
-          end
-
-          def put_api_vars( route, api_vars, options={} )
-            payload = { 'api_vars': api_vars }.to_json
-            put route, payload, options
-          end
-
           def stream_chunks( route, &block )
             block_response = asChunks &block
             api_call( route, block_response: block_response )

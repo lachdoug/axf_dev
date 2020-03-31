@@ -6,7 +6,7 @@ app.views.edit = ( parent, path ) => controller => (a,x) => [
     `/~/${ path }/views/${ controller.params.view_id }`,
     ( view, el ) => el.$nodes = [
 
-      app.control.designer(
+      app.dialogue.designer(
         controller,
         `/~/${ path }/views/${ controller.params.view_id }`,
         view,

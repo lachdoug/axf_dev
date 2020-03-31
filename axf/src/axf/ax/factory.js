@@ -1,13 +1,13 @@
 /**
  * Component Factory.
- * The Component Factory turns Components into View Objects.
+ * The Component Factory turns a component into an HTML node ( or a null ).
  *
  * @since 0.0.0
  * @namespace ax.factory
  *
  * @param {component} component
  *
- * @return {component} Being either an Element, Node or View Object.
+ * @return {node} node or null
  */
 ax.factory = function( component ) {
 

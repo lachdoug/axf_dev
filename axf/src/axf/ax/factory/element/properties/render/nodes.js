@@ -1,11 +1,11 @@
 /**
-* Writes an object's nodes content to its element
+* Adds nodes to element.
 *
 * @since 1.0.0
 *
-* @param {element} element An element with stale content.
+* @param {element} element
 *
-* @return {element} The element with up-to-date content.
+* @return {element} The element with content.
 */
 
 ax.factory.element.properties.render.
@@ -15,7 +15,6 @@ nodes = function ( element ) {
   let nodes = element.$nodes
 
   if ( ax.is.function( nodes ) ) {
-    // if ( ax.is.tag( nodes ) ) { } else { }
     nodes = nodes.bind( element )
     if ( element.$properties.hasOwnProperty( '$state' ) ) {
       nodes = nodes( element, element.$state )
@@ -26,8 +25,6 @@ nodes = function ( element ) {
   while ( element.firstChild ) {
     element.firstChild.remove()
   }
-
-  // debugger
 
   // Add content
   if ( ax.is.array( nodes ) ) {

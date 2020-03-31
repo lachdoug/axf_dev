@@ -1,14 +1,14 @@
 /**
  * Type Is Null Checker.
- * Determines whether variable is null.
+ * Determines whether value is null.
  *
  * @since 0.0.0
  *
- * @param variable
+ * @param value
  *
  * @return {boolean}
  *
  */
-ax.is.null = function ( variable ) {
-  return variable === null
+ax.is.null = function ( value ) {
+  return value === null
 }

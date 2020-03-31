@@ -196,11 +196,58 @@ ax.extension.bootstrap.form.shim = function() {
       },
     } ),
 
+    control: ( f, target ) => ( options={} ) => {
+
+      if ( options.collection ) {
+        return target( {
+          ...options,
+          itemsTag: {
+            class: 'mb-1 d-block',
+            ...options.itemsTag
+          },
+          itemTag: {
+            class: 'clearfix d-block mb-1',
+            ...options.itemTag
+          },
+          itemHeaderTag: {
+            class: 'd-inline-block float-right',
+            ...options.itemHeaderTag
+          },
+          itemButtonsTag: {
+            class: 'btn-group',
+            ...options.itemButtonsTag
+          },
+          itemBodyTag: {
+            class: 'd-inline-block float-left',
+            ...options.itemBodyTag,
+          },
+          footerTag: {
+            class: 'mb-1 d-block',
+            ...options.footerTag
+          },
+          sortButtonsTag: {
+            class: 'float-right',
+            ...options.sortButtonsTag
+          },
+          sortOffButton: {
+            ...options.sortOffButton,
+            buttonTag: {
+              class: 'btn btn-warning',
+              ...( options.sortOffButton || {} ).buttonTag,
+            },
+          },
+        } )
+      } else{
+        return target( options )
+      }
+
+    },
+
     controls: {
       table: ( f, target ) => ( options={} ) => target( {
         ...options,
         tableTag: {
-          class: 'table table-sm table-borderless mb-0',
+          class: 'table table-sm table-borderless mb-1',
           ...options.tableTag,
         },
         itemButtonsTag: {
@@ -222,45 +269,49 @@ ax.extension.bootstrap.form.shim = function() {
             ...( options.sortOffButton || {} ).buttonTag,
           },
         },
-        sortOnButton: {
-          ...options.sortOnButton,
-          buttonTag: {
-            class: 'btn btn-secondary',
-            ...( options.sortOnButton || {} ).buttonTag,
-          },
-        },
-        addButton: {
-          ...options.addButton,
-          buttonTag: {
-            class: 'btn btn-secondary',
-            ...( options.addButton || {} ).buttonTag,
-          },
-        },
-        upButton: {
-          ...options.upButton,
-          buttonTag: {
-            class: 'btn btn-secondary',
-            ...( options.upButton || {} ).buttonTag,
-          },
-        },
-        downButton: {
-          ...options.downButton,
-          buttonTag: {
-            class: 'btn btn-secondary',
-            ...( options.downButton || {} ).buttonTag,
-          },
-        },
-        removeButton: {
-          ...options.removeButton,
-          buttonTag: {
-            class: 'btn btn-secondary',
-            ...( options.removeButton || {} ).buttonTag,
-          },
-        },
+        // sortOnButton: {
+        //   ...options.sortOnButton,
+        //   buttonTag: {
+        //     class: 'btn btn-secondary',
+        //     ...( options.sortOnButton || {} ).buttonTag,
+        //   },
+        // },
+        // addButton: {
+        //   ...options.addButton,
+        //   buttonTag: {
+        //     class: 'btn btn-secondary',
+        //     ...( options.addButton || {} ).buttonTag,
+        //   },
+        // },
+        // upButton: {
+        //   ...options.upButton,
+        //   buttonTag: {
+        //     class: 'btn btn-secondary',
+        //     ...( options.upButton || {} ).buttonTag,
+        //   },
+        // },
+        // downButton: {
+        //   ...options.downButton,
+        //   buttonTag: {
+        //     class: 'btn btn-secondary',
+        //     ...( options.downButton || {} ).buttonTag,
+        //   },
+        // },
+        // removeButton: {
+        //   ...options.removeButton,
+        //   buttonTag: {
+        //     class: 'btn btn-secondary',
+        //     ...( options.removeButton || {} ).buttonTag,
+        //   },
+        // },
 
       } ),
       many: ( f, target ) => ( options={} ) => target( {
         ...options,
+        itemsTag: {
+          class: 'mb-1 d-block',
+          ...options.itemsTag
+        },
         itemHeaderTag: {
           class: 'clearfix',
           ...options.itemHeaderTag
@@ -284,41 +335,41 @@ ax.extension.bootstrap.form.shim = function() {
             ...( options.sortOffButton || {} ).buttonTag,
           },
         },
-        sortOnButton: {
-          ...options.sortOnButton,
-          buttonTag: {
-            class: 'btn btn-secondary',
-            ...( options.sortOnButton || {} ).buttonTag,
-          },
-        },
-        addButton: {
-          ...options.addButton,
-          buttonTag: {
-            class: 'btn btn-secondary',
-            ...( options.addButton || {} ).buttonTag,
-          },
-        },
-        upButton: {
-          ...options.upButton,
-          buttonTag: {
-            class: 'btn btn-secondary',
-            ...( options.upButton || {} ).buttonTag,
-          },
-        },
-        downButton: {
-          ...options.downButton,
-          buttonTag: {
-            class: 'btn btn-secondary',
-            ...( options.downButton || {} ).buttonTag,
-          },
-        },
-        removeButton: {
-          ...options.removeButton,
-          buttonTag: {
-            class: 'btn btn-secondary',
-            ...( options.removeButton || {} ).buttonTag,
-          },
-        },
+        // sortOnButton: {
+        //   ...options.sortOnButton,
+        //   buttonTag: {
+        //     class: 'btn btn-secondary',
+        //     ...( options.sortOnButton || {} ).buttonTag,
+        //   },
+        // },
+        // addButton: {
+        //   ...options.addButton,
+        //   buttonTag: {
+        //     class: 'btn btn-secondary',
+        //     ...( options.addButton || {} ).buttonTag,
+        //   },
+        // },
+        // upButton: {
+        //   ...options.upButton,
+        //   buttonTag: {
+        //     class: 'btn btn-secondary',
+        //     ...( options.upButton || {} ).buttonTag,
+        //   },
+        // },
+        // downButton: {
+        //   ...options.downButton,
+        //   buttonTag: {
+        //     class: 'btn btn-secondary',
+        //     ...( options.downButton || {} ).buttonTag,
+        //   },
+        // },
+        // removeButton: {
+        //   ...options.removeButton,
+        //   buttonTag: {
+        //     class: 'btn btn-secondary',
+        //     ...( options.removeButton || {} ).buttonTag,
+        //   },
+        // },
 
       } ),
       selectinput: ( f, target ) => ( options={} ) => target( {

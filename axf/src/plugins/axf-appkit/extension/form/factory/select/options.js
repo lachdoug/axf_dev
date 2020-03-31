@@ -7,7 +7,7 @@ options = function( options ) {
   let selections = x.lib.form.selections( options.selections )
 
   if ( options.placeholder ) {
-    selections.unshift( { value: '', label: options.placeholder } )
+    selections.unshift( { value: '', label: options.placeholder, class: 'placeholder', } )
   }
 
   return selections.map( function ( selection ) {
@@ -43,11 +43,12 @@ options = function( options ) {
       } else {
         selected = value == selection.value
       }
-      
+
       return a.option( selection.label, {
         value: selection.value,
         selected: selected || undefined,
         disabled: selection.disabled,
+        class: selection.class,
         ...optionsTagOptions
       } )
 

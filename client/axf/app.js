@@ -323,6 +323,20 @@ app.people.edit = controller => (a,x) => [
 app.people.fields = f => [
 
   f.field( {
+    key: 'name',
+    layout: 'vertical',
+    as: 'one',
+    form: ff => [
+      ff.field( {
+        key: 'first',
+      } ),
+      ff.field( {
+        key: 'last',
+      } ),
+    ],
+  } ),
+
+  f.field( {
     key: 'jobs',
     as: 'table',
     static: true,
@@ -341,29 +355,21 @@ app.people.fields = f => [
   } ),
 
   f.field( {
-    key: 'name',
-    layout: 'vertical',
-    as: 'one',
-    form: ff => [
-      ff.field( {
-        key: 'first',
-      } ),
-      ff.field( {
-        key: 'last',
-      } ),
-    ],
-  } ),
-  f.field( {
     key: 'password',
     layout: 'vertical',
     as: 'password',
     placeholder: 'mmmm',
+    collection: 'true',
+    confirmation: true,
+
   } ),
   f.field( {
     key: 'about',
     layout: 'vertical',
     as: 'markdown',
     placeholder: 'mmmm',
+    collection: 'true',
+
   } ),
   f.field( {
     key: 'js',
@@ -373,6 +379,8 @@ app.people.fields = f => [
     code: {
       mode: 'javascript',
     },
+    collection: 'true',
+
   } ),
   f.field( {
     key: 'active',
@@ -382,6 +390,8 @@ app.people.fields = f => [
     checkbox: {
       label: 'Check for yes',
     },
+    collection: 'true',
+
   } ),
   f.field( {
     key: 'pets',
@@ -394,6 +404,9 @@ app.people.fields = f => [
       'fish': 'Fish',
       'bird': 'Bird',
     },
+    collection: 'true',
+
+
   } ),
   f.field( {
     key: 'car',
@@ -405,7 +418,14 @@ app.people.fields = f => [
       key: 'pets',
       layout: 'vertical',
       pattern: '^(cat|dog)$'
-    }
+    },
+    select: {
+      multiple: true,
+
+    },
+    collection: 'true',
+
+
   } ),
   f.field( {
     key: 'color',
@@ -415,12 +435,17 @@ app.people.fields = f => [
       '': 'None',
       'red': 'Red',
       'blue': 'Blue',
-    }
+    },
+    collection: 'true',
+
+
   } ),
   f.field( {
     key: 'color',
     layout: 'vertical',
     as: 'input/color',
+    collection: 'true',
+
   } ),
   f.field( {
     key: 'sports',
@@ -431,12 +456,17 @@ app.people.fields = f => [
       'golf': 'Golf',
       'rugby': 'Rugby',
       'cricket': 'Cricket',
-    }
+    },
+    collection: 'true',
+
+
   } ),
   f.field( {
     key: 'json',
     layout: 'vertical',
     as: 'json',
     placeholder: 'mmmm',
+    collection: 'true',
+
   } ),
 ]

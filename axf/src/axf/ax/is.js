@@ -1,6 +1,5 @@
 /**
- * Type Is Checkers namespace.
- * Type Is Checkers check data types.
+ * Confirm value is of a data type.
  *
  * @since 0.0.0
  * @namespace ax.is

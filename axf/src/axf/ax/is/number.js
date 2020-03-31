@@ -1,14 +1,14 @@
 /**
  * Type Is Number Checker.
- * Determines whether variable is number.
+ * Determines whether value is number.
  *
  * @since 0.0.0
  *
- * @param variable
+ * @param value
  *
  * @return {boolean}
  *
  */
-ax.is.number = function ( variable ) {
-  return typeof variable === 'number'
+ax.is.number = function ( value ) {
+  return typeof value === 'number'
 }

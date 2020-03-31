@@ -1,16 +1,14 @@
 /**
  * Type Is Undefined Checker.
- * Determines whether variable is undefined.
+ * Determines whether value is undefined.
  *
  * @since 0.0.0
  *
- * @param variable
+ * @param value
  *
  * @return {boolean}
  *
  */
-ax.is.undefined = function ( variable ) {
-  // debugger
-  // return typeof variable == 'undefined'
-  return variable === void 0
+ax.is.undefined = function ( value ) {
+  return value === void 0
 }

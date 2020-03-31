@@ -1,10 +1,8 @@
 /**
  * Type Is Not Something.
- * Determines whether variable is not a type.
+ * Determines whether value is not a type.
  *
  * @since 0.0.0
- *
- * @param variable
  *
  * @return {boolean}
  *

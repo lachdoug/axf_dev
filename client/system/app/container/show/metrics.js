@@ -18,6 +18,7 @@ app.container.show.metrics = container => (a,x) => {
         a.hr,
         a.p( 'Rx/Tx' ),
         app.charts.network( { '': { rx: network.in, tx: network.out } } ),
+        a.br,
       ]
     )
 

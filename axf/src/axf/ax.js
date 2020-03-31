@@ -1,5 +1,5 @@
 /**
- * Creates an HTML element.
+ * Creates an HTML element using the Ax element factory.
  * If options.target is supplied, the element will replace the target in the DOM,
  * or append or prepend to target if options.insert is 'append' or 'prepend'.
  *

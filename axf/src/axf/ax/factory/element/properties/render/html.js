@@ -1,3 +1,13 @@
+/**
+* Adds HTML to element.
+*
+* @since 1.0.0
+*
+* @param {element} element
+*
+* @return {element} The element with content.
+*/
+
 ax.factory.element.properties.render.html = function ( element ) {
 
   let html = element.$html

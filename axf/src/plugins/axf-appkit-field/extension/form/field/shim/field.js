@@ -17,8 +17,8 @@ field = function( f, options={} ) {
         // Controls don't normally need labels. Checkbox is exception.
         // Label for checkbox needs to be specified in options.checkbox.
         // options.label and options.labelTag consumed by this.field.header()
-        label: '', 
-        labelTag: {},
+        label: undefined, 
+        labelTag: undefined,
       } ),
       f.hint( options ),
     ], options.bodyTag ),

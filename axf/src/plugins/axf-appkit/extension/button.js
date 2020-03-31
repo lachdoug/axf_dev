@@ -4,7 +4,7 @@ ax.extension.button = function( options = {} ) {
 
   let handler = options.onclick || ( () => {} )
 
-  let label = a['appkit-button-label']( options.label || '🌑', { style: { pointerEvents: 'none' } } )
+  let label = a['appkit-button-label']( options.label || '', { style: { pointerEvents: 'none' } } )
 
   let confirmation
 
